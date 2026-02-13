@@ -1,0 +1,402 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>LoginDialog</class>
+ <widget class="QDialog" name="LoginDialog">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>800</width>
+    <height>500</height>
+   </rect>
+  </property>
+  <property name="minimumSize">
+   <size>
+    <width>800</width>
+    <height>500</height>
+   </size>
+  </property>
+  <property name="windowTitle">
+   <string>Smart Oil Press - Connexion</string>
+  </property>
+  <property name="styleSheet">
+   <string notr="true">/* Dialog principal */
+QDialog {
+    background-color: #F5F5F5;
+}
+
+/* Titre */
+QLabel#titre_label {
+    color: #556B2F;
+    font-size: 28px;
+    font-weight: bold;
+    background-color: transparent;
+}
+
+/* Labels */
+QLabel {
+    color: #6B4F3F;
+    font-size: 14px;
+    font-weight: bold;
+    background-color: transparent;
+}
+
+/* Inputs */
+QLineEdit {
+    border: 2px solid #D4AF37;
+    border-radius: 8px;
+    padding: 12px;
+    font-size: 14px;
+    background-color: white;
+    color: #333333;
+}
+
+QLineEdit:focus {
+    border: 2px solid #556B2F;
+}
+
+/* Checkbox */
+QCheckBox {
+    color: #6B4F3F;
+    font-size: 13px;
+    spacing: 8px;
+}
+
+QCheckBox::indicator {
+    width: 18px;
+    height: 18px;
+    border: 2px solid #D4AF37;
+    border-radius: 4px;
+    background-color: white;
+}
+
+QCheckBox::indicator:checked {
+    background-color: #556B2F;
+    border-color: #556B2F;
+    image: url(:/icons/check.png);
+}
+
+/* Button */
+QPushButton {
+    background-color: #556B2F;
+    color: white;
+    border: none;
+    border-radius: 10px;
+    padding: 14px;
+    font-size: 16px;
+    font-weight: bold;
+}
+
+QPushButton:hover {
+    background-color: #6B8E23;
+}
+
+QPushButton:pressed {
+    background-color: #2C3E1F;
+}</string>
+  </property>
+  <widget class="QFrame" name="image_frame">
+   <property name="geometry">
+    <rect>
+     <x>0</x>
+     <y>0</y>
+     <width>400</width>
+     <height>501</height>
+    </rect>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">QFrame#image_frame {
+    background-color: #556B2F;
+    border-right: 5px solid #D4AF37;
+}</string>
+   </property>
+   <property name="frameShape">
+    <enum>QFrame::Shape::StyledPanel</enum>
+   </property>
+   <property name="frameShadow">
+    <enum>QFrame::Shadow::Raised</enum>
+   </property>
+   <widget class="QLabel" name="label">
+    <property name="geometry">
+     <rect>
+      <x>20</x>
+      <y>20</y>
+      <width>341</width>
+      <height>421</height>
+     </rect>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">QLabel {
+    background-color: transparent;
+    border-radius: 50%;
+    padding: 30px;
+}</string>
+    </property>
+    <property name="text">
+     <string/>
+    </property>
+    <property name="pixmap">
+     <pixmap>images/login-removebg-preview.png</pixmap>
+    </property>
+    <property name="scaledContents">
+     <bool>true</bool>
+    </property>
+   </widget>
+  </widget>
+  <widget class="QFrame" name="form_frame">
+   <property name="geometry">
+    <rect>
+     <x>400</x>
+     <y>0</y>
+     <width>400</width>
+     <height>501</height>
+    </rect>
+   </property>
+   <property name="minimumSize">
+    <size>
+     <width>400</width>
+     <height>0</height>
+    </size>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">QFrame#form_frame {
+    background-color: #FAFAF5;
+}</string>
+   </property>
+   <property name="frameShape">
+    <enum>QFrame::Shape::StyledPanel</enum>
+   </property>
+   <property name="frameShadow">
+    <enum>QFrame::Shadow::Raised</enum>
+   </property>
+   <widget class="QWidget" name="">
+    <property name="geometry">
+     <rect>
+      <x>0</x>
+      <y>0</y>
+      <width>401</width>
+      <height>505</height>
+     </rect>
+    </property>
+    <layout class="QVBoxLayout" name="verticalLayout">
+     <item>
+      <widget class="QLabel" name="label_2">
+       <property name="minimumSize">
+        <size>
+         <width>100</width>
+         <height>100</height>
+        </size>
+       </property>
+       <property name="maximumSize">
+        <size>
+         <width>100</width>
+         <height>100</height>
+        </size>
+       </property>
+       <property name="styleSheet">
+        <string notr="true">QLabel {
+    background-color: #556B2F;
+    border-radius: 50px;
+    padding: 20px;
+}</string>
+       </property>
+       <property name="text">
+        <string/>
+       </property>
+       <property name="pixmap">
+        <pixmap>images/lg-removebg-preview.png</pixmap>
+       </property>
+       <property name="scaledContents">
+        <bool>true</bool>
+       </property>
+       <property name="alignment">
+        <set>Qt::AlignmentFlag::AlignCenter</set>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QLabel" name="label_3">
+       <property name="text">
+        <string>Système de gestion - Smart Oil Press</string>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QLabel" name="titre_label">
+       <property name="font">
+        <font>
+         <pointsize>-1</pointsize>
+         <bold>true</bold>
+        </font>
+       </property>
+       <property name="styleSheet">
+        <string notr="true">QLabel {
+    color: #556B2F;
+    padding: 30px 0 20px 0;
+}</string>
+       </property>
+       <property name="text">
+        <string>Se Connecter</string>
+       </property>
+       <property name="alignment">
+        <set>Qt::AlignmentFlag::AlignCenter</set>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QLabel" name="cin_label&#10;">
+       <property name="font">
+        <font>
+         <family>Segoe UI</family>
+         <pointsize>-1</pointsize>
+         <bold>true</bold>
+        </font>
+       </property>
+       <property name="styleSheet">
+        <string notr="true">QLabel {
+    color: #6B4F3F;
+    font-size: 14px;
+    font-weight: bold;
+    padding-left: 30px;
+    padding-top: 10px;
+}</string>
+       </property>
+       <property name="text">
+        <string>Nom d'utilisateur(CIN)</string>
+       </property>
+       <property name="scaledContents">
+        <bool>false</bool>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QLineEdit" name="cin_input&#10;">
+       <property name="styleSheet">
+        <string notr="true">QLineEdit {
+    border: 2px solid #D4AF37;
+    border-radius: 8px;
+    padding: 10px;
+    font-size: 14px;
+    background-color: white;
+}
+
+QLineEdit:focus {
+    border: 2px solid #556B2F;
+}</string>
+       </property>
+       <property name="maxLength">
+        <number>8</number>
+       </property>
+       <property name="placeholderText">
+        <string>Entrez votre CIN (8 chiffres) </string>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QLabel" name="password_label">
+       <property name="font">
+        <font>
+         <pointsize>-1</pointsize>
+         <bold>true</bold>
+        </font>
+       </property>
+       <property name="styleSheet">
+        <string notr="true">QLabel {
+    color: #6B4F3F;
+    font-size: 14px;
+    font-weight: bold;
+    padding-left: 30px;
+    padding-top: 10px;
+}</string>
+       </property>
+       <property name="text">
+        <string>Mot de passe</string>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QLineEdit" name="password_input&#10;">
+       <property name="styleSheet">
+        <string notr="true">QLineEdit {
+    border: 2px solid #D4AF37;
+    border-radius: 8px;
+    padding: 10px;
+    font-size: 14px;
+    background-color: white;
+}
+
+QLineEdit:focus {
+    border: 2px solid #556B2F;
+}
+</string>
+       </property>
+       <property name="echoMode">
+        <enum>QLineEdit::EchoMode::Password</enum>
+       </property>
+       <property name="placeholderText">
+        <string>Entrez votre mot de passe</string>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QCheckBox" name="remember_checkbox">
+       <property name="styleSheet">
+        <string notr="true">QCheckBox {
+    color: #6B4F3F;
+    font-size: 13px;
+    background-color: transparent;
+}
+
+QCheckBox::indicator {
+    width: 18px;
+    height: 18px;
+    border: 2px solid #D4AF37;
+    border-radius: 4px;
+    background-color: white;
+}
+
+QCheckBox::indicator:checked {
+    background-color: #556B2F;
+    border-color: #556B2F;
+}
+</string>
+       </property>
+       <property name="text">
+        <string>Mot de passe enregistree</string>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QPushButton" name="connexion_btn">
+       <property name="styleSheet">
+        <string notr="true">QPushButton {
+    background-color: #556B2F;
+    color: white;
+    border: 2px solid #D4AF37;
+    border-radius: 8px;
+    padding: 12px;
+    font-size: 16px;
+    font-weight: bold;
+    margin: 20px 30px 10px 30px;
+}
+
+QPushButton:hover {
+    background-color: #6B8E23;
+}
+
+QPushButton:pressed {
+    background-color: #2C3E1F;
+}</string>
+       </property>
+       <property name="text">
+        <string>Connexion</string>
+       </property>
+      </widget>
+     </item>
+    </layout>
+   </widget>
+  </widget>
+ </widget>
+ <resources/>
+ <connections/>
+</ui>
