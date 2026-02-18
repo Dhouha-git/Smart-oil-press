@@ -1,0 +1,1200 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>MainWindow</class>
+ <widget class="QMainWindow" name="MainWindow">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>1012</width>
+    <height>686</height>
+   </rect>
+  </property>
+  <property name="windowTitle">
+   <string>MainWindow</string>
+  </property>
+  <widget class="QWidget" name="centralwidget">
+   <widget class="QStackedWidget" name="stackedWidget">
+    <property name="geometry">
+     <rect>
+      <x>0</x>
+      <y>0</y>
+      <width>1001</width>
+      <height>691</height>
+     </rect>
+    </property>
+    <widget class="QWidget" name="page">
+     <widget class="QGroupBox" name="InformationsPersonnelles_2">
+      <property name="geometry">
+       <rect>
+        <x>0</x>
+        <y>0</y>
+        <width>341</width>
+        <height>631</height>
+       </rect>
+      </property>
+      <property name="styleSheet">
+       <string notr="true">
+QWidget {
+    background: #ffffff;
+    font-family: &quot;Segoe UI&quot;, &quot;Arial&quot;;
+    font-size: 11pt;
+    color: #111111;
+}
+
+/* Optional: better default focus behavior */
+*:focus {
+    outline: none; /* Qt ignores CSS outline mostly, but keep clean */
+}
+
+/* =========================================================
+   COLORS (keep consistent)
+   =========================================================
+   Accent (orange): #c78a10
+   Accent dark:     #a66f08
+   Accent light:    #f3d08a
+   Border neutral:  #bdbdbd
+*/
+ 
+/* =========================================================
+   GROUPBOX
+   ========================================================= */
+QGroupBox {
+    border: 2px solid #c78a10;
+    border-radius: 14px;
+    margin-top: 18px;              /* space for title */
+    padding: 16px 14px 12px 14px;  /* inside spacing */
+    background: transparent;
+}
+
+QGroupBox::title {
+    subcontrol-origin: margin;
+    subcontrol-position: top left;
+
+    left: 16px;
+    padding: 0 10px;
+
+    font-weight: 700;
+    font-size: 12pt;
+    color: #111111;
+
+    background: #ffffff; /* cuts border behind title */
+}
+
+/* =========================================================
+   LABELS
+   ========================================================= */
+QLabel {
+    font-weight: 700;
+    color: #111111;
+}
+
+/* =========================================================
+   LINE EDIT (text fields)
+   ========================================================= */
+QLineEdit {
+    background: #ffffff;
+    border: 2px solid #c78a10;
+    border-radius: 6px;
+    padding: 6px 10px;
+    selection-background-color: #c78a10;
+    selection-color: #ffffff;
+}
+
+QLineEdit:hover {
+    border-color: #a66f08;
+}
+
+QLineEdit:focus {
+    border-color: #a66f08;
+}
+
+QLineEdit:disabled {
+    background: #f4f4f4;
+    border-color: #d6b56f;
+    color: #888888;
+}
+
+/* =========================================================
+   COMBOBOX
+   ========================================================= */
+QComboBox {
+    background: #ffffff;
+    border: 2px solid #c78a10;
+    border-radius: 6px;
+    padding: 6px 34px 6px 10px;  /* right padding to avoid overlap with arrow */
+}
+
+QComboBox:hover {
+    border-color: #a66f08;
+}
+
+QComboBox:focus {
+    border-color: #a66f08;
+}
+
+QComboBox:disabled {
+    background: #f4f4f4;
+    border-color: #d6b56f;
+    color: #888888;
+}
+
+QComboBox::drop-down {
+    subcontrol-origin: padding;
+    subcontrol-position: top right;
+    width: 28px;
+
+    border-left: 2px solid #c78a10;
+    border-top-right-radius: 6px;
+    border-bottom-right-radius: 6px;
+    background: #ffffff;
+}
+
+QComboBox:hover::drop-down {
+    border-left-color: #a66f08;
+}
+
+/* Arrow: QSS cannot draw a real arrow without an image.
+   This is a simple “chevron” using borders via an indicator trick is not supported for QComboBox.
+   Best option: provide an SVG/PNG. Replace with your resource path.
+*/
+QComboBox::down-arrow {
+    image: url(:/icons/chevron-down.png); /* &lt;-- put your icon in Qt resources */
+    width: 12px;
+    height: 12px;
+}
+
+/* Dropdown list */
+QComboBox QAbstractItemView {
+    border: 2px solid #c78a10;
+    background: #ffffff;
+    selection-background-color: #f3d08a;
+    selection-color: #111111;
+    outline: none;
+}
+
+/* =========================================================
+   DATEEDIT / SPINBOX
+   ========================================================= */
+QDateEdit, QSpinBox, QDoubleSpinBox {
+    background: #ffffff;
+    border: 2px solid #c78a10;
+    border-radius: 6px;
+    padding: 6px 34px 6px 10px; /* space for buttons */
+}
+
+QDateEdit:hover, QSpinBox:hover, QDoubleSpinBox:hover {
+    border-color: #a66f08;
+}
+
+QDateEdit:focus, QSpinBox:focus, QDoubleSpinBox:focus {
+    border-color: #a66f08;
+}
+
+QDateEdit:disabled, QSpinBox:disabled, QDoubleSpinBox:disabled {
+    background: #f4f4f4;
+    border-color: #d6b56f;
+    color: #888888;
+}
+
+/* Buttons area */
+QDateEdit::up-button, QSpinBox::up-button, QDoubleSpinBox::up-button,
+QDateEdit::down-button, QSpinBox::down-button, QDoubleSpinBox::down-button {
+    subcontrol-origin: border;
+    width: 28px;
+    background: #ffffff;
+    border-left: 2px solid #c78a10;
+}
+
+QDateEdit::up-button, QSpinBox::up-button, QDoubleSpinBox::up-button {
+    subcontrol-position: top right;
+    border-top-right-radius: 6px;
+}
+
+QDateEdit::down-button, QSpinBox::down-button, QDoubleSpinBox::down-button {
+    subcontrol-position: bottom right;
+    border-bottom-right-radius: 6px;
+}
+
+QDateEdit:hover::up-button, QSpinBox:hover::up-button, QDoubleSpinBox:hover::up-button,
+QDateEdit:hover::down-button, QSpinBox:hover::down-button, QDoubleSpinBox:hover::down-button {
+    border-left-color: #a66f08;
+}
+
+QDateEdit::up-arrow, QSpinBox::up-arrow, QDoubleSpinBox::up-arrow {
+    image: url(:/icons/chevron-up.png);
+    width: 10px;
+    height: 10px;
+}
+
+QDateEdit::down-arrow, QSpinBox::down-arrow, QDoubleSpinBox::down-arrow {
+    image: url(:/icons/chevron-down.png);
+    width: 10px;
+    height: 10px;
+}
+
+/* =========================================================
+   PUSH BUTTON
+   ========================================================= */
+QPushButton {
+    background: #f5f5f5;
+    border: 1px solid #bdbdbd;
+    border-radius: 6px;
+    padding: 7px 16px;
+}
+
+QPushButton:hover {
+    background: #eeeeee;
+    border-color: #a9a9a9;
+}
+
+QPushButton:pressed {
+    background: #e4e4e4;
+}
+
+QPushButton:disabled {
+    background: #f2f2f2;
+    border-color: #d0d0d0;
+    color: #9a9a9a;
+}
+
+/* =========================================================
+   OPTIONAL: TOOLTIP (nice touch)
+  
+QToolTip {
+    background: #ffffff;
+    color: #111111;
+    border: 1px solid #c78a10;
+    padding: 6px 8px;
+    border-radius: 6px;
+}</string>
+      </property>
+      <property name="title">
+       <string/>
+      </property>
+      <widget class="QLabel" name="label_33">
+       <property name="enabled">
+        <bool>true</bool>
+       </property>
+       <property name="geometry">
+        <rect>
+         <x>10</x>
+         <y>40</y>
+         <width>161</width>
+         <height>20</height>
+        </rect>
+       </property>
+       <property name="font">
+        <font>
+         <family>Segoe UI</family>
+         <pointsize>11</pointsize>
+         <bold>true</bold>
+        </font>
+       </property>
+       <property name="text">
+        <string>ID_Operation</string>
+       </property>
+       <property name="scaledContents">
+        <bool>false</bool>
+       </property>
+      </widget>
+      <widget class="QLabel" name="label_34">
+       <property name="enabled">
+        <bool>true</bool>
+       </property>
+       <property name="geometry">
+        <rect>
+         <x>20</x>
+         <y>80</y>
+         <width>49</width>
+         <height>16</height>
+        </rect>
+       </property>
+       <property name="font">
+        <font>
+         <family>Segoe UI</family>
+         <pointsize>11</pointsize>
+         <bold>true</bold>
+        </font>
+       </property>
+       <property name="text">
+        <string>Date_Production</string>
+       </property>
+       <property name="scaledContents">
+        <bool>false</bool>
+       </property>
+      </widget>
+      <widget class="QLabel" name="label_35">
+       <property name="enabled">
+        <bool>true</bool>
+       </property>
+       <property name="geometry">
+        <rect>
+         <x>20</x>
+         <y>120</y>
+         <width>131</width>
+         <height>21</height>
+        </rect>
+       </property>
+       <property name="font">
+        <font>
+         <family>Segoe UI</family>
+         <pointsize>11</pointsize>
+         <bold>true</bold>
+        </font>
+       </property>
+       <property name="text">
+        <string>ID_Agriculteur</string>
+       </property>
+       <property name="scaledContents">
+        <bool>false</bool>
+       </property>
+      </widget>
+      <widget class="QLabel" name="label_36">
+       <property name="enabled">
+        <bool>true</bool>
+       </property>
+       <property name="geometry">
+        <rect>
+         <x>20</x>
+         <y>160</y>
+         <width>91</width>
+         <height>16</height>
+        </rect>
+       </property>
+       <property name="font">
+        <font>
+         <family>Segoe UI</family>
+         <pointsize>11</pointsize>
+         <bold>true</bold>
+        </font>
+       </property>
+       <property name="text">
+        <string>ID_Machine</string>
+       </property>
+       <property name="scaledContents">
+        <bool>false</bool>
+       </property>
+      </widget>
+      <widget class="QLabel" name="label_37">
+       <property name="enabled">
+        <bool>true</bool>
+       </property>
+       <property name="geometry">
+        <rect>
+         <x>10</x>
+         <y>190</y>
+         <width>141</width>
+         <height>31</height>
+        </rect>
+       </property>
+       <property name="font">
+        <font>
+         <family>Segoe UI</family>
+         <pointsize>11</pointsize>
+         <bold>true</bold>
+        </font>
+       </property>
+       <property name="text">
+        <string>Quantité_Olives (kg)</string>
+       </property>
+       <property name="scaledContents">
+        <bool>false</bool>
+       </property>
+      </widget>
+      <widget class="QLabel" name="label_38">
+       <property name="enabled">
+        <bool>true</bool>
+       </property>
+       <property name="geometry">
+        <rect>
+         <x>10</x>
+         <y>240</y>
+         <width>131</width>
+         <height>21</height>
+        </rect>
+       </property>
+       <property name="font">
+        <font>
+         <family>Segoe UI</family>
+         <pointsize>11</pointsize>
+         <bold>true</bold>
+        </font>
+       </property>
+       <property name="text">
+        <string>Quantité_Huile (litres)</string>
+       </property>
+       <property name="scaledContents">
+        <bool>false</bool>
+       </property>
+      </widget>
+      <widget class="QLabel" name="label_39">
+       <property name="enabled">
+        <bool>true</bool>
+       </property>
+       <property name="geometry">
+        <rect>
+         <x>10</x>
+         <y>290</y>
+         <width>141</width>
+         <height>21</height>
+        </rect>
+       </property>
+       <property name="font">
+        <font>
+         <family>Segoe UI</family>
+         <pointsize>11</pointsize>
+         <bold>true</bold>
+        </font>
+       </property>
+       <property name="text">
+        <string>Rendement</string>
+       </property>
+       <property name="scaledContents">
+        <bool>false</bool>
+       </property>
+      </widget>
+      <widget class="QLabel" name="label_40">
+       <property name="enabled">
+        <bool>true</bool>
+       </property>
+       <property name="geometry">
+        <rect>
+         <x>10</x>
+         <y>340</y>
+         <width>131</width>
+         <height>21</height>
+        </rect>
+       </property>
+       <property name="font">
+        <font>
+         <family>Segoe UI</family>
+         <pointsize>11</pointsize>
+         <bold>true</bold>
+        </font>
+       </property>
+       <property name="text">
+        <string>Type_Huile</string>
+       </property>
+       <property name="scaledContents">
+        <bool>false</bool>
+       </property>
+      </widget>
+      <widget class="QLineEdit" name="lineEdit_cin_2">
+       <property name="geometry">
+        <rect>
+         <x>160</x>
+         <y>30</y>
+         <width>171</width>
+         <height>31</height>
+        </rect>
+       </property>
+      </widget>
+      <widget class="QLineEdit" name="lineEdit_adresse_2">
+       <property name="geometry">
+        <rect>
+         <x>160</x>
+         <y>110</y>
+         <width>171</width>
+         <height>31</height>
+        </rect>
+       </property>
+      </widget>
+      <widget class="QLineEdit" name="lineEdit_codepostal_2">
+       <property name="geometry">
+        <rect>
+         <x>160</x>
+         <y>150</y>
+         <width>171</width>
+         <height>31</height>
+        </rect>
+       </property>
+      </widget>
+      <widget class="QDateEdit" name="dateEdit_3">
+       <property name="geometry">
+        <rect>
+         <x>170</x>
+         <y>70</y>
+         <width>151</width>
+         <height>31</height>
+        </rect>
+       </property>
+      </widget>
+      <widget class="QComboBox" name="comboBox_6">
+       <property name="geometry">
+        <rect>
+         <x>160</x>
+         <y>330</y>
+         <width>171</width>
+         <height>42</height>
+        </rect>
+       </property>
+       <item>
+        <property name="text">
+         <string>Celibataire</string>
+        </property>
+       </item>
+       <item>
+        <property name="text">
+         <string>Marie</string>
+        </property>
+       </item>
+       <item>
+        <property name="text">
+         <string>Divorce</string>
+        </property>
+       </item>
+      </widget>
+      <widget class="QLabel" name="label_41">
+       <property name="enabled">
+        <bool>true</bool>
+       </property>
+       <property name="geometry">
+        <rect>
+         <x>0</x>
+         <y>440</y>
+         <width>141</width>
+         <height>21</height>
+        </rect>
+       </property>
+       <property name="font">
+        <font>
+         <family>Segoe UI</family>
+         <pointsize>11</pointsize>
+         <bold>true</bold>
+        </font>
+       </property>
+       <property name="text">
+        <string>Durée_Pressage</string>
+       </property>
+       <property name="scaledContents">
+        <bool>false</bool>
+       </property>
+      </widget>
+      <widget class="QLabel" name="label_50">
+       <property name="enabled">
+        <bool>true</bool>
+       </property>
+       <property name="geometry">
+        <rect>
+         <x>10</x>
+         <y>390</y>
+         <width>121</width>
+         <height>21</height>
+        </rect>
+       </property>
+       <property name="font">
+        <font>
+         <family>Segoe UI</family>
+         <pointsize>11</pointsize>
+         <bold>true</bold>
+        </font>
+       </property>
+       <property name="text">
+        <string>Température_Moy</string>
+       </property>
+       <property name="scaledContents">
+        <bool>false</bool>
+       </property>
+      </widget>
+      <widget class="QLabel" name="label_49">
+       <property name="enabled">
+        <bool>true</bool>
+       </property>
+       <property name="geometry">
+        <rect>
+         <x>20</x>
+         <y>480</y>
+         <width>111</width>
+         <height>31</height>
+        </rect>
+       </property>
+       <property name="font">
+        <font>
+         <family>Segoe UI</family>
+         <pointsize>11</pointsize>
+         <bold>true</bold>
+        </font>
+       </property>
+       <property name="text">
+        <string>Observation</string>
+       </property>
+       <property name="scaledContents">
+        <bool>false</bool>
+       </property>
+      </widget>
+      <widget class="QLineEdit" name="lineEdit_codepostal_4">
+       <property name="geometry">
+        <rect>
+         <x>160</x>
+         <y>190</y>
+         <width>171</width>
+         <height>31</height>
+        </rect>
+       </property>
+      </widget>
+      <widget class="QLineEdit" name="lineEdit_codepostal_5">
+       <property name="geometry">
+        <rect>
+         <x>160</x>
+         <y>230</y>
+         <width>171</width>
+         <height>31</height>
+        </rect>
+       </property>
+      </widget>
+      <widget class="QLineEdit" name="lineEdit_codepostal_6">
+       <property name="geometry">
+        <rect>
+         <x>160</x>
+         <y>280</y>
+         <width>171</width>
+         <height>31</height>
+        </rect>
+       </property>
+      </widget>
+      <widget class="QLineEdit" name="lineEdit_codepostal_7">
+       <property name="geometry">
+        <rect>
+         <x>160</x>
+         <y>390</y>
+         <width>171</width>
+         <height>31</height>
+        </rect>
+       </property>
+      </widget>
+      <widget class="QLineEdit" name="lineEdit_codepostal_8">
+       <property name="geometry">
+        <rect>
+         <x>160</x>
+         <y>430</y>
+         <width>171</width>
+         <height>31</height>
+        </rect>
+       </property>
+      </widget>
+      <widget class="QLineEdit" name="lineEdit_codepostal_9">
+       <property name="geometry">
+        <rect>
+         <x>160</x>
+         <y>470</y>
+         <width>171</width>
+         <height>31</height>
+        </rect>
+       </property>
+      </widget>
+      <widget class="QPushButton" name="pushButton">
+       <property name="geometry">
+        <rect>
+         <x>0</x>
+         <y>530</y>
+         <width>93</width>
+         <height>29</height>
+        </rect>
+       </property>
+       <property name="styleSheet">
+        <string notr="true"/>
+       </property>
+       <property name="text">
+        <string>ajouter</string>
+       </property>
+      </widget>
+      <widget class="QPushButton" name="pushButton_2">
+       <property name="geometry">
+        <rect>
+         <x>100</x>
+         <y>530</y>
+         <width>111</width>
+         <height>29</height>
+        </rect>
+       </property>
+       <property name="text">
+        <string>modifier</string>
+       </property>
+      </widget>
+      <widget class="QPushButton" name="pushButton_3">
+       <property name="geometry">
+        <rect>
+         <x>222</x>
+         <y>530</y>
+         <width>111</width>
+         <height>29</height>
+        </rect>
+       </property>
+       <property name="text">
+        <string>suprimer</string>
+       </property>
+      </widget>
+      <widget class="QPushButton" name="pushButton_4">
+       <property name="geometry">
+        <rect>
+         <x>110</x>
+         <y>570</y>
+         <width>93</width>
+         <height>29</height>
+        </rect>
+       </property>
+       <property name="text">
+        <string>afficher</string>
+       </property>
+      </widget>
+     </widget>
+     <widget class="QGroupBox" name="InformationsPersonnelles_3">
+      <property name="geometry">
+       <rect>
+        <x>370</x>
+        <y>0</y>
+        <width>621</width>
+        <height>631</height>
+       </rect>
+      </property>
+      <property name="styleSheet">
+       <string notr="true">QTableWidget {
+    background-color: #6f8438;
+    gridline-color: #d6b25e;
+    border: 1px solid #d6b25e;
+    border-radius: 10px;
+}
+
+QTableWidget::item {
+    padding: 6px;
+}
+
+QTableWidget::item:selected {
+    background-color: #d6b25e;
+    color: #3b3b3b;
+}
+
+/* Header */
+QHeaderView::section {
+    background-color: #4a5c25;
+    color: white;
+    padding: 6px;
+    border: 1px solid #d6b25e;
+    font-weight: bold;
+}
+
+/* =========================
+   SCROLLBAR
+========================= */
+QScrollBar:vertical {
+    background: #4a5c25;
+    width: 12px;
+    margin: 0;
+}
+
+QScrollBar::handle:vertical {
+    background: #d6b25e;
+    border-radius: 6px;
+    min-height: 20px;
+}
+
+QScrollBar::handle:vertical:hover {
+    background: #ffd978;
+}
+
+QScrollBar::add-line,
+QScrollBar::sub-line {
+    background: none;
+    height: 0;
+}
+
+QWidget {
+    background: #ffffff;
+    font-family: &quot;Segoe UI&quot;, &quot;Arial&quot;;
+    font-size: 11pt;
+    color: #111111;
+}
+
+/* Optional: better default focus behavior */
+*:focus {
+    outline: none; /* Qt ignores CSS outline mostly, but keep clean */
+}
+
+/* =========================================================
+   COLORS (keep consistent)
+   =========================================================
+   Accent (orange): #c78a10
+   Accent dark:     #a66f08
+   Accent light:    #f3d08a
+   Border neutral:  #bdbdbd
+*/
+ 
+/* =========================================================
+   GROUPBOX
+   ========================================================= */
+QGroupBox {
+    border: 2px solid #c78a10;
+    border-radius: 14px;
+    margin-top: 18px;              /* space for title */
+    padding: 16px 14px 12px 14px;  /* inside spacing */
+    background: transparent;
+}
+
+QGroupBox::title {
+    subcontrol-origin: margin;
+    subcontrol-position: top left;
+
+    left: 16px;
+    padding: 0 10px;
+
+    font-weight: 700;
+    font-size: 12pt;
+    color: #111111;
+
+    background: #ffffff; /* cuts border behind title */
+}
+
+/* =========================================================
+   LABELS
+   ========================================================= */
+QLabel {
+    font-weight: 700;
+    color: #111111;
+}
+
+/* =========================================================
+   LINE EDIT (text fields)
+   ========================================================= */
+QLineEdit {
+    background: #ffffff;
+    border: 2px solid #c78a10;
+    border-radius: 6px;
+    padding: 6px 10px;
+    selection-background-color: #c78a10;
+    selection-color: #ffffff;
+}
+
+QLineEdit:hover {
+    border-color: #a66f08;
+}
+
+QLineEdit:focus {
+    border-color: #a66f08;
+}
+
+QLineEdit:disabled {
+    background: #f4f4f4;
+    border-color: #d6b56f;
+    color: #888888;
+}
+
+/* =========================================================
+   COMBOBOX
+   ========================================================= */
+QComboBox {
+    background: #ffffff;
+    border: 2px solid #c78a10;
+    border-radius: 6px;
+    padding: 6px 34px 6px 10px;  /* right padding to avoid overlap with arrow */
+}
+
+QComboBox:hover {
+    border-color: #a66f08;
+}
+
+QComboBox:focus {
+    border-color: #a66f08;
+}
+
+QComboBox:disabled {
+    background: #f4f4f4;
+    border-color: #d6b56f;
+    color: #888888;
+}
+
+QComboBox::drop-down {
+    subcontrol-origin: padding;
+    subcontrol-position: top right;
+    width: 28px;
+
+    border-left: 2px solid #c78a10;
+    border-top-right-radius: 6px;
+    border-bottom-right-radius: 6px;
+    background: #ffffff;
+}
+
+QComboBox:hover::drop-down {
+    border-left-color: #a66f08;
+}
+
+/* Arrow: QSS cannot draw a real arrow without an image.
+   This is a simple “chevron” using borders via an indicator trick is not supported for QComboBox.
+   Best option: provide an SVG/PNG. Replace with your resource path.
+*/
+QComboBox::down-arrow {
+    image: url(:/icons/chevron-down.png); /* &lt;-- put your icon in Qt resources */
+    width: 12px;
+    height: 12px;
+}
+
+/* Dropdown list */
+QComboBox QAbstractItemView {
+    border: 2px solid #c78a10;
+    background: #ffffff;
+    selection-background-color: #f3d08a;
+    selection-color: #111111;
+    outline: none;
+}
+
+/* =========================================================
+   DATEEDIT / SPINBOX
+   ========================================================= */
+QDateEdit, QSpinBox, QDoubleSpinBox {
+    background: #ffffff;
+    border: 2px solid #c78a10;
+    border-radius: 6px;
+    padding: 6px 34px 6px 10px; /* space for buttons */
+}
+
+QDateEdit:hover, QSpinBox:hover, QDoubleSpinBox:hover {
+    border-color: #a66f08;
+}
+
+QDateEdit:focus, QSpinBox:focus, QDoubleSpinBox:focus {
+    border-color: #a66f08;
+}
+
+QDateEdit:disabled, QSpinBox:disabled, QDoubleSpinBox:disabled {
+    background: #f4f4f4;
+    border-color: #d6b56f;
+    color: #888888;
+}
+
+/* Buttons area */
+QDateEdit::up-button, QSpinBox::up-button, QDoubleSpinBox::up-button,
+QDateEdit::down-button, QSpinBox::down-button, QDoubleSpinBox::down-button {
+    subcontrol-origin: border;
+    width: 28px;
+    background: #ffffff;
+    border-left: 2px solid #c78a10;
+}
+
+QDateEdit::up-button, QSpinBox::up-button, QDoubleSpinBox::up-button {
+    subcontrol-position: top right;
+    border-top-right-radius: 6px;
+}
+
+QDateEdit::down-button, QSpinBox::down-button, QDoubleSpinBox::down-button {
+    subcontrol-position: bottom right;
+    border-bottom-right-radius: 6px;
+}
+
+QDateEdit:hover::up-button, QSpinBox:hover::up-button, QDoubleSpinBox:hover::up-button,
+QDateEdit:hover::down-button, QSpinBox:hover::down-button, QDoubleSpinBox:hover::down-button {
+    border-left-color: #a66f08;
+}
+
+QDateEdit::up-arrow, QSpinBox::up-arrow, QDoubleSpinBox::up-arrow {
+    image: url(:/icons/chevron-up.png);
+    width: 10px;
+    height: 10px;
+}
+
+QDateEdit::down-arrow, QSpinBox::down-arrow, QDoubleSpinBox::down-arrow {
+    image: url(:/icons/chevron-down.png);
+    width: 10px;
+    height: 10px;
+}
+
+/* =========================================================
+   PUSH BUTTON
+   ========================================================= */
+QPushButton {
+    background: #f5f5f5;
+    border: 1px solid #bdbdbd;
+    border-radius: 6px;
+    padding: 7px 16px;
+}
+
+QPushButton:hover {
+    background: #eeeeee;
+    border-color: #a9a9a9;
+}
+
+QPushButton:pressed {
+    background: #e4e4e4;
+}
+
+QPushButton:disabled {
+    background: #f2f2f2;
+    border-color: #d0d0d0;
+    color: #9a9a9a;
+}
+
+/* =========================================================
+   OPTIONAL: TOOLTIP (nice touch)
+  
+QToolTip {
+    background: #ffffff;
+    color: #111111;
+    border: 1px solid #c78a10;
+    padding: 6px 8px;
+    border-radius: 6px;
+}</string>
+      </property>
+      <property name="title">
+       <string/>
+      </property>
+      <widget class="QComboBox" name="comboBox_7">
+       <property name="geometry">
+        <rect>
+         <x>210</x>
+         <y>40</y>
+         <width>341</width>
+         <height>42</height>
+        </rect>
+       </property>
+       <item>
+        <property name="text">
+         <string>Recherche des opérations selon</string>
+        </property>
+       </item>
+      </widget>
+      <widget class="QComboBox" name="comboBox_8">
+       <property name="geometry">
+        <rect>
+         <x>40</x>
+         <y>110</y>
+         <width>291</width>
+         <height>42</height>
+        </rect>
+       </property>
+       <item>
+        <property name="text">
+         <string>Tri des opérations par :</string>
+        </property>
+       </item>
+      </widget>
+      <widget class="QPushButton" name="pushButton_5">
+       <property name="geometry">
+        <rect>
+         <x>70</x>
+         <y>40</y>
+         <width>81</width>
+         <height>41</height>
+        </rect>
+       </property>
+       <property name="text">
+        <string>pdf</string>
+       </property>
+      </widget>
+      <widget class="QPushButton" name="pushButton_6">
+       <property name="geometry">
+        <rect>
+         <x>460</x>
+         <y>110</y>
+         <width>121</width>
+         <height>41</height>
+        </rect>
+       </property>
+       <property name="text">
+        <string>historique</string>
+       </property>
+      </widget>
+      <widget class="QPushButton" name="rendement">
+       <property name="geometry">
+        <rect>
+         <x>20</x>
+         <y>410</y>
+         <width>131</width>
+         <height>41</height>
+        </rect>
+       </property>
+       <property name="text">
+        <string>rendement</string>
+       </property>
+      </widget>
+      <widget class="QPushButton" name="pushButton_8">
+       <property name="geometry">
+        <rect>
+         <x>250</x>
+         <y>420</y>
+         <width>121</width>
+         <height>31</height>
+        </rect>
+       </property>
+       <property name="text">
+        <string>anomalies</string>
+       </property>
+      </widget>
+      <widget class="QPushButton" name="pushButton_9">
+       <property name="geometry">
+        <rect>
+         <x>470</x>
+         <y>410</y>
+         <width>121</width>
+         <height>41</height>
+        </rect>
+       </property>
+       <property name="text">
+        <string>graphique</string>
+       </property>
+      </widget>
+      <widget class="QTableWidget" name="tableWidget">
+       <property name="geometry">
+        <rect>
+         <x>10</x>
+         <y>200</y>
+         <width>591</width>
+         <height>201</height>
+        </rect>
+       </property>
+       <column>
+        <property name="text">
+         <string>New Column</string>
+        </property>
+       </column>
+       <column>
+        <property name="text">
+         <string>date</string>
+        </property>
+       </column>
+       <column>
+        <property name="text">
+         <string>id_A</string>
+        </property>
+       </column>
+       <column>
+        <property name="text">
+         <string>id_m</string>
+        </property>
+       </column>
+       <column>
+        <property name="text">
+         <string>qut_o</string>
+        </property>
+       </column>
+      </widget>
+      <widget class="QStackedWidget" name="stackedWidget_2">
+       <property name="geometry">
+        <rect>
+         <x>20</x>
+         <y>470</y>
+         <width>571</width>
+         <height>141</height>
+        </rect>
+       </property>
+       <widget class="QWidget" name="page_3"/>
+       <widget class="QWidget" name="page_4"/>
+      </widget>
+     </widget>
+    </widget>
+    <widget class="QWidget" name="page_2"/>
+   </widget>
+  </widget>
+  <widget class="QMenuBar" name="menubar">
+   <property name="geometry">
+    <rect>
+     <x>0</x>
+     <y>0</y>
+     <width>1012</width>
+     <height>26</height>
+    </rect>
+   </property>
+  </widget>
+  <widget class="QStatusBar" name="statusbar"/>
+ </widget>
+ <resources/>
+ <connections/>
+</ui>
