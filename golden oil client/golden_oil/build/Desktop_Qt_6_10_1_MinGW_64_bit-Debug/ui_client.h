@@ -201,7 +201,7 @@ public:
         centralwidget->setObjectName("centralwidget");
         stacked = new QStackedWidget(centralwidget);
         stacked->setObjectName("stacked");
-        stacked->setGeometry(QRect(-40, -50, 1841, 1191));
+        stacked->setGeometry(QRect(60, 0, 1841, 1191));
         QFont font;
         font.setFamilies({QString::fromUtf8("Yu Gothic UI")});
         font.setPointSize(12);

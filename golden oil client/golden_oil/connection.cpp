@@ -27,9 +27,9 @@ connection::~connection()
 bool connection::createConnect()
 {
     db = QSqlDatabase::addDatabase("QODBC");
-    db.setDatabaseName("DSN=smart");
-    db.setUserName("TASNIM");
-    db.setPassword("tasnim34");
+    db.setDatabaseName("SmartOilPress");
+    db.setUserName("SMART");
+    db.setPassword("smart123");
 
     // Affiche le PATH que Qt voit
     qDebug() << "PATH Qt :" << qgetenv("PATH");

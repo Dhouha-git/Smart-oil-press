@@ -16,20 +16,19 @@ int main(int argc, char *argv[])
     db.setUserName("TASNIM");
     db.setPassword("tasnim34");
 
-    if (!db.open()) {
-        qDebug() << "Erreur complète :" << db.lastError().text();
-        w.show();
+    if (db.open()) {
+           qDebug() << "Connexion réussie";
         QMessageBox::information(nullptr, QObject::tr("Database is open"),
-                                 QObject::tr("Connection successful"),
-                                 QMessageBox::Cancel);
+                                 QObject::tr("Connection successful"));
+w.show();
     } else {
-        qDebug() << "Connexion réussie";
+qDebug() << "Erreur complète :" << db.lastError().text();
         QMessageBox::information(nullptr, QObject::tr("Database is not open"),
                                  QObject::tr("Connection failed.\nClick "),
                                  QMessageBox::Cancel);
+
     }
 
-    return 0;
 
     return a.exec();
 }
