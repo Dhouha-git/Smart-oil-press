@@ -1,6 +1,6 @@
 #ifndef MAINWINDOW_H
 #define MAINWINDOW_H
-
+#include <QString>
 #include <QMainWindow>
 #include "employe.h"
 
@@ -11,7 +11,7 @@ QT_END_NAMESPACE
 class MainWindow : public QMainWindow
 {
     Q_OBJECT
-
+int id_selected;
 public:
     MainWindow(QWidget *parent = nullptr);
     ~MainWindow();
@@ -34,19 +34,24 @@ private slots:
     void on_btn_employes_3_clicked();
 
     void on_btn_ajouter_clicked();
-   // void on_tableView_clicked(const QModelIndex &index);
-   // void on_btn_modifier_valider_clicked();
+    //void on_tableView_clicked(const QModelIndex &index);
+    //void on_btn_modifier_valider_clicked();
     void on_btn_annuler_4_clicked();
 
     void on_btn_retour_4_clicked();
 
     void on_btn_employes_6_clicked();
 
+    void on_btn_valider_4_clicked();
+    void on_lineEdit_recherche_textChanged(const QString &);
+    void on_comboBox_filtre_currentTextChanged(const QString &);
+    void on_comboBox_tri_currentTextChanged(const QString &);
 private:
     Ui::MainWindow *ui;
     Employe Etmp;
 
     void refreshTable();
+    void updateRecherche();
 };
 
 #endif
