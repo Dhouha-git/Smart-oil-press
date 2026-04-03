@@ -196,12 +196,12 @@ public:
     {
         if (client->objectName().isEmpty())
             client->setObjectName("client");
-        client->resize(1666, 965);
+        client->resize(1592, 793);
         centralwidget = new QWidget(client);
         centralwidget->setObjectName("centralwidget");
         stacked = new QStackedWidget(centralwidget);
         stacked->setObjectName("stacked");
-        stacked->setGeometry(QRect(60, -10, 1841, 1191));
+        stacked->setGeometry(QRect(60, 0, 1841, 1191));
         QFont font;
         font.setFamilies({QString::fromUtf8("Yu Gothic UI")});
         font.setPointSize(12);
@@ -1687,7 +1687,7 @@ public:
         client->setCentralWidget(centralwidget);
         menubar = new QMenuBar(client);
         menubar->setObjectName("menubar");
-        menubar->setGeometry(QRect(0, 0, 1666, 26));
+        menubar->setGeometry(QRect(0, 0, 1592, 26));
         client->setMenuBar(menubar);
         statusbar = new QStatusBar(client);
         statusbar->setObjectName("statusbar");
@@ -1695,7 +1695,7 @@ public:
 
         retranslateUi(client);
 
-        stacked->setCurrentIndex(0);
+        stacked->setCurrentIndex(1);
 
 
         QMetaObject::connectSlotsByName(client);

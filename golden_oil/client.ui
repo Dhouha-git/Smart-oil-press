@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>1666</width>
-    <height>965</height>
+    <width>1592</width>
+    <height>793</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -18,7 +18,7 @@
     <property name="geometry">
      <rect>
       <x>60</x>
-      <y>-10</y>
+      <y>0</y>
       <width>1841</width>
       <height>1191</height>
      </rect>
@@ -95,7 +95,7 @@ QPushButton#navBtn:pressed {
 </string>
     </property>
     <property name="currentIndex">
-     <number>0</number>
+     <number>1</number>
     </property>
     <widget class="QWidget" name="page_3">
      <widget class="QFrame" name="frame_7">
@@ -3498,7 +3498,7 @@ input, select, textarea {
     <rect>
      <x>0</x>
      <y>0</y>
-     <width>1666</width>
+     <width>1592</width>
      <height>26</height>
     </rect>
    </property>

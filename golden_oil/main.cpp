@@ -7,7 +7,7 @@ int main(int argc, char *argv[])
 {
     QApplication a(argc, argv);
 
-    if(Connection::getInstance()->createconnect())
+    if(connection::getInstance()->createConnect())
     {
         QMessageBox::information(nullptr,
                                  "Database",

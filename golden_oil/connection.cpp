@@ -1,40 +1,55 @@
 #include "connection.h"
+#include <QSqlDatabase>
 #include <QSqlError>
 #include <QDebug>
+#include <QSqlQuery>
+#include <QSqlTableModel>
 
-Connection* Connection::instance = nullptr;
 
-Connection::Connection()
+// Initialisation du singleton
+connection* connection::instance = nullptr;
+// Constructeur privé
+connection::connection()
 {
-    db = QSqlDatabase::addDatabase("QODBC");
-    db.setDatabaseName("Source_Projet2A");
+    // Si Qt contient déjà une connexion par défaut
+    if (QSqlDatabase::contains("qt_sql_default_connection"))
+        db = QSqlDatabase::database("qt_sql_default_connection");
+    else
+        db = QSqlDatabase::addDatabase("QODBC"); // ou "QMYSQL" si MySQL
+
+    db.setDatabaseName("Source_Projet2A"); // DSN ODBC ou nom DB
     db.setUserName("SMART");
     db.setPassword("smart123");
 }
 
-Connection* Connection::getInstance()
+// Singleton
+connection* connection::getInstance()
 {
-    if(instance == nullptr)
-        instance = new Connection();
-
+    if (!instance)
+        instance = new connection();
     return instance;
 }
 
-bool Connection::createconnect()
+// Créer / ouvrir la connexion
+bool connection::createConnect()
 {
-    if(db.open())
+    if (db.isOpen())  // évite de rouvrir
+        return true;
+
+    if (db.open())
     {
         qDebug() << "Connexion réussie";
         return true;
     }
     else
     {
-        qDebug() << "Erreur connexion :" << db.lastError();
+        qDebug() << "Erreur connexion :" << db.lastError().text();
         return false;
     }
 }
 
-QSqlDatabase Connection::getDatabase()
+// Accès à la base
+QSqlDatabase connection::getDatabase()
 {
     return db;
 }

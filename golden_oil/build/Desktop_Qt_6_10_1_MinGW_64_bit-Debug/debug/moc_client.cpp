@@ -42,13 +42,12 @@ template <> constexpr inline auto client::qt_create_metaobjectdata<qt_meta_tag_Z
         "on_analyse_clicked",
         "",
         "on_chatbot_clicked",
-        "on_pdf_clicked",
-        "on_pushButton_3_clicked",
+        "on_retour_clicked",
         "on_historique_clicked",
         "on_classement_clicked",
+        "on_pushButton_3_clicked",
         "on_pushButton_5_clicked",
-        "on_pushButton_6_clicked",
-        "on_pushButton_4_clicked"
+        "on_pushButton_6_clicked"
     };
 
     QtMocHelpers::UintData qt_methods {
@@ -56,20 +55,18 @@ template <> constexpr inline auto client::qt_create_metaobjectdata<qt_meta_tag_Z
         QtMocHelpers::SlotData<void()>(1, 2, QMC::AccessPrivate, QMetaType::Void),
         // Slot 'on_chatbot_clicked'
         QtMocHelpers::SlotData<void()>(3, 2, QMC::AccessPrivate, QMetaType::Void),
-        // Slot 'on_pdf_clicked'
+        // Slot 'on_retour_clicked'
         QtMocHelpers::SlotData<void()>(4, 2, QMC::AccessPrivate, QMetaType::Void),
-        // Slot 'on_pushButton_3_clicked'
-        QtMocHelpers::SlotData<void()>(5, 2, QMC::AccessPrivate, QMetaType::Void),
         // Slot 'on_historique_clicked'
-        QtMocHelpers::SlotData<void()>(6, 2, QMC::AccessPrivate, QMetaType::Void),
+        QtMocHelpers::SlotData<void()>(5, 2, QMC::AccessPrivate, QMetaType::Void),
         // Slot 'on_classement_clicked'
+        QtMocHelpers::SlotData<void()>(6, 2, QMC::AccessPrivate, QMetaType::Void),
+        // Slot 'on_pushButton_3_clicked'
         QtMocHelpers::SlotData<void()>(7, 2, QMC::AccessPrivate, QMetaType::Void),
         // Slot 'on_pushButton_5_clicked'
         QtMocHelpers::SlotData<void()>(8, 2, QMC::AccessPrivate, QMetaType::Void),
         // Slot 'on_pushButton_6_clicked'
         QtMocHelpers::SlotData<void()>(9, 2, QMC::AccessPrivate, QMetaType::Void),
-        // Slot 'on_pushButton_4_clicked'
-        QtMocHelpers::SlotData<void()>(10, 2, QMC::AccessPrivate, QMetaType::Void),
     };
     QtMocHelpers::UintData qt_properties {
     };
@@ -95,13 +92,12 @@ void client::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int _id, void
         switch (_id) {
         case 0: _t->on_analyse_clicked(); break;
         case 1: _t->on_chatbot_clicked(); break;
-        case 2: _t->on_pdf_clicked(); break;
-        case 3: _t->on_pushButton_3_clicked(); break;
-        case 4: _t->on_historique_clicked(); break;
-        case 5: _t->on_classement_clicked(); break;
+        case 2: _t->on_retour_clicked(); break;
+        case 3: _t->on_historique_clicked(); break;
+        case 4: _t->on_classement_clicked(); break;
+        case 5: _t->on_pushButton_3_clicked(); break;
         case 6: _t->on_pushButton_5_clicked(); break;
         case 7: _t->on_pushButton_6_clicked(); break;
-        case 8: _t->on_pushButton_4_clicked(); break;
         default: ;
         }
     }
@@ -127,14 +123,14 @@ int client::qt_metacall(QMetaObject::Call _c, int _id, void **_a)
     if (_id < 0)
         return _id;
     if (_c == QMetaObject::InvokeMetaMethod) {
-        if (_id < 9)
+        if (_id < 8)
             qt_static_metacall(this, _c, _id, _a);
-        _id -= 9;
+        _id -= 8;
     }
     if (_c == QMetaObject::RegisterMethodArgumentMetaType) {
-        if (_id < 9)
+        if (_id < 8)
             *reinterpret_cast<QMetaType *>(_a[0]) = QMetaType();
-        _id -= 9;
+        _id -= 8;
     }
     return _id;
 }
