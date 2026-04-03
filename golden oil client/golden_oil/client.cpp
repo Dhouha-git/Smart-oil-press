@@ -1,28 +1,41 @@
 #include "client.h"
 #include "ui_client.h"
 #include "connection.h"
+
+// ======= AJOUT DES INCLUDES SQL (IMPORTANT) =======
+#include <QSqlQuery>
+#include <QSqlError>
+#include <QSqlDatabase>
+#include <QSqlTableModel>
+#include <QDebug>
+
+// ================= CONSTRUCTEUR =================
 client::client(QWidget *parent)
     : QMainWindow(parent)
     , ui(new Ui::client)
 {
     ui->setupUi(this);
 
-    // Vérifie si la connexion est ouverte
-    if (!connection::instance()->createConnect()) {
+    // Vérifier la connexion
+    if (!connection::getInstance()->createConnect()) {
         qDebug() << "Erreur: Impossible de se connecter à la base!";
     } else {
         qDebug() << "Base ouverte avec succès";
     }
 }
+
+// ================= AJOUTER =================
 bool client::ajouter()
 {
     if (!QSqlDatabase::database().isOpen()) {
-        qDebug() << "Database is not open! Cannot execute insert.";
+        qDebug() << "Database is not open!";
         return false;
     }
 
     QSqlQuery query;
-    query.prepare("INSERT INTO CLIENT(ID,NOM,PRENOM,TELEPHONE,EMAIL,ADRESSE,DATE_INSCRIPTION,"
+
+    query.prepare("INSERT INTO CLIENT "
+                  "(ID,NOM,PRENOM,TELEPHONE,EMAIL,ADRESSE,DATE_INSCRIPTION,"
                   "TYPE_CLIENT,TYPE_HUILE_PREFERE,EMBALLAGE_PREFERE,TOTAL_ACHAT,POINTS_FIDELITE) "
                   "VALUES (:id,:nom,:prenom,:telephone,:email,:adresse,:date_inscription,"
                   ":type_client,:type_huile_prefere,:emballage_prefere,:total_achat,:points_fidelite)");
@@ -41,24 +54,26 @@ bool client::ajouter()
     query.bindValue(":points_fidelite", points_fidelite);
 
     if (!query.exec()) {
-        qDebug() << "Erreur dans l'ajout:" << query.lastError().text();
+        qDebug() << "Erreur ajout:" << query.lastError().text();
         return false;
-    } else {
-        qDebug() << "Ajout avec succès";
-        return true;
     }
+
+    qDebug() << "Ajout réussi";
+    return true;
 }
 
-// ===================== MODIFIER =====================
+// ================= MODIFIER =================
 bool client::modifier()
 {
     if (!QSqlDatabase::database().isOpen()) {
-        qDebug() << "Database is not open! Cannot execute update.";
+        qDebug() << "Database is not open!";
         return false;
     }
 
     QSqlQuery query;
-    query.prepare("UPDATE CLIENT SET NOM=:nom, PRENOM=:prenom, TELEPHONE=:telephone, EMAIL=:email, "
+
+    query.prepare("UPDATE CLIENT SET "
+                  "NOM=:nom, PRENOM=:prenom, TELEPHONE=:telephone, EMAIL=:email, "
                   "ADRESSE=:adresse, DATE_INSCRIPTION=:date_inscription, TYPE_CLIENT=:type_client, "
                   "TYPE_HUILE_PREFERE=:type_huile_prefere, EMBALLAGE_PREFERE=:emballage_prefere, "
                   "TOTAL_ACHAT=:total_achat, POINTS_FIDELITE=:points_fidelite "
@@ -78,19 +93,19 @@ bool client::modifier()
     query.bindValue(":points_fidelite", points_fidelite);
 
     if (!query.exec()) {
-        qDebug() << "Erreur dans la modification:" << query.lastError().text();
+        qDebug() << "Erreur modification:" << query.lastError().text();
         return false;
-    } else {
-        qDebug() << "Modification avec succès";
-        return true;
     }
+
+    qDebug() << "Modification réussie";
+    return true;
 }
 
-// ===================== SUPPRIMER =====================
+// ================= SUPPRIMER =================
 bool client::supprimer(int id)
 {
     if (!QSqlDatabase::database().isOpen()) {
-        qDebug() << "Database is not open! Cannot execute delete.";
+        qDebug() << "Database is not open!";
         return false;
     }
 
@@ -99,80 +114,74 @@ bool client::supprimer(int id)
     query.bindValue(":id", id);
 
     if (!query.exec()) {
-        qDebug() << "Erreur dans la suppression:" << query.lastError().text();
+        qDebug() << "Erreur suppression:" << query.lastError().text();
         return false;
-    } else {
-        qDebug() << "Suppression avec succès";
-        return true;
     }
+
+    qDebug() << "Suppression réussie";
+    return true;
 }
 
-// ===================== AFFICHER =====================
+// ================= AFFICHER =================
 void client::afficher(QSqlTableModel *model)
 {
     if (!QSqlDatabase::database().isOpen()) {
-        qDebug() << "Database is not open! Cannot load data.";
+        qDebug() << "Database is not open!";
         return;
     }
 
     model->setTable("CLIENT");
+
     if (!model->select()) {
-        qDebug() << "Erreur lors du chargement des données:" << model->lastError().text();
+        qDebug() << "Erreur affichage:" << model->lastError().text();
     } else {
-        qDebug() << "Chargement de données réussi. Nombre de lignes:" << model->rowCount();
+        qDebug() << "Affichage OK, lignes:" << model->rowCount();
     }
 }
 
+// ================= DESTRUCTEUR =================
 client::~client()
 {
     delete ui;
 }
 
+// ================= NAVIGATION UI =================
 void client::on_analyse_clicked()
 {
     ui->stacked->setCurrentWidget(ui->page_2);
 }
-
 
 void client::on_chatbot_clicked()
 {
     ui->stacked->setCurrentWidget(ui->page_3);
 }
 
-
 void client::on_retour_clicked()
 {
-
+    ui->stacked->setCurrentWidget(ui->page);
 }
-
 
 void client::on_historique_clicked()
 {
     ui->stacked->setCurrentWidget(ui->page_4);
 }
 
-
 void client::on_classement_clicked()
 {
     ui->stacked->setCurrentWidget(ui->page_5);
 }
-
 
 void client::on_pushButton_3_clicked()
 {
     ui->stacked->setCurrentWidget(ui->page);
 }
 
-
 void client::on_pushButton_5_clicked()
 {
-      ui->stacked->setCurrentWidget(ui->page_2);
+    ui->stacked->setCurrentWidget(ui->page_2);
 }
-
 
 void client::on_pushButton_6_clicked()
 {
     ui->stacked->setCurrentWidget(ui->page_2);
-
 }
-

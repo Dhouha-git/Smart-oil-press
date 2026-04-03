@@ -1,56 +1,55 @@
 #include "connection.h"
 #include <QSqlDatabase>
-#include <QDebug>
-#include <QtSql/QSqlQueryModel>
-#include <QString>  // pour QString
-#include <QDate>
-#include <QSqlTableModel>
 #include <QSqlError>
-connection* connection::p_instance = nullptr;
+#include <QDebug>
+#include <QSqlQuery>
+#include <QSqlTableModel>
 
-connection* connection::instance()
-{
-    if (!p_instance)
-        p_instance = new connection();
-    return p_instance;
-}
 
+// Initialisation du singleton
+connection* connection::instance = nullptr;
+// Constructeur privé
 connection::connection()
 {
-}
+    // Si Qt contient déjà une connexion par défaut
+    if (QSqlDatabase::contains("qt_sql_default_connection"))
+        db = QSqlDatabase::database("qt_sql_default_connection");
+    else
+        db = QSqlDatabase::addDatabase("QODBC"); // ou "QMYSQL" si MySQL
 
-connection::~connection()
-{
-    closeConnection();
-}
-
-bool connection::createConnect()
-{
-    db = QSqlDatabase::addDatabase("QODBC");
-    db.setDatabaseName("SmartOilPress");
+    db.setDatabaseName("Source_Projet2A"); // DSN ODBC ou nom DB
     db.setUserName("SMART");
     db.setPassword("smart123");
+}
 
-    // Affiche le PATH que Qt voit
-    qDebug() << "PATH Qt :" << qgetenv("PATH");
+// Singleton
+connection* connection::getInstance()
+{
+    if (!instance)
+        instance = new connection();
+    return instance;
+}
 
-    // Liste les drivers disponibles
-    qDebug() << "Drivers disponibles :" << QSqlDatabase::drivers();
+// Créer / ouvrir la connexion
+bool connection::createConnect()
+{
+    if (db.isOpen())  // évite de rouvrir
+        return true;
 
-    // Tente d’ouvrir la base
-    if (!db.open()) {
-        qDebug() << "Erreur complète :" << db.lastError().text();
-        return false;
-    } else {
+    if (db.open())
+    {
         qDebug() << "Connexion réussie";
         return true;
     }
+    else
+    {
+        qDebug() << "Erreur connexion :" << db.lastError().text();
+        return false;
+    }
 }
 
-void connection::closeConnection()
+// Accès à la base
+QSqlDatabase connection::getDatabase()
 {
-    if (db.isOpen()) {
-        db.close();
-        qDebug() << "Connexion fermée";
-    }
+    return db;
 }
