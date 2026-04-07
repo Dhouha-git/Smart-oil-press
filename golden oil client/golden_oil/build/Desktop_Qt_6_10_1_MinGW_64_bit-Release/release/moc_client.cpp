@@ -48,9 +48,13 @@ template <> constexpr inline auto client::qt_create_metaobjectdata<qt_meta_tag_Z
         "on_pushButton_3_clicked",
         "on_pushButton_5_clicked",
         "on_pushButton_6_clicked",
-        "onAjouterClicked",
-        "onModifierClicked",
-        "onSupprimerClicked"
+        "on_ajouter_clicked",
+        "on_modifier_clicked",
+        "on_recherche1_2_clicked",
+        "on_tri_2_clicked",
+        "on_annuler_clicked",
+        "on_annuler1_clicked",
+        "on_supprimer_clicked"
     };
 
     QtMocHelpers::UintData qt_methods {
@@ -70,12 +74,20 @@ template <> constexpr inline auto client::qt_create_metaobjectdata<qt_meta_tag_Z
         QtMocHelpers::SlotData<void()>(8, 2, QMC::AccessPrivate, QMetaType::Void),
         // Slot 'on_pushButton_6_clicked'
         QtMocHelpers::SlotData<void()>(9, 2, QMC::AccessPrivate, QMetaType::Void),
-        // Slot 'onAjouterClicked'
+        // Slot 'on_ajouter_clicked'
         QtMocHelpers::SlotData<void()>(10, 2, QMC::AccessPrivate, QMetaType::Void),
-        // Slot 'onModifierClicked'
+        // Slot 'on_modifier_clicked'
         QtMocHelpers::SlotData<void()>(11, 2, QMC::AccessPrivate, QMetaType::Void),
-        // Slot 'onSupprimerClicked'
+        // Slot 'on_recherche1_2_clicked'
         QtMocHelpers::SlotData<void()>(12, 2, QMC::AccessPrivate, QMetaType::Void),
+        // Slot 'on_tri_2_clicked'
+        QtMocHelpers::SlotData<void()>(13, 2, QMC::AccessPrivate, QMetaType::Void),
+        // Slot 'on_annuler_clicked'
+        QtMocHelpers::SlotData<void()>(14, 2, QMC::AccessPrivate, QMetaType::Void),
+        // Slot 'on_annuler1_clicked'
+        QtMocHelpers::SlotData<void()>(15, 2, QMC::AccessPrivate, QMetaType::Void),
+        // Slot 'on_supprimer_clicked'
+        QtMocHelpers::SlotData<void()>(16, 2, QMC::AccessPrivate, QMetaType::Void),
     };
     QtMocHelpers::UintData qt_properties {
     };
@@ -107,9 +119,13 @@ void client::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int _id, void
         case 5: _t->on_pushButton_3_clicked(); break;
         case 6: _t->on_pushButton_5_clicked(); break;
         case 7: _t->on_pushButton_6_clicked(); break;
-        case 8: _t->onAjouterClicked(); break;
-        case 9: _t->onModifierClicked(); break;
-        case 10: _t->onSupprimerClicked(); break;
+        case 8: _t->on_ajouter_clicked(); break;
+        case 9: _t->on_modifier_clicked(); break;
+        case 10: _t->on_recherche1_2_clicked(); break;
+        case 11: _t->on_tri_2_clicked(); break;
+        case 12: _t->on_annuler_clicked(); break;
+        case 13: _t->on_annuler1_clicked(); break;
+        case 14: _t->on_supprimer_clicked(); break;
         default: ;
         }
     }
@@ -135,14 +151,14 @@ int client::qt_metacall(QMetaObject::Call _c, int _id, void **_a)
     if (_id < 0)
         return _id;
     if (_c == QMetaObject::InvokeMetaMethod) {
-        if (_id < 11)
+        if (_id < 15)
             qt_static_metacall(this, _c, _id, _a);
-        _id -= 11;
+        _id -= 15;
     }
     if (_c == QMetaObject::RegisterMethodArgumentMetaType) {
-        if (_id < 11)
+        if (_id < 15)
             *reinterpret_cast<QMetaType *>(_a[0]) = QMetaType();
-        _id -= 11;
+        _id -= 15;
     }
     return _id;
 }

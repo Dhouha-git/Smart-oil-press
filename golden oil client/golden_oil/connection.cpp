@@ -17,9 +17,7 @@ connection::connection()
     else
         db = QSqlDatabase::addDatabase("QODBC"); // ou "QMYSQL" si MySQL
 
-    db.setDatabaseName("Source_Projet2A"); // DSN ODBC ou nom DB
-    db.setUserName("SMART");
-    db.setPassword("smart123");
+   db.setDatabaseName("Driver={Oracle in XE};Dbq=XE;Uid=SMART;Pwd=smart123;");
 }
 
 // Singleton

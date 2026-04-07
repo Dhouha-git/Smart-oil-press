@@ -12,6 +12,7 @@
 QT_BEGIN_NAMESPACE
 namespace Ui {
 class client;
+
 }
 QT_END_NAMESPACE
 
@@ -39,10 +40,27 @@ private slots:
     void on_pushButton_5_clicked();
 
     void on_pushButton_6_clicked();
+private slots:
+    void on_ajouter_clicked();
+    void on_modifier_clicked();
+    void on_recherche1_2_clicked();
+void on_tri_2_clicked();
+    void on_annuler_clicked();
+void on_annuler1_clicked();
+
+
+    void on_supprimer_clicked();
+
+
+
+
+
+
 
 private:
     Ui::client *ui;
-
+private:
+    void verifierSaisie();
 
     // ---- Attributs du client ----
     int id;
@@ -57,6 +75,8 @@ private:
     QString emballage_prefere;
     QString total_achat;
     QString points_fidelite;
+    QSqlTableModel *model;
+
 public:
     client(    int id,
            QString nom,
@@ -74,6 +94,7 @@ public:
     bool modifier();
     static bool supprimer(int id);
     static void afficher(QSqlTableModel *model);
+      void remplirTableau();
 
 };
 #endif // CLIENT_H

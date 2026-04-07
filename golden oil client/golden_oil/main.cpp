@@ -2,7 +2,12 @@
 #include <QMessageBox>
 #include "connection.h"
 #include "client.h"
-
+#include <QtSql/QSqlDatabase>
+#include <QtSql/QSqlQueryModel>
+#include <QString>  // pour QString
+#include <QDate>
+#include <QSqlTableModel>
+#include <QSqlError>
 int main(int argc, char *argv[])
 {
     QApplication a(argc, argv);
