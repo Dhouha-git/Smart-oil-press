@@ -1,0 +1,11 @@
+<RCC>
+    <qresource prefix="/images">
+        <file>images/add-user_6862949.png</file>
+        <file>images/business_11625667.png</file>
+        <file>images/cellphone_1740687.png</file>
+        <file>images/eye.png</file>
+        <file>images/lg-removebg-preview.png</file>
+        <file>images/login-removebg-preview.png</file>
+        <file>images/salary_10305143.png</file>
+    </qresource>
+</RCC>
