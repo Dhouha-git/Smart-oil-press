@@ -17,8 +17,8 @@
    <widget class="QStackedWidget" name="stacked">
     <property name="geometry">
      <rect>
-      <x>-10</x>
-      <y>-40</y>
+      <x>-20</x>
+      <y>-60</y>
       <width>1841</width>
       <height>1191</height>
      </rect>
@@ -95,64 +95,38 @@ QPushButton#navBtn:pressed {
 </string>
     </property>
     <property name="currentIndex">
-     <number>1</number>
+     <number>0</number>
     </property>
     <widget class="QWidget" name="page_3">
      <widget class="QFrame" name="frame_7">
       <property name="geometry">
        <rect>
-        <x>-10</x>
-        <y>-20</y>
+        <x>0</x>
+        <y>-40</y>
         <width>161</width>
         <height>851</height>
        </rect>
       </property>
       <property name="styleSheet">
-       <string notr="true">/* Couleur de fond du frame */
-background-color: olive;
-
-/* Bordure fine et arrondie pour un effet moderne */
-border: 1px solid #556B2F; 
-border-radius: 8px;
-
-/* Optionnel : ajoute un peu d'ombre pour plus de relief */
-box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.2);
-
-/* Style pour les labels et champs à l'intérieur */
-label {
-    font-family: Arial, sans-serif;
-    font-size: 12pt;
-    color: #fff; /* texte en blanc pour contraste */
+       <string notr="true">QFrame {
+    background-color: #556B2F;
+} QFrame#sidebar_5 {
+    background-color: #556B2F;
+}
+QPushButton {
+    background-color: transparent;
+    color: white;
+    border: 2px solid #D4AF37;
+    border-radius: 10px;
+    padding: 10px;
+    margin: 8px 12px;
+    text-align: left;
 }
 
-input, select, textarea {
-    border-radius: 4px;
-    border: 1px solid #ccc;
-    padding: 3px 5px;
-}
-/* Couleur de fond du frame */
-background-color: olive;
-
-/* Bordure fine et arrondie pour un effet moderne */
-border: 1px solid #556B2F; 
-border-radius: 8px;
-
-/* Optionnel : ajoute un peu d'ombre pour plus de relief */
-box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.2);
-
-/* Style pour les labels et champs à l'intérieur */
-label {
-    font-family: Arial, sans-serif;
-    font-size: 12pt;
-    color: #fff; /* texte en blanc pour contraste */
-}
-
-input, select, textarea {
-    border-radius: 4px;
-    border: 1px solid #ccc;
-    padding: 3px 5px;
-}
-</string>
+QPushButton:hover {
+    background-color: #D4AF37;
+    color: black;
+}</string>
       </property>
       <property name="frameShape">
        <enum>QFrame::Shape::StyledPanel</enum>
@@ -163,10 +137,10 @@ input, select, textarea {
       <widget class="QPushButton" name="agriculteurs_3">
        <property name="geometry">
         <rect>
-         <x>0</x>
-         <y>300</y>
+         <x>-10</x>
+         <y>360</y>
          <width>181</width>
-         <height>42</height>
+         <height>61</height>
         </rect>
        </property>
        <property name="text">
@@ -176,10 +150,10 @@ input, select, textarea {
       <widget class="QPushButton" name="ventes_3">
        <property name="geometry">
         <rect>
-         <x>0</x>
-         <y>340</y>
+         <x>-10</x>
+         <y>420</y>
          <width>181</width>
-         <height>42</height>
+         <height>61</height>
         </rect>
        </property>
        <property name="text">
@@ -190,9 +164,9 @@ input, select, textarea {
        <property name="geometry">
         <rect>
          <x>-10</x>
-         <y>380</y>
+         <y>480</y>
          <width>181</width>
-         <height>42</height>
+         <height>61</height>
         </rect>
        </property>
        <property name="text">
@@ -203,9 +177,9 @@ input, select, textarea {
        <property name="geometry">
         <rect>
          <x>-10</x>
-         <y>260</y>
+         <y>300</y>
          <width>181</width>
-         <height>42</height>
+         <height>61</height>
         </rect>
        </property>
        <property name="text">
@@ -215,10 +189,10 @@ input, select, textarea {
       <widget class="QPushButton" name="pushButton_4">
        <property name="geometry">
         <rect>
-         <x>0</x>
-         <y>140</y>
+         <x>-10</x>
+         <y>250</y>
          <width>181</width>
-         <height>42</height>
+         <height>61</height>
         </rect>
        </property>
        <property name="text">
@@ -229,9 +203,9 @@ input, select, textarea {
        <property name="geometry">
         <rect>
          <x>-10</x>
-         <y>660</y>
+         <y>610</y>
          <width>181</width>
-         <height>42</height>
+         <height>61</height>
         </rect>
        </property>
        <property name="text">
@@ -241,10 +215,10 @@ input, select, textarea {
       <widget class="QPushButton" name="deconnexion_3">
        <property name="geometry">
         <rect>
-         <x>0</x>
-         <y>750</y>
+         <x>-10</x>
+         <y>710</y>
          <width>181</width>
-         <height>42</height>
+         <height>61</height>
         </rect>
        </property>
        <property name="text">
@@ -254,10 +228,10 @@ input, select, textarea {
       <widget class="QPushButton" name="aide_3">
        <property name="geometry">
         <rect>
-         <x>0</x>
-         <y>700</y>
+         <x>-10</x>
+         <y>660</y>
          <width>181</width>
-         <height>51</height>
+         <height>61</height>
         </rect>
        </property>
        <property name="text">
@@ -304,112 +278,158 @@ QLabel#appTitle {
         <bool>true</bool>
        </property>
       </widget>
-     </widget>
-     <widget class="QFrame" name="frame_8">
-      <property name="geometry">
-       <rect>
-        <x>150</x>
-        <y>0</y>
-        <width>1521</width>
-        <height>91</height>
-       </rect>
-      </property>
-      <property name="styleSheet">
-       <string notr="true">/* Couleur de fond du frame */
-background-color: olive;
-
-/* Bordure fine et arrondie pour un effet moderne */
-border: 1px solid #556B2F; 
-border-radius: 8px;
-
-/* Optionnel : ajoute un peu d'ombre pour plus de relief */
-box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.2);
-
-/* Style pour les labels et champs à l'intérieur */
-label {
-    font-family: Arial, sans-serif;
-    font-size: 12pt;
-    color: #fff; /* texte en blanc pour contraste */
-}
-
-input, select, textarea {
-    border-radius: 4px;
-    border: 1px solid #ccc;
-    padding: 3px 5px;
-}
-/* Couleur de fond du frame */
-background-color: olive;
-
-/* Bordure fine et arrondie pour un effet moderne */
-border: 1px solid #556B2F; 
-border-radius: 8px;
-
-/* Optionnel : ajoute un peu d'ombre pour plus de relief */
-box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.2);
-
-/* Style pour les labels et champs à l'intérieur */
-label {
-    font-family: Arial, sans-serif;
-    font-size: 12pt;
-    color: #fff; /* texte en blanc pour contraste */
-}
-
-input, select, textarea {
-    border-radius: 4px;
-    border: 1px solid #ccc;
-    padding: 3px 5px;
-}
-</string>
-      </property>
-      <property name="frameShape">
-       <enum>QFrame::Shape::StyledPanel</enum>
-      </property>
-      <property name="frameShadow">
-       <enum>QFrame::Shadow::Raised</enum>
-      </property>
-      <widget class="QLabel" name="label_27">
+      <widget class="QFrame" name="frame_14">
        <property name="geometry">
         <rect>
-         <x>0</x>
-         <y>0</y>
-         <width>1511</width>
-         <height>101</height>
+         <x>150</x>
+         <y>130</y>
+         <width>1351</width>
+         <height>631</height>
+        </rect>
+       </property>
+       <property name="frameShape">
+        <enum>QFrame::Shape::StyledPanel</enum>
+       </property>
+       <property name="frameShadow">
+        <enum>QFrame::Shadow::Raised</enum>
+       </property>
+      </widget>
+      <widget class="QLabel" name="logo_label">
+       <property name="geometry">
+        <rect>
+         <x>-40</x>
+         <y>30</y>
+         <width>181</width>
+         <height>221</height>
         </rect>
        </property>
        <property name="styleSheet">
-        <string notr="true">font: 16pt &quot;Segoe UI&quot;;</string>
+        <string notr="true">QLabel#logoLabel {
+    width: 50px;
+    height: 50px;
+    border: none;
+    padding: 0px;
+    background: transparent;
+}</string>
        </property>
        <property name="text">
-        <string> 🤖Ai golden oil press chat</string>
+        <string/>
+       </property>
+       <property name="pixmap">
+        <pixmap>../../../../Downloads/golden-removebg-preview (1).png</pixmap>
        </property>
       </widget>
      </widget>
-     <widget class="QLabel" name="label_29">
+     <widget class="QPlainTextEdit" name="message_2">
       <property name="geometry">
        <rect>
-        <x>320</x>
-        <y>160</y>
-        <width>701</width>
-        <height>231</height>
+        <x>390</x>
+        <y>640</y>
+        <width>411</width>
+        <height>61</height>
        </rect>
       </property>
       <property name="styleSheet">
-       <string notr="true">font: 14pt &quot;Segoe UI&quot;;
-font: 20pt &quot;Segoe UI&quot;;</string>
+       <string notr="true">QPlainTextEdit {
+    background-color: #FFFFFF;   /* fond blanc */
+    color: #000000;              /* texte noir */
+    border: 2px solid #D4AF37;   /* doré */
+    border-radius: 18px;
+    padding: 10px 15px;
+    font-size: 13pt;
+    font-family: &quot;Segoe UI&quot;;
+    selection-background-color: #D4AF37;
+    selection-color: #000000;
+}
+
+/* effet focus */
+QPlainTextEdit:focus {
+    border: 2px solid #FFD700;
+}
+
+/* placeholder */
+QPlainTextEdit[placeholderText] {
+    color: rgba(0, 0, 0, 0.5);  /* gris lisible */
+}
+
+/* scrollbar */
+QScrollBar:vertical {
+    background: transparent;
+    width: 8px;
+    margin: 5px;
+}
+
+QScrollBar::handle:vertical {
+    background: rgba(212, 175, 55, 0.6);
+    border-radius: 4px;
+}
+
+QScrollBar::handle:vertical:hover {
+    background: #D4AF37;
+}
+
+QScrollBar::add-line:vertical,
+QScrollBar::sub-line:vertical {
+    height: 0;
+}</string>
       </property>
-      <property name="text">
-       <string> 
-Bonjour cher client
-Par où commencer ?</string>
+      <property name="plainText">
+       <string/>
       </property>
      </widget>
-     <widget class="QTextEdit" name="message_2">
+     <widget class="QPushButton" name="envoyer">
       <property name="geometry">
        <rect>
-        <x>340</x>
-        <y>630</y>
+        <x>650</x>
+        <y>640</y>
+        <width>151</width>
+        <height>61</height>
+       </rect>
+      </property>
+      <property name="styleSheet">
+       <string notr="true">QPushButton {
+    background-color: transparent;   /* transparent */
+    color: #b59b4c;                  /* doré texte */
+    border: 2px solid #b59b4c;       /* contour doré */
+    border-radius: 20px;
+    padding: 6px 15px;
+    font-weight: bold;
+}</string>
+      </property>
+      <property name="text">
+       <string>envoyer</string>
+      </property>
+     </widget>
+     <widget class="QPushButton" name="fichier">
+      <property name="geometry">
+       <rect>
+        <x>500</x>
+        <y>700</y>
+        <width>201</width>
+        <height>41</height>
+       </rect>
+      </property>
+      <property name="styleSheet">
+       <string notr="true">QPushButton {
+    background-color: transparent;   /* transparent */
+    color: #b59b4c;                  /* doré texte */
+    border: 2px solid #b59b4c;       /* contour doré */
+    border-radius: 20px;
+    padding: 6px 15px;
+    font-weight: bold;
+}</string>
+      </property>
+      <property name="text">
+       <string>🏷️ fichier</string>
+      </property>
+     </widget>
+     <widget class="QPlainTextEdit" name="message_3">
+      <property name="geometry">
+       <rect>
+        <x>990</x>
+        <y>890</y>
         <width>681</width>
-        <height>91</height>
+        <height>61</height>
        </rect>
       </property>
       <property name="styleSheet">
@@ -443,28 +463,518 @@ Par où commencer ?</string>
 </string>
       </property>
      </widget>
-     <widget class="QPushButton" name="envoyer">
+     <widget class="QPlainTextEdit" name="chat">
       <property name="geometry">
        <rect>
-        <x>1050</x>
-        <y>660</y>
-        <width>93</width>
-        <height>29</height>
+        <x>390</x>
+        <y>150</y>
+        <width>411</width>
+        <height>491</height>
        </rect>
       </property>
-      <property name="text">
-       <string> envoyer</string>
+      <property name="styleSheet">
+       <string notr="true">QPlainTextEdit {
+    background-color: #FFFFFF;   /* fond blanc */
+    color: #000000;              /* texte noir */
+    border: 2px solid #D4AF37;   /* doré */
+    border-radius: 18px;
+    padding: 10px 15px;
+    font-size: 13pt;
+    font-family: &quot;Segoe UI&quot;;
+    selection-background-color: #D4AF37;
+    selection-color: #000000;
+}
+
+/* effet focus */
+QPlainTextEdit:focus {
+    border: 2px solid #FFD700;
+}
+
+/* placeholder */
+QPlainTextEdit[placeholderText] {
+    color: rgba(0, 0, 0, 0.5);  /* gris lisible */
+}
+
+/* scrollbar */
+QScrollBar:vertical {
+    background: transparent;
+    width: 8px;
+    margin: 5px;
+}
+
+QScrollBar::handle:vertical {
+    background: rgba(212, 175, 55, 0.6);
+    border-radius: 4px;
+}
+
+QScrollBar::handle:vertical:hover {
+    background: #D4AF37;
+}
+
+QScrollBar::add-line:vertical,
+QScrollBar::sub-line:vertical {
+    height: 0;
+}</string>
       </property>
+     </widget>
+     <widget class="QFrame" name="frame_8">
+      <property name="geometry">
+       <rect>
+        <x>170</x>
+        <y>10</y>
+        <width>211</width>
+        <height>801</height>
+       </rect>
+      </property>
+      <property name="styleSheet">
+       <string notr="true">QFrame {
+    background-color: #ffffff;          /* blanc */
+    border-radius: 15px;                /* coins arrondis */
+    border: 1px solid #e5e7eb;          /* gris très léger */
+}
+
+/* effet shadow simulé */
+QFrame:hover {
+    border: 1px solid #d1d5db;
+}
+
+/* si tu veux un frame type &quot;card&quot; premium */
+QFrame#chatFrame {
+    background-color: #ffffff;
+    border-radius: 20px;
+    border: 1px solid #e5e7eb;
+    padding: 10px;
+}</string>
+      </property>
+      <property name="frameShape">
+       <enum>QFrame::Shape::StyledPanel</enum>
+      </property>
+      <property name="frameShadow">
+       <enum>QFrame::Shadow::Raised</enum>
+      </property>
+      <widget class="QListWidget" name="list">
+       <property name="geometry">
+        <rect>
+         <x>0</x>
+         <y>200</y>
+         <width>211</width>
+         <height>321</height>
+        </rect>
+       </property>
+      </widget>
+      <widget class="QLineEdit" name="recherche">
+       <property name="geometry">
+        <rect>
+         <x>0</x>
+         <y>70</y>
+         <width>161</width>
+         <height>61</height>
+        </rect>
+       </property>
+       <property name="styleSheet">
+        <string notr="true">QLineEdit {
+    background-color: #F5F5DC;        /* blanc cassé (beige clair) */
+    color: #1a1a1a;                   /* texte noir doux */
+ border: 2px solid #FFFFFF; 
+    border-radius: 10px;
+    padding: 6px 10px;
+    font-size: 11pt;
+    font-family: Arial;
+    selection-background-color: #D4AF37; /* doré */
+    selection-color: #000000;
+}
+
+QLineEdit:focus {
+    border: 2px solid #D4AF37;        /* doré */
+    background-color: #FFF8DC;        /* blanc cassé plus lumineux */
+}
+
+QLineEdit:hover {
+  border: 2px solid #FFFFFF; 
+}
+
+QLineEdit:disabled {
+    background-color: #e0e0d1;
+    color: #888888;
+    border: 2px solid #cccccc;
+}
+QLineEdit::placeholder {
+    color: #888888;
+    font-style: italic;
+}
+
+</string>
+       </property>
+      </widget>
+      <widget class="QLabel" name="label_13">
+       <property name="geometry">
+        <rect>
+         <x>0</x>
+         <y>160</y>
+         <width>211</width>
+         <height>41</height>
+        </rect>
+       </property>
+       <property name="styleSheet">
+        <string notr="true">QLabel {
+    font-size: 22px;
+    font-weight: bold;
+    color: #1f2937;      /* gris foncé élégant */
+}</string>
+       </property>
+       <property name="text">
+        <string> recents</string>
+       </property>
+      </widget>
+      <widget class="QPushButton" name="recherche_2">
+       <property name="geometry">
+        <rect>
+         <x>160</x>
+         <y>70</y>
+         <width>51</width>
+         <height>61</height>
+        </rect>
+       </property>
+       <property name="styleSheet">
+        <string notr="true">QPushButton {
+    background-color: transparent;   /* transparent */
+    color: #b59b4c;                  /* doré texte */
+    border: 2px solid #b59b4c;       /* contour doré */
+    border-radius: 20px;
+    padding: 6px 15px;
+    font-weight: bold;
+}
+
+QPushButton:hover {
+    background-color: #6B8E23;   /* olive plus clair */
+    border: 2px solid #FFD700;   /* doré plus vif */
+    color: #000000;
+}
+
+QPushButton:pressed {
+    background-color: #2F3B1C;   /* olive foncé */
+    border: 2px solid #D4AF37;
+    color: #FFFFFF;
+}</string>
+       </property>
+       <property name="text">
+        <string>🔎</string>
+       </property>
+      </widget>
+     </widget>
+     <widget class="QFrame" name="frame_13">
+      <property name="geometry">
+       <rect>
+        <x>380</x>
+        <y>50</y>
+        <width>1311</width>
+        <height>101</height>
+       </rect>
+      </property>
+      <property name="styleSheet">
+       <string notr="true">QFrame {
+    background-color: #ffffff;          /* blanc */
+    border-radius: 15px;                /* coins arrondis */
+    border: 1px solid #e5e7eb;          /* gris très léger */
+}
+
+/* effet shadow simulé */
+QFrame:hover {
+    border: 1px solid #d1d5db;
+}
+
+/* si tu veux un frame type &quot;card&quot; premium */
+QFrame#chatFrame {
+    background-color: #ffffff;
+    border-radius: 20px;
+    border: 1px solid #e5e7eb;
+    padding: 10px;
+}</string>
+      </property>
+      <property name="frameShape">
+       <enum>QFrame::Shape::StyledPanel</enum>
+      </property>
+      <property name="frameShadow">
+       <enum>QFrame::Shadow::Raised</enum>
+      </property>
+      <widget class="QLabel" name="label_29">
+       <property name="geometry">
+        <rect>
+         <x>10</x>
+         <y>80</y>
+         <width>1281</width>
+         <height>61</height>
+        </rect>
+       </property>
+       <property name="text">
+        <string>Bot IA · répond instantanément
+
+</string>
+       </property>
+      </widget>
+      <widget class="QLabel" name="label_27">
+       <property name="geometry">
+        <rect>
+         <x>-10</x>
+         <y>0</y>
+         <width>1291</width>
+         <height>81</height>
+        </rect>
+       </property>
+       <property name="styleSheet">
+        <string notr="true">QLabel {
+    font-size: 22px;
+    font-weight: bold;
+    color: #1f2937;      /* gris foncé élégant */
+}</string>
+       </property>
+       <property name="text">
+        <string>🤖golden oil press chat</string>
+       </property>
+      </widget>
+      <widget class="QPushButton" name="mode">
+       <property name="geometry">
+        <rect>
+         <x>720</x>
+         <y>0</y>
+         <width>51</width>
+         <height>81</height>
+        </rect>
+       </property>
+       <property name="styleSheet">
+        <string notr="true">QPushButton {
+    background-color: transparent;   /* transparent */
+    color: #b59b4c;                  /* doré texte */
+    border: 2px solid #b59b4c;       /* contour doré */
+    border-radius: 20px;
+    padding: 6px 15px;
+    font-weight: bold;
+}
+
+/* hover */
+QPushButton:hover {
+    background-color: rgba(181, 155, 76, 0.15);  /* léger doré transparent */
+    color: #ffffff;
+    border: 2px solid #D4AF37;
+}
+
+/* pressed */
+QPushButton:pressed {
+    background-color: rgba(181, 155, 76, 0.35);  /* plus visible */
+    color: #ffffff;
+    border: 2px solid #8a742f;
+}</string>
+       </property>
+       <property name="text">
+        <string>🌙​</string>
+       </property>
+      </widget>
+      <widget class="QPushButton" name="nouvelle_discussion">
+       <property name="geometry">
+        <rect>
+         <x>670</x>
+         <y>0</y>
+         <width>51</width>
+         <height>81</height>
+        </rect>
+       </property>
+       <property name="styleSheet">
+        <string notr="true">QPushButton {
+    background-color: transparent;   /* transparent */
+    color: #b59b4c;                  /* doré texte */
+    border: 2px solid #b59b4c;       /* contour doré */
+    border-radius: 20px;
+    padding: 6px 15px;
+    font-weight: bold;
+}
+
+/* hover */
+QPushButton:hover {
+    background-color: rgba(181, 155, 76, 0.15);  /* léger doré transparent */
+    color: #ffffff;
+    border: 2px solid #D4AF37;
+}
+
+/* pressed */
+QPushButton:pressed {
+    background-color: rgba(181, 155, 76, 0.35);  /* plus visible */
+    color: #ffffff;
+    border: 2px solid #8a742f;
+}</string>
+       </property>
+       <property name="text">
+        <string>➕</string>
+       </property>
+      </widget>
+     </widget>
+     <widget class="QFrame" name="frame_15">
+      <property name="geometry">
+       <rect>
+        <x>820</x>
+        <y>160</y>
+        <width>481</width>
+        <height>311</height>
+       </rect>
+      </property>
+      <property name="styleSheet">
+       <string notr="true">/* CONTENEUR PRINCIPAL (card) */
+QFrame#cardInfo {
+    background-color: #FFFFFF;
+    border: 1px solid #E0E0E0;
+    border-radius: 15px;
+    padding: 15px;
+}
+
+/* TITRE &quot;information&quot; */
+QLabel#titleInfo {
+    font-size: 16pt;
+    font-weight: bold;
+    color: #2C3E50;
+    padding-bottom: 5px;
+}
+
+/* TEXTE DESCRIPTION */
+QLabel#description {
+    font-size: 12pt;
+    color: #444444;
+    line-height: 1.4;
+}
+
+/* EMAIL */
+QLabel#email {
+    font-size: 11pt;
+    color: #777777;
+    margin-top: 10px;
+}
+
+/* BOUTON */
+QPushButton#btnContact {
+    background-color: #D4AF37;   /* doré */
+    color: #FFFFFF;
+    border: none;
+    border-radius: 12px;
+    padding: 10px 18px;
+    font-size: 11pt;
+    font-weight: bold;
+}
+
+QPushButton#btnContact:hover {
+    background-color: #C49B2C;
+}
+
+QPushButton#btnContact:pressed {
+    background-color: #A8831F;
+}
+
+/* EFFET INPUT / ZONE TEXTE */
+QPlainTextEdit {
+    background-color: #FAFAFA;
+    border: 1px solid #DDDDDD;
+    border-radius: 10px;
+    padding: 8px;
+    color: #000000;
+}
+
+/* OPTION: effet shadow (Qt via code, pas CSS) */</string>
+      </property>
+      <property name="frameShape">
+       <enum>QFrame::Shape::StyledPanel</enum>
+      </property>
+      <property name="frameShadow">
+       <enum>QFrame::Shadow::Raised</enum>
+      </property>
+      <widget class="QLabel" name="label_43">
+       <property name="geometry">
+        <rect>
+         <x>-10</x>
+         <y>150</y>
+         <width>311</width>
+         <height>81</height>
+        </rect>
+       </property>
+       <property name="styleSheet">
+        <string notr="true">QLabel {
+    font-size: 22px;
+    font-weight: bold;
+    color: #1f2937;      /* gris foncé élégant */
+}</string>
+       </property>
+       <property name="text">
+        <string> 📩contacter un conseiller</string>
+       </property>
+      </widget>
+      <widget class="QLabel" name="label_44">
+       <property name="geometry">
+        <rect>
+         <x>0</x>
+         <y>200</y>
+         <width>671</width>
+         <height>81</height>
+        </rect>
+       </property>
+       <property name="text">
+        <string>goldenoilpress2026@gmail.com</string>
+       </property>
+      </widget>
+      <widget class="QLabel" name="label_40">
+       <property name="geometry">
+        <rect>
+         <x>0</x>
+         <y>60</y>
+         <width>931</width>
+         <height>51</height>
+        </rect>
+       </property>
+       <property name="styleSheet">
+        <string notr="true"/>
+       </property>
+       <property name="text">
+        <string>Golden Oil Press est spécialisée dans la production d’huile d’olive vierge  </string>
+       </property>
+      </widget>
+      <widget class="QLabel" name="label_38">
+       <property name="geometry">
+        <rect>
+         <x>0</x>
+         <y>0</y>
+         <width>571</width>
+         <height>51</height>
+        </rect>
+       </property>
+       <property name="styleSheet">
+        <string notr="true">QLabel {
+    font-size: 22px;
+    font-weight: bold;
+    color: #1f2937;      /* gris foncé élégant */
+}</string>
+       </property>
+       <property name="text">
+        <string> 🌿information</string>
+       </property>
+      </widget>
+      <widget class="QLabel" name="label_41">
+       <property name="geometry">
+        <rect>
+         <x>0</x>
+         <y>90</y>
+         <width>671</width>
+         <height>61</height>
+        </rect>
+       </property>
+       <property name="text">
+        <string> et biologique en mettant l’accent sur la qualité, la tradition et la santé.</string>
+       </property>
+      </widget>
      </widget>
     </widget>
     <widget class="QWidget" name="page">
      <widget class="QFrame" name="frame_3">
       <property name="geometry">
        <rect>
-        <x>180</x>
-        <y>150</y>
-        <width>1001</width>
-        <height>361</height>
+        <x>160</x>
+        <y>140</y>
+        <width>1101</width>
+        <height>401</height>
        </rect>
       </property>
       <property name="styleSheet">
@@ -798,8 +1308,8 @@ QScrollBar::handle:vertical:hover {
       <widget class="QPushButton" name="ajouter">
        <property name="geometry">
         <rect>
-         <x>640</x>
-         <y>320</y>
+         <x>730</x>
+         <y>360</y>
          <width>121</width>
          <height>40</height>
         </rect>
@@ -954,8 +1464,8 @@ QPushButton:hover {
       <widget class="QPushButton" name="modifier">
        <property name="geometry">
         <rect>
-         <x>760</x>
-         <y>320</y>
+         <x>850</x>
+         <y>360</y>
          <width>121</width>
          <height>40</height>
         </rect>
@@ -979,8 +1489,8 @@ QPushButton:hover {
       <widget class="QPushButton" name="annuler">
        <property name="geometry">
         <rect>
-         <x>880</x>
-         <y>320</y>
+         <x>970</x>
+         <y>360</y>
          <width>121</width>
          <height>40</height>
         </rect>
@@ -1331,8 +1841,8 @@ QLabel#appTitle {
      <widget class="QFrame" name="frame_5">
       <property name="geometry">
        <rect>
-        <x>1200</x>
-        <y>360</y>
+        <x>1260</x>
+        <y>400</y>
         <width>301</width>
         <height>141</height>
        </rect>
@@ -1421,31 +1931,43 @@ QPushButton:hover {
       <property name="geometry">
        <rect>
         <x>170</x>
-        <y>550</y>
+        <y>540</y>
         <width>241</width>
-        <height>26</height>
+        <height>41</height>
        </rect>
       </property>
       <property name="styleSheet">
-       <string notr="true">/* ===== SEARCH BAR ===== */
-QLineEdit#searchEdit {
-    background-color: #F1F5EA;
- 
-    border-radius: 16px;
-    padding: 6px 32px 6px 12px; /* espace à droite pour icône */
-    font-size: 10pt;
-    color: #2F3E1E;
-  border: 2px solid #D4AF37;   /* jaune doré */
+       <string notr="true">QLineEdit {
+    background-color: #F5F5DC;        /* blanc cassé (beige clair) */
+    color: #1a1a1a;                   /* texte noir doux */
+ border: 2px solid #FFFFFF; 
+    border-radius: 10px;
+    padding: 6px 10px;
+    font-size: 11pt;
+    font-family: Arial;
+    selection-background-color: #D4AF37; /* doré */
+    selection-color: #000000;
 }
 
-QLineEdit#searchEdit:focus {
-    border: 2px solid #6B8E23;
-    background-color: white;
+QLineEdit:focus {
+    border: 2px solid #D4AF37;        /* doré */
+    background-color: #FFF8DC;        /* blanc cassé plus lumineux */
 }
 
-QLineEdit#searchEdit:hover {
-    border: 2px solid #8FAF3C;
+QLineEdit:hover {
+  border: 2px solid #FFFFFF; 
 }
+
+QLineEdit:disabled {
+    background-color: #e0e0d1;
+    color: #888888;
+    border: 2px solid #cccccc;
+}
+QLineEdit::placeholder {
+    color: #888888;
+    font-style: italic;
+}
+
 </string>
       </property>
       <property name="text">
@@ -1456,10 +1978,33 @@ QLineEdit#searchEdit:hover {
       <property name="geometry">
        <rect>
         <x>410</x>
-        <y>550</y>
-        <width>93</width>
-        <height>29</height>
+        <y>540</y>
+        <width>71</width>
+        <height>41</height>
        </rect>
+      </property>
+      <property name="styleSheet">
+       <string notr="true">QPushButton {
+    background-color: #D4AF37;   /* doré */
+    color: #FFFFFF;              /* texte blanc */
+    border: 2px solid #FFFFFF;   /* contour blanc */
+    border-radius: 12px;
+    padding: 8px 16px;
+    font-size: 11pt;
+    font-weight: bold;
+}
+
+QPushButton:hover {
+    background-color: #FFD700;   /* doré plus lumineux */
+    color: #000000;              /* texte noir pour contraste */
+    border: 2px solid #D4AF37;
+}
+
+QPushButton:pressed {
+    background-color: #B8962E;   /* doré foncé */
+    color: #FFFFFF;
+    border: 2px solid #FFFFFF;
+}</string>
       </property>
       <property name="text">
        <string>🔍​</string>
@@ -1468,21 +2013,78 @@ QLineEdit#searchEdit:hover {
      <widget class="QLineEdit" name="tri">
       <property name="geometry">
        <rect>
-        <x>590</x>
-        <y>550</y>
-        <width>191</width>
-        <height>21</height>
+        <x>570</x>
+        <y>540</y>
+        <width>221</width>
+        <height>41</height>
        </rect>
+      </property>
+      <property name="styleSheet">
+       <string notr="true">QLineEdit {
+    background-color: #F5F5DC;        /* blanc cassé (beige clair) */
+    color: #1a1a1a;                   /* texte noir doux */
+ border: 2px solid #FFFFFF; 
+    border-radius: 10px;
+    padding: 6px 10px;
+    font-size: 11pt;
+    font-family: Arial;
+    selection-background-color: #D4AF37; /* doré */
+    selection-color: #000000;
+}
+
+QLineEdit:focus {
+    border: 2px solid #D4AF37;        /* doré */
+    background-color: #FFF8DC;        /* blanc cassé plus lumineux */
+}
+
+QLineEdit:hover {
+  border: 2px solid #FFFFFF; 
+}
+
+QLineEdit:disabled {
+    background-color: #e0e0d1;
+    color: #888888;
+    border: 2px solid #cccccc;
+}
+QLineEdit::placeholder {
+    color: #888888;
+    font-style: italic;
+}
+
+</string>
       </property>
      </widget>
      <widget class="QPushButton" name="tri_2">
       <property name="geometry">
        <rect>
         <x>790</x>
-        <y>550</y>
-        <width>93</width>
-        <height>29</height>
+        <y>540</y>
+        <width>111</width>
+        <height>41</height>
        </rect>
+      </property>
+      <property name="styleSheet">
+       <string notr="true">QPushButton {
+    background-color: #D4AF37;   /* doré */
+    color: #FFFFFF;              /* texte blanc */
+    border: 1px solid #FFFFFF;   /* contour blanc */
+    border-radius: 12px;
+    padding: 8px 16px;
+    font-size: 11pt;
+    font-weight: bold;
+}
+
+QPushButton:hover {
+    background-color: #FFD700;   /* doré plus lumineux */
+    color: #000000;              /* texte noir pour contraste */
+    border: 2px solid #D4AF37;
+}
+
+QPushButton:pressed {
+    background-color: #B8962E;   /* doré foncé */
+    color: #FFFFFF;
+    border: 2px solid #FFFFFF;
+}</string>
       </property>
       <property name="text">
        <string> trier par</string>
@@ -1491,7 +2093,7 @@ QLineEdit#searchEdit:hover {
      <widget class="QFrame" name="frame">
       <property name="geometry">
        <rect>
-        <x>0</x>
+        <x>-10</x>
         <y>0</y>
         <width>1851</width>
         <height>91</height>
@@ -1512,7 +2114,7 @@ QLineEdit#searchEdit:hover {
      <widget class="QPushButton" name="analyse">
       <property name="geometry">
        <rect>
-        <x>1220</x>
+        <x>1260</x>
         <y>140</y>
         <width>161</width>
         <height>51</height>
@@ -1520,10 +2122,26 @@ QLineEdit#searchEdit:hover {
       </property>
       <property name="styleSheet">
        <string notr="true">QPushButton {
-   
-color: #556B2F;
+    background-color: #D4AF37;   /* doré */
+    color: #FFFFFF;              /* texte blanc */
+    border: 2px solid #FFFFFF;   /* contour blanc */
+    border-radius: 12px;
+    padding: 8px 16px;
+    font-size: 11pt;
+    font-weight: bold;
 }
 
+QPushButton:hover {
+    background-color: #FFD700;   /* doré plus lumineux */
+    color: #000000;              /* texte noir pour contraste */
+    border: 2px solid #D4AF37;
+}
+
+QPushButton:pressed {
+    background-color: #B8962E;   /* doré foncé */
+    color: #FFFFFF;
+    border: 2px solid #FFFFFF;
+}
 </string>
       </property>
       <property name="text">
@@ -1533,24 +2151,34 @@ color: #556B2F;
      <widget class="QPushButton" name="chatbot">
       <property name="geometry">
        <rect>
-        <x>1220</x>
+        <x>1260</x>
         <y>190</y>
         <width>161</width>
-        <height>61</height>
+        <height>51</height>
        </rect>
       </property>
       <property name="styleSheet">
        <string notr="true">QPushButton {
-    background-color: #6B4F3F
-    color: black;
-    border-radius: 6px;
-    padding: 6px 12px;
+    background-color: #D4AF37;   /* doré */
+    color: #FFFFFF;              /* texte blanc */
+    border: 2px solid #FFFFFF;   /* contour blanc */
+    border-radius: 12px;
+    padding: 8px 16px;
+    font-size: 11pt;
+    font-weight: bold;
 }
 
 QPushButton:hover {
-    background-color: #c49b2f;
+    background-color: #FFD700;   /* doré plus lumineux */
+    color: #000000;              /* texte noir pour contraste */
+    border: 2px solid #D4AF37;
 }
-</string>
+
+QPushButton:pressed {
+    background-color: #B8962E;   /* doré foncé */
+    color: #FFFFFF;
+    border: 2px solid #FFFFFF;
+}</string>
       </property>
       <property name="text">
        <string>🤖 chatbot</string>
@@ -1559,11 +2187,34 @@ QPushButton:hover {
      <widget class="QPushButton" name="pdf">
       <property name="geometry">
        <rect>
-        <x>1220</x>
-        <y>250</y>
+        <x>1260</x>
+        <y>90</y>
         <width>161</width>
         <height>51</height>
        </rect>
+      </property>
+      <property name="styleSheet">
+       <string notr="true">QPushButton {
+    background-color: #D4AF37;   /* doré */
+    color: #FFFFFF;              /* texte blanc */
+    border: 2px solid #FFFFFF;   /* contour blanc */
+    border-radius: 12px;
+    padding: 8px 16px;
+    font-size: 11pt;
+    font-weight: bold;
+}
+
+QPushButton:hover {
+    background-color: #FFD700;   /* doré plus lumineux */
+    color: #000000;              /* texte noir pour contraste */
+    border: 2px solid #D4AF37;
+}
+
+QPushButton:pressed {
+    background-color: #B8962E;   /* doré foncé */
+    color: #FFFFFF;
+    border: 2px solid #FFFFFF;
+}</string>
       </property>
       <property name="text">
        <string>pdf📄</string>
@@ -1572,8 +2223,8 @@ QPushButton:hover {
      <widget class="QLabel" name="label_18">
       <property name="geometry">
        <rect>
-        <x>170</x>
-        <y>70</y>
+        <x>150</x>
+        <y>60</y>
         <width>361</width>
         <height>91</height>
        </rect>
@@ -1597,49 +2248,24 @@ QPushButton:hover {
        </rect>
       </property>
       <property name="styleSheet">
-       <string notr="true">/* Couleur de fond du frame */
-background-color: olive;
-
-/* Bordure fine et arrondie pour un effet moderne */
-border: 1px solid #556B2F; 
-border-radius: 8px;
-
-/* Optionnel : ajoute un peu d'ombre pour plus de relief */
-box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.2);
-
-/* Style pour les labels et champs à l'intérieur */
-label {
-    font-family: Arial, sans-serif;
-    font-size: 12pt;
-    color: #fff; /* texte en blanc pour contraste */
+       <string notr="true">QFrame {
+    background-color: #556B2F;
+} QFrame#sidebar_5 {
+    background-color: #556B2F;
+}
+QPushButton {
+    background-color: transparent;
+    color: white;
+    border: 2px solid #D4AF37;
+    border-radius: 10px;
+    padding: 10px;
+    margin: 8px 12px;
+    text-align: left;
 }
 
-input, select, textarea {
-    border-radius: 4px;
-    border: 1px solid #ccc;
-    padding: 3px 5px;
-}
-/* Couleur de fond du frame */
-background-color: olive;
-
-/* Bordure fine et arrondie pour un effet moderne */
-border: 1px solid #556B2F; 
-border-radius: 8px;
-
-/* Optionnel : ajoute un peu d'ombre pour plus de relief */
-box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.2);
-
-/* Style pour les labels et champs à l'intérieur */
-label {
-    font-family: Arial, sans-serif;
-    font-size: 12pt;
-    color: #fff; /* texte en blanc pour contraste */
-}
-
-input, select, textarea {
-    border-radius: 4px;
-    border: 1px solid #ccc;
-    padding: 3px 5px;
+QPushButton:hover {
+    background-color: #D4AF37;
+    color: black;
 }
 </string>
       </property>
@@ -1652,10 +2278,10 @@ input, select, textarea {
       <widget class="QPushButton" name="production_2">
        <property name="geometry">
         <rect>
-         <x>0</x>
-         <y>380</y>
-         <width>181</width>
-         <height>41</height>
+         <x>10</x>
+         <y>400</y>
+         <width>201</width>
+         <height>71</height>
         </rect>
        </property>
        <property name="text">
@@ -1665,10 +2291,10 @@ input, select, textarea {
       <widget class="QPushButton" name="employes_2">
        <property name="geometry">
         <rect>
-         <x>0</x>
-         <y>260</y>
-         <width>181</width>
-         <height>41</height>
+         <x>10</x>
+         <y>220</y>
+         <width>201</width>
+         <height>71</height>
         </rect>
        </property>
        <property name="text">
@@ -1678,34 +2304,21 @@ input, select, textarea {
       <widget class="QPushButton" name="ventes_2">
        <property name="geometry">
         <rect>
-         <x>0</x>
-         <y>300</y>
-         <width>181</width>
-         <height>41</height>
+         <x>10</x>
+         <y>280</y>
+         <width>201</width>
+         <height>71</height>
         </rect>
        </property>
        <property name="text">
         <string>👨‍💻Ventes</string>
        </property>
       </widget>
-      <widget class="QPushButton" name="agriculteurs_2">
-       <property name="geometry">
-        <rect>
-         <x>0</x>
-         <y>340</y>
-         <width>181</width>
-         <height>41</height>
-        </rect>
-       </property>
-       <property name="text">
-        <string>​👨🏻‍🌾​ Agriculteurs</string>
-       </property>
-      </widget>
       <widget class="QPushButton" name="deconnexion_2">
        <property name="geometry">
         <rect>
          <x>10</x>
-         <y>1130</y>
+         <y>630</y>
          <width>201</width>
          <height>61</height>
         </rect>
@@ -1719,8 +2332,8 @@ input, select, textarea {
         <rect>
          <x>0</x>
          <y>120</y>
-         <width>181</width>
-         <height>41</height>
+         <width>211</width>
+         <height>71</height>
         </rect>
        </property>
        <property name="text">
@@ -1750,10 +2363,10 @@ input, select, textarea {
       <widget class="QPushButton" name="parametre_2">
        <property name="geometry">
         <rect>
-         <x>0</x>
+         <x>10</x>
          <y>500</y>
-         <width>181</width>
-         <height>42</height>
+         <width>201</width>
+         <height>81</height>
         </rect>
        </property>
        <property name="text">
@@ -1763,10 +2376,10 @@ input, select, textarea {
       <widget class="QPushButton" name="aide_2">
        <property name="geometry">
         <rect>
-         <x>0</x>
-         <y>540</y>
-         <width>181</width>
-         <height>51</height>
+         <x>10</x>
+         <y>570</y>
+         <width>201</width>
+         <height>71</height>
         </rect>
        </property>
        <property name="text">
@@ -1813,6 +2426,19 @@ QLabel#appTitle {
         <bool>true</bool>
        </property>
       </widget>
+      <widget class="QPushButton" name="agriculteurs_2">
+       <property name="geometry">
+        <rect>
+         <x>10</x>
+         <y>340</y>
+         <width>201</width>
+         <height>71</height>
+        </rect>
+       </property>
+       <property name="text">
+        <string>​👨🏻‍🌾​ Agriculteurs</string>
+       </property>
+      </widget>
      </widget>
      <widget class="QFrame" name="frame_6">
       <property name="geometry">
@@ -1838,9 +2464,9 @@ QLabel#appTitle {
          <colorrole role="Button">
           <brush brushstyle="SolidPattern">
            <color alpha="255">
-            <red>128</red>
-            <green>128</green>
-            <blue>0</blue>
+            <red>85</red>
+            <green>107</green>
+            <blue>47</blue>
            </color>
           </brush>
          </colorrole>
@@ -1910,18 +2536,18 @@ QLabel#appTitle {
          <colorrole role="Base">
           <brush brushstyle="SolidPattern">
            <color alpha="255">
-            <red>128</red>
-            <green>128</green>
-            <blue>0</blue>
+            <red>85</red>
+            <green>107</green>
+            <blue>47</blue>
            </color>
           </brush>
          </colorrole>
          <colorrole role="Window">
           <brush brushstyle="SolidPattern">
            <color alpha="255">
-            <red>128</red>
-            <green>128</green>
-            <blue>0</blue>
+            <red>85</red>
+            <green>107</green>
+            <blue>47</blue>
            </color>
           </brush>
          </colorrole>
@@ -1993,9 +2619,9 @@ QLabel#appTitle {
          <colorrole role="Button">
           <brush brushstyle="SolidPattern">
            <color alpha="255">
-            <red>128</red>
-            <green>128</green>
-            <blue>0</blue>
+            <red>85</red>
+            <green>107</green>
+            <blue>47</blue>
            </color>
           </brush>
          </colorrole>
@@ -2065,18 +2691,18 @@ QLabel#appTitle {
          <colorrole role="Base">
           <brush brushstyle="SolidPattern">
            <color alpha="255">
-            <red>128</red>
-            <green>128</green>
-            <blue>0</blue>
+            <red>85</red>
+            <green>107</green>
+            <blue>47</blue>
            </color>
           </brush>
          </colorrole>
          <colorrole role="Window">
           <brush brushstyle="SolidPattern">
            <color alpha="255">
-            <red>128</red>
-            <green>128</green>
-            <blue>0</blue>
+            <red>85</red>
+            <green>107</green>
+            <blue>47</blue>
            </color>
           </brush>
          </colorrole>
@@ -2148,9 +2774,9 @@ QLabel#appTitle {
          <colorrole role="Button">
           <brush brushstyle="SolidPattern">
            <color alpha="255">
-            <red>128</red>
-            <green>128</green>
-            <blue>0</blue>
+            <red>85</red>
+            <green>107</green>
+            <blue>47</blue>
            </color>
           </brush>
          </colorrole>
@@ -2220,18 +2846,18 @@ QLabel#appTitle {
          <colorrole role="Base">
           <brush brushstyle="SolidPattern">
            <color alpha="255">
-            <red>128</red>
-            <green>128</green>
-            <blue>0</blue>
+            <red>85</red>
+            <green>107</green>
+            <blue>47</blue>
            </color>
           </brush>
          </colorrole>
          <colorrole role="Window">
           <brush brushstyle="SolidPattern">
            <color alpha="255">
-            <red>128</red>
-            <green>128</green>
-            <blue>0</blue>
+            <red>85</red>
+            <green>107</green>
+            <blue>47</blue>
            </color>
           </brush>
          </colorrole>
@@ -2296,29 +2922,9 @@ QLabel#appTitle {
        <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; color:#005500;&quot;&gt;#005500&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
       </property>
       <property name="styleSheet">
-       <string notr="true">/* Couleur de fond du frame */
-background-color: olive;
-
-/* Bordure fine et arrondie pour un effet moderne */
-border: 1px solid #556B2F; 
-border-radius: 8px;
-
-/* Optionnel : ajoute un peu d'ombre pour plus de relief */
-box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.2);
-
-/* Style pour les labels et champs à l'intérieur */
-label {
-    font-family: Arial, sans-serif;
-    font-size: 12pt;
-    color: #fff; /* texte en blanc pour contraste */
-}
-
-input, select, textarea {
-    border-radius: 4px;
-    border: 1px solid #ccc;
-    padding: 3px 5px;
-}
-</string>
+       <string notr="true">QFrame {
+    background-color: #556B2F;
+}</string>
       </property>
       <property name="frameShape">
        <enum>QFrame::Shape::StyledPanel</enum>
@@ -2356,11 +2962,22 @@ input, select, textarea {
      <widget class="QTableWidget" name="table1">
       <property name="geometry">
        <rect>
-        <x>330</x>
+        <x>490</x>
         <y>250</y>
-        <width>741</width>
+        <width>501</width>
         <height>291</height>
        </rect>
+      </property>
+      <property name="styleSheet">
+       <string notr="true">QTableView {
+    background-color: white;
+    border: 2px solid #D4AF37;   /* jaune doré */
+    gridline-color: #D4AF37;
+    border-radius: 6px;
+    selection-background-color: #FFF3C4;
+    selection-color: black;
+}
+</string>
       </property>
       <column>
        <property name="text">
@@ -2402,6 +3019,40 @@ input, select, textarea {
         <height>42</height>
        </rect>
       </property>
+      <property name="styleSheet">
+       <string notr="true">QLineEdit {
+    background-color: #F5F5DC;        /* blanc cassé (beige clair) */
+    color: #1a1a1a;                   /* texte noir doux */
+ border: 2px solid #FFFFFF; 
+    border-radius: 10px;
+    padding: 6px 10px;
+    font-size: 11pt;
+    font-family: Arial;
+    selection-background-color: #D4AF37; /* doré */
+    selection-color: #000000;
+}
+
+QLineEdit:focus {
+    border: 2px solid #D4AF37;        /* doré */
+    background-color: #FFF8DC;        /* blanc cassé plus lumineux */
+}
+
+QLineEdit:hover {
+  border: 2px solid #FFFFFF; 
+}
+
+QLineEdit:disabled {
+    background-color: #e0e0d1;
+    color: #888888;
+    border: 2px solid #cccccc;
+}
+QLineEdit::placeholder {
+    color: #888888;
+    font-style: italic;
+}
+
+</string>
+      </property>
      </widget>
      <widget class="QLabel" name="label_22">
       <property name="geometry">
@@ -2420,10 +3071,33 @@ input, select, textarea {
       <property name="geometry">
        <rect>
         <x>470</x>
-        <y>150</y>
+        <y>140</y>
         <width>93</width>
-        <height>29</height>
+        <height>41</height>
        </rect>
+      </property>
+      <property name="styleSheet">
+       <string notr="true">QPushButton {
+    background-color: #D4AF37;   /* doré */
+    color: #FFFFFF;              /* texte blanc */
+    border: 2px solid #FFFFFF;   /* contour blanc */
+    border-radius: 12px;
+    padding: 8px 16px;
+    font-size: 11pt;
+    font-weight: bold;
+}
+
+QPushButton:hover {
+    background-color: #FFD700;   /* doré plus lumineux */
+    color: #000000;              /* texte noir pour contraste */
+    border: 2px solid #D4AF37;
+}
+
+QPushButton:pressed {
+    background-color: #B8962E;   /* doré foncé */
+    color: #FFFFFF;
+    border: 2px solid #FFFFFF;
+}</string>
       </property>
       <property name="text">
        <string>🔍​</string>
@@ -2451,6 +3125,40 @@ input, select, textarea {
         <height>42</height>
        </rect>
       </property>
+      <property name="styleSheet">
+       <string notr="true">QLineEdit {
+    background-color: #F5F5DC;        /* blanc cassé (beige clair) */
+    color: #1a1a1a;                   /* texte noir doux */
+ border: 2px solid #FFFFFF; 
+    border-radius: 10px;
+    padding: 6px 10px;
+    font-size: 11pt;
+    font-family: Arial;
+    selection-background-color: #D4AF37; /* doré */
+    selection-color: #000000;
+}
+
+QLineEdit:focus {
+    border: 2px solid #D4AF37;        /* doré */
+    background-color: #FFF8DC;        /* blanc cassé plus lumineux */
+}
+
+QLineEdit:hover {
+  border: 2px solid #FFFFFF; 
+}
+
+QLineEdit:disabled {
+    background-color: #e0e0d1;
+    color: #888888;
+    border: 2px solid #cccccc;
+}
+QLineEdit::placeholder {
+    color: #888888;
+    font-style: italic;
+}
+
+</string>
+      </property>
      </widget>
      <widget class="QPushButton" name="appliquer">
       <property name="geometry">
@@ -2460,6 +3168,29 @@ input, select, textarea {
         <width>131</width>
         <height>41</height>
        </rect>
+      </property>
+      <property name="styleSheet">
+       <string notr="true">QPushButton {
+    background-color: #D4AF37;   /* doré */
+    color: #FFFFFF;              /* texte blanc */
+    border: 2px solid #FFFFFF;   /* contour blanc */
+    border-radius: 12px;
+    padding: 8px 16px;
+    font-size: 11pt;
+    font-weight: bold;
+}
+
+QPushButton:hover {
+    background-color: #FFD700;   /* doré plus lumineux */
+    color: #000000;              /* texte noir pour contraste */
+    border: 2px solid #D4AF37;
+}
+
+QPushButton:pressed {
+    background-color: #B8962E;   /* doré foncé */
+    color: #FFFFFF;
+    border: 2px solid #FFFFFF;
+}</string>
       </property>
       <property name="text">
        <string> appliquer</string>
@@ -2543,39 +3274,37 @@ input, select, textarea {
        <string> bio</string>
       </property>
      </widget>
-     <widget class="QTableWidget" name="table2">
+     <widget class="QPushButton" name="exporter2_2">
       <property name="geometry">
        <rect>
-        <x>250</x>
-        <y>560</y>
-        <width>391</width>
-        <height>192</height>
+        <x>1260</x>
+        <y>230</y>
+        <width>241</width>
+        <height>61</height>
        </rect>
       </property>
-      <column>
-       <property name="text">
-        <string> volume d'achat</string>
-       </property>
-      </column>
-      <column>
-       <property name="text">
-        <string>achat cumulés dans le temps</string>
-       </property>
-      </column>
-      <column>
-       <property name="text">
-        <string> type de huile prefere</string>
-       </property>
-      </column>
-     </widget>
-     <widget class="QPushButton" name="pushButton">
-      <property name="geometry">
-       <rect>
-        <x>230</x>
-        <y>820</y>
-        <width>191</width>
-        <height>29</height>
-       </rect>
+      <property name="styleSheet">
+       <string notr="true">QPushButton {
+    background-color: #D4AF37;   /* doré */
+    color: #FFFFFF;              /* texte blanc */
+    border: 2px solid #FFFFFF;   /* contour blanc */
+    border-radius: 12px;
+    padding: 8px 16px;
+    font-size: 11pt;
+    font-weight: bold;
+}
+
+QPushButton:hover {
+    background-color: #FFD700;   /* doré plus lumineux */
+    color: #000000;              /* texte noir pour contraste */
+    border: 2px solid #D4AF37;
+}
+
+QPushButton:pressed {
+    background-color: #B8962E;   /* doré foncé */
+    color: #FFFFFF;
+    border: 2px solid #FFFFFF;
+}</string>
       </property>
       <property name="text">
        <string> exporter comme pdf</string>
@@ -2584,11 +3313,34 @@ input, select, textarea {
      <widget class="QPushButton" name="classement">
       <property name="geometry">
        <rect>
-        <x>1250</x>
-        <y>220</y>
-        <width>191</width>
+        <x>1260</x>
+        <y>160</y>
+        <width>241</width>
         <height>71</height>
        </rect>
+      </property>
+      <property name="styleSheet">
+       <string notr="true">QPushButton {
+    background-color: #D4AF37;   /* doré */
+    color: #FFFFFF;              /* texte blanc */
+    border: 2px solid #FFFFFF;   /* contour blanc */
+    border-radius: 12px;
+    padding: 8px 16px;
+    font-size: 11pt;
+    font-weight: bold;
+}
+
+QPushButton:hover {
+    background-color: #FFD700;   /* doré plus lumineux */
+    color: #000000;              /* texte noir pour contraste */
+    border: 2px solid #D4AF37;
+}
+
+QPushButton:pressed {
+    background-color: #B8962E;   /* doré foncé */
+    color: #FFFFFF;
+    border: 2px solid #FFFFFF;
+}</string>
       </property>
       <property name="text">
        <string> classement de client</string>
@@ -2597,14 +3349,83 @@ input, select, textarea {
      <widget class="QPushButton" name="historique">
       <property name="geometry">
        <rect>
-        <x>1250</x>
-        <y>150</y>
-        <width>191</width>
+        <x>1260</x>
+        <y>90</y>
+        <width>241</width>
         <height>71</height>
        </rect>
       </property>
+      <property name="styleSheet">
+       <string notr="true">QPushButton {
+    background-color: #D4AF37;   /* doré */
+    color: #FFFFFF;              /* texte blanc */
+    border: 2px solid #FFFFFF;   /* contour blanc */
+    border-radius: 12px;
+    padding: 8px 16px;
+    font-size: 11pt;
+    font-weight: bold;
+}
+
+QPushButton:hover {
+    background-color: #FFD700;   /* doré plus lumineux */
+    color: #000000;              /* texte noir pour contraste */
+    border: 2px solid #D4AF37;
+}
+
+QPushButton:pressed {
+    background-color: #B8962E;   /* doré foncé */
+    color: #FFFFFF;
+    border: 2px solid #FFFFFF;
+}</string>
+      </property>
       <property name="text">
        <string> historique d'achat</string>
+      </property>
+     </widget>
+     <widget class="QGraphicsView" name="chart">
+      <property name="geometry">
+       <rect>
+        <x>480</x>
+        <y>580</y>
+        <width>571</width>
+        <height>261</height>
+       </rect>
+      </property>
+     </widget>
+     <widget class="QPushButton" name="executer">
+      <property name="geometry">
+       <rect>
+        <x>330</x>
+        <y>580</y>
+        <width>131</width>
+        <height>51</height>
+       </rect>
+      </property>
+      <property name="styleSheet">
+       <string notr="true">QPushButton {
+    background-color: #D4AF37;   /* doré */
+    color: #FFFFFF;              /* texte blanc */
+    border: 2px solid #FFFFFF;   /* contour blanc */
+    border-radius: 12px;
+    padding: 8px 16px;
+    font-size: 11pt;
+    font-weight: bold;
+}
+
+QPushButton:hover {
+    background-color: #FFD700;   /* doré plus lumineux */
+    color: #000000;              /* texte noir pour contraste */
+    border: 2px solid #D4AF37;
+}
+
+QPushButton:pressed {
+    background-color: #B8962E;   /* doré foncé */
+    color: #FFFFFF;
+    border: 2px solid #FFFFFF;
+}</string>
+      </property>
+      <property name="text">
+       <string>executer</string>
       </property>
      </widget>
     </widget>
@@ -2619,51 +3440,25 @@ input, select, textarea {
        </rect>
       </property>
       <property name="styleSheet">
-       <string notr="true">/* Couleur de fond du frame */
-background-color: olive;
-
-/* Bordure fine et arrondie pour un effet moderne */
-border: 1px solid #556B2F; 
-border-radius: 8px;
-
-/* Optionnel : ajoute un peu d'ombre pour plus de relief */
-box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.2);
-
-/* Style pour les labels et champs à l'intérieur */
-label {
-    font-family: Arial, sans-serif;
-    font-size: 12pt;
-    color: #fff; /* texte en blanc pour contraste */
+       <string notr="true">QFrame {
+    background-color: #556B2F;
+} QFrame#sidebar_5 {
+    background-color: #556B2F;
+}
+QPushButton {
+    background-color: transparent;
+    color: white;
+    border: 2px solid #D4AF37;
+    border-radius: 10px;
+    padding: 10px;
+    margin: 8px 12px;
+    text-align: left;
 }
 
-input, select, textarea {
-    border-radius: 4px;
-    border: 1px solid #ccc;
-    padding: 3px 5px;
-}
-/* Couleur de fond du frame */
-background-color: olive;
-
-/* Bordure fine et arrondie pour un effet moderne */
-border: 1px solid #556B2F; 
-border-radius: 8px;
-
-/* Optionnel : ajoute un peu d'ombre pour plus de relief */
-box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.2);
-
-/* Style pour les labels et champs à l'intérieur */
-label {
-    font-family: Arial, sans-serif;
-    font-size: 12pt;
-    color: #fff; /* texte en blanc pour contraste */
-}
-
-input, select, textarea {
-    border-radius: 4px;
-    border: 1px solid #ccc;
-    padding: 3px 5px;
-}
-</string>
+QPushButton:hover {
+    background-color: #D4AF37;
+    color: black;
+}</string>
       </property>
       <property name="frameShape">
        <enum>QFrame::Shape::StyledPanel</enum>
@@ -2674,10 +3469,10 @@ input, select, textarea {
       <widget class="QPushButton" name="agriculteurs_4">
        <property name="geometry">
         <rect>
-         <x>0</x>
-         <y>300</y>
-         <width>181</width>
-         <height>42</height>
+         <x>-10</x>
+         <y>290</y>
+         <width>191</width>
+         <height>61</height>
         </rect>
        </property>
        <property name="text">
@@ -2687,10 +3482,10 @@ input, select, textarea {
       <widget class="QPushButton" name="ventes_4">
        <property name="geometry">
         <rect>
-         <x>0</x>
+         <x>-10</x>
          <y>340</y>
-         <width>181</width>
-         <height>42</height>
+         <width>191</width>
+         <height>61</height>
         </rect>
        </property>
        <property name="text">
@@ -2701,9 +3496,9 @@ input, select, textarea {
        <property name="geometry">
         <rect>
          <x>-10</x>
-         <y>380</y>
-         <width>181</width>
-         <height>42</height>
+         <y>390</y>
+         <width>191</width>
+         <height>61</height>
         </rect>
        </property>
        <property name="text">
@@ -2714,9 +3509,9 @@ input, select, textarea {
        <property name="geometry">
         <rect>
          <x>-10</x>
-         <y>260</y>
-         <width>181</width>
-         <height>42</height>
+         <y>241</y>
+         <width>191</width>
+         <height>61</height>
         </rect>
        </property>
        <property name="text">
@@ -2726,10 +3521,10 @@ input, select, textarea {
       <widget class="QPushButton" name="pushButton_5">
        <property name="geometry">
         <rect>
-         <x>0</x>
-         <y>120</y>
-         <width>181</width>
-         <height>42</height>
+         <x>-10</x>
+         <y>130</y>
+         <width>191</width>
+         <height>81</height>
         </rect>
        </property>
        <property name="text">
@@ -2740,9 +3535,9 @@ input, select, textarea {
        <property name="geometry">
         <rect>
          <x>-10</x>
-         <y>690</y>
-         <width>181</width>
-         <height>42</height>
+         <y>480</y>
+         <width>191</width>
+         <height>61</height>
         </rect>
        </property>
        <property name="text">
@@ -2752,10 +3547,10 @@ input, select, textarea {
       <widget class="QPushButton" name="deconnexion_4">
        <property name="geometry">
         <rect>
-         <x>0</x>
-         <y>780</y>
-         <width>181</width>
-         <height>41</height>
+         <x>-10</x>
+         <y>580</y>
+         <width>191</width>
+         <height>61</height>
         </rect>
        </property>
        <property name="text">
@@ -2765,10 +3560,10 @@ input, select, textarea {
       <widget class="QPushButton" name="aide_4">
        <property name="geometry">
         <rect>
-         <x>0</x>
-         <y>730</y>
-         <width>181</width>
-         <height>51</height>
+         <x>-10</x>
+         <y>530</y>
+         <width>191</width>
+         <height>61</height>
         </rect>
        </property>
        <property name="text">
@@ -2826,49 +3621,8 @@ QLabel#appTitle {
        </rect>
       </property>
       <property name="styleSheet">
-       <string notr="true">/* Couleur de fond du frame */
-background-color: olive;
-
-/* Bordure fine et arrondie pour un effet moderne */
-border: 1px solid #556B2F; 
-border-radius: 8px;
-
-/* Optionnel : ajoute un peu d'ombre pour plus de relief */
-box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.2);
-
-/* Style pour les labels et champs à l'intérieur */
-label {
-    font-family: Arial, sans-serif;
-    font-size: 12pt;
-    color: #fff; /* texte en blanc pour contraste */
-}
-
-input, select, textarea {
-    border-radius: 4px;
-    border: 1px solid #ccc;
-    padding: 3px 5px;
-}
-/* Couleur de fond du frame */
-background-color: olive;
-
-/* Bordure fine et arrondie pour un effet moderne */
-border: 1px solid #556B2F; 
-border-radius: 8px;
-
-/* Optionnel : ajoute un peu d'ombre pour plus de relief */
-box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.2);
-
-/* Style pour les labels et champs à l'intérieur */
-label {
-    font-family: Arial, sans-serif;
-    font-size: 12pt;
-    color: #fff; /* texte en blanc pour contraste */
-}
-
-input, select, textarea {
-    border-radius: 4px;
-    border: 1px solid #ccc;
-    padding: 3px 5px;
+       <string notr="true">QFrame {
+    background-color: #556B2F;
 }</string>
       </property>
       <property name="frameShape">
@@ -2897,25 +3651,41 @@ input, select, textarea {
      <widget class="QTableWidget" name="table3">
       <property name="geometry">
        <rect>
-        <x>480</x>
-        <y>130</y>
-        <width>501</width>
+        <x>580</x>
+        <y>100</y>
+        <width>651</width>
         <height>591</height>
        </rect>
       </property>
+      <property name="styleSheet">
+       <string notr="true">QTableView {
+    background-color: white;
+    border: 2px solid #D4AF37;   /* jaune doré */
+    gridline-color: #D4AF37;
+    border-radius: 6px;
+    selection-background-color: #FFF3C4;
+    selection-color: black;
+}
+</string>
+      </property>
       <column>
        <property name="text">
-        <string> date d'inscription</string>
+        <string>id</string>
        </property>
       </column>
       <column>
        <property name="text">
-        <string> type de huile prefere</string>
+        <string> date </string>
        </property>
       </column>
       <column>
        <property name="text">
-        <string> emballage prefere</string>
+        <string> type de huile </string>
+       </property>
+      </column>
+      <column>
+       <property name="text">
+        <string>emballage</string>
        </property>
       </column>
       <column>
@@ -2927,11 +3697,34 @@ input, select, textarea {
      <widget class="QPushButton" name="exporter1">
       <property name="geometry">
        <rect>
-        <x>420</x>
-        <y>740</y>
+        <x>490</x>
+        <y>710</y>
         <width>271</width>
-        <height>31</height>
+        <height>51</height>
        </rect>
+      </property>
+      <property name="styleSheet">
+       <string notr="true">QPushButton {
+    background-color: #D4AF37;   /* doré */
+    color: #FFFFFF;              /* texte blanc */
+    border: 2px solid #FFFFFF;   /* contour blanc */
+    border-radius: 12px;
+    padding: 8px 16px;
+    font-size: 11pt;
+    font-weight: bold;
+}
+
+QPushButton:hover {
+    background-color: #FFD700;   /* doré plus lumineux */
+    color: #000000;              /* texte noir pour contraste */
+    border: 2px solid #D4AF37;
+}
+
+QPushButton:pressed {
+    background-color: #B8962E;   /* doré foncé */
+    color: #FFFFFF;
+    border: 2px solid #FFFFFF;
+}</string>
       </property>
       <property name="text">
        <string> expoter comme pdf📄</string>
@@ -2949,51 +3742,25 @@ input, select, textarea {
        </rect>
       </property>
       <property name="styleSheet">
-       <string notr="true">/* Couleur de fond du frame */
-background-color: olive;
-
-/* Bordure fine et arrondie pour un effet moderne */
-border: 1px solid #556B2F; 
-border-radius: 8px;
-
-/* Optionnel : ajoute un peu d'ombre pour plus de relief */
-box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.2);
-
-/* Style pour les labels et champs à l'intérieur */
-label {
-    font-family: Arial, sans-serif;
-    font-size: 12pt;
-    color: #fff; /* texte en blanc pour contraste */
+       <string notr="true">QFrame {
+    background-color: #556B2F;
+} QFrame#sidebar_5 {
+    background-color: #556B2F;
+}
+QPushButton {
+    background-color: transparent;
+    color: white;
+    border: 2px solid #D4AF37;
+    border-radius: 10px;
+    padding: 10px;
+    margin: 8px 12px;
+    text-align: left;
 }
 
-input, select, textarea {
-    border-radius: 4px;
-    border: 1px solid #ccc;
-    padding: 3px 5px;
-}
-/* Couleur de fond du frame */
-background-color: olive;
-
-/* Bordure fine et arrondie pour un effet moderne */
-border: 1px solid #556B2F; 
-border-radius: 8px;
-
-/* Optionnel : ajoute un peu d'ombre pour plus de relief */
-box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.2);
-
-/* Style pour les labels et champs à l'intérieur */
-label {
-    font-family: Arial, sans-serif;
-    font-size: 12pt;
-    color: #fff; /* texte en blanc pour contraste */
-}
-
-input, select, textarea {
-    border-radius: 4px;
-    border: 1px solid #ccc;
-    padding: 3px 5px;
-}
-</string>
+QPushButton:hover {
+    background-color: #D4AF37;
+    color: black;
+}</string>
       </property>
       <property name="frameShape">
        <enum>QFrame::Shape::StyledPanel</enum>
@@ -3004,10 +3771,10 @@ input, select, textarea {
       <widget class="QPushButton" name="agriculteurs_5">
        <property name="geometry">
         <rect>
-         <x>0</x>
-         <y>300</y>
-         <width>181</width>
-         <height>42</height>
+         <x>-10</x>
+         <y>280</y>
+         <width>191</width>
+         <height>61</height>
         </rect>
        </property>
        <property name="text">
@@ -3017,10 +3784,10 @@ input, select, textarea {
       <widget class="QPushButton" name="ventes_5">
        <property name="geometry">
         <rect>
-         <x>0</x>
-         <y>340</y>
-         <width>181</width>
-         <height>42</height>
+         <x>-10</x>
+         <y>330</y>
+         <width>191</width>
+         <height>61</height>
         </rect>
        </property>
        <property name="text">
@@ -3032,8 +3799,8 @@ input, select, textarea {
         <rect>
          <x>-10</x>
          <y>380</y>
-         <width>181</width>
-         <height>42</height>
+         <width>191</width>
+         <height>61</height>
         </rect>
        </property>
        <property name="text">
@@ -3044,9 +3811,9 @@ input, select, textarea {
        <property name="geometry">
         <rect>
          <x>-10</x>
-         <y>260</y>
-         <width>181</width>
-         <height>42</height>
+         <y>230</y>
+         <width>191</width>
+         <height>61</height>
         </rect>
        </property>
        <property name="text">
@@ -3058,8 +3825,8 @@ input, select, textarea {
         <rect>
          <x>-10</x>
          <y>140</y>
-         <width>181</width>
-         <height>42</height>
+         <width>191</width>
+         <height>71</height>
         </rect>
        </property>
        <property name="text">
@@ -3070,9 +3837,9 @@ input, select, textarea {
        <property name="geometry">
         <rect>
          <x>-10</x>
-         <y>690</y>
-         <width>181</width>
-         <height>42</height>
+         <y>510</y>
+         <width>191</width>
+         <height>61</height>
         </rect>
        </property>
        <property name="text">
@@ -3082,10 +3849,10 @@ input, select, textarea {
       <widget class="QPushButton" name="deconnexion_5">
        <property name="geometry">
         <rect>
-         <x>0</x>
-         <y>780</y>
-         <width>181</width>
-         <height>41</height>
+         <x>-10</x>
+         <y>610</y>
+         <width>191</width>
+         <height>71</height>
         </rect>
        </property>
        <property name="text">
@@ -3095,10 +3862,10 @@ input, select, textarea {
       <widget class="QPushButton" name="aide_5">
        <property name="geometry">
         <rect>
-         <x>0</x>
-         <y>730</y>
-         <width>181</width>
-         <height>51</height>
+         <x>-10</x>
+         <y>560</y>
+         <width>191</width>
+         <height>61</height>
         </rect>
        </property>
        <property name="text">
@@ -3149,11 +3916,22 @@ QLabel#appTitle {
      <widget class="QTableWidget" name="table4">
       <property name="geometry">
        <rect>
-        <x>260</x>
-        <y>290</y>
+        <x>200</x>
+        <y>180</y>
         <width>501</width>
         <height>491</height>
        </rect>
+      </property>
+      <property name="styleSheet">
+       <string notr="true">QTableView {
+    background-color: white;
+    border: 2px solid #D4AF37;   /* jaune doré */
+    gridline-color: #D4AF37;
+    border-radius: 6px;
+    selection-background-color: #FFF3C4;
+    selection-color: black;
+}
+</string>
       </property>
       <column>
        <property name="text">
@@ -3179,11 +3957,22 @@ QLabel#appTitle {
      <widget class="QTableWidget" name="table5">
       <property name="geometry">
        <rect>
-        <x>970</x>
-        <y>290</y>
-        <width>401</width>
+        <x>900</x>
+        <y>180</y>
+        <width>671</width>
         <height>491</height>
        </rect>
+      </property>
+      <property name="styleSheet">
+       <string notr="true">QTableView {
+    background-color: white;
+    border: 2px solid #D4AF37;   /* jaune doré */
+    gridline-color: #D4AF37;
+    border-radius: 6px;
+    selection-background-color: #FFF3C4;
+    selection-color: black;
+}
+</string>
       </property>
       <column>
        <property name="text">
@@ -3198,6 +3987,16 @@ QLabel#appTitle {
       <column>
        <property name="text">
         <string>prenom</string>
+       </property>
+      </column>
+      <column>
+       <property name="text">
+        <string>total achat</string>
+       </property>
+      </column>
+      <column>
+       <property name="text">
+        <string>emballage </string>
        </property>
       </column>
      </widget>
@@ -3220,8 +4019,8 @@ QLabel#appTitle {
      <widget class="QLabel" name="label_34">
       <property name="geometry">
        <rect>
-        <x>1020</x>
-        <y>100</y>
+        <x>1010</x>
+        <y>80</y>
         <width>251</width>
         <height>31</height>
        </rect>
@@ -3238,56 +4037,14 @@ QLabel#appTitle {
        <rect>
         <x>170</x>
         <y>0</y>
-        <width>1651</width>
-        <height>80</height>
+        <width>1671</width>
+        <height>81</height>
        </rect>
       </property>
       <property name="styleSheet">
-       <string notr="true">/* Couleur de fond du frame */
-background-color: olive;
-
-/* Bordure fine et arrondie pour un effet moderne */
-border: 1px solid #556B2F; 
-border-radius: 8px;
-
-/* Optionnel : ajoute un peu d'ombre pour plus de relief */
-box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.2);
-
-/* Style pour les labels et champs à l'intérieur */
-label {
-    font-family: Arial, sans-serif;
-    font-size: 12pt;
-    color: #fff; /* texte en blanc pour contraste */
-}
-
-input, select, textarea {
-    border-radius: 4px;
-    border: 1px solid #ccc;
-    padding: 3px 5px;
-}
-/* Couleur de fond du frame */
-background-color: olive;
-
-/* Bordure fine et arrondie pour un effet moderne */
-border: 1px solid #556B2F; 
-border-radius: 8px;
-
-/* Optionnel : ajoute un peu d'ombre pour plus de relief */
-box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.2);
-
-/* Style pour les labels et champs à l'intérieur */
-label {
-    font-family: Arial, sans-serif;
-    font-size: 12pt;
-    color: #fff; /* texte en blanc pour contraste */
-}
-
-input, select, textarea {
-    border-radius: 4px;
-    border: 1px solid #ccc;
-    padding: 3px 5px;
-}
-</string>
+       <string notr="true">QFrame {
+    background-color: #556B2F;
+}</string>
       </property>
       <property name="frameShape">
        <enum>QFrame::Shape::StyledPanel</enum>
@@ -3315,7 +4072,7 @@ input, select, textarea {
      <widget class="QLabel" name="label_36">
       <property name="geometry">
        <rect>
-        <x>200</x>
+        <x>190</x>
         <y>150</y>
         <width>63</width>
         <height>20</height>
@@ -3361,40 +4118,40 @@ input, select, textarea {
        </rect>
       </property>
       <property name="text">
-       <string> points de fidélités</string>
-      </property>
-     </widget>
-     <widget class="QLCDNumber" name="points_2">
-      <property name="geometry">
-       <rect>
-        <x>340</x>
-        <y>200</y>
-        <width>64</width>
-        <height>23</height>
-       </rect>
-      </property>
-     </widget>
-     <widget class="QLabel" name="label_38">
-      <property name="geometry">
-       <rect>
-        <x>410</x>
-        <y>200</y>
-        <width>63</width>
-        <height>20</height>
-       </rect>
-      </property>
-      <property name="text">
-       <string>pts</string>
+       <string/>
       </property>
      </widget>
      <widget class="QPushButton" name="appliquer2">
       <property name="geometry">
        <rect>
-        <x>450</x>
-        <y>190</y>
-        <width>111</width>
-        <height>29</height>
+        <x>540</x>
+        <y>140</y>
+        <width>161</width>
+        <height>41</height>
        </rect>
+      </property>
+      <property name="styleSheet">
+       <string notr="true">QPushButton {
+    background-color: #D4AF37;   /* doré */
+    color: #FFFFFF;              /* texte blanc */
+    border: 2px solid #FFFFFF;   /* contour blanc */
+    border-radius: 12px;
+    padding: 8px 16px;
+    font-size: 11pt;
+    font-weight: bold;
+}
+
+QPushButton:hover {
+    background-color: #FFD700;   /* doré plus lumineux */
+    color: #000000;              /* texte noir pour contraste */
+    border: 2px solid #D4AF37;
+}
+
+QPushButton:pressed {
+    background-color: #B8962E;   /* doré foncé */
+    color: #FFFFFF;
+    border: 2px solid #FFFFFF;
+}</string>
       </property>
       <property name="text">
        <string> 🪧appliquer</string>
@@ -3403,8 +4160,8 @@ input, select, textarea {
      <widget class="QLabel" name="label_39">
       <property name="geometry">
        <rect>
-        <x>1010</x>
-        <y>190</y>
+        <x>1060</x>
+        <y>140</y>
         <width>63</width>
         <height>20</height>
        </rect>
@@ -3416,8 +4173,8 @@ input, select, textarea {
      <widget class="QRadioButton" name="particulier_4">
       <property name="geometry">
        <rect>
-        <x>1070</x>
-        <y>190</y>
+        <x>1110</x>
+        <y>140</y>
         <width>110</width>
         <height>24</height>
        </rect>
@@ -3429,8 +4186,8 @@ input, select, textarea {
      <widget class="QRadioButton" name="profisionnel_5">
       <property name="geometry">
        <rect>
-        <x>1180</x>
-        <y>190</y>
+        <x>1220</x>
+        <y>140</y>
         <width>110</width>
         <height>24</height>
        </rect>
@@ -3442,11 +4199,34 @@ input, select, textarea {
      <widget class="QPushButton" name="appliquer3">
       <property name="geometry">
        <rect>
-        <x>1300</x>
-        <y>190</y>
-        <width>111</width>
-        <height>29</height>
+        <x>1390</x>
+        <y>130</y>
+        <width>171</width>
+        <height>41</height>
        </rect>
+      </property>
+      <property name="styleSheet">
+       <string notr="true">QPushButton {
+    background-color: #D4AF37;   /* doré */
+    color: #FFFFFF;              /* texte blanc */
+    border: 2px solid #FFFFFF;   /* contour blanc */
+    border-radius: 12px;
+    padding: 8px 16px;
+    font-size: 11pt;
+    font-weight: bold;
+}
+
+QPushButton:hover {
+    background-color: #FFD700;   /* doré plus lumineux */
+    color: #000000;              /* texte noir pour contraste */
+    border: 2px solid #D4AF37;
+}
+
+QPushButton:pressed {
+    background-color: #B8962E;   /* doré foncé */
+    color: #FFFFFF;
+    border: 2px solid #FFFFFF;
+}</string>
       </property>
       <property name="text">
        <string>🪧 appliquer</string>
@@ -3455,11 +4235,34 @@ input, select, textarea {
      <widget class="QPushButton" name="exporter2">
       <property name="geometry">
        <rect>
-        <x>260</x>
-        <y>790</y>
-        <width>221</width>
-        <height>29</height>
+        <x>680</x>
+        <y>690</y>
+        <width>231</width>
+        <height>41</height>
        </rect>
+      </property>
+      <property name="styleSheet">
+       <string notr="true">QPushButton {
+    background-color: #D4AF37;   /* doré */
+    color: #FFFFFF;              /* texte blanc */
+    border: 2px solid #FFFFFF;   /* contour blanc */
+    border-radius: 12px;
+    padding: 8px 16px;
+    font-size: 11pt;
+    font-weight: bold;
+}
+
+QPushButton:hover {
+    background-color: #FFD700;   /* doré plus lumineux */
+    color: #000000;              /* texte noir pour contraste */
+    border: 2px solid #D4AF37;
+}
+
+QPushButton:pressed {
+    background-color: #B8962E;   /* doré foncé */
+    color: #FFFFFF;
+    border: 2px solid #FFFFFF;
+}</string>
       </property>
       <property name="text">
        <string> expoter comme pdf📄</string>

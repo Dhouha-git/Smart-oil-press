@@ -9,11 +9,25 @@
 #include <QDate>
 #include <QSqlTableModel>
 #include <QSqlError>
-QT_BEGIN_NAMESPACE
+#include <QPrinter>  // 🔹 obligatoire
+#include <QTextEdit>
+#include <QTimer>
+#include <QtCharts/QChart>
+#include <QtCharts/QLineSeries>
+#include <QMediaRecorder>
+#include <QMediaCaptureSession>
+#include <QAudioInput>
+#include <QIODevice>
+#include <QNetworkAccessManager>
+#include <QMap>
+#include <QVariantList>
+
+
 namespace Ui {
 class client;
 
 }
+
 QT_END_NAMESPACE
 
 class client : public QMainWindow
@@ -47,20 +61,63 @@ private slots:
 void on_tri_2_clicked();
     void on_annuler_clicked();
 void on_annuler1_clicked();
-
-
+void on_pdf_clicked();
+ void on_recherche2_2_clicked();
     void on_supprimer_clicked();
+ void afficher_historique();
 
 
 
 
 
 
+
+
+    void on_appliquer_clicked();
+
+ void on_exporter1_clicked();
+
+    void on_appliquer2_clicked();
+
+ void on_appliquer3_clicked();
+
+    void on_exporter2_clicked();
+
+ void on_pushButton_4_clicked();
+
+    void on_envoyer_clicked();
+
+ /*void on_qr_clicked();*/
+
+
+    void on_fichier_clicked();
+
+    void on_nouvelle_discussion_clicked();
+
+    void on_exporter2_2_clicked();
+
+    void on_executer_clicked();
+
+    void on_mode_clicked();
+
+    void on_recherche_2_clicked();
 
 private:
     Ui::client *ui;
+     QTextEdit *chatBox;
+    static const int MAX_DISCUSSIONS = 20;
+     QLineSeries *seriesAchat;
+     QLineSeries *seriesCumul;
+     QMediaRecorder *recorder;
+     QAudioInput *audioInput;
+     QMediaCaptureSession captureSession;
+     QMap<QString, QVariantList> conversations;
+     QString fileName;
 private:
     void verifierSaisie();
+    void ajouterMessage(const QString &id, const QString &message);
+    void updateListeConversations(const QString &id, const QString &lastMsg);
+    void chargerClients();
 
     // ---- Attributs du client ----
     int id;
@@ -76,6 +133,10 @@ private:
     QString total_achat;
     QString points_fidelite;
     QSqlTableModel *model;
+      int getNextId();
+    QTimer *timer;
+      QChart *chart;
+      QLineSeries *series;
 
 public:
     client(    int id,
@@ -90,11 +151,16 @@ public:
            QString emballage,
            QString total,
            QString point);
+
     bool ajouter();
     bool modifier();
     static bool supprimer(int id);
     static void afficher(QSqlTableModel *model);
       void remplirTableau();
+    void ajouterDiscussionRecente(const QString &nom, const QString &message);
+void afficherCourbeDansTable2();
+    void afficherCourbe();
+ void applyTheme(QString mode);
 
 };
 #endif // CLIENT_H

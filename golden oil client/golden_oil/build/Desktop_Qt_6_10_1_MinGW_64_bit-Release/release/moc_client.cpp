@@ -7,6 +7,8 @@
 *****************************************************************************/
 
 #include "../../../client.h"
+#include <QtGui/qtextcursor.h>
+#include <QtNetwork/QSslError>
 #include <QtCore/qmetatype.h>
 
 #include <QtCore/qtmochelpers.h>
@@ -54,7 +56,23 @@ template <> constexpr inline auto client::qt_create_metaobjectdata<qt_meta_tag_Z
         "on_tri_2_clicked",
         "on_annuler_clicked",
         "on_annuler1_clicked",
-        "on_supprimer_clicked"
+        "on_pdf_clicked",
+        "on_recherche2_2_clicked",
+        "on_supprimer_clicked",
+        "afficher_historique",
+        "on_appliquer_clicked",
+        "on_exporter1_clicked",
+        "on_appliquer2_clicked",
+        "on_appliquer3_clicked",
+        "on_exporter2_clicked",
+        "on_pushButton_4_clicked",
+        "on_envoyer_clicked",
+        "on_fichier_clicked",
+        "on_nouvelle_discussion_clicked",
+        "on_exporter2_2_clicked",
+        "on_executer_clicked",
+        "on_mode_clicked",
+        "on_recherche_2_clicked"
     };
 
     QtMocHelpers::UintData qt_methods {
@@ -86,8 +104,40 @@ template <> constexpr inline auto client::qt_create_metaobjectdata<qt_meta_tag_Z
         QtMocHelpers::SlotData<void()>(14, 2, QMC::AccessPrivate, QMetaType::Void),
         // Slot 'on_annuler1_clicked'
         QtMocHelpers::SlotData<void()>(15, 2, QMC::AccessPrivate, QMetaType::Void),
-        // Slot 'on_supprimer_clicked'
+        // Slot 'on_pdf_clicked'
         QtMocHelpers::SlotData<void()>(16, 2, QMC::AccessPrivate, QMetaType::Void),
+        // Slot 'on_recherche2_2_clicked'
+        QtMocHelpers::SlotData<void()>(17, 2, QMC::AccessPrivate, QMetaType::Void),
+        // Slot 'on_supprimer_clicked'
+        QtMocHelpers::SlotData<void()>(18, 2, QMC::AccessPrivate, QMetaType::Void),
+        // Slot 'afficher_historique'
+        QtMocHelpers::SlotData<void()>(19, 2, QMC::AccessPrivate, QMetaType::Void),
+        // Slot 'on_appliquer_clicked'
+        QtMocHelpers::SlotData<void()>(20, 2, QMC::AccessPrivate, QMetaType::Void),
+        // Slot 'on_exporter1_clicked'
+        QtMocHelpers::SlotData<void()>(21, 2, QMC::AccessPrivate, QMetaType::Void),
+        // Slot 'on_appliquer2_clicked'
+        QtMocHelpers::SlotData<void()>(22, 2, QMC::AccessPrivate, QMetaType::Void),
+        // Slot 'on_appliquer3_clicked'
+        QtMocHelpers::SlotData<void()>(23, 2, QMC::AccessPrivate, QMetaType::Void),
+        // Slot 'on_exporter2_clicked'
+        QtMocHelpers::SlotData<void()>(24, 2, QMC::AccessPrivate, QMetaType::Void),
+        // Slot 'on_pushButton_4_clicked'
+        QtMocHelpers::SlotData<void()>(25, 2, QMC::AccessPrivate, QMetaType::Void),
+        // Slot 'on_envoyer_clicked'
+        QtMocHelpers::SlotData<void()>(26, 2, QMC::AccessPrivate, QMetaType::Void),
+        // Slot 'on_fichier_clicked'
+        QtMocHelpers::SlotData<void()>(27, 2, QMC::AccessPrivate, QMetaType::Void),
+        // Slot 'on_nouvelle_discussion_clicked'
+        QtMocHelpers::SlotData<void()>(28, 2, QMC::AccessPrivate, QMetaType::Void),
+        // Slot 'on_exporter2_2_clicked'
+        QtMocHelpers::SlotData<void()>(29, 2, QMC::AccessPrivate, QMetaType::Void),
+        // Slot 'on_executer_clicked'
+        QtMocHelpers::SlotData<void()>(30, 2, QMC::AccessPrivate, QMetaType::Void),
+        // Slot 'on_mode_clicked'
+        QtMocHelpers::SlotData<void()>(31, 2, QMC::AccessPrivate, QMetaType::Void),
+        // Slot 'on_recherche_2_clicked'
+        QtMocHelpers::SlotData<void()>(32, 2, QMC::AccessPrivate, QMetaType::Void),
     };
     QtMocHelpers::UintData qt_properties {
     };
@@ -125,7 +175,23 @@ void client::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int _id, void
         case 11: _t->on_tri_2_clicked(); break;
         case 12: _t->on_annuler_clicked(); break;
         case 13: _t->on_annuler1_clicked(); break;
-        case 14: _t->on_supprimer_clicked(); break;
+        case 14: _t->on_pdf_clicked(); break;
+        case 15: _t->on_recherche2_2_clicked(); break;
+        case 16: _t->on_supprimer_clicked(); break;
+        case 17: _t->afficher_historique(); break;
+        case 18: _t->on_appliquer_clicked(); break;
+        case 19: _t->on_exporter1_clicked(); break;
+        case 20: _t->on_appliquer2_clicked(); break;
+        case 21: _t->on_appliquer3_clicked(); break;
+        case 22: _t->on_exporter2_clicked(); break;
+        case 23: _t->on_pushButton_4_clicked(); break;
+        case 24: _t->on_envoyer_clicked(); break;
+        case 25: _t->on_fichier_clicked(); break;
+        case 26: _t->on_nouvelle_discussion_clicked(); break;
+        case 27: _t->on_exporter2_2_clicked(); break;
+        case 28: _t->on_executer_clicked(); break;
+        case 29: _t->on_mode_clicked(); break;
+        case 30: _t->on_recherche_2_clicked(); break;
         default: ;
         }
     }
@@ -151,14 +217,14 @@ int client::qt_metacall(QMetaObject::Call _c, int _id, void **_a)
     if (_id < 0)
         return _id;
     if (_c == QMetaObject::InvokeMetaMethod) {
-        if (_id < 15)
+        if (_id < 31)
             qt_static_metacall(this, _c, _id, _a);
-        _id -= 15;
+        _id -= 31;
     }
     if (_c == QMetaObject::RegisterMethodArgumentMetaType) {
-        if (_id < 15)
+        if (_id < 31)
             *reinterpret_cast<QMetaType *>(_a[0]) = QMetaType();
-        _id -= 15;
+        _id -= 31;
     }
     return _id;
 }
