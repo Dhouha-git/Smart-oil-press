@@ -14,6 +14,272 @@
    <string>Pressage — Gestion des productions</string>
   </property>
   <widget class="QWidget" name="centralwidget">
+  <property name="styleSheet">
+   <string notr="true">
+/* =========================================================
+   GLOBAL TYPOGRAPHY &amp; BACKGROUND
+   ========================================================= */
+QWidget {
+    font-family: &quot;Segoe UI&quot;, &quot;Helvetica Neue&quot;, &quot;Arial&quot;;
+    font-size: 10pt;
+    color: #2b2b2b;
+}
+
+#centralwidget, #page {
+    background-color: #f4f5f2; /* Vert trÃ¨s, trÃ¨s pÃ¢le / gris doux pour reposer les yeux */
+}
+
+/* =========================================================
+   GROUPBOX (LES CARTES)
+   ========================================================= */
+QGroupBox {
+    background-color: #ffffff;
+    border: 1px solid #d5c8a3; /* Bordure dorÃ©e trÃ¨s fine et Ã©lÃ©gante */
+    border-radius: 10px;
+    margin-top: 24px;  /* Espace pour le titre */
+    padding: 24px 20px 16px 20px;
+}
+
+QGroupBox:hover {
+    border: 1px solid #c78a10; 
+    background-color: #ffffff;
+}
+
+/* Le "Rectangle" du titre modernisÃ© en style Pilule Premium */
+QGroupBox::title {
+    subcontrol-origin: margin;
+    subcontrol-position: top left;
+    left: 20px;
+    top: -12px;
+    padding: 6px 20px;
+    font-weight: 700;
+    font-size: 13pt;
+    color: #ffffff;             /* Texte blanc pour contraster */
+    background-color: #c78a10;  /* Le dorÃ© de votre charte en fond plat */
+    border-radius: 8px;         /* Bords arrondis style pilule */
+}
+
+/* Effet Hover sur le titre */
+QGroupBox::title:hover {
+    background-color: #e09f1d;
+}
+
+/* =========================================================
+   LABELS
+   ========================================================= */
+QLabel {
+    font-weight: 600; /* Semi-bold pour une lecture ultra nette */
+    color: #3b3b3b;
+}
+QLabel#label_formule_rendement {
+    color: #7a7a7a;
+    font-size: 9pt;
+    font-style: italic;
+}
+
+/* =========================================================
+   LINE EDIT (CHAMPS DE TEXTE) &amp; COMBOBOX
+   ========================================================= */
+QLineEdit, QComboBox, QDateEdit, QSpinBox, QDoubleSpinBox {
+    background-color: #fcfcfc;
+    border: 1.5px solid #d2d2d2; /* Bordure discrÃ¨te */
+    border-radius: 6px;
+    padding: 8px 12px;
+    color: #111111;
+    font-weight: 500;
+}
+
+QLineEdit:hover, QComboBox:hover, QDateEdit:hover {
+    border: 1.5px solid #c78a10;
+    background-color: #ffffff;
+}
+
+QLineEdit:focus, QComboBox:focus, QDateEdit:focus {
+    border: 2px solid #c78a10; /* Focus or net */
+    background-color: #ffffff;
+}
+
+QComboBox::drop-down, QDateEdit::down-button, QDateEdit::up-button {
+    subcontrol-origin: padding;
+    border-left: 1px solid transparent;
+    width: 24px;
+    background: transparent;
+}
+QComboBox:hover::drop-down {
+    border-left: 1px solid #f0e4cc;
+}
+QComboBox::down-arrow {
+    width: 14px; height: 14px;
+}
+QComboBox QAbstractItemView {
+    border: 1px solid #c78a10;
+    background: #ffffff;
+    selection-background-color: #fdf5e6; /* DorÃ© super clair */
+    selection-color: #c78a10;
+    border-radius: 6px;
+}
+
+/* =========================================================
+   BOUTONS : DESIGN "GHOST" &amp; SOLID
+   ========================================================= */
+QPushButton {
+    font-weight: 700; /* Texte gras */
+    border-radius: 6px; /* Coins modernes */
+    padding: 8px 16px;
+}
+
+/* --- BOUTONS PRINCIPAUX (SOLID) --- */
+/* Bouton "Ajouter" */
+QPushButton#ajouter {
+    background-color: #4a5c25; /* Vert Olive */
+    color: #ffffff;
+    border: none;
+}
+QPushButton#ajouter:hover {
+    background-color: #5c7230;
+}
+QPushButton#ajouter:pressed {
+    background-color: #3b491d;
+    padding-top: 10px; padding-bottom: 6px;
+}
+
+/* Boutons "Chatbot IA" &amp; "Rendement" */
+QPushButton#btn_chatbot {
+    background-color: #2e7d32;
+    color: #ffffff;
+    border: none;
+}
+QPushButton#btn_chatbot:hover {
+    background-color: #389e3d;
+}
+QPushButton#btn_chatbot:pressed {
+    padding-top: 10px; padding-bottom: 6px;
+}
+
+QPushButton#rendement {
+    background-color: #c78a10;
+    color: #ffffff;
+    border: none;
+    font-size: 11pt;
+}
+QPushButton#rendement:hover {
+    background-color: #e09f1d;
+}
+QPushButton#rendement:pressed {
+    padding-top: 10px; padding-bottom: 6px;
+}
+
+
+/* --- BOUTONS SECONDAIRES (GHOST OUTLINE) --- */
+/* FantÃ´me dorÃ© pour la modification */
+QPushButton#modifier {
+    background-color: transparent;
+    border: 2px solid #c78a10;
+    color: #c78a10;
+}
+QPushButton#modifier:hover {
+    background-color: #c78a10;
+    color: #ffffff;
+}
+QPushButton#modifier:pressed {
+    background-color: #a66f08;
+    border-color: #a66f08;
+}
+
+/* FantÃ´me rouge vif pour suppression */
+QPushButton#suprimer {
+    background-color: transparent;
+    border: 2px solid #d32f2f;
+    color: #d32f2f;
+}
+QPushButton#suprimer:hover {
+    background-color: #d32f2f;
+    color: #ffffff;
+}
+QPushButton#suprimer:pressed {
+    background-color: #b71c1c;
+    border-color: #b71c1c;
+}
+
+/* FantÃ´me vert pour Afficher */
+QPushButton#afficher {
+    background-color: transparent;
+    border: 2px solid #4a5c25;
+    color: #4a5c25;
+}
+QPushButton#afficher:hover {
+    background-color: #4a5c25;
+    color: #ffffff;
+}
+QPushButton#afficher:pressed {
+    background-color: #3b491d;
+}
+
+/* Autres petits boutons utilitaires (Gris) */
+QPushButton#pushButton_5, QPushButton#pushButton_6, QPushButton#anomalies, QPushButton#graphique, QPushButton#pushButton_recherche, QPushButton#pushButton_effacer_filtre {
+    background-color: #ffffff;
+    border: 1px solid #dcdcdc;
+    color: #555555;
+    font-weight: 600;
+}
+QPushButton#pushButton_5:hover, QPushButton#pushButton_6:hover, QPushButton#anomalies:hover, QPushButton#graphique:hover, QPushButton#pushButton_recherche:hover, QPushButton#pushButton_effacer_filtre:hover {
+    background-color: #f0f0f0;
+    border-color: #c78a10; /* petit clin d'oeil dorÃ© au survol */
+    color: #c78a10;
+}
+
+/* =========================================================
+   TABLE WIDGET &amp; BARS
+   ========================================================= */
+QTableWidget {
+    background-color: #ffffff;
+    alternate-background-color: #fdfdfd;
+    gridline-color: #f0e4cc;
+    border: 1px solid #e0dfd6;
+    border-radius: 8px;
+    selection-background-color: #fbf1da; /* DorÃ© pale */
+    selection-color: #a66f08; /* Texte foncÃ© pour lisibilitÃ© */
+}
+
+QTableWidget::item {
+    padding: 8px 6px;
+    border-bottom: 1px solid #f6f6f6;
+}
+QTableWidget::item:hover {
+    background-color: #fafbf9;
+}
+
+QHeaderView::section {
+    background-color: #4a5c25;
+    color: #ffffff;
+    padding: 10px 8px;
+    font-weight: 700;
+    font-size: 10pt;
+    border: none;
+    border-right: 1px solid #5c7230;
+}
+
+QScrollBar:vertical {
+    background: #f4f5f2;
+    width: 10px;
+    margin: 2px;
+    border-radius: 4px;
+}
+QScrollBar::handle:vertical {
+    background: #c3ccbb; /* Vert olive trÃ¨s pale */
+    border-radius: 4px;
+    min-height: 24px;
+}
+QScrollBar::handle:vertical:hover {
+    background: #4a5c25; /* S'assombrit au survol */
+}
+QScrollBar::add-line, QScrollBar::sub-line {
+    background: none;
+    height: 0;
+}
+   </string>
+  </property>
+   
    <widget class="QStackedWidget" name="stackedWidget">
     <property name="geometry">
      <rect>
@@ -32,295 +298,6 @@
         <width>341</width>
         <height>631</height>
        </rect>
-      </property>
-      <property name="styleSheet">
-       <string notr="true">
-QWidget {
-    background: #ffffff;
-    font-family: &quot;Segoe UI&quot;, &quot;Arial&quot;;
-    font-size: 11pt;
-    color: #111111;
-}
-
-/* Optional: better default focus behavior */
-*:focus {
-    outline: none; /* Qt ignores CSS outline mostly, but keep clean */
-}
-
-/* =========================================================
-   COLORS (keep consistent)
-   =========================================================
-   Accent (orange): #c78a10
-   Accent dark:     #a66f08
-   Accent light:    #f3d08a
-   Border neutral:  #bdbdbd
-*/
- 
-/* =========================================================
-   GROUPBOX
-   ========================================================= */
-QGroupBox {
-    border: 2px solid #c78a10;
-    border-radius: 14px;
-    margin-top: 18px;              /* space for title */
-    padding: 16px 14px 12px 14px;  /* inside spacing */
-    background: transparent;
-}
-
-QGroupBox::title {
-    subcontrol-origin: margin;
-    subcontrol-position: top left;
-
-    left: 16px;
-    padding: 0 10px;
-
-    font-weight: 700;
-    font-size: 12pt;
-    color: #111111;
-
-    background: #ffffff; /* cuts border behind title */
-}
-
-/* =========================================================
-   LABELS
-   ========================================================= */
-QLabel {
-    font-weight: 700;
-    color: #111111;
-}
-
-/* =========================================================
-   LINE EDIT (text fields)
-   ========================================================= */
-QLineEdit {
-    background: #ffffff;
-    border: 2px solid #c78a10;
-    border-radius: 6px;
-    padding: 6px 10px;
-    selection-background-color: #c78a10;
-    selection-color: #ffffff;
-}
-
-QLineEdit:hover {
-    border-color: #a66f08;
-}
-
-QLineEdit:focus {
-    border-color: #a66f08;
-}
-
-QLineEdit:disabled {
-    background: #f4f4f4;
-    border-color: #d6b56f;
-    color: #888888;
-}
-
-/* =========================================================
-   COMBOBOX
-   ========================================================= */
-QComboBox {
-    background: #ffffff;
-    border: 2px solid #c78a10;
-    border-radius: 6px;
-    padding: 6px 34px 6px 10px;  /* right padding to avoid overlap with arrow */
-}
-
-QComboBox:hover {
-    border-color: #a66f08;
-}
-
-QComboBox:focus {
-    border-color: #a66f08;
-}
-
-QComboBox:disabled {
-    background: #f4f4f4;
-    border-color: #d6b56f;
-    color: #888888;
-}
-
-QComboBox::drop-down {
-    subcontrol-origin: padding;
-    subcontrol-position: top right;
-    width: 28px;
-
-    border-left: 2px solid #c78a10;
-    border-top-right-radius: 6px;
-    border-bottom-right-radius: 6px;
-    background: #ffffff;
-}
-
-QComboBox:hover::drop-down {
-    border-left-color: #a66f08;
-}
-
-/* Arrow: QSS cannot draw a real arrow without an image.
-   This is a simple “chevron” using borders via an indicator trick is not supported for QComboBox.
-   Best option: provide an SVG/PNG. Replace with your resource path.
-*/
-QComboBox::down-arrow {
-    image: url(:/icons/chevron-down.png); /* &lt;-- put your icon in Qt resources */
-    width: 12px;
-    height: 12px;
-}
-
-/* Dropdown list */
-QComboBox QAbstractItemView {
-    border: 2px solid #c78a10;
-    background: #ffffff;
-    selection-background-color: #f3d08a;
-    selection-color: #111111;
-    outline: none;
-}
-
-/* =========================================================
-   DATEEDIT / SPINBOX
-   ========================================================= */
-QDateEdit, QSpinBox, QDoubleSpinBox {
-    background: #ffffff;
-    border: 2px solid #c78a10;
-    border-radius: 6px;
-    padding: 6px 34px 6px 10px; /* space for buttons */
-}
-
-QDateEdit:hover, QSpinBox:hover, QDoubleSpinBox:hover {
-    border-color: #a66f08;
-}
-
-QDateEdit:focus, QSpinBox:focus, QDoubleSpinBox:focus {
-    border-color: #a66f08;
-}
-
-QDateEdit:disabled, QSpinBox:disabled, QDoubleSpinBox:disabled {
-    background: #f4f4f4;
-    border-color: #d6b56f;
-    color: #888888;
-}
-
-/* Buttons area */
-QDateEdit::up-button, QSpinBox::up-button, QDoubleSpinBox::up-button,
-QDateEdit::down-button, QSpinBox::down-button, QDoubleSpinBox::down-button {
-    subcontrol-origin: border;
-    width: 28px;
-    background: #ffffff;
-    border-left: 2px solid #c78a10;
-}
-
-QDateEdit::up-button, QSpinBox::up-button, QDoubleSpinBox::up-button {
-    subcontrol-position: top right;
-    border-top-right-radius: 6px;
-}
-
-QDateEdit::down-button, QSpinBox::down-button, QDoubleSpinBox::down-button {
-    subcontrol-position: bottom right;
-    border-bottom-right-radius: 6px;
-}
-
-QDateEdit:hover::up-button, QSpinBox:hover::up-button, QDoubleSpinBox:hover::up-button,
-QDateEdit:hover::down-button, QSpinBox:hover::down-button, QDoubleSpinBox:hover::down-button {
-    border-left-color: #a66f08;
-}
-
-QDateEdit::up-arrow, QSpinBox::up-arrow, QDoubleSpinBox::up-arrow {
-    image: url(:/icons/chevron-up.png);
-    width: 10px;
-    height: 10px;
-}
-
-QDateEdit::down-arrow, QSpinBox::down-arrow, QDoubleSpinBox::down-arrow {
-    image: url(:/icons/chevron-down.png);
-    width: 10px;
-    height: 10px;
-}
-
-/* =========================================================
-   PUSH BUTTON
-   ========================================================= */
-QPushButton {
-    background: #f5f5f5;
-    border: 1px solid #bdbdbd;
-    border-radius: 6px;
-    padding: 7px 16px;
-}
-
-QPushButton:hover {
-    background: #eeeeee;
-    border-color: #a9a9a9;
-}
-
-QPushButton:pressed {
-    background: #e4e4e4;
-}
-
-QPushButton:disabled {
-    background: #f2f2f2;
-    border-color: #d0d0d0;
-    color: #9a9a9a;
-}
-
-/* =========================================================
-   TOOLTIP
-   ========================================================= */
-QToolTip {
-    background: #ffffff;
-    color: #111111;
-    border: 1px solid #c78a10;
-    padding: 6px 8px;
-    border-radius: 6px;
-}
-
-/* Fond du formulaire */
-#InformationsPersonnelles_2 {
-    background-color: #faf8f4;
-}
-
-/* Bouton principal */
-QPushButton#ajouter {
-    background-color: #4a5c25;
-    color: #ffffff;
-    border: 1px solid #3d4d1f;
-    font-weight: 700;
-    border-radius: 8px;
-    padding: 8px 14px;
-}
-QPushButton#ajouter:hover {
-    background-color: #5d7230;
-    border-color: #4a5c25;
-}
-QPushButton#ajouter:pressed {
-    background-color: #3d4d1f;
-}
-
-QPushButton#modifier, QPushButton#suprimer, QPushButton#afficher {
-    border-radius: 8px;
-    padding: 7px 12px;
-    font-weight: 600;
-}
-QPushButton#modifier {
-    background-color: #fff9ed;
-    border: 2px solid #c78a10;
-    color: #5c4006;
-}
-QPushButton#modifier:hover {
-    background-color: #f3d08a;
-}
-QPushButton#suprimer {
-    background-color: #fff5f5;
-    border: 2px solid #c62828;
-    color: #b71c1c;
-}
-QPushButton#suprimer:hover {
-    background-color: #ffcdd2;
-}
-QPushButton#afficher {
-    background-color: #e8f4ea;
-    border: 2px solid #4a5c25;
-    color: #2e3d18;
-}
-QPushButton#afficher:hover {
-    background-color: #c8e6c9;
-}
-</string>
       </property>
       <property name="title">
        <string>Fiche de production</string>
@@ -515,9 +492,6 @@ QPushButton#afficher:hover {
          <width>321</width>
          <height>32</height>
         </rect>
-       </property>
-       <property name="styleSheet">
-        <string notr="true">color: #5c5c5c; font-size: 9pt; font-weight: normal;</string>
        </property>
        <property name="text">
         <string>Formule : (quantité d'huile ÷ quantité d'olives) × 100 — puis bouton « Calculer rendement » à droite</string>
@@ -826,291 +800,6 @@ QPushButton#afficher:hover {
         <height>631</height>
        </rect>
       </property>
-      <property name="styleSheet">
-       <string notr="true">QTableWidget {
-    background-color: #6f8438;
-    gridline-color: #d6b25e;
-    border: 1px solid #d6b25e;
-    border-radius: 10px;
-}
-
-QTableWidget::item {
-    padding: 6px;
-}
-
-QTableWidget::item:selected {
-    background-color: #d6b25e;
-    color: #3b3b3b;
-}
-
-/* Header */
-QHeaderView::section {
-    background-color: #4a5c25;
-    color: white;
-    padding: 6px;
-    border: 1px solid #d6b25e;
-    font-weight: bold;
-}
-
-/* =========================
-   SCROLLBAR
-========================= */
-QScrollBar:vertical {
-    background: #4a5c25;
-    width: 12px;
-    margin: 0;
-}
-
-QScrollBar::handle:vertical {
-    background: #d6b25e;
-    border-radius: 6px;
-    min-height: 20px;
-}
-
-QScrollBar::handle:vertical:hover {
-    background: #ffd978;
-}
-
-QScrollBar::add-line,
-QScrollBar::sub-line {
-    background: none;
-    height: 0;
-}
-
-QWidget {
-    background: #ffffff;
-    font-family: &quot;Segoe UI&quot;, &quot;Arial&quot;;
-    font-size: 11pt;
-    color: #111111;
-}
-
-/* Optional: better default focus behavior */
-*:focus {
-    outline: none; /* Qt ignores CSS outline mostly, but keep clean */
-}
-
-/* =========================================================
-   COLORS (keep consistent)
-   =========================================================
-   Accent (orange): #c78a10
-   Accent dark:     #a66f08
-   Accent light:    #f3d08a
-   Border neutral:  #bdbdbd
-*/
- 
-/* =========================================================
-   GROUPBOX
-   ========================================================= */
-QGroupBox {
-    border: 2px solid #c78a10;
-    border-radius: 14px;
-    margin-top: 18px;              /* space for title */
-    padding: 16px 14px 12px 14px;  /* inside spacing */
-    background: transparent;
-}
-
-QGroupBox::title {
-    subcontrol-origin: margin;
-    subcontrol-position: top left;
-
-    left: 16px;
-    padding: 0 10px;
-
-    font-weight: 700;
-    font-size: 12pt;
-    color: #111111;
-
-    background: #ffffff; /* cuts border behind title */
-}
-
-/* =========================================================
-   LABELS
-   ========================================================= */
-QLabel {
-    font-weight: 700;
-    color: #111111;
-}
-
-/* =========================================================
-   LINE EDIT (text fields)
-   ========================================================= */
-QLineEdit {
-    background: #ffffff;
-    border: 2px solid #c78a10;
-    border-radius: 6px;
-    padding: 6px 10px;
-    selection-background-color: #c78a10;
-    selection-color: #ffffff;
-}
-
-QLineEdit:hover {
-    border-color: #a66f08;
-}
-
-QLineEdit:focus {
-    border-color: #a66f08;
-}
-
-QLineEdit:disabled {
-    background: #f4f4f4;
-    border-color: #d6b56f;
-    color: #888888;
-}
-
-/* =========================================================
-   COMBOBOX
-   ========================================================= */
-QComboBox {
-    background: #ffffff;
-    border: 2px solid #c78a10;
-    border-radius: 6px;
-    padding: 6px 34px 6px 10px;  /* right padding to avoid overlap with arrow */
-}
-
-QComboBox:hover {
-    border-color: #a66f08;
-}
-
-QComboBox:focus {
-    border-color: #a66f08;
-}
-
-QComboBox:disabled {
-    background: #f4f4f4;
-    border-color: #d6b56f;
-    color: #888888;
-}
-
-QComboBox::drop-down {
-    subcontrol-origin: padding;
-    subcontrol-position: top right;
-    width: 28px;
-
-    border-left: 2px solid #c78a10;
-    border-top-right-radius: 6px;
-    border-bottom-right-radius: 6px;
-    background: #ffffff;
-}
-
-QComboBox:hover::drop-down {
-    border-left-color: #a66f08;
-}
-
-/* Arrow: QSS cannot draw a real arrow without an image.
-   This is a simple “chevron” using borders via an indicator trick is not supported for QComboBox.
-   Best option: provide an SVG/PNG. Replace with your resource path.
-*/
-QComboBox::down-arrow {
-    image: url(:/icons/chevron-down.png); /* &lt;-- put your icon in Qt resources */
-    width: 12px;
-    height: 12px;
-}
-
-/* Dropdown list */
-QComboBox QAbstractItemView {
-    border: 2px solid #c78a10;
-    background: #ffffff;
-    selection-background-color: #f3d08a;
-    selection-color: #111111;
-    outline: none;
-}
-
-/* =========================================================
-   DATEEDIT / SPINBOX
-   ========================================================= */
-QDateEdit, QSpinBox, QDoubleSpinBox {
-    background: #ffffff;
-    border: 2px solid #c78a10;
-    border-radius: 6px;
-    padding: 6px 34px 6px 10px; /* space for buttons */
-}
-
-QDateEdit:hover, QSpinBox:hover, QDoubleSpinBox:hover {
-    border-color: #a66f08;
-}
-
-QDateEdit:focus, QSpinBox:focus, QDoubleSpinBox:focus {
-    border-color: #a66f08;
-}
-
-QDateEdit:disabled, QSpinBox:disabled, QDoubleSpinBox:disabled {
-    background: #f4f4f4;
-    border-color: #d6b56f;
-    color: #888888;
-}
-
-/* Buttons area */
-QDateEdit::up-button, QSpinBox::up-button, QDoubleSpinBox::up-button,
-QDateEdit::down-button, QSpinBox::down-button, QDoubleSpinBox::down-button {
-    subcontrol-origin: border;
-    width: 28px;
-    background: #ffffff;
-    border-left: 2px solid #c78a10;
-}
-
-QDateEdit::up-button, QSpinBox::up-button, QDoubleSpinBox::up-button {
-    subcontrol-position: top right;
-    border-top-right-radius: 6px;
-}
-
-QDateEdit::down-button, QSpinBox::down-button, QDoubleSpinBox::down-button {
-    subcontrol-position: bottom right;
-    border-bottom-right-radius: 6px;
-}
-
-QDateEdit:hover::up-button, QSpinBox:hover::up-button, QDoubleSpinBox:hover::up-button,
-QDateEdit:hover::down-button, QSpinBox:hover::down-button, QDoubleSpinBox:hover::down-button {
-    border-left-color: #a66f08;
-}
-
-QDateEdit::up-arrow, QSpinBox::up-arrow, QDoubleSpinBox::up-arrow {
-    image: url(:/icons/chevron-up.png);
-    width: 10px;
-    height: 10px;
-}
-
-QDateEdit::down-arrow, QSpinBox::down-arrow, QDoubleSpinBox::down-arrow {
-    image: url(:/icons/chevron-down.png);
-    width: 10px;
-    height: 10px;
-}
-
-/* =========================================================
-   PUSH BUTTON
-   ========================================================= */
-QPushButton {
-    background: #f5f5f5;
-    border: 1px solid #bdbdbd;
-    border-radius: 6px;
-    padding: 7px 16px;
-}
-
-QPushButton:hover {
-    background: #eeeeee;
-    border-color: #a9a9a9;
-}
-
-QPushButton:pressed {
-    background: #e4e4e4;
-}
-
-QPushButton:disabled {
-    background: #f2f2f2;
-    border-color: #d0d0d0;
-    color: #9a9a9a;
-}
-
-/* =========================================================
-   OPTIONAL: TOOLTIP (nice touch)
-  
-QToolTip {
-    background: #ffffff;
-    color: #111111;
-    border: 1px solid #c78a10;
-    padding: 6px 8px;
-    border-radius: 6px;
-}</string>
-      </property>
       <property name="title">
        <string>Liste des productions</string>
       </property>
@@ -1220,19 +909,6 @@ QToolTip {
         <string>PDF</string>
        </property>
       </widget>
-      <widget class="QPushButton" name="pushButton_6">
-       <property name="geometry">
-        <rect>
-         <x>418</x>
-         <y>90</y>
-         <width>124</width>
-         <height>38</height>
-        </rect>
-       </property>
-       <property name="text">
-        <string>Historique</string>
-       </property>
-      </widget>
       <widget class="QPushButton" name="rendement">
        <property name="geometry">
         <rect>
@@ -1245,23 +921,6 @@ QToolTip {
        <property name="toolTip">
         <string>Calcule : (quantité d'huile ÷ quantité d'olives) × 100 et remplit le champ Rendement (%)</string>
        </property>
-       <property name="styleSheet">
-        <string notr="true">QPushButton {
-    background-color: #c78a10;
-    color: #ffffff;
-    font-weight: 700;
-    font-size: 11pt;
-    border: none;
-    border-radius: 10px;
-    padding: 10px 14px;
-}
-QPushButton:hover {
-    background-color: #a66f08;
-}
-QPushButton:pressed {
-    background-color: #8a5a06;
-}</string>
-       </property>
        <property name="text">
         <string>Calculer rendement</string>
        </property>
@@ -1271,7 +930,7 @@ QPushButton:pressed {
         <rect>
          <x>200</x>
          <y>324</y>
-         <width>128</width>
+         <width>61</width>
          <height>44</height>
         </rect>
        </property>
@@ -1282,14 +941,27 @@ QPushButton:pressed {
       <widget class="QPushButton" name="graphique">
        <property name="geometry">
         <rect>
-         <x>340</x>
+         <x>280</x>
+         <y>320</y>
+         <width>161</width>
+         <height>44</height>
+        </rect>
+       </property>
+       <property name="text">
+        <string>Graphique</string>
+       </property>
+      </widget>
+      <widget class="QPushButton" name="btn_chatbot">
+       <property name="geometry">
+        <rect>
+         <x>480</x>
          <y>324</y>
          <width>128</width>
          <height>44</height>
         </rect>
        </property>
        <property name="text">
-        <string>Graphique</string>
+        <string>Chatbot IA</string>
        </property>
       </widget>
       <widget class="QTableWidget" name="tableWidget">
@@ -1366,7 +1038,7 @@ QPushButton:pressed {
         <rect>
          <x>462</x>
          <y>36</y>
-         <width>88</width>
+         <width>61</width>
          <height>40</height>
         </rect>
        </property>
@@ -1377,9 +1049,9 @@ QPushButton:pressed {
       <widget class="QPushButton" name="pushButton_effacer_filtre">
        <property name="geometry">
         <rect>
-         <x>554</x>
+         <x>531</x>
          <y>36</y>
-         <width>68</width>
+         <width>91</width>
          <height>40</height>
         </rect>
        </property>
@@ -1393,6 +1065,77 @@ QPushButton:pressed {
      </widget>
     </widget>
     <widget class="QWidget" name="page_2"/>
+    <widget class="QWidget" name="page_chatbot">
+     <widget class="QTextBrowser" name="chat_history">
+      <property name="geometry">
+       <rect>
+        <x>20</x>
+        <y>60</y>
+        <width>961</width>
+        <height>521</height>
+       </rect>
+      </property>
+     </widget>
+     <widget class="QLineEdit" name="chat_input">
+      <property name="geometry">
+       <rect>
+        <x>20</x>
+        <y>600</y>
+        <width>841</width>
+        <height>41</height>
+       </rect>
+      </property>
+      <property name="placeholderText">
+       <string>Ex : Quel est le rendement moyen de la presse P12 ce mois-ci ?</string>
+      </property>
+     </widget>
+     <widget class="QPushButton" name="btn_envoyer_chat">
+      <property name="geometry">
+       <rect>
+        <x>880</x>
+        <y>600</y>
+        <width>101</width>
+        <height>41</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string>Envoyer</string>
+      </property>
+     </widget>
+     <widget class="QPushButton" name="btn_retour_chat">
+      <property name="geometry">
+       <rect>
+        <x>20</x>
+        <y>10</y>
+        <width>131</width>
+        <height>41</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string>&lt; Retour aux prod.</string>
+      </property>
+     </widget>
+     <widget class="QLabel" name="label_100">
+      <property name="geometry">
+       <rect>
+        <x>400</x>
+        <y>15</y>
+        <width>251</width>
+        <height>31</height>
+       </rect>
+      </property>
+      <property name="font">
+       <font>
+        <family>Segoe UI</family>
+        <pointsize>11</pointsize>
+        <bold>true</bold>
+       </font>
+      </property>
+      <property name="text">
+       <string>Assistant Virtuel</string>
+      </property>
+     </widget>
+    </widget>
    </widget>
   </widget>
   <widget class="QMenuBar" name="menubar">
