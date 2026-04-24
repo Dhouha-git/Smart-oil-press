@@ -4,6 +4,12 @@
 #include <QMainWindow>
 #include <QDate>
 #include <QSqlQueryModel>
+#include <QNetworkAccessManager>
+#include <QNetworkReply>
+#include <QNetworkRequest>
+#include <QJsonDocument>
+#include <QJsonObject>
+#include <QJsonArray>
 
 QT_BEGIN_NAMESPACE
 namespace Ui {
@@ -55,6 +61,7 @@ private slots:
     void on_btn_modifier_clicked();
 
     void on_metier_clicked();
+    void on_VERIFIER_clicked();
 
     void on_analyse_clicked();
 
@@ -223,8 +230,14 @@ private slots:
 
     void on_btn_annuler_4_clicked();
 
+    void on_btn_retour_11_clicked();
+    void onAIReplyReceived(QNetworkReply *reply);
+
 private:
     Ui::MainWindow *ui;
+    QNetworkAccessManager *m_networkManager;
+
+    QString getDatabaseContext(); // Contexte BD pour l'assistant AI
 
 };
 #endif // MAINWINDOW_H

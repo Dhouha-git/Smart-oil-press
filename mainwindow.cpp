@@ -4,12 +4,22 @@
 #include <QSqlError>
 #include <QDebug>
 #include <QMessageBox>
+#include <QTextCursor>
+#include <QSslSocket>
 
 MainWindow::MainWindow(QWidget *parent)
     : QMainWindow(parent)
     , ui(new Ui::MainWindow)
+    , m_networkManager(new QNetworkAccessManager(this))
 {
     ui->setupUi(this);
+    
+    // Diagnostic SSL pour l'assistant AI
+    if (QSslSocket::supportsSsl()) {
+        qDebug() << "SSL Supporté: OUI (Version:" << QSslSocket::sslLibraryBuildVersionString() << ")";
+    } else {
+        qDebug() << "SSL Supporté: NON. L'assistant AI ne fonctionnera pas sans OpenSSL DLLs.";
+    }
     ui->stackedWidget->setCurrentWidget(ui->login);
 
     ui->TABLEAG->setModel(afficherAgriculteurs());
@@ -38,7 +48,6 @@ MainWindow::MainWindow(QWidget *parent)
         QPixmap(":/images/images/lg-removebg-preview.png"));
     ui->label_30->setPixmap(
         QPixmap(":/images/images/lg-removebg-preview.png"));
-
 
 
 
@@ -673,8 +682,7 @@ bool MainWindow::supprimerAgriculteur(int cin)
 QSqlQueryModel* MainWindow::afficherAgriculteurs()
 {
     QSqlQueryModel* model = new QSqlQueryModel();
-    model->setQuery("SELECT TO_CHAR(CIN,'99999999999'), NOM, PRENOM, TO_CHAR(TELEPHONE), EMAIL, REGION, TYPE_OLIVE, DATE_INSCRIPTION, VOLUME_LIVRAISON, DATE_LIVRAISON FROM AGRICULTEUR");
-    
+    model->setQuery("SELECT CIN, NOM, PRENOM, TELEPHONE, EMAIL, REGION, TYPE_OLIVE, DATE_INSCRIPTION, VOLUME_LIVRAISON, DATE_LIVRAISON FROM AGRICULTEUR");
     model->setHeaderData(0, Qt::Horizontal, QObject::tr("CIN"));
     model->setHeaderData(1, Qt::Horizontal, QObject::tr("Nom"));
     model->setHeaderData(2, Qt::Horizontal, QObject::tr("Prénom"));
@@ -717,7 +725,7 @@ QSqlQueryModel* MainWindow::rechercherAgriculteur(QString queryStr)
 QSqlQueryModel* MainWindow::trierAgriculteurs(QString critere)
 {
     QSqlQueryModel* model = new QSqlQueryModel();
-    model->setQuery("SELECT CIN, NOM, PRENOM, TELEPHONE, EMAIL, REGION, TYPE_OLIVE, DATE_INSCRIPTION, VOLUME_LIVRAISON, DATE_LIVRAISON FROM AGRICULTEUR ORDER BY " + critere);
+    model->setQuery("SELECT TO_CHAR(CIN), NOM, PRENOM, TO_CHAR(TELEPHONE), EMAIL, REGION, TYPE_OLIVE, DATE_INSCRIPTION, VOLUME_LIVRAISON, DATE_LIVRAISON FROM AGRICULTEUR ORDER BY " + critere);
     
     model->setHeaderData(0, Qt::Horizontal, QObject::tr("CIN"));
     model->setHeaderData(1, Qt::Horizontal, QObject::tr("Nom"));
@@ -959,21 +967,26 @@ void MainWindow::on_TABLEAG_doubleClicked(const QModelIndex &index)
 
 void MainWindow::on_metier_clicked()
 {
-    // Naviguer vers la page
+    // Naviguer vers la page (uniquement navigation maintenant)
     ui->stackedWidget->setCurrentWidget(ui->page_classement_agri);
+}
 
-    // Métier avancé: Trouver les agriculteurs avec des doublons (plusieurs livraisons)
+void MainWindow::on_VERIFIER_clicked()
+{
+    // Métier avancé: Rappel des dates de livraison les plus proches (dans les 2 jours)
+    // Se déclenche uniquement sur le bouton VERIFIER
     QSqlQuery query;
-    query.prepare("SELECT CIN, NOM, PRENOM, TELEPHONE, COUNT(*), SUM(VOLUME_LIVRAISON) "
+    // Sélectionne les livraisons entre aujourd'hui et aujourd'hui + 2 jours
+    query.prepare("SELECT CIN, NOM, PRENOM, TELEPHONE, REGION, DATE_LIVRAISON "
                   "FROM AGRICULTEUR "
-                  "GROUP BY CIN, NOM, PRENOM, TELEPHONE "
-                  "HAVING COUNT(*) > 1 "
-                  "ORDER BY COUNT(*) DESC, SUM(VOLUME_LIVRAISON) DESC");
+                  "WHERE DATE_LIVRAISON >= TRUNC(SYSDATE) "
+                  "AND DATE_LIVRAISON <= TRUNC(SYSDATE) + 2 "
+                  "ORDER BY DATE_LIVRAISON ASC");
 
     if (query.exec()) {
         ui->tableWidget_3->setRowCount(0); // clear existing rows
         ui->tableWidget_3->setColumnCount(6);
-        ui->tableWidget_3->setHorizontalHeaderLabels({"CIN", "Nom", "Prénom", "Téléphone", "Nb Livraisons", "Volume Total"});
+        ui->tableWidget_3->setHorizontalHeaderLabels({"CIN", "Nom", "Prénom", "Téléphone", "Région", "Date Livraison"});
 
         int row = 0;
         while (query.next()) {
@@ -984,17 +997,186 @@ void MainWindow::on_metier_clicked()
             ui->tableWidget_3->setItem(row, 3, new QTableWidgetItem(query.value(3).toString()));
             ui->tableWidget_3->setItem(row, 4, new QTableWidgetItem(query.value(4).toString()));
             
-            // Format volume nicely
-            QString volStr = QString::number(query.value(5).toDouble(), 'f', 2) + " L";
-            ui->tableWidget_3->setItem(row, 5, new QTableWidgetItem(volStr));
+            // Formatage de la date en chaîne lisible
+            QString dateStr = query.value(5).toDate().toString("dd/MM/yyyy");
+            ui->tableWidget_3->setItem(row, 5, new QTableWidgetItem(dateStr));
             
             row++;
         }
         
-        // Resize columns to fit contents
+        // Ajustement automatique des colonnes
         ui->tableWidget_3->resizeColumnsToContents();
+        
+        if (row == 0) {
+            QMessageBox::information(this, "Rappel Livraisons", "Aucune livraison prévue dans les 2 prochains jours.");
+        }
     } else {
-        qDebug() << "Erreur métier avancé :" << query.lastError().text();
+        qDebug() << "Erreur Rappel Livraisons :" << query.lastError().text();
     }
 }
 
+
+QString MainWindow::getDatabaseContext()
+{
+    QString context = "Tu es l'assistant spécialisé dans la gestion des AGRICULTEURS pour l'application Smart Oil Press.\n"
+                      "Ton rôle est d'aider l'utilisateur à analyser et gérer les données des agriculteurs, les récoltes d'olives et les volumes livrés.\n"
+                      "Tu dois répondre à TOUTES les questions en faisant le lien avec le domaine agricole et les données de la base.\n"
+                      "Si une question n'a aucun rapport avec l'agriculture ou les agriculteurs, essaie quand même de ramener le sujet vers la gestion de la presse à huile.\n\n"
+                      "Voici les données en temps réel de la base de données Oracle :\n\n";
+
+    // 1. Nombre total d'agriculteurs
+    QSqlQuery q1;
+    if (q1.exec("SELECT COUNT(*) FROM AGRICULTEUR") && q1.next())
+        context += QString("- Nombre total d'agriculteurs enregistrés : %1\n").arg(q1.value(0).toInt());
+
+    // 2. Volume total livré
+    QSqlQuery q2;
+    if (q2.exec("SELECT SUM(VOLUME_LIVRAISON) FROM AGRICULTEUR") && q2.next())
+        context += QString("- Volume total d'huile/olives livré : %1 L\n").arg(q2.value(0).toDouble(), 0, 'f', 2);
+
+    // 3. Répartition par région
+    QSqlQuery q3;
+    if (q3.exec("SELECT REGION, COUNT(*) FROM AGRICULTEUR GROUP BY REGION ORDER BY COUNT(*) DESC")) {
+        context += "- Statistiques par région :\n";
+        while (q3.next())
+            context += QString("    * %1 : %2 agriculteur(s)\n").arg(q3.value(0).toString()).arg(q3.value(1).toInt());
+    }
+
+    // 4. Répartition par type d'olive
+    QSqlQuery q4;
+    if (q4.exec("SELECT TYPE_OLIVE, COUNT(*) FROM AGRICULTEUR GROUP BY TYPE_OLIVE ORDER BY COUNT(*) DESC")) {
+        context += "- Analyse par variété d'olive :\n";
+        while (q4.next())
+            context += QString("    * %1 : %2 agriculteur(s)\n").arg(q4.value(0).toString()).arg(q4.value(1).toInt());
+    }
+
+    // 5. Top 3 par volume
+    QSqlQuery q5;
+    if (q5.exec("SELECT NOM, PRENOM, VOLUME_LIVRAISON FROM AGRICULTEUR ORDER BY VOLUME_LIVRAISON DESC FETCH FIRST 3 ROWS ONLY")) {
+        context += "- Nos producteurs les plus performants (Top 3) :\n";
+        int r = 1;
+        while (q5.next())
+            context += QString("    %1. %2 %3 - %4 L\n").arg(r++).arg(q5.value(0).toString()).arg(q5.value(1).toString()).arg(q5.value(2).toDouble(), 0, 'f', 2);
+    }
+
+    // 6. Livraisons imminentes (prochains 2 jours)
+    QSqlQuery q6;
+    if (q6.exec("SELECT COUNT(*) FROM AGRICULTEUR WHERE DATE_LIVRAISON >= TRUNC(SYSDATE) AND DATE_LIVRAISON <= TRUNC(SYSDATE) + 2") && q6.next()) {
+        context += QString("- Nombre de livraisons prévues dans les 2 prochains jours : %1\n").arg(q6.value(0).toInt());
+    }
+
+    context += "\nInstructions finales : Réponds de manière CLAIRE, CONCISE et COURTE (maximum 2-3 phrases). "
+               "Utilise uniquement les données fournies pour répondre. Sois l'expert métier de la Smart Oil Press.";
+    return context;
+}
+
+void MainWindow::on_btn_retour_11_clicked()
+{
+    QString userMessage = ui->lineEdit_recherche_agri_2->text().trimmed();
+    if (userMessage.isEmpty()) {
+        QMessageBox::warning(this, "Assistant AI", "Veuillez saisir un message.");
+        return;
+    }
+
+    // Afficher le message de l'utilisateur
+    ui->textEdit_2->append("<b style='color:#556B2F;'>Vous :</b> " + userMessage.toHtmlEscaped());
+    ui->lineEdit_recherche_agri_2->clear();
+    ui->btn_retour_11->setEnabled(false);
+    ui->textEdit_2->append("<i style='color:#999;'>Assistant en train de répondre...</i>");
+
+    // Récupérer le contexte de la base de données
+    QString dbContext = getDatabaseContext();
+    qDebug() << "AI Context generated:" << dbContext; // Debug pour voir si la DB renvoie des données
+
+    // Construire le message combiné (Contexte + Question)
+    // On met le contexte au début pour que l'IA "lise" les données avant la question
+    QString combinedMessage = QString("CONTEXTE ET DONNÉES DE LA BASE :\n%1\n\nQUESTION DE L'UTILISATEUR : %2")
+                                  .arg(dbContext)
+                                  .arg(userMessage);
+
+    QJsonObject userMessageObj;
+    userMessageObj["role"] = "user";
+    userMessageObj["content"] = combinedMessage;
+
+    QJsonArray messages;
+    messages.append(userMessageObj);
+
+    QJsonObject requestBody;
+    requestBody["model"] = "qwen/qwen-2.5-7b-instruct";
+    requestBody["messages"] = messages;
+
+    QJsonDocument doc(requestBody);
+    QByteArray jsonData = doc.toJson();
+
+    // Configurer la requête HTTP
+    QNetworkRequest request(QUrl("https://openrouter.ai/api/v1/chat/completions"));
+    request.setHeader(QNetworkRequest::ContentTypeHeader, "application/json");
+    request.setRawHeader("Authorization", "Bearer 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");
+    request.setRawHeader("HTTP-Referer", "https://smart-oil-press.app");
+    request.setRawHeader("X-Title", "Smart Oil Press");
+
+    QNetworkReply *reply = m_networkManager->post(request, jsonData);
+    connect(reply, &QNetworkReply::finished, this, [this, reply]() {
+        onAIReplyReceived(reply);
+    });
+}
+
+void MainWindow::onAIReplyReceived(QNetworkReply *reply)
+{
+    ui->btn_retour_11->setEnabled(true);
+
+    // Supprimer le message "en train de répondre..."
+    QTextCursor cursor = ui->textEdit_2->textCursor();
+    cursor.movePosition(QTextCursor::End);
+    cursor.select(QTextCursor::LineUnderCursor);
+    cursor.removeSelectedText();
+    cursor.deletePreviousChar(); // supprimer le \n
+
+    if (reply->error() != QNetworkReply::NoError) {
+        int statusCode = reply->attribute(QNetworkRequest::HttpStatusCodeAttribute).toInt();
+        qDebug() << "Erreur réseau AI :" << reply->errorString();
+        qDebug() << "Code HTTP :" << statusCode;
+        
+        QString errorMsg = reply->errorString();
+        if (errorMsg == "Connection closed") {
+            errorMsg += " (Vérifiez vos DLL OpenSSL : libssl-1_1-x64.dll et libcrypto-1_1-x64.dll)";
+        }
+        
+        ui->textEdit_2->append("<b style='color:red;'>Erreur :</b> " + errorMsg);
+        reply->deleteLater();
+        return;
+    }
+
+    QByteArray responseData = reply->readAll();
+    QJsonDocument jsonResponse = QJsonDocument::fromJson(responseData);
+
+    if (jsonResponse.isNull() || !jsonResponse.isObject()) {
+        ui->textEdit_2->append("<b style='color:red;'>Erreur :</b> Réponse invalide du serveur.");
+        reply->deleteLater();
+        return;
+    }
+
+    QJsonObject obj = jsonResponse.object();
+
+    // Vérifier s'il y a une erreur dans la réponse
+    if (obj.contains("error")) {
+        QString errMsg = obj["error"].toObject()["message"].toString();
+        ui->textEdit_2->append("<b style='color:red;'>Erreur AI :</b> " + errMsg);
+        reply->deleteLater();
+        return;
+    }
+
+    // Extraire la réponse
+    QJsonArray choices = obj["choices"].toArray();
+    if (choices.isEmpty()) {
+        ui->textEdit_2->append("<b style='color:red;'>Erreur :</b> Aucune réponse reçue.");
+        reply->deleteLater();
+        return;
+    }
+
+    QString aiResponse = choices[0].toObject()["message"].toObject()["content"].toString();
+    ui->textEdit_2->append("<b style='color:#D4AF37;'>Assistant :</b> " + aiResponse.toHtmlEscaped().replace("\n", "<br>"));
+    ui->textEdit_2->append(""); // ligne vide
+
+    reply->deleteLater();
+}

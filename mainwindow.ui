@@ -9464,12 +9464,57 @@ QPushButton:hover {
           </rect>
          </property>
         </widget>
+        <widget class="QLineEdit" name="lineEdit_recherche_agri_2">
+         <property name="geometry">
+          <rect>
+           <x>170</x>
+           <y>220</y>
+           <width>171</width>
+           <height>26</height>
+          </rect>
+         </property>
+        </widget>
+        <widget class="QPushButton" name="btn_retour_11">
+         <property name="geometry">
+          <rect>
+           <x>30</x>
+           <y>220</y>
+           <width>121</width>
+           <height>31</height>
+          </rect>
+         </property>
+         <property name="styleSheet">
+          <string notr="true">/* ====== PushButton ====== */
+QPushButton {
+    background-color: #556B2F;
+    color: white;
+    border-radius: 8px;
+    padding: 8px 20px;
+    font-weight: bold;
+}
+
+QPushButton:hover {
+    background-color: #6B8E23;
+}
+
+QPushButton:pressed {
+    background-color: #3E4E1F;
+}
+</string>
+         </property>
+         <property name="text">
+          <string>ENVOYER</string>
+         </property>
+         <property name="icon">
+          <iconset theme="QIcon::ThemeIcon::GoPrevious"/>
+         </property>
+        </widget>
        </widget>
        <widget class="QFrame" name="frame_23">
         <property name="geometry">
          <rect>
           <x>250</x>
-          <y>90</y>
+          <y>100</y>
           <width>491</width>
           <height>341</height>
          </rect>
@@ -9506,7 +9551,7 @@ QPushButton:hover {
           </rect>
          </property>
          <property name="text">
-          <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-size:14pt; font-weight:700;&quot;&gt;Classement des agriculteurs les plus actifs:&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+          <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-size:14pt; font-weight:700;&quot;&gt;RAPPEL DES DATES LIVRS PROCHES:&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
          </property>
         </widget>
         <widget class="QTableWidget" name="tableWidget_3">
@@ -9515,8 +9560,43 @@ QPushButton:hover {
            <x>20</x>
            <y>90</y>
            <width>451</width>
-           <height>221</height>
+           <height>161</height>
           </rect>
+         </property>
+        </widget>
+        <widget class="QPushButton" name="VERIFIER">
+         <property name="geometry">
+          <rect>
+           <x>180</x>
+           <y>260</y>
+           <width>121</width>
+           <height>41</height>
+          </rect>
+         </property>
+         <property name="styleSheet">
+          <string notr="true">/* ====== PushButton ====== */
+QPushButton {
+    background-color: #556B2F;
+    color: white;
+    border-radius: 8px;
+    padding: 8px 20px;
+    font-weight: bold;
+}
+
+QPushButton:hover {
+    background-color: #6B8E23;
+}
+
+QPushButton:pressed {
+    background-color: #3E4E1F;
+}
+</string>
+         </property>
+         <property name="text">
+          <string>VERIFIER</string>
+         </property>
+         <property name="icon">
+          <iconset theme="QIcon::ThemeIcon::GoPrevious"/>
          </property>
         </widget>
        </widget>
