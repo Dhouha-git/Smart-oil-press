@@ -4,6 +4,52 @@
 #include <QString>
 #include <QItemSelectionModel>
 #include <QDebug>
+
+#include <QDialog>
+#include <QVBoxLayout>
+#include <QHBoxLayout>
+#include <QLabel>
+#include <QLineEdit>
+#include <QPushButton>
+#include <QRandomGenerator>
+#include <QProcess>
+#include <QSqlQuery>
+
+#include <QFileDialog>
+#include <QFile>
+#include <QTextStream>
+#include <QMessageBox>
+#include <QAbstractItemModel>
+
+#include <QNetworkAccessManager>
+#include <QNetworkRequest>
+#include <QNetworkReply>
+#include <QJsonDocument>
+#include <QJsonObject>
+#include <QEventLoop>
+#include <QDialog>
+#include <QVBoxLayout>
+#include <QHBoxLayout>
+#include <QTextEdit>
+#include <QLineEdit>
+#include <QPushButton>
+#include <QLabel>
+#include <QScrollBar>
+#include <QStandardPaths>
+#include <QProcess>
+#include <QDir>
+#include <QInputDialog>
+#include <QPdfWriter>
+#include <QPainter>
+#include <QDesktopServices>
+#include <QtCharts/QChartView>
+#include <QtCharts/QLineSeries>
+#include <QtCharts/QSplineSeries>
+#include <QtCharts/QChart>
+#include <QtCharts/QValueAxis>
+#include <QtCharts/QDateTimeAxis>
+#include <QDate>
+#include <numeric>
 MainWindow::MainWindow(QWidget *parent)
     : QMainWindow(parent)
     , ui(new Ui::MainWindow)
@@ -12,6 +58,13 @@ MainWindow::MainWindow(QWidget *parent)
     ui->stackedWidget->setCurrentWidget(ui->login);
      refreshTable();
     refreshTableClient();
+     ui->recherche2->clear();
+     ui->particulier_6->setChecked(false);
+     ui->profisionnel_6->setChecked(false);
+     on_recherche2_2_clicked();
+     on_appliquer3_2_clicked();
+     ui->particulier_5->setChecked(false);
+     ui->profisionnel_4->setChecked(false);     // table "clients fidèles"
      refreshTableVente();
     refreshTableAgriculteur();
     ui->label_17->setPixmap(
@@ -38,8 +91,42 @@ MainWindow::MainWindow(QWidget *parent)
     ui->label_30->setPixmap(
         QPixmap(":/images/images/lg-removebg-preview.png"));
 
+    connect(ui->executer, &QPushButton::clicked,
+            this, &MainWindow::afficherCourbeDansTable2);
 
+    // ── Ventes : Recherche, Tri, Exports, Analyses ────────────────────────────
+    connect(ui->vente_rechercheClientBtn,  &QPushButton::clicked,
+            this, &MainWindow::on_vente_rechercheClientBtn_clicked);
+    connect(ui->vente_rechercheDateBtn,    &QPushButton::clicked,
+            this, &MainWindow::on_vente_rechercheDateBtn_clicked);
+    connect(ui->vente_triBox, QOverload<int>::of(&QComboBox::currentIndexChanged),
+            this, &MainWindow::on_vente_triBox_currentIndexChanged);
+    connect(ui->vente_exportCSVBtn,        &QPushButton::clicked,
+            this, &MainWindow::on_vente_exportCSVBtn_clicked);
+    connect(ui->vente_exportPDFBtn,        &QPushButton::clicked,
+            this, &MainWindow::on_vente_exportPDFBtn_clicked);
+    connect(ui->pushButton_12,             &QPushButton::clicked,
+            this, &MainWindow::on_listerVentes);
+    connect(ui->vente_analyserCABtn,       &QPushButton::clicked,
+            this, &MainWindow::on_vente_analyserCABtn_clicked);
+    connect(ui->vente_detecterAnomaliesBtn,&QPushButton::clicked,
+            this, &MainWindow::on_vente_detecterAnomaliesBtn_clicked);
+    connect(ui->vente_previsionBtn,        &QPushButton::clicked,
+            this, &MainWindow::on_vente_previsionBtn_clicked);
+    connect(ui->vente_graphiqueCABtn,      &QPushButton::clicked,
+            this, &MainWindow::on_vente_graphiqueCABtn_clicked);
 
+    // ── Arduino ──────────────────────────────────────────────────
+    m_arduino = new Arduino(this);
+
+    connect(m_arduino, &Arduino::carteDetectee,
+            this,      &MainWindow::onCarteDetectee);
+    connect(m_arduino, &Arduino::employeIdentifie,
+            this,      &MainWindow::onEmployeIdentifie);
+    connect(m_arduino, &Arduino::employeInconnu,
+            this,      &MainWindow::onEmployeInconnu);
+    connect(m_arduino, &Arduino::messageRecu,
+            this,      &MainWindow::onMessageArduino);
 
 }
 
@@ -369,8 +456,638 @@ void MainWindow::on_comboBox_tri_currentTextChanged(const QString &)
     updateRecherche();
 }
 
+void MainWindow::on_btn_pdf_employes_clicked()
+{
+    // 1. Choisir où sauvegarder
+    QString chemin = QFileDialog::getSaveFileName(
+        this,
+        "Exporter les employés en PDF",
+        QDir::homePath() + "/employes_" +
+            QDateTime::currentDateTime().toString("yyyyMMdd_HHmm") + ".pdf",
+        "PDF (*.pdf)"
+        );
+    if (chemin.isEmpty()) return;
 
+    // 2. Configurer le PDF
+    // ✅ CORRIGÉ : ScreenResolution au lieu de HighResolution
+    //    HighResolution = 1200 DPI → tout devient minuscule
+    //    ScreenResolution = 96 DPI  → tailles normales et lisibles
+    QPrinter printer(QPrinter::ScreenResolution);
+    printer.setOutputFormat(QPrinter::PdfFormat);
+    printer.setOutputFileName(chemin);
+    printer.setPageOrientation(QPageLayout::Landscape);
+    printer.setPageSize(QPageSize::A4);
+    printer.setPageMargins(QMarginsF(10, 10, 10, 10), QPageLayout::Millimeter);
 
+    QPainter painter;
+    if (!painter.begin(&printer)) {
+        QMessageBox::critical(this, "Erreur", "Impossible de créer le PDF !");
+        return;
+    }
+
+    // 3. Dimensions réelles de la page
+    QRect page = painter.viewport();
+    int W = page.width();
+    int H = page.height();
+
+    // ✅ Marges latérales fixes en pixels
+    int margeG = 20;
+    int margeD = 20;
+    int totalW = W - margeG - margeD;
+
+    // 4. Couleurs
+    QColor vertFonce(85, 107, 47);
+    QColor orCouleur(212, 175, 55);
+    QColor blanc(255, 255, 255);
+    QColor grisClair(240, 244, 235);
+    QColor texteSombre(40, 40, 40);
+    QColor bordureGrise(180, 180, 180);
+
+    // ══════════════════════════════════════════
+    // 5. EN-TÊTE
+    // ══════════════════════════════════════════
+    int hauteurHeader = 80;
+    painter.fillRect(0, 0, W, hauteurHeader, vertFonce);
+
+    // Titre
+    painter.setPen(blanc);
+    painter.setFont(QFont("Arial", 20, QFont::Bold));
+    painter.drawText(QRect(0, 8, W, 35), Qt::AlignCenter, "Smart Oil Press");
+
+    // Sous-titre
+    painter.setFont(QFont("Arial", 11));
+    painter.drawText(QRect(0, 40, W, 25), Qt::AlignCenter, "Liste des Employes");
+
+    // Date
+    painter.setFont(QFont("Arial", 8));
+    painter.drawText(QRect(margeG, 60, totalW, 18),
+                     Qt::AlignRight,
+                     "Genere le : " + QDateTime::currentDateTime().toString("dd/MM/yyyy a HH:mm"));
+
+    // Ligne dorée sous l'en-tête
+    painter.setPen(QPen(orCouleur, 3));
+    painter.drawLine(0, hauteurHeader, W, hauteurHeader);
+
+    int y = hauteurHeader + 10;
+
+    // ══════════════════════════════════════════
+    // 6. COLONNES
+    // ══════════════════════════════════════════
+    QStringList headers = {
+        "ID", "CIN", "Nom", "Prenom",
+        "Departement", "Poste", "Contrat",
+        "Salaire", "Primes", "Statut"
+    };
+
+    // ✅ Largeurs proportionnelles bien réparties
+    QList<double> ratios = { 0.05, 0.09, 0.10, 0.10, 0.13, 0.14, 0.09, 0.10, 0.09, 0.11 };
+    QList<int> colW;
+    for (double r : ratios)
+        colW << int(totalW * r);
+
+    // ✅ Hauteur de ligne généreuse
+    int rowH = 28;
+
+    // ══════════════════════════════════════════
+    // 7. FONCTION LAMBDA : dessiner en-tête tableau
+    // ══════════════════════════════════════════
+    auto dessinerEnteteTableau = [&]() {
+        painter.fillRect(margeG, y, totalW, rowH, vertFonce);
+        painter.setFont(QFont("Arial", 9, QFont::Bold));
+        int xCol = margeG;
+        for (int i = 0; i < headers.size(); i++) {
+            // Séparateur vertical blanc
+            if (i > 0) {
+                painter.setPen(QPen(QColor(255,255,255,80), 1));
+                painter.drawLine(xCol, y, xCol, y + rowH);
+            }
+            painter.setPen(blanc);
+            painter.drawText(
+                QRect(xCol + 4, y, colW[i] - 8, rowH),
+                Qt::AlignVCenter | Qt::AlignHCenter,
+                headers[i]);
+            xCol += colW[i];
+        }
+    };
+
+    dessinerEnteteTableau();
+    y += rowH;
+
+    // ══════════════════════════════════════════
+    // 8. DONNÉES DEPUIS LA BD
+    // ══════════════════════════════════════════
+    QSqlDatabase db = Connection::getInstance()->getDatabase();
+    QSqlQuery query(db);
+    query.exec(
+        "SELECT ID_EMP, CIN, NOM, PRENOM, DEPARTEMENT, "
+        "POSTE, TYPE_CONTRAT, SALAIRE, PRIMES, STATUT "
+        "FROM EMPLOYE ORDER BY ID_EMP"
+        );
+
+    int nbLigne = 0;
+    // ✅ Lignes par page calculées dynamiquement
+    int lignesParPage = (H - hauteurHeader - 10 - 40) / rowH - 1;
+
+    while (query.next()) {
+
+        // ── Nouvelle page si besoin ──────────────
+        if (nbLigne > 0 && nbLigne % lignesParPage == 0) {
+            printer.newPage();
+
+            // En-tête simplifié sur les pages suivantes
+            painter.fillRect(0, 0, W, 35, vertFonce);
+            painter.setPen(blanc);
+            painter.setFont(QFont("Arial", 11, QFont::Bold));
+            painter.drawText(QRect(0, 0, W, 35), Qt::AlignCenter, "Smart Oil Press — Liste des Employes (suite)");
+            painter.setPen(QPen(orCouleur, 2));
+            painter.drawLine(0, 35, W, 35);
+
+            y = 45;
+            dessinerEnteteTableau();
+            y += rowH;
+            painter.setFont(QFont("Arial", 8));
+        }
+
+        // ── Fond alterné ─────────────────────────
+        QColor bg = (nbLigne % 2 == 0) ? blanc : grisClair;
+        painter.fillRect(margeG, y, totalW, rowH, bg);
+
+        // ── Valeurs ──────────────────────────────
+        QString statut = query.value(9).toString();
+        QStringList vals;
+        vals << query.value(0).toString()
+             << query.value(1).toString()
+             << query.value(2).toString()
+             << query.value(3).toString()
+             << query.value(4).toString()
+             << query.value(5).toString()
+             << query.value(6).toString()
+             << QString::number(query.value(7).toDouble(), 'f', 0) + " DT"
+             << QString::number(query.value(8).toDouble(), 'f', 0) + " DT"
+             << statut;
+
+        int xCol = margeG;
+        for (int i = 0; i < vals.size(); i++) {
+
+            // Séparateur vertical
+            painter.setPen(QPen(bordureGrise, 1));
+            if (i > 0)
+                painter.drawLine(xCol, y, xCol, y + rowH);
+
+            // Couleur texte selon colonne
+            if (i == 9) {
+                // Statut coloré
+                QString s = statut.toLower();
+                QColor couleurStatut;
+                if      (s == "actif")        couleurStatut = QColor(34, 120, 34);
+                else if (s.contains("cong"))  couleurStatut = QColor(200, 100, 0);
+                else                          couleurStatut = QColor(200, 20, 20);
+                painter.setPen(couleurStatut);
+                painter.setFont(QFont("Arial", 8, QFont::Bold));
+            } else if (i == 0) {
+                // ID en gras
+                painter.setPen(vertFonce);
+                painter.setFont(QFont("Arial", 8, QFont::Bold));
+            } else {
+                painter.setPen(texteSombre);
+                painter.setFont(QFont("Arial", 8));
+            }
+
+            painter.drawText(
+                QRect(xCol + 4, y, colW[i] - 8, rowH),
+                Qt::AlignVCenter | Qt::AlignHCenter,
+                vals[i]);
+
+            xCol += colW[i];
+        }
+
+        // Ligne horizontale du bas de chaque ligne
+        painter.setPen(QPen(bordureGrise, 1));
+        painter.drawLine(margeG, y + rowH, margeG + totalW, y + rowH);
+
+        y += rowH;
+        nbLigne++;
+    }
+
+    // Bordure extérieure du tableau
+
+    painter.setPen(QPen(vertFonce, 2));
+    painter.drawRect(margeG, hauteurHeader + 10,
+                     totalW, y - hauteurHeader - 10);
+
+    // ══════════════════════════════════════════
+    // 9. PIED DE PAGE
+    // ══════════════════════════════════════════
+    painter.fillRect(0, H - 35, W, 35, grisClair);
+    painter.setPen(QPen(orCouleur, 2));
+    painter.drawLine(0, H - 35, W, H - 35);
+
+    painter.setPen(texteSombre);
+    painter.setFont(QFont("Arial", 8));
+    painter.drawText(
+        QRect(margeG, H - 30, totalW, 25),
+        Qt::AlignCenter,
+        QString("Smart Oil Press  |  Total : %1 employe(s)  |  "
+                + QDateTime::currentDateTime().toString("dd/MM/yyyy")).arg(nbLigne)
+        );
+
+    painter.end();
+
+    QMessageBox::information(
+        this, "Succes",
+        QString("PDF genere avec succes !\n%1 employe(s) exporte(s).\n\nFichier :\n%2")
+            .arg(nbLigne).arg(chemin));
+}
+
+void MainWindow::exporterTableViewExcel(QAbstractItemModel* model, const QString& titre)
+{
+    if (!model) {
+        QMessageBox::warning(this, "Export Excel", "Aucune donnée à exporter.");
+        return;
+    }
+
+    QString filePath = QFileDialog::getSaveFileName(
+        this,
+        "Exporter vers Excel",
+        QDir::homePath() + "/" + titre + ".xls",
+        "Fichier Excel (*.xls)"
+        );
+
+    if (filePath.isEmpty()) return;
+
+    // Génération du fichier XLSX via SpreadsheetML (XML)
+    // Structure minimale d'un .xlsx : c'est un ZIP contenant des XML
+    // On utilise QZipWriter si disponible, sinon on génère un CSV compatible Excel
+
+    // Option simple : générer un fichier CSV avec extension .csv
+    // (renommer en .xlsx pour compatibilité ou utiliser la méthode XML ci-dessous)
+
+    // ---- Méthode XML SpreadsheetML (s'ouvre directement dans Excel) ----
+    QFile file(filePath);
+    if (!file.open(QIODevice::WriteOnly | QIODevice::Text)) {
+        QMessageBox::critical(this, "Erreur", "Impossible de créer le fichier.");
+        return;
+    }
+
+    QTextStream out(&file);
+    out.setEncoding(QStringConverter::Utf8);
+
+    // En-tête XML Excel
+    out << "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n";
+    out << "<?mso-application progid=\"Excel.Sheet\"?>\n";
+    out << "<Workbook xmlns=\"urn:schemas-microsoft-com:office:spreadsheet\"\n";
+    out << " xmlns:ss=\"urn:schemas-microsoft-com:office:spreadsheet\">\n";
+    out << "<Worksheet ss:Name=\"" << titre << "\">\n";
+    out << "<Table>\n";
+
+    // Style en-tête (gras)
+    out << "<Row>\n";
+    for (int col = 0; col < model->columnCount(); ++col) {
+        QString header = model->headerData(col, Qt::Horizontal).toString()
+        .replace("&","&amp;").replace("<","&lt;").replace(">","&gt;");
+        out << "<Cell><Data ss:Type=\"String\"><b>" << header << "</b></Data></Cell>\n";
+    }
+    out << "</Row>\n";
+
+    // Données
+    for (int row = 0; row < model->rowCount(); ++row) {
+        out << "<Row>\n";
+        for (int col = 0; col < model->columnCount(); ++col) {
+            QString val = model->data(model->index(row, col)).toString()
+            .replace("&","&amp;").replace("<","&lt;").replace(">","&gt;");
+
+            // Détecter si c'est un nombre
+            bool isNum = false;
+            double num = val.toDouble(&isNum);
+
+            if (isNum && !val.isEmpty()) {
+                out << "<Cell><Data ss:Type=\"Number\">" << num << "</Data></Cell>\n";
+            } else {
+                out << "<Cell><Data ss:Type=\"String\">" << val << "</Data></Cell>\n";
+            }
+        }
+        out << "</Row>\n";
+    }
+
+    out << "</Table>\n</Worksheet>\n</Workbook>\n";
+    file.close();
+
+    QMessageBox::information(this, "Export réussi",
+                             "Fichier exporté avec succès :\n" + filePath);
+}
+void MainWindow::on_exporter_excel_employes_clicked()
+{
+    Employe e;
+    exporterTableViewExcel(e.afficher(), "Employes");
+}
+void MainWindow::envoyerEmail(QString dest, QString code)
+{
+    // ── Tes infos Gmail ───────────────────────────────────
+    const QString smtpHost = "smtp.gmail.com";
+    const int     smtpPort = 465;                        // SSL direct
+    const QString smtpUser = "farhatsaidisaidi@gmail.com";       // ← ton Gmail
+    const QString smtpPass = "pjyl ycfr sryt tzvx";      // ← App Password
+
+    // ── Corps du mail ─────────────────────────────────────
+    QString corps =
+        "Bonjour,\r\n\r\n"
+        "Vous avez demande une reinitialisation de mot de passe.\r\n\r\n"
+        "Votre code de reinitialisation est :\r\n\r\n"
+        "        " + code + "\r\n\r\n"
+                 "Ce code expire dans 10 minutes.\r\n\r\n"
+                  "Cordialement \r\n\r\n"
+                 "-- Smart Oil Press";
+
+    // ── Connexion SSL directe sur port 465 ────────────────
+    QSslSocket socket;
+    socket.setPeerVerifyMode(QSslSocket::VerifyNone); // pas de verif certificat
+    socket.connectToHostEncrypted(smtpHost, smtpPort);
+
+    if (!socket.waitForEncrypted(8000)) {
+        QMessageBox::critical(this, "Erreur connexion",
+                              "Impossible de se connecter au serveur Gmail.\n"
+                              "Vérifiez votre connexion internet.\n\n"
+                              "Détail : " + socket.errorString());
+        return;
+    }
+
+    // ── Helpers lire / écrire ─────────────────────────────
+    auto lire = [&]() -> QString {
+        socket.waitForReadyRead(5000);
+        QString rep = socket.readAll();
+        qDebug() << "<<" << rep.trimmed();
+        return rep;
+    };
+
+    auto envoyer = [&](QString cmd) {
+        qDebug() << ">>" << cmd;
+        socket.write((cmd + "\r\n").toUtf8());
+        socket.waitForBytesWritten(3000);
+    };
+
+    // ── Dialogue SMTP ─────────────────────────────────────
+    lire();                                    // 220 smtp.gmail.com
+
+    envoyer("EHLO localhost");
+    lire();                                    // 250 capabilities
+
+    envoyer("AUTH LOGIN");
+    lire();                                    // 334 username
+
+    envoyer(smtpUser.toUtf8().toBase64());
+    lire();                                    // 334 password
+
+    envoyer(smtpPass.toUtf8().toBase64());
+    QString authResp = lire();                 // 235 OK  ou  535 erreur
+
+    if (!authResp.contains("235")) {
+        QMessageBox::critical(this, "Erreur authentification",
+                              "Gmail a refusé la connexion.\n\n"
+                              "Vérifiez :\n"
+                              "1. L'adresse Gmail dans le code\n"
+                              "2. L'App Password (pas votre vrai mot de passe)\n"
+                              "   → myaccount.google.com/apppasswords\n\n"
+                              "Réponse Gmail : " + authResp.trimmed());
+        socket.disconnectFromHost();
+        return;
+    }
+
+    envoyer("MAIL FROM:<" + smtpUser + ">");
+    lire();                                    // 250 OK
+
+    envoyer("RCPT TO:<" + dest + ">");
+    QString rcptResp = lire();                 // 250 OK ou 550 erreur
+
+    if (!rcptResp.contains("250")) {
+        QMessageBox::critical(this, "Erreur destinataire",
+                              "Adresse email invalide ou refusée :\n" + dest +
+                                  "\n\nRéponse : " + rcptResp.trimmed());
+        socket.disconnectFromHost();
+        return;
+    }
+
+    envoyer("DATA");
+    lire();                                    // 354 Start input
+
+    // Message complet
+    QString message =
+        "From: Smart Oil Press <" + smtpUser + ">\r\n"
+                                               "To: " + dest + "\r\n"
+                 "Subject: Code de verification - Smart Oil Press\r\n"
+                 "Content-Type: text/plain; charset=UTF-8\r\n"
+                 "\r\n" +
+        corps + "\r\n.";
+
+    envoyer(message);
+    QString dataResp = lire();                // 250 OK
+
+    if (dataResp.contains("250")) {
+        qDebug() << "✅ Email envoyé à" << dest;
+    } else {
+        QMessageBox::warning(this, "Avertissement",
+                             "Problème lors de l'envoi.\n"
+                             "Réponse : " + dataResp.trimmed());
+    }
+
+    envoyer("QUIT");
+    socket.disconnectFromHost();
+}
+
+void MainWindow::on_btn_mdp_oublie_clicked()
+{
+    // ══════════════════════════════════════════
+    // DIALOG 1 — Email
+    // ══════════════════════════════════════════
+    QDialog dlgEmail(this);
+    dlgEmail.setWindowTitle("Mot de passe oublié");
+    dlgEmail.setFixedSize(400, 200);
+    dlgEmail.setStyleSheet(
+        "QDialog { background-color: #f5f5f0; }"
+        "QLabel  { color: #556B2F; font-weight: bold; font-size: 13px; }"
+        "QLineEdit { border: 2px solid #D4AF37; border-radius: 6px;"
+        "            padding: 8px; font-size: 13px; }"
+        "QPushButton { background-color: #556B2F; color: white;"
+        "              border-radius: 6px; padding: 8px 16px;"
+        "              font-size: 13px; font-weight: bold; }"
+        "QPushButton:hover { background-color: #6B8E23; }"
+        );
+
+    QVBoxLayout *layoutEmail = new QVBoxLayout(&dlgEmail);
+    QLabel      *lblEmail    = new QLabel("Entrez votre email :");
+    QLineEdit   *inputEmail  = new QLineEdit();
+    inputEmail->setPlaceholderText("exemple@gmail.com");
+
+    QHBoxLayout *btnsEmail   = new QHBoxLayout();
+    QPushButton *btnEnvoyer  = new QPushButton("Envoyer le code");
+    QPushButton *btnAnnuler1 = new QPushButton("Annuler");
+    btnAnnuler1->setStyleSheet(
+        "background-color: #aaa; color: white;"
+        "border-radius: 6px; padding: 8px 16px;");
+
+    btnsEmail->addWidget(btnEnvoyer);
+    btnsEmail->addWidget(btnAnnuler1);
+
+    layoutEmail->addWidget(lblEmail);
+    layoutEmail->addWidget(inputEmail);
+    layoutEmail->addLayout(btnsEmail);
+
+    connect(btnAnnuler1, &QPushButton::clicked,
+            &dlgEmail, &QDialog::reject);
+    connect(btnEnvoyer, &QPushButton::clicked, [&]() {
+        QString email = inputEmail->text().trimmed();
+        if (email.isEmpty()) {
+            QMessageBox::warning(&dlgEmail, "Erreur",
+                                 "Entrez votre email !"); return; }
+
+        QSqlQuery q;
+        q.prepare("SELECT ID_EMP FROM SMART.EMPLOYE "
+                  "WHERE TRIM(UPPER(EMAIL)) = TRIM(UPPER(:e))");
+        q.bindValue(":e", email);
+        q.exec();
+        if (!q.next()) {
+            QMessageBox::warning(&dlgEmail, "Erreur",
+                                 "Aucun compte avec cet email !"); return; }
+
+        dlgEmail.accept();
+    });
+
+    if (dlgEmail.exec() != QDialog::Accepted) return;
+    QString email = inputEmail->text().trimmed();
+
+    // Générer et envoyer le code
+    QString code = QString::number(
+        QRandomGenerator::global()->bounded(100000, 999999));
+    envoyerEmail(email, code);
+    QMessageBox::information(this, "Code envoyé",
+                             "Un code a été envoyé à :\n" + email);
+
+    // ══════════════════════════════════════════
+    // DIALOG 2 — Code
+    // ══════════════════════════════════════════
+    QDialog dlgCode(this);
+    dlgCode.setWindowTitle("Vérification du code");
+    dlgCode.setFixedSize(400, 200);
+    dlgCode.setStyleSheet(
+        "QDialog { background-color: #f5f5f0; }"
+        "QLabel  { color: #556B2F; font-weight: bold; font-size: 13px; }"
+        "QLineEdit { border: 2px solid #D4AF37; border-radius: 6px;"
+        "            padding: 8px; font-size: 13px; }"
+        "QPushButton { background-color: #556B2F; color: white;"
+        "              border-radius: 6px; padding: 8px 16px;"
+        "              font-size: 13px; font-weight: bold; }"
+        "QPushButton:hover { background-color: #6B8E23; }"
+        );
+
+    QVBoxLayout *layoutCode = new QVBoxLayout(&dlgCode);
+    QLabel      *lblCode    = new QLabel("Entrez le code reçu par email :");
+    QLineEdit   *inputCode  = new QLineEdit();
+    inputCode->setPlaceholderText("Code à 6 chiffres");
+    inputCode->setMaxLength(6);
+
+    QHBoxLayout *btnsCode   = new QHBoxLayout();
+    QPushButton *btnVerif   = new QPushButton("Vérifier");
+    QPushButton *btnAnnuler2 = new QPushButton("Annuler");
+    btnAnnuler2->setStyleSheet(
+        "background-color: #aaa; color: white;"
+        "border-radius: 6px; padding: 8px 16px;");
+
+    btnsCode->addWidget(btnVerif);
+    btnsCode->addWidget(btnAnnuler2);
+
+    layoutCode->addWidget(lblCode);
+    layoutCode->addWidget(inputCode);
+    layoutCode->addLayout(btnsCode);
+
+    connect(btnAnnuler2, &QPushButton::clicked,
+            &dlgCode, &QDialog::reject);
+    connect(btnVerif, &QPushButton::clicked, [&]() {
+        if (inputCode->text().trimmed() != code) {
+            QMessageBox::warning(&dlgCode, "Erreur",
+                                 "Code incorrect !"); return; }
+        dlgCode.accept();
+    });
+
+    if (dlgCode.exec() != QDialog::Accepted) return;
+    QMessageBox::information(this, "Succès", "Code correct !");
+
+    // ══════════════════════════════════════════
+    // DIALOG 3 — Nouveau mot de passe
+    // ══════════════════════════════════════════
+    QDialog dlgMdp(this);
+    dlgMdp.setWindowTitle("Nouveau mot de passe");
+    dlgMdp.setFixedSize(400, 230);
+    dlgMdp.setStyleSheet(
+        "QDialog { background-color: #f5f5f0; }"
+        "QLabel  { color: #556B2F; font-weight: bold; font-size: 13px; }"
+        "QLineEdit { border: 2px solid #D4AF37; border-radius: 6px;"
+        "            padding: 8px; font-size: 13px; }"
+        "QPushButton { background-color: #556B2F; color: white;"
+        "              border-radius: 6px; padding: 8px 16px;"
+        "              font-size: 13px; font-weight: bold; }"
+        "QPushButton:hover { background-color: #6B8E23; }"
+        );
+
+    QVBoxLayout *layoutMdp  = new QVBoxLayout(&dlgMdp);
+    QLabel      *lblNouv    = new QLabel("Nouveau mot de passe :");
+    QLineEdit   *inputNouv  = new QLineEdit();
+    inputNouv->setEchoMode(QLineEdit::Password);
+    inputNouv->setPlaceholderText("Minimum 6 caractères");
+
+    QLabel      *lblConf    = new QLabel("Confirmer mot de passe :");
+    QLineEdit   *inputConf  = new QLineEdit();
+    inputConf->setEchoMode(QLineEdit::Password);
+    inputConf->setPlaceholderText("Répétez le mot de passe");
+
+    QHBoxLayout *btnsMdp    = new QHBoxLayout();
+    QPushButton *btnChanger = new QPushButton("Changer");
+    QPushButton *btnAnnuler3 = new QPushButton("Annuler");
+    btnAnnuler3->setStyleSheet(
+        "background-color: #aaa; color: white;"
+        "border-radius: 6px; padding: 8px 16px;");
+
+    btnsMdp->addWidget(btnChanger);
+    btnsMdp->addWidget(btnAnnuler3);
+
+    layoutMdp->addWidget(lblNouv);
+    layoutMdp->addWidget(inputNouv);
+    layoutMdp->addWidget(lblConf);
+    layoutMdp->addWidget(inputConf);
+    layoutMdp->addLayout(btnsMdp);
+
+    connect(btnAnnuler3, &QPushButton::clicked,
+            &dlgMdp, &QDialog::reject);
+    connect(btnChanger, &QPushButton::clicked, [&]() {
+        QString nouv = inputNouv->text();
+        QString conf = inputConf->text();
+        if (nouv.length() < 6) {
+            QMessageBox::warning(&dlgMdp, "Erreur",
+                                 "Minimum 6 caractères !"); return; }
+        if (nouv != conf) {
+            QMessageBox::warning(&dlgMdp, "Erreur",
+                                 "Les mots de passe ne correspondent pas !"); return; }
+        dlgMdp.accept();
+    });
+
+    if (dlgMdp.exec() != QDialog::Accepted) return;
+
+    // Mettre à jour dans BD
+    QSqlQuery query;
+    query.prepare(
+        "UPDATE SMART.EMPLOYE SET MOT_DE_PASSE = :mdp "
+        "WHERE TRIM(UPPER(EMAIL)) = TRIM(UPPER(:email))"
+        );
+    query.bindValue(":mdp",   inputNouv->text());
+    query.bindValue(":email", email);
+
+    if (query.exec()) {
+        QMessageBox::information(this, "Succès",
+                                 "Mot de passe changé avec succès !\n"
+                                 "Connectez-vous avec le nouveau mot de passe.");
+    } else {
+        QMessageBox::critical(this, "Erreur",
+                              "Erreur : " + query.lastError().text());
+    }
+}
 void MainWindow::on_pushButton_10_clicked()
 {
     // ✅ Plus besoin de lire id_vente
@@ -397,9 +1114,370 @@ void MainWindow::on_pushButton_10_clicked()
     }
 }
 
+QString MainWindow::interrogerOllama(const QString &prompt)
+{
+    // ✅ Construire l'historique complet
+    QString conversationComplete = "";
+    for (auto &msg : historiqueChat) {
+        if (msg.first == "user")
+            conversationComplete += "Utilisateur: " + msg.second + "\n";
+        else
+            conversationComplete += "Assistant: " + msg.second + "\n";
+    }
+    conversationComplete += "Utilisateur: " + prompt + "\n";
+
+    QNetworkAccessManager manager;
+    QNetworkRequest request(QUrl("http://localhost:11434/api/generate"));
+    request.setHeader(QNetworkRequest::ContentTypeHeader, "application/json");
+
+    QJsonObject body;
+    body["model"]  = "llama3.2";
+    body["prompt"] = conversationComplete;
+    body["stream"] = false;
+    body["system"] = "Tu es un assistant RH pour une huilerie tunisienne "
+                     "appelee Smart Oil Press. Reponds uniquement en francais. "
+                     "Sois precis et professionnel. Souviens-toi de tout ce "
+                     "qui a ete dit dans cette conversation.";
+
+    QNetworkReply *reply = manager.post(
+        request, QJsonDocument(body).toJson());
+
+    QEventLoop loop;
+    QObject::connect(reply, &QNetworkReply::finished,
+                     &loop, &QEventLoop::quit);
+    loop.exec();
+
+    if (reply->error() != QNetworkReply::NoError) {
+        reply->deleteLater();
+        return "Erreur : Ollama ne repond pas.";
+    }
+
+    QJsonObject response = QJsonDocument::fromJson(
+                               reply->readAll()).object();
+    reply->deleteLater();
+
+    QString reponse = response["response"].toString().trimmed();
+
+    // ✅ Sauvegarder dans l'historique
+    historiqueChat.append({"user",      prompt});
+    historiqueChat.append({"assistant", reponse});
+
+    return reponse;
+}
+
+// ══════════════════════════════════════════
+// Récupérer infos employé depuis BD
+// ══════════════════════════════════════════
+QString MainWindow::getInfosEmploye(const QString &question)
+{
+    // Chercher un nom dans la question
+    QSqlQuery query;
+    query.exec(
+        "SELECT ID_EMP, CIN, NOM, PRENOM, DEPARTEMENT, POSTE, "
+        "TYPE_CONTRAT, SALAIRE, PRIMES, STATUT, "
+        "HEURE_ENTREE, HEURE_SORTIE "
+        "FROM SMART.EMPLOYE"
+        );
+
+    QString employes = "";
+    while (query.next()) {
+        QString nom    = query.value(2).toString();
+        QString prenom = query.value(3).toString();
+
+        // Vérifier si le nom/prénom est mentionné dans la question
+        if (question.contains(nom, Qt::CaseInsensitive) ||
+            question.contains(prenom, Qt::CaseInsensitive)) {
+
+            // Calculer heures travaillées
+            QString heureEntree = query.value(10).toString();
+            QString heureSortie = query.value(11).toString();
+            QString heuresTravaillees = "Non disponible";
+
+            if (!heureEntree.isEmpty() && !heureSortie.isEmpty()) {
+                QTime entree = QTime::fromString(heureEntree, "HH:mm");
+                QTime sortie = QTime::fromString(heureSortie, "HH:mm");
+                int minutes  = entree.secsTo(sortie) / 60;
+                int heures   = minutes / 60;
+                int mins     = minutes % 60;
+                heuresTravaillees = QString("%1h%2").arg(heures).arg(mins);
+            }
+
+            employes += QString(
+                            "Employe trouve :\n"
+                            "- ID         : %1\n"
+                            "- CIN        : %2\n"
+                            "- Nom        : %3\n"
+                            "- Prenom     : %4\n"
+                            "- Departement: %5\n"
+                            "- Poste      : %6\n"
+                            "- Contrat    : %7\n"
+                            "- Salaire    : %8 DT\n"
+                            "- Primes     : %9 DT\n"
+                            "- Statut     : %10\n"
+                            "- Heure entree: %11\n"
+                            "- Heure sortie: %12\n"
+                            "- Heures travaillees: %13\n"
+                            )
+                            .arg(query.value(0).toString())
+                            .arg(query.value(1).toString())
+                            .arg(nom)
+                            .arg(prenom)
+                            .arg(query.value(4).toString())
+                            .arg(query.value(5).toString())
+                            .arg(query.value(6).toString())
+                            .arg(query.value(7).toString())
+                            .arg(query.value(8).toString())
+                            .arg(query.value(9).toString())
+                            .arg(heureEntree.isEmpty() ? "Non renseignee" : heureEntree)
+                            .arg(heureSortie.isEmpty() ? "Non renseignee" : heureSortie)
+                            .arg(heuresTravaillees);
+        }
+    }
+
+    if (employes.isEmpty())
+        employes = "Aucun employe trouve avec ce nom dans la base de donnees.";
+
+    return employes;
+}
+
+// ══════════════════════════════════════════
+// Bouton Chatbot → Popup
+// ══════════════════════════════════════════
+void MainWindow::on_btn_chatbot_clicked()
+{
+    // ── Créer le Dialog ──────────────────────
+    QDialog *dlg = new QDialog(this);
+    dlg->setWindowTitle("Chatbot - Gestion Employes");
+    dlg->setFixedSize(600, 500);
+    dlg->setStyleSheet(
+        "QDialog    { background-color: #f5f5f0; }"
+        "QTextEdit  { background-color: white; border: 2px solid #D4AF37;"
+        "             border-radius: 8px; padding: 8px; font-size: 13px; }"
+        "QLineEdit  { border: 2px solid #D4AF37; border-radius: 8px;"
+        "             padding: 8px; font-size: 13px; }"
+        "QPushButton { background-color: #556B2F; color: white;"
+        "              border-radius: 8px; padding: 8px 16px;"
+        "              font-size: 13px; font-weight: bold; }"
+        "QPushButton:hover { background-color: #6B8E23; }"
+        "QLabel { color: #556B2F; font-weight: bold; font-size: 14px; }"
+        );
+
+    // ── Layout principal ─────────────────────
+    QVBoxLayout *mainLayout = new QVBoxLayout(dlg);
+
+    // Titre
+    QLabel *lblTitre = new QLabel("Assistant Employes - Smart Oil Press");
+    lblTitre->setAlignment(Qt::AlignCenter);
+    lblTitre->setStyleSheet(
+        "font-size: 15px; font-weight: bold; color: #556B2F;"
+        "padding: 8px; background-color: #e8f0d8; border-radius: 6px;");
+
+    // Zone de conversation
+    QTextEdit *chatArea = new QTextEdit();
+    chatArea->setReadOnly(true);
+    chatArea->setMinimumHeight(320);
+    chatArea->append(
+        "<b style='color:#556B2F;'>Assistant :</b> "
+        "Bonjour ! Je suis votre assistant pour la gestion des employes. "
+        "Posez-moi une question sur un employe, par exemple :<br>"
+        "- <i>Quelles sont les infos de Mohamed ?</i><br>"
+        "- <i>Combien d'heures a travaille Ali ?</i><br>"
+        "- <i>Quelle prime suggeres-tu pour Sara ?</i>"
+        );
+
+    // Zone de saisie
+    QHBoxLayout *inputLayout = new QHBoxLayout();
+    QLineEdit   *inputMsg    = new QLineEdit();
+    inputMsg->setPlaceholderText("Posez votre question ici...");
+    QPushButton *btnEnvoyer  = new QPushButton("Envoyer");
+    QPushButton *btnFermer   = new QPushButton("Fermer");
+    btnFermer->setStyleSheet(
+        "background-color: #888; color: white; border-radius: 8px;"
+        "padding: 8px 16px; font-size: 13px;");
+
+    inputLayout->addWidget(inputMsg);
+    inputLayout->addWidget(btnEnvoyer);
+
+    mainLayout->addWidget(lblTitre);
+    mainLayout->addWidget(chatArea);
+    mainLayout->addLayout(inputLayout);
+    mainLayout->addWidget(btnFermer);
+
+    // ── Fermer ───────────────────────────────
+    connect(btnFermer, &QPushButton::clicked, dlg, &QDialog::close);
+
+    // ── Envoyer message ──────────────────────
+    auto envoyerMessage = [&]() {
+        QString question = inputMsg->text().trimmed();
+        if (question.isEmpty()) return;
+
+        // Afficher la question
+        chatArea->append(
+            "<br><b style='color:#1565C0;'>Vous :</b> " + question);
+        chatArea->append(
+            "<b style='color:#556B2F;'>Assistant :</b> "
+            "<i>Recherche en cours...</i>");
+        inputMsg->clear();
+        QApplication::processEvents();
+
+        // Récupérer infos depuis BD
+        QString infosEmploye = getInfosEmploye(question);
+
+        // Construire le prompt pour Ollama
+        QString prompt = QString(
+                             "Tu es un assistant RH pour une huilerie tunisienne appelee Smart Oil Press. "
+                             "Reponds uniquement en francais. Sois precis et professionnel.\n\n"
+                             "Voici les informations de la base de donnees :\n%1\n\n"
+                             "Question : %2\n\n"
+                             "Si la question concerne les primes, analyse le salaire et les heures "
+                             "travaillees et fais une recommandation precise avec un montant en DT. "
+                             "Si la question concerne les heures, calcule et explique."
+                             ).arg(infosEmploye).arg(question);
+
+        // Interroger Ollama
+        QString reponse = interrogerOllama(prompt);
+
+        // Supprimer le "Recherche en cours..."
+        QTextCursor cursor = chatArea->textCursor();
+        cursor.movePosition(QTextCursor::End);
+        cursor.select(QTextCursor::BlockUnderCursor);
+        cursor.removeSelectedText();
+        cursor.deletePreviousChar();
+
+        // Afficher la réponse
+        chatArea->append(
+            "<b style='color:#556B2F;'>Assistant :</b> " + reponse + "<br>");
+
+        // Scroll vers le bas
+        chatArea->verticalScrollBar()->setValue(
+            chatArea->verticalScrollBar()->maximum());
+    };
+
+    // Envoyer avec bouton ou touche Entrée
+    connect(btnEnvoyer, &QPushButton::clicked, envoyerMessage);
+    connect(inputMsg,   &QLineEdit::returnPressed, envoyerMessage);
+
+    dlg->exec();
+
+    QPushButton *btnNouveau = new QPushButton("Nouvelle conversation");
+    btnNouveau->setStyleSheet(
+        "background-color: #D4AF37; color: white; border-radius: 8px;"
+        "padding: 8px 16px; font-size: 13px;");
+
+    // Ajouter dans le layout
+    mainLayout->addWidget(btnNouveau);
+
+    // Effacer l'historique et le chat
+    connect(btnNouveau, &QPushButton::clicked, [&]() {
+        historiqueChat.clear();
+        chatArea->clear();
+        chatArea->append(
+            "<b style='color:#556B2F;'>Assistant :</b> "
+            "Nouvelle conversation demarree ! Comment puis-je vous aider ?");
+    });
+}
+
+void MainWindow::on_btn_face_login_clicked()
+{
+    QString cin = ui->lineEdit->text().trimmed();
+
+    if (cin.isEmpty()) {
+        QMessageBox::warning(this, "Erreur", "Saisissez votre CIN d'abord !");
+        return;
+    }
+
+    // Chercher photo dans BD
+    QSqlQuery query;
+    query.prepare("SELECT PHOTO_PATH, NOM, PRENOM FROM EMPLOYE WHERE CIN = :cin");
+    query.bindValue(":cin", cin.toInt());
+
+    if (!query.exec() || !query.next()) {
+        QMessageBox::warning(this, "Erreur", "CIN introuvable !");
+        return;
+    }
+
+    QString photoPath = query.value(0).toString();
+    QString nom       = query.value(1).toString();
+    QString prenom    = query.value(2).toString();
+
+    if (photoPath.isEmpty()) {
+        QMessageBox::warning(this, "Erreur", "Aucune photo pour cet employé !");
+        return;
+    }
+
+    QMessageBox::information(this, "Face ID", "📷 Regardez la webcam...");
+
+    // Lancer script Python
+    QString scriptPath = "C:/Users/user/OneDrive - ESPRIT/Documents/Integration_PROJET/face_login.py";
+    QProcess *process = new QProcess(this);
+    process->start("py", QStringList() << "-3.11" << scriptPath << photoPath);
+
+    connect(process, &QProcess::finished, this,
+            [=](int, QProcess::ExitStatus) {
+                QString result = process->readAllStandardOutput().trimmed();
+                process->deleteLater();
+
+                // Garder seulement la dernière ligne (ignorer warnings)
+                QStringList lines = result.split("\n");
+                QString lastLine = lines.last().trimmed();
+
+                if (lastLine == "OK") {
+                    QMessageBox::information(this, "Accès autorisé",
+                                             "Bonjour " + prenom + " " + nom + " ! 👋");
+                    ui->stackedWidget->setCurrentWidget(ui->dashboard);
+                } else if (lastLine == "NO_FILE") {
+                    QMessageBox::critical(this, "Erreur", "Photo introuvable !");
+                } else if (lastLine == "NO_CAM") {
+                    QMessageBox::critical(this, "Erreur", "Webcam non disponible !");
+                } else if (lastLine == "NO_FACE") {
+                    QMessageBox::warning(this, "Échec", "Aucun visage détecté !");
+                } else {
+                    QMessageBox::warning(this, "Accès refusé", "Visage non reconnu ❌");
+                }
+            });
+}
+void MainWindow::on_btn_prendre_photo_clicked()
+{
+    QString cin = ui->lineEdit_cin_4->text().trimmed();
+    if (cin.isEmpty()) {
+        QMessageBox::warning(this, "Erreur", "Saisissez le CIN d'abord !");
+        return;
+    }
+
+    QString dossier   = QCoreApplication::applicationDirPath() + "/photos/";
+    QString photoPath = dossier + cin + ".jpg";
+
+    // Créer dossier si inexistant
+    QDir().mkpath(dossier);
+
+    // Capturer via Python
+    QString script = QString(
+                         "import cv2\n"
+                         "cap = cv2.VideoCapture(0)\n"
+                         "ret, frame = cap.read()\n"
+                         "cap.release()\n"
+                         "cv2.imwrite(r'%1', frame)\n"
+                         "print('OK')\n"
+                         ).arg(photoPath);
+
+    QProcess *p = new QProcess(this);
+    p->start("py", QStringList() << "-3.11" << "-c" << script);
+    p->waitForFinished(5000);
+
+    // Sauvegarder chemin en BD
+    QSqlQuery q;
+    q.prepare("UPDATE EMPLOYE SET PHOTO_PATH = :path WHERE CIN = :cin");
+    q.bindValue(":path", photoPath);
+    q.bindValue(":cin", cin.toInt());
+    q.exec();
+
+    QMessageBox::information(this, "Photo", "✅ Photo enregistrée !");
+    p->deleteLater();
+}
 void MainWindow::on_btn_login_3_clicked()
 {
-    ui->stackedWidget->setCurrentWidget(ui->dashboard);
+
+
 }
 
 
@@ -452,6 +1530,79 @@ void MainWindow::on_chatbot_clicked()
 
 void MainWindow::on_pdf_clicked()
 {
+    QString nom = ui->recherche1_2->text().trimmed();
+
+    QString fileName = QFileDialog::getSaveFileName(
+        this,
+        "Enregistrer PDF",
+        QStandardPaths::writableLocation(QStandardPaths::DownloadLocation) + "/client.pdf",
+        "PDF (*.pdf)"
+        );
+
+    if (fileName.isEmpty())
+        return;
+
+    QSqlDatabase db = QSqlDatabase::database();
+    if (!db.isOpen()) {
+        QMessageBox::critical(this, "Erreur", "Base de données non ouverte");
+        return;
+    }
+
+    QPrinter printer(QPrinter::HighResolution);
+    printer.setOutputFormat(QPrinter::PdfFormat);
+    printer.setOutputFileName(fileName);
+
+    QPainter painter(&printer);
+
+    int y = 100;
+
+    painter.setFont(QFont("Arial", 14, QFont::Bold));
+    painter.drawText(200, y, "Liste Client");
+    y += 100;
+
+    QSqlQuery query;
+
+    // ✔️ requête sécurisée
+    if (!query.prepare("SELECT nom, prenom, total_achat, points_fidelite "
+                       "FROM CLIENT WHERE nom LIKE :nom")) {
+        QMessageBox::critical(this, "Erreur", "Erreur préparation requête");
+        return;
+    }
+
+    query.bindValue(":nom", "%" + nom + "%");
+
+    if (!query.exec()) {
+        QMessageBox::critical(this, "Erreur SQL", query.lastError().text());
+        return;
+    }
+
+    painter.setFont(QFont("Arial", 10));
+
+    bool found = false;
+
+    while (query.next()) {
+        found = true;
+
+        painter.drawText(100, y, "Nom: " + query.value(0).toString());
+        y += 50;
+
+        painter.drawText(100, y, "Prénom: " + query.value(1).toString());
+        y += 50;
+
+        painter.drawText(100, y, "Total Achat: " + query.value(2).toString());
+        y += 50;
+
+        painter.drawText(100, y, "Points: " + query.value(3).toString());
+        y += 100;
+    }
+
+    if (!found) {
+        painter.drawText(100, y, "Aucun client trouvé");
+    }
+
+    painter.end();
+
+    QMessageBox::information(this, "Succès", "PDF généré !");
 
 }
 
@@ -869,11 +2020,55 @@ void MainWindow::on_btn_ventes_12_clicked()
     ui->stackedWidget->setCurrentWidget(ui->page_ventes);
 }
 
-
 void MainWindow::on_connecter_clicked()
 {
-    ui->stackedWidget->setCurrentWidget(ui->dashboard);
+    QString cin = ui->lineEdit->text().trimmed();
+    QString mdp = ui->lineEdit_5->text().trimmed();
+
+    if (cin.isEmpty() || mdp.isEmpty()) {
+        QMessageBox::warning(this, "Erreur",
+                             "Remplissez tous les champs !");
+        return;
+    }
+
+    QSqlQuery query;
+    query.prepare(
+        "SELECT ID_EMP FROM SMART.EMPLOYE "
+        "WHERE TRIM(CIN) = :cin AND TRIM(MOT_DE_PASSE) = :mdp"
+        );
+    query.bindValue(":cin", cin);
+    query.bindValue(":mdp", mdp);
+
+    if (!query.exec()) {
+        qDebug() << "ERREUR SQL :" << query.lastError().text();
+        QMessageBox::critical(this, "Erreur SQL", query.lastError().text());
+        return;
+    }
+
+    if (query.next()) {
+        // ✅ Connexion réussie
+        ui->stackedWidget->setCurrentWidget(ui->dashboard);
+    } else {
+        // Debug : afficher ce qui est en BD pour ce CIN
+        QSqlQuery dbg;
+        dbg.prepare("SELECT CIN, MOT_DE_PASSE FROM SMART.EMPLOYE WHERE TRIM(CIN) = :cin");
+        dbg.bindValue(":cin", cin);
+        dbg.exec();
+        if (dbg.next()) {
+            qDebug() << "CIN en BD     :" << dbg.value(0).toString();
+            qDebug() << "MDP en BD     :" << dbg.value(1).toString();
+            qDebug() << "MDP saisi     :" << mdp;
+            qDebug() << "Correspondance:" << (dbg.value(1).toString().trimmed() == mdp);
+        } else {
+            qDebug() << "CIN introuvable en BD :" << cin;
+        }
+
+        QMessageBox::warning(this, "Erreur",
+                             "CIN ou mot de passe incorrect !");
+    }
 }
+
+
 
 MainWindow::~MainWindow()
 {
@@ -1103,6 +2298,246 @@ void MainWindow::on_listerVentes()
 void MainWindow::on_resetFormulaire()
 {
     viderFormulaire();
+}
+
+// ─────────────────────────────────────────────────────────────────────────────
+// 🔍 RECHERCHE PAR CLIENT
+// ─────────────────────────────────────────────────────────────────────────────
+void MainWindow::on_vente_rechercheClientBtn_clicked()
+{
+    QString texte = ui->vente_rechercheClientEdit->text().trimmed();
+    if (texte.isEmpty()) {
+        QMessageBox::warning(this, "Erreur", "Veuillez saisir un ID client.");
+        return;
+    }
+
+    bool ok;
+    int idClient = texte.toInt(&ok);
+    if (!ok) {
+        QMessageBox::warning(this, "Erreur", "L'ID client doit être un nombre entier.");
+        return;
+    }
+
+    QSqlQueryModel* model = Vente::rechercherParClient(idClient);
+    ui->tableView_vente->setModel(model);
+    ui->tableView_vente->resizeColumnsToContents();
+
+    if (model->rowCount() == 0)
+        QMessageBox::information(this, "Résultat",
+                                 "Aucune vente trouvée pour le client ID : "
+                                 + QString::number(idClient));
+}
+
+// 🔍 RECHERCHE PAR DATE
+void MainWindow::on_vente_rechercheDateBtn_clicked()
+{
+    QDate date = ui->vente_dateRechercheEdit->date();
+    QSqlQueryModel* model = Vente::rechercherParDate(date);
+    ui->tableView_vente->setModel(model);
+    ui->tableView_vente->resizeColumnsToContents();
+}
+
+// 🔃 TRI
+void MainWindow::on_vente_triBox_currentIndexChanged(int index)
+{
+    Vente::TriType type;
+    bool asc = true;
+    switch (index) {
+    case 0: type = Vente::ParDate;    asc = true;  break;
+    case 1: type = Vente::ParDate;    asc = false; break;
+    case 2: type = Vente::ParMontant; asc = true;  break;
+    case 3: type = Vente::ParMontant; asc = false; break;
+    default: return;
+    }
+    QSqlQueryModel* model = Vente::listerTries(type, asc);
+    ui->tableView_vente->setModel(model);
+    ui->tableView_vente->resizeColumnsToContents();
+}
+
+// ─────────────────────────────────────────────────────────────────────────────
+// 📄 EXPORTS
+// ─────────────────────────────────────────────────────────────────────────────
+void MainWindow::on_vente_exportCSVBtn_clicked()
+{
+    QString fichier = QFileDialog::getSaveFileName(this, "Exporter en CSV", "", "Fichiers CSV (*.csv)");
+    if (fichier.isEmpty()) return;
+    if (!fichier.endsWith(".csv")) fichier += ".csv";
+    if (Vente::exporterCSV(fichier))
+        QMessageBox::information(this, "Export CSV", "Export réussi !");
+    else
+        QMessageBox::critical(this, "Export CSV", "Échec de l'export.");
+}
+
+void MainWindow::on_vente_exportPDFBtn_clicked()
+{
+    QString fichier = QFileDialog::getSaveFileName(this, "Exporter en PDF", "", "Fichiers PDF (*.pdf)");
+    if (fichier.isEmpty()) return;
+    if (!fichier.endsWith(".pdf")) fichier += ".pdf";
+    if (Vente::exporterPDF(fichier, "Liste des ventes"))
+        QMessageBox::information(this, "Export PDF", "Export réussi !");
+    else
+        QMessageBox::critical(this, "Export PDF", "Échec de l'export.");
+}
+
+// ─────────────────────────────────────────────────────────────────────────────
+// 📊 ANALYSE CA
+// ─────────────────────────────────────────────────────────────────────────────
+void MainWindow::on_vente_analyserCABtn_clicked()
+{
+    QDate debut = ui->vente_dateDebutAnalyse->date();
+    QDate fin   = ui->vente_dateFinAnalyse->date();
+    Vente::StatsCA stats = Vente::calculerChiffreAffaires(debut, fin);
+
+    QString msg = QString("📊 Chiffre d'affaires du %1 au %2\n\n"
+                          "Total          : %3 DT\n"
+                          "Moyenne/vente  : %4 DT\n"
+                          "Minimum        : %5 DT\n"
+                          "Maximum        : %6 DT\n"
+                          "Nombre ventes  : %7")
+                      .arg(debut.toString("dd/MM/yyyy"))
+                      .arg(fin.toString("dd/MM/yyyy"))
+                      .arg(stats.total,   0, 'f', 2)
+                      .arg(stats.moyenne, 0, 'f', 2)
+                      .arg(stats.min,     0, 'f', 2)
+                      .arg(stats.max,     0, 'f', 2)
+                      .arg(stats.nbVentes);
+    QMessageBox::information(this, "Analyse du CA", msg);
+}
+
+// ⚠️ DÉTECTION ANOMALIES
+void MainWindow::on_vente_detecterAnomaliesBtn_clicked()
+{
+    QDate debut = ui->vente_dateDebutAnalyse->date();
+    QDate fin   = ui->vente_dateFinAnalyse->date();
+    QVector<Vente> anomalies = Vente::detecterAnomalies(debut, fin);
+
+    if (anomalies.isEmpty()) {
+        QMessageBox::information(this, "Anomalies", "Aucune vente anormale détectée.");
+        return;
+    }
+    QString liste;
+    for (const Vente& v : anomalies) {
+        liste += QString("Vente %1 — Client %2 — Montant %3 DT\n")
+                     .arg(v.getIdVente())
+                     .arg(v.getIdClient())
+                     .arg(v.getMontantPaye(), 0, 'f', 2);
+    }
+    QMessageBox::information(this, "Ventes anormales détectées", liste);
+}
+
+// 📈 PRÉVISION
+void MainWindow::on_vente_previsionBtn_clicked()
+{
+    double prev = Vente::prevoirVentesMoisProchain();
+    QMessageBox::information(this, "Prévision CA",
+                             QString("Prévision du CA pour les 30 prochains jours :\n%1 DT")
+                                 .arg(prev, 0, 'f', 2));
+}
+
+// 📊 GRAPHIQUE (QtCharts) — courbes sur toute la plage de dates disponibles
+void MainWindow::on_vente_graphiqueCABtn_clicked()
+{
+    // Récupérer la date min et max directement depuis la BD
+    QSqlQuery rangeQuery(QSqlDatabase::database());
+    rangeQuery.exec("SELECT TO_CHAR(MIN(DATE_VENTE),'YYYY-MM-DD'), "
+                    "TO_CHAR(MAX(DATE_VENTE),'YYYY-MM-DD') FROM SMART.VENTE");
+
+    QDate debut, fin;
+    if (rangeQuery.next()) {
+        debut = QDate::fromString(rangeQuery.value(0).toString(), "yyyy-MM-dd");
+        fin   = QDate::fromString(rangeQuery.value(1).toString(), "yyyy-MM-dd");
+    }
+
+    if (!debut.isValid() || !fin.isValid()) {
+        QMessageBox::information(this, "Graphique", "Aucune vente en base de données.");
+        return;
+    }
+
+    QVector<QPair<QDate, double>> data = Vente::chiffreAffairesParJour(debut, fin);
+
+    if (data.isEmpty()) {
+        QMessageBox::information(this, "Graphique", "Aucune donnée disponible.");
+        return;
+    }
+
+    // ── Série en courbe lisse ──────────────────────────────────────────────
+    QSplineSeries *series = new QSplineSeries();
+    series->setName("CA quotidien (DT)");
+    QPen pen(QColor("#556B2F"));
+    pen.setWidth(2);
+    series->setPen(pen);
+
+    qint64 minMs = LLONG_MAX, maxMs = LLONG_MIN;
+    double maxVal = 0;
+
+    for (const auto& point : data) {
+        qint64 ms = point.first.startOfDay().toMSecsSinceEpoch();
+        series->append(ms, point.second);
+        if (ms < minMs) minMs = ms;
+        if (ms > maxMs) maxMs = ms;
+        if (point.second > maxVal) maxVal = point.second;
+    }
+
+    // ── Graphique ──────────────────────────────────────────────────────────
+    QChart *chart = new QChart();
+    chart->addSeries(series);
+    chart->setTitle(QString("Évolution du CA  —  %1  →  %2")
+                        .arg(debut.toString("dd/MM/yyyy"))
+                        .arg(fin.toString("dd/MM/yyyy")));
+    chart->setAnimationOptions(QChart::SeriesAnimations);
+    chart->setBackgroundBrush(QBrush(Qt::white));
+    chart->legend()->setVisible(true);
+    chart->legend()->setAlignment(Qt::AlignBottom);
+
+    // Axe X : dates
+    QDateTimeAxis *axisX = new QDateTimeAxis;
+    axisX->setFormat("dd/MM/yy");
+    axisX->setTitleText("Date");
+    axisX->setRange(QDateTime::fromMSecsSinceEpoch(minMs),
+                    QDateTime::fromMSecsSinceEpoch(maxMs));
+    axisX->setTickCount(qMin((int)data.size(), 10));
+    chart->addAxis(axisX, Qt::AlignBottom);
+    series->attachAxis(axisX);
+
+    // Axe Y : montants
+    QValueAxis *axisY = new QValueAxis;
+    axisY->setTitleText("Montant (DT)");
+    axisY->setRange(0, maxVal * 1.2);
+    axisY->setLabelFormat("%.2f");
+    chart->addAxis(axisY, Qt::AlignLeft);
+    series->attachAxis(axisY);
+
+    // ── Fenêtre d'affichage ────────────────────────────────────────────────
+    QWidget *win = new QWidget(nullptr, Qt::Window);
+    win->setWindowTitle(QString("Graphique CA  (%1 points)").arg(data.size()));
+    win->resize(1000, 600);
+    win->setAttribute(Qt::WA_DeleteOnClose);
+
+    QVBoxLayout *layout = new QVBoxLayout(win);
+    layout->setContentsMargins(10, 10, 10, 10);
+
+    // Infos résumé en haut
+    QLabel *lblInfo = new QLabel(
+        QString("  %1 jours de données  |  Total : %2 DT  |  Moyenne/jour : %3 DT")
+            .arg(data.size())
+            .arg(QString::number(
+                     std::accumulate(data.begin(), data.end(), 0.0,
+                                     [](double s, const QPair<QDate,double>& p){ return s + p.second; }),
+                     'f', 2))
+            .arg(QString::number(
+                     std::accumulate(data.begin(), data.end(), 0.0,
+                                     [](double s, const QPair<QDate,double>& p){ return s + p.second; })
+                     / data.size(), 'f', 2))
+        );
+    lblInfo->setStyleSheet("background:#556B2F; color:white; padding:6px; font-weight:bold;");
+    layout->addWidget(lblInfo);
+
+    QChartView *chartView = new QChartView(chart, win);
+    chartView->setRenderHint(QPainter::Antialiasing);
+    layout->addWidget(chartView);
+
+    win->setLayout(layout);
+    win->show();
 }
 
 ///client
@@ -1908,6 +3343,7 @@ void MainWindow::viderChampsProduction()
     ui->Observation->clear();
 }
 
+
 // ================================================================
 // ÉTAPE 9 — refreshTableProduction()
 // ✅ Fonction utilitaire appelée depuis d'autres modules si besoin
@@ -1916,3 +3352,819 @@ void MainWindow::refreshTableProduction()
 {
     rafraichirGrilleProduction("");
 }
+
+
+
+void MainWindow::on_btn_connecter_arduino_clicked()
+{
+    bool ok;
+    QString port = QInputDialog::getText(
+        this, "Connexion Arduino",
+        "Entrez le port (ex: COM3 ou COM4):",
+        QLineEdit::Normal, "COM3", &ok
+        );
+    if (!ok || port.isEmpty()) return;
+
+    if (m_arduino->connecter(port)) {
+        QMessageBox::information(this, "Arduino", "Connecté sur " + port);
+    } else {
+        QMessageBox::critical(this, "Arduino", "Impossible de se connecter sur " + port);
+    }
+}
+
+void MainWindow::on_btn_ecrire_carte_clicked()
+{
+    // Récupérer le CIN sélectionné dans la tableView
+    QModelIndex index = ui->tableView->currentIndex();
+    if (!index.isValid()) {
+        QMessageBox::warning(this, "Erreur",
+                             "Sélectionne un employé d'abord !");
+        return;
+    }
+
+    // CIN est colonne 1
+    QString cin = ui->tableView->model()
+                      ->index(index.row(), 1).data().toString();
+
+    if (cin.isEmpty()) {
+        QMessageBox::warning(this, "Erreur", "CIN introuvable !");
+        return;
+    }
+
+    if (!m_arduino->estConnecte()) {
+        QMessageBox::warning(this, "Arduino",
+                             "Arduino non connecté !");
+        return;
+    }
+
+    // Envoyer le CIN à l'Arduino
+    m_arduino->envoyerDonnees(cin);
+
+    QMessageBox::information(this, "Arduino",
+                             "CIN " + cin + " envoyé !\nScanne la carte maintenant 🃏");
+}
+
+void MainWindow::onCarteDetectee(const QString &cin)
+{
+    // Log dans le textEdit arduino
+    ui->message_2->append(
+        "🃏 Carte détectée : " + cin);
+}
+
+void MainWindow::onEmployeIdentifie(const QString &cin,
+                                    const QString &nom,
+                                    const QString &prenom)
+{
+    // Récupérer l'heure actuelle
+    QString heure = QTime::currentTime().toString("HH:mm");
+
+    // Popup avec nom, prénom et heure
+    QMessageBox msgBox;
+    msgBox.setWindowTitle("Pointage Présence");
+    msgBox.setText(
+        "<b style='font-size:16px'>✅ Accès autorisé</b><br><br>"
+        "<b>Nom :</b> " + nom + "<br>"
+                "<b>Prénom :</b> " + prenom + "<br>"
+                   "<b>Heure :</b> " + heure
+        );
+    msgBox.setIconPixmap(QPixmap(":/images/images/lg-removebg-preview.png")
+                             .scaled(80, 80, Qt::KeepAspectRatio));
+    msgBox.setStandardButtons(QMessageBox::Ok);
+    msgBox.exec();
+
+    // Log dans textEdit
+    ui->message_2->append("✅ " + nom + " " + prenom + " — " + heure);
+
+    refreshTable();
+}
+
+void MainWindow::onEmployeInconnu(const QString &cin)
+{
+    QString heure = QTime::currentTime().toString("HH:mm");
+
+    QMessageBox msgBox;
+    msgBox.setWindowTitle("Accès Refusé");
+    msgBox.setText(
+        "<b style='font-size:16px'>❌ Accès refusé</b><br><br>"
+        "<b>CIN :</b> " + cin + "<br>"
+                "<b>Heure :</b> " + heure + "<br><br>"
+                  "<i>Employé non reconnu dans le système</i>"
+        );
+    msgBox.setIcon(QMessageBox::Critical);
+    msgBox.setStandardButtons(QMessageBox::Ok);
+    msgBox.exec();
+
+    // Log dans textEdit
+    ui->message_2->append("❌ CIN inconnu : " + cin + " — " + heure);
+}
+
+void MainWindow::onMessageArduino(const QString &msg)
+{
+    ui->message_2->append("[Arduino] " + msg);
+}
+
+void MainWindow::on_recherche2_2_clicked()
+{
+    QString motcle = ui->recherche2->text().trimmed();
+
+    bool isParticulier = ui->particulier_6->isChecked();
+    bool isProfessionnel = ui->profisionnel_6->isChecked();
+
+    QSqlQuery query;
+
+    QString sql = "SELECT nom, prenom, total_achat,points_fidelite FROM CLIENT WHERE 1=1";
+
+    // filtre texte
+    if (!motcle.isEmpty()) {
+        sql += " AND (nom LIKE :mc OR prenom LIKE :mc)";
+    }
+
+    // filtre type client
+    if (isParticulier) {
+        sql += " AND type_client = 'particulier'";
+    }
+    else if (isProfessionnel) {
+        sql += " AND type_client = 'professionnel'";
+    }
+
+    query.prepare(sql);
+
+    if (!motcle.isEmpty()) {
+        query.bindValue(":mc", "%" + motcle + "%");
+    }
+
+    if (!query.exec()) {
+        qDebug() << "Erreur SQL :" << query.lastError().text();
+        return;
+    }
+
+    ui->table1->setRowCount(0);
+    ui->table1->setColumnCount(4);
+    ui->table1->setHorizontalHeaderLabels(QStringList()
+                                          << "Nom" << "Prénom" << "Total Achat");
+
+    int row = 0;
+
+    while (query.next()) {
+        ui->table1->insertRow(row);
+
+        ui->table1->setItem(row, 0,
+                            new QTableWidgetItem(query.value("nom").toString()));
+
+        ui->table1->setItem(row, 1,
+                            new QTableWidgetItem(query.value("prenom").toString()));
+
+        ui->table1->setItem(row, 2,
+                            new QTableWidgetItem(query.value("total_achat").toString()));
+
+        ui->table1->setItem(row, 3,
+                            new QTableWidgetItem(query.value("points_fidelite").toString()));
+
+
+        row++;
+    }
+
+}
+
+
+void MainWindow::on_appliquer_clicked()
+{
+    QDate date = ui->date_6->date();
+
+    bool vierge = ui->vierge->isChecked();
+    bool bio = ui->bio->isChecked();
+
+    QSqlQuery query;
+
+    QString sql =
+        "SELECT nom, prenom, total_achat, points_fidelite, date_inscription "
+        "FROM CLIENT "
+        "WHERE date_inscription <= TO_DATE(:date, 'YYYY-MM-DD')";
+
+    // filtres
+    if (vierge && !bio) {
+        sql += " AND LOWER(type_huile_prefere) LIKE '%vierge%'";
+    }
+    else if (!vierge && bio) {
+        sql += " AND LOWER(type_huile_prefere) LIKE '%bio%'";
+    }
+    else if (vierge && bio) {
+        sql += " AND (LOWER(type_huile_prefere) LIKE '%vierge%' OR LOWER(type_huile_prefere) LIKE '%bio%')";
+    }
+
+    query.prepare(sql);
+    query.bindValue(":date", date.toString("yyyy-MM-dd"));
+
+    if (!query.exec()) {
+        qDebug() << "SQL ERROR:" << query.lastError().text();
+        return;
+    }
+
+    ui->table1->setRowCount(0);
+    ui->table1->setColumnCount(4);
+
+    int row = 0;
+
+    while (query.next()) {
+        ui->table1->insertRow(row);
+
+        ui->table1->setItem(row, 0,
+                            new QTableWidgetItem(query.value("nom").toString()));
+
+        ui->table1->setItem(row, 1,
+                            new QTableWidgetItem(query.value("prenom").toString()));
+
+        ui->table1->setItem(row, 2,
+                            new QTableWidgetItem(query.value("total_achat").toString()));
+
+        ui->table1->setItem(row, 3,
+                            new QTableWidgetItem(query.value("points_fidelite").toString()));
+
+        row++;
+    }
+}
+void MainWindow::afficher_historique()
+{
+    QSqlQuery query;
+
+    QString sql =
+        "SELECT id, date_inscription, type_huile_prefere, emballage_prefere, total_achat "
+        "FROM CLIENT "
+        "ORDER BY date_inscription DESC";
+
+    if (!query.exec(sql)) {
+        qDebug() << "SQL ERROR:" << query.lastError().text();
+        return;
+    }
+
+    ui->table3->setRowCount(0);
+    ui->table3->setColumnCount(5);
+
+    ui->table3->setHorizontalHeaderLabels(
+        QStringList() << "id"
+                      << "Date inscription"
+                      << "Type huile"
+                      << "Emballage"
+                      << "Total achat"
+                      <<"points de fidelite"
+        );
+
+    int row = 0;
+
+    while (query.next()) {
+        ui->table3->insertRow(row);
+
+        ui->table3->setItem(row, 0,
+                            new QTableWidgetItem(query.value(0).toString()));
+
+        ui->table3->setItem(row, 1,
+                            new QTableWidgetItem(
+                                query.value(1).toDate().toString("dd/MM/yyyy")
+                                ));
+
+        ui->table3->setItem(row, 2,
+                            new QTableWidgetItem(query.value(2).toString()));
+
+        ui->table3->setItem(row, 3,
+                            new QTableWidgetItem(query.value(3).toString()));
+
+        ui->table3->setItem(row, 4,
+                            new QTableWidgetItem(query.value(4).toString()));
+
+        row++;
+    }
+}
+
+
+
+void MainWindow::on_exporter1_clicked()
+{
+    QString fileName = QFileDialog::getSaveFileName(
+        this,
+        "Exporter PDF",
+        "",
+        "PDF Files (*.pdf)"
+        );
+
+    if (fileName.isEmpty())
+        return;
+
+    if (!fileName.endsWith(".pdf"))
+        fileName += ".pdf";
+
+    QPdfWriter pdf(fileName);
+    pdf.setPageSize(QPageSize::A4);
+    pdf.setResolution(300);
+
+    QPainter painter(&pdf);
+    if (!painter.isActive()) return;
+
+    int x = 80;
+    int y = 150;
+
+    int colWidth = 400;   // 🔽 tableau plus petit
+    int rowHeight = 220;  // 🔽 compact
+
+    QColor olive(107, 142, 35);
+    QColor gold(212, 175, 55);
+    QColor black(0, 0, 0);
+
+    // ===== TITRE =====
+    painter.setPen(olive);
+    painter.setFont(QFont("Arial", 12, QFont::Bold));
+    painter.drawText(x, y, "Historique Clients");
+    y += 400;
+
+    // ===== HEADER =====
+    painter.setFont(QFont("Arial", 9, QFont::Bold));
+
+    for (int col = 0; col < ui->table3->columnCount(); col++) {
+
+        QRect rect(x + col * colWidth, y, colWidth, rowHeight);
+
+        painter.setPen(gold);
+        painter.setBrush(olive);
+        painter.drawRect(rect);
+
+        painter.setPen(Qt::black);
+        painter.drawText(rect.adjusted(5, 0, 0, 0),
+                         ui->table3->horizontalHeaderItem(col)->text());
+    }
+
+    y += rowHeight;
+
+    // ===== DATA =====
+    painter.setFont(QFont("Arial", 8));
+
+    for (int row = 0; row < ui->table3->rowCount(); row++) {
+
+        for (int col = 0; col < ui->table3->columnCount(); col++) {
+
+            QString text = ui->table3->item(row, col)
+            ? ui->table3->item(row, col)->text()
+            : "";
+
+            QRect rect(x + col * colWidth, y, colWidth, rowHeight);
+
+            // alternance couleur fond
+            if (row % 2 == 0)
+                painter.setBrush(QColor(245, 245, 245)); // gris clair
+            else
+                painter.setBrush(Qt::white);
+
+            painter.setPen(olive);
+            painter.drawRect(rect);
+
+            painter.setPen(Qt::black);
+            painter.drawText(rect.adjusted(5, 0, 0, 0), text);
+        }
+
+        y += rowHeight;
+
+        // page break
+        if (y > 26000) {
+            pdf.newPage();
+            y = 150;
+        }
+    }
+
+    painter.end();
+
+}
+
+
+
+
+void MainWindow::on_appliquer2_clicked()
+{
+    QSqlQuery query;
+
+    QString type;
+
+    if (ui->particulier_5->isChecked())
+        type = "particulier";
+    else if (ui->profisionnel_4->isChecked())
+        type = "professionnel";
+
+    QString sql = "SELECT nom, prenom, type_client, points_fidelite FROM CLIENT";
+
+    if (!type.isEmpty()) {
+        sql += " WHERE TRIM(LOWER(type_client)) = '" + type + "'";
+    }
+
+    sql += " ORDER BY points_fidelite DESC";
+
+    if (!query.exec(sql)) {
+        qDebug() << "SQL ERROR:" << query.lastError().text();
+        return;
+    }
+
+    ui->table4->setRowCount(0);
+    ui->table4->setColumnCount(4);
+
+    int row = 0;
+
+    while (query.next()) {
+        ui->table4->insertRow(row);
+
+        ui->table4->setItem(row, 0, new QTableWidgetItem(query.value(0).toString()));
+        ui->table4->setItem(row, 1, new QTableWidgetItem(query.value(1).toString()));
+        ui->table4->setItem(row, 2, new QTableWidgetItem(query.value(2).toString()));
+        ui->table4->setItem(row, 3, new QTableWidgetItem(query.value(3).toString()));
+
+        row++;
+    }
+}
+
+
+void MainWindow::on_appliquer3_2_clicked()
+{
+
+    QString sql = "SELECT id, nom, prenom, total_achat, emballage_prefere, type_client "
+                  "FROM CLIENT WHERE 1=1";
+
+    bool particulier = ui->particulier_4->isChecked();
+    bool professionnel = ui->profisionnel_5->isChecked();
+
+    if (particulier || professionnel)
+    {
+        sql += " AND (";
+
+        if (particulier && professionnel)
+        {
+            sql += "type_client = 'particulier' OR type_client = 'professionnel'";
+        }
+        else if (particulier)
+        {
+            sql += "type_client = 'particulier'";
+        }
+        else if (professionnel)
+        {
+            sql += "type_client = 'professionnel'";
+        }
+
+        sql += ")";
+    }
+
+    // 🔥 TRI AJOUTÉ ICI
+    sql += " ORDER BY total_achat ASC, emballage_prefere ASC";
+
+    QSqlQuery query;
+    if (!query.exec(sql))
+    {
+        qDebug() << "SQL Error:" << query.lastError().text();
+        return;
+    }
+
+    ui->table5->clearContents();
+    ui->table5->setRowCount(0);
+
+    int row = 0;
+
+    while (query.next())
+    {
+        ui->table5->insertRow(row);
+
+        ui->table5->setItem(row, 0, new QTableWidgetItem(query.value("id").toString()));
+        ui->table5->setItem(row, 1, new QTableWidgetItem(query.value("nom").toString()));
+        ui->table5->setItem(row, 2, new QTableWidgetItem(query.value("prenom").toString()));
+        ui->table5->setItem(row, 3, new QTableWidgetItem(query.value("total_achat").toString()));
+        ui->table5->setItem(row, 4, new QTableWidgetItem(query.value("emballage_prefere").toString()));
+    }
+
+    ui->table5->setColumnCount(5);
+    ui->table5->setHorizontalHeaderLabels(
+        {"ID", "Nom", "Prenom", "Total Achat", "Emballage"}
+        );
+
+}
+
+
+void MainWindow::on_exporter_2_clicked()
+{
+    QString fileName = QFileDialog::getSaveFileName(
+        this, "Exporter PDF", "", "*.pdf"
+        );
+
+    if (fileName.isEmpty())
+        return;
+
+    if (!fileName.endsWith(".pdf"))
+        fileName += ".pdf";
+
+    QPrinter printer(QPrinter::PrinterResolution);
+    printer.setOutputFormat(QPrinter::PdfFormat);
+    printer.setOutputFileName(fileName);
+
+    QPainter painter;
+    if (!painter.begin(&printer))
+        return;
+
+    int y = 100;
+
+    QFont titleFont("Arial", 14, QFont::Bold);
+    QFont sectionFont("Arial", 11, QFont::Bold);
+    QFont textFont("Arial", 9);
+
+    QColor olive(107, 142, 35);
+    QColor gold(212, 175, 55);
+
+    painter.setFont(titleFont);
+    painter.setPen(olive);
+    painter.drawText(200, 50, "RAPPORT CLIENTS");
+
+    QStringList types = {"particulier", "professionnel"};
+
+    // =========================================================
+    // 1. CLIENTS FIDELES PAR TYPE (ASC)
+    // =========================================================
+    for (QString type : types)
+    {
+        painter.setFont(sectionFont);
+        painter.setPen(gold);
+        painter.drawText(50, y, "CLIENTS FIDELES - " + type.toUpper());
+        y += 25;
+
+        painter.setFont(textFont);
+        painter.setPen(Qt::black);
+
+        QSqlQuery q;
+
+        q.prepare(
+            "SELECT id, nom, prenom, total_achat, emballage_prefere, type_client, points_fidelite "
+            "FROM CLIENT "
+            "WHERE type_client = :type "
+            "AND NVL(points_fidelite,0) BETWEEN 0 AND 100 "
+            "ORDER BY points_fidelite DESC"
+            );
+
+        q.bindValue(":type", type);
+
+        if (q.exec())
+        {
+            while (q.next())
+            {
+                painter.drawText(50, y, q.value(0).toString());
+                painter.drawText(90, y, q.value(1).toString());
+                painter.drawText(180, y, q.value(2).toString());
+                painter.drawText(280, y, q.value(3).toString());
+                painter.drawText(360, y, q.value(4).toString());
+                painter.drawText(460, y, q.value(5).toString());
+                painter.drawText(560, y, q.value(6).toString());
+
+                y += 18;
+
+                if (y > 1000)
+                {
+                    printer.newPage();
+                    y = 100;
+                }
+            }
+        }
+
+        y += 30;
+    }
+
+    // =========================================================
+    // 2. MEILLEURS CLIENTS PAR TYPE (ASC)
+    // =========================================================
+    for (QString type : types)
+    {
+        painter.setFont(sectionFont);
+        painter.setPen(olive);
+        painter.drawText(50, y, "MEILLEURS CLIENTS - " + type.toUpper());
+        y += 25;
+
+        painter.setFont(textFont);
+        painter.setPen(Qt::black);
+
+        QSqlQuery q2;
+
+        q2.prepare(
+            "SELECT id, nom, prenom, total_achat, emballage_prefere, type_client, points_fidelite "
+            "FROM CLIENT "
+            "WHERE type_client = :type "
+            "ORDER BY total_achat DESC"
+            );
+
+        q2.bindValue(":type", type);
+
+        if (q2.exec())
+        {
+            while (q2.next())
+            {
+                painter.drawText(50, y, q2.value(0).toString());
+                painter.drawText(90, y, q2.value(1).toString());
+                painter.drawText(180, y, q2.value(2).toString());
+                painter.drawText(280, y, q2.value(3).toString());
+                painter.drawText(360, y, q2.value(4).toString());
+                painter.drawText(460, y, q2.value(5).toString());
+                painter.drawText(560, y, q2.value(6).toString());
+
+                y += 18;
+
+                if (y > 1000)
+                {
+                    printer.newPage();
+                    y = 100;
+                }
+            }
+        }
+
+        y += 30;
+    }
+
+    painter.end();
+
+}
+
+
+void MainWindow::on_executer_clicked()
+{
+    QString fileName = QFileDialog::getSaveFileName(
+        this,
+        "Exporter vers CSV",
+        "",
+        "Fichiers CSV (*.csv)"
+        );
+
+    if (fileName.isEmpty())
+        return;
+
+    if (!fileName.endsWith(".csv"))
+        fileName += ".csv";
+
+    QSqlQuery query;
+
+    if (!query.exec("SELECT id, nom, prenom, total_achat FROM CLIENT")) {
+        QMessageBox::critical(this, "Erreur", "Erreur SQL");
+        return;
+    }
+
+    QFile file(fileName);
+
+    if (!file.open(QIODevice::WriteOnly | QIODevice::Text)) {
+        QMessageBox::critical(this, "Erreur", "Impossible d'ouvrir le fichier");
+        return;
+    }
+
+    QTextStream out(&file);
+
+    out << "ID,Nom,Prenom,Total Achat\n";
+
+    while (query.next())
+    {
+        out << query.value(0).toString() << ","
+            << query.value(1).toString() << ","
+            << query.value(2).toString() << ","
+            << query.value(3).toString() << "\n";
+    }
+
+    file.close();
+
+    QMessageBox::information(this, "Succès", "Export terminé avec succès !");
+
+    QDesktopServices::openUrl(QUrl::fromLocalFile(fileName));
+
+}
+
+void MainWindow::afficherCourbe()
+{
+    QLineSeries *series = new QLineSeries();
+    series->append(0, 0);
+    series->append(1, 10);
+
+    QChart *chart = new QChart();
+    chart->addSeries(series);
+    chart->setTitle("Test Courbe");
+
+    QChartView *view = new QChartView(chart);
+    view->setRenderHint(QPainter::Antialiasing);
+
+    QVBoxLayout *layout = new QVBoxLayout(ui->chart);
+    ui->chart->setLayout(layout);
+
+    layout->addWidget(view);
+}
+void MainWindow::afficherCourbeDansTable2()
+{
+    QSqlQuery query;
+
+    if (!query.exec("SELECT date_inscription, total_achat FROM CLIENT ORDER BY date_inscription")) {
+        qDebug() << query.lastError().text();
+        return;
+    }
+
+    QLineSeries *seriesAchat = new QLineSeries();
+    QLineSeries *seriesCumul = new QLineSeries();
+
+    double cumul = 0;
+
+    while (query.next())
+    {
+        QDate date = query.value(0).toDate();
+        double achat = query.value(1).toDouble();
+
+        cumul += achat;
+
+        qint64 x = date.startOfDay().toMSecsSinceEpoch();
+
+        seriesAchat->append(x, achat);
+        seriesCumul->append(x, cumul);
+    }
+
+    QChart *chart = new QChart();
+    chart->addSeries(seriesAchat);
+    chart->addSeries(seriesCumul);
+    chart->setTitle("Évolution des achats clients");
+
+    QDateTimeAxis *axisX = new QDateTimeAxis();
+    axisX->setFormat("dd/MM");
+
+    QValueAxis *axisY = new QValueAxis();
+
+    chart->addAxis(axisX, Qt::AlignBottom);
+    chart->addAxis(axisY, Qt::AlignLeft);
+
+    seriesAchat->attachAxis(axisX);
+    seriesCumul->attachAxis(axisX);
+    seriesAchat->attachAxis(axisY);
+    seriesCumul->attachAxis(axisY);
+
+    QChartView *view = new QChartView(chart);
+    view->setRenderHint(QPainter::Antialiasing);
+
+    QLayout *layout = ui->chart->layout();
+    if (!layout)
+    {
+        layout = new QVBoxLayout(ui->chart);
+        ui->chart->setLayout(layout);
+    }
+
+    // nettoyage ancien contenu
+    QLayoutItem *item;
+    while ((item = layout->takeAt(0)) != nullptr)
+    {
+        delete item->widget();
+        delete item;
+    }
+
+    layout->addWidget(view);
+}
+
+
+void MainWindow::on_classement_clicked()
+{
+    ui->stackedWidget->setCurrentWidget(ui->page_classement_clients);
+}
+
+
+void MainWindow::on_export_2_clicked()
+{
+    QString fileName = QFileDialog::getSaveFileName(
+        this,
+        "Exporter vers Excel",
+        "",
+        "Fichiers Excel (*.csv)"
+        );
+
+    if (fileName.isEmpty())
+        return;
+
+    if (!fileName.endsWith(".csv"))
+        fileName += ".csv";
+
+    QSqlQuery query;
+    if (!query.exec("SELECT id, nom, prenom, total_achat FROM CLIENT")) {
+        qDebug() << query.lastError().text();
+        QMessageBox::critical(this, "Erreur", "Erreur SQL");
+        return;
+    }
+
+    QFile file(fileName);
+    if (!file.open(QIODevice::WriteOnly | QIODevice::Text)) {
+        QMessageBox::critical(this, "Erreur", "Impossible d'ouvrir le fichier");
+        return;
+    }
+
+    QTextStream out(&file);
+
+    // 🔹 Header Excel
+    out << "ID,Nom,Prenom,Total Achat\n";
+
+    // 🔹 Données
+    while (query.next())
+    {
+        QString id = query.value(0).toString();
+        QString nom = query.value(1).toString();
+        QString prenom = query.value(2).toString();
+        QString total = query.value(3).toString();
+
+        out << id << "," << nom << "," << prenom << "," << total << "\n";
+    }
+
+    file.close();
+
+    QMessageBox::information(this, "Succès", "Export Excel terminé !");
+}
+

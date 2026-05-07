@@ -7,7 +7,22 @@
 #include "vente.h"
 #include <QString>
 #include <QMainWindow>
+#include "arduino.h"
 
+#include <QTcpSocket>
+#include <QRandomGenerator>
+#include <QSslSocket>
+#include <QPrinter>
+#include <QPainter>
+#include <QFileDialog>
+#include <QDateTime>
+#include <QDir>
+#include <QTextEdit>
+#include <QtCharts/QChartView>
+#include <QtCharts/QLineSeries>
+#include <QtCharts/QChart>
+#include <QtCharts/QValueAxis>
+#include <QtCharts/QDateTimeAxis>
 QT_BEGIN_NAMESPACE
 namespace Ui {
 class MainWindow;
@@ -185,6 +200,8 @@ private slots:
     void on_btn_ventes_12_clicked();
 
     void on_connecter_clicked();
+
+    void on_btn_mdp_oublie_clicked();
     void on_historique_clicked();
 
     void on_btn_retour_5_clicked();
@@ -210,12 +227,33 @@ private slots:
     void on_lineEdit_recherche_textChanged(const QString &);
     void on_comboBox_filtre_currentTextChanged(const QString &);
     void on_comboBox_tri_currentTextChanged(const QString &);
-
+    void on_btn_pdf_employes_clicked();
     void on_ajouterVente();
     void on_afficherVente();
     void on_listerVentes();
     void on_resetFormulaire();
     void on_tableView_vente_clicked(const QModelIndex &index);
+
+    // ── Ventes : Recherche & Tri ──────────────────────────────────────────────
+    void on_vente_rechercheClientBtn_clicked();
+    void on_vente_rechercheDateBtn_clicked();
+    void on_vente_triBox_currentIndexChanged(int index);
+
+    // ── Ventes : Exports ──────────────────────────────────────────────────────
+    void on_vente_exportCSVBtn_clicked();
+    void on_vente_exportPDFBtn_clicked();
+
+    // ── Ventes : Analyses ─────────────────────────────────────────────────────
+    void on_vente_analyserCABtn_clicked();
+    void on_vente_detecterAnomaliesBtn_clicked();
+    void on_vente_previsionBtn_clicked();
+    void on_vente_graphiqueCABtn_clicked();
+
+    void on_exporter_excel_employes_clicked();
+    void on_btn_chatbot_clicked();
+
+    void on_btn_face_login_clicked();
+    void on_btn_prendre_photo_clicked();
 
     void on_ajouter_3_clicked();
     void on_supprimer_3_clicked();   // ← adaptez au vrai nom du bouton
@@ -243,6 +281,33 @@ private slots:
     void on_afficher_prod_clicked();
     void on_rendement_clicked();
     void on_tableWidget_prod_cellClicked(int row, int column);
+
+    void onCarteDetectee(const QString &cin);
+    void onEmployeIdentifie(const QString &cin, const QString &nom, const QString &prenom);
+    void onEmployeInconnu(const QString &cin);
+    void onMessageArduino(const QString &msg);
+    void on_btn_connecter_arduino_clicked();   // bouton de connexion dans ton UI
+    void on_btn_ecrire_carte_clicked();
+    void on_recherche2_2_clicked();
+
+    void on_appliquer_clicked();
+
+    void on_exporter1_clicked();
+
+
+    void on_appliquer2_clicked();
+
+    void on_appliquer3_2_clicked();
+
+    void on_exporter_2_clicked();
+
+    void on_executer_clicked();
+
+    void on_classement_clicked();
+        void afficher_historique();
+
+    void on_export_2_clicked();
+
 private:
     Ui::MainWindow *ui;
     Employe Etmp;
@@ -261,5 +326,18 @@ private:
     void viderFormulaireClient();
     void rafraichirGrilleProduction(const QString &needle);
     void viderChampsProduction();
+    void envoyerEmail(QString dest, QString code);
+    void exporterTableViewExcel(QAbstractItemModel* model, const QString& titre);
+    void afficherCourbeDansTable2();
+    void afficherCourbe();
+    void ouvrirChatbot();
+    QString interrogerOllama(const QString &prompt);
+    QString getInfosEmploye(const QString &question);
+    QList<QPair<QString,QString>> historiqueChat;
+    Arduino *m_arduino;
+    QChart *chart;
+    QLineSeries *series;
+    QTimer *timer;
+
 };
 #endif // MAINWINDOW_H
