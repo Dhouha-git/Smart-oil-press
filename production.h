@@ -5,6 +5,9 @@
 #include <QDate>
 #include <QSqlQuery>
 #include <QSqlQueryModel>
+#include <QVector>
+#include <QPair>
+
 
 class Production
 {
@@ -62,6 +65,15 @@ public:
     bool modifier();
     static bool supprimer(int id_operation);
     QSqlQueryModel* afficher();
+    static double calculerRendementMoyen();
+    static QVector<QPair<QString, double>> rendementParType();
+    static QVector<int> detecterAnomaliesRendement(double seuilMin, double seuilMax);
+    static QVector<QPair<QDate, double>> evolutionRendement();
+    static bool exporterCSV(const QString &chemin);
+    QSqlQueryModel* rechercherParType(const QString &type);
+    QSqlQueryModel* rechercherParPeriode(const QDate &debut, const QDate &fin);
+
+
 };
 
 #endif // PRODUCTION_H

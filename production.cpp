@@ -4,6 +4,26 @@
 #include <QSqlError>
 #include <QSqlQueryModel>
 #include <QDebug>
+#include <QComboBox>
+#include <QDateTime>
+#include <QLineEdit>
+#include <QPushButton>
+#include <QSqlDatabase>
+#include <QTableWidgetItem>
+#include <QFileDialog>
+#include <QPrinter>
+#include <QTextDocument>
+#include <QTextBrowser>
+#include <QVBoxLayout>
+#include <QFileInfo>
+#include <QRegularExpression>
+#include <QRegularExpressionMatch>
+#include <QNetworkRequest>
+#include <QJsonDocument>
+#include <QJsonObject>
+#include <QJsonArray>
+#include <QUrl>
+#include <QSerialPortInfo>
 
 // ============================================================
 // CONSTRUCTEUR PAR DÉFAUT
@@ -156,5 +176,124 @@ QSqlQueryModel* Production::afficher()
     model->setHeaderData(8, Qt::Horizontal, "Durée pressage");
     model->setHeaderData(9, Qt::Horizontal, "Observation");
 
+    return model;
+}
+// ─────────────────────────────────────────────────────────
+// calculerRendementMoyen
+// ─────────────────────────────────────────────────────────
+double Production::calculerRendementMoyen()
+{
+    QSqlQuery q;
+    q.exec("SELECT AVG(RENDEMENT) FROM PRODUCTION");
+    if (q.next()) return q.value(0).toDouble();
+    return 0.0;
+}
+
+// ─────────────────────────────────────────────────────────
+// rendementParType
+// ─────────────────────────────────────────────────────────
+QVector<QPair<QString, double>> Production::rendementParType()
+{
+    QVector<QPair<QString, double>> result;
+    QSqlQuery q;
+    q.exec("SELECT TYPE_HUILE, AVG(RENDEMENT) FROM PRODUCTION "
+           "GROUP BY TYPE_HUILE ORDER BY TYPE_HUILE");
+    while (q.next())
+        result.append({q.value(0).toString(), q.value(1).toDouble()});
+    return result;
+}
+
+// ─────────────────────────────────────────────────────────
+// detecterAnomaliesRendement
+// ─────────────────────────────────────────────────────────
+QVector<int> Production::detecterAnomaliesRendement(double seuilMin, double seuilMax)
+{
+    QVector<int> ids;
+    QSqlQuery q;
+    q.prepare("SELECT ID_OPERATION FROM PRODUCTION "
+              "WHERE RENDEMENT < :min OR RENDEMENT > :max");
+    q.bindValue(":min", seuilMin);
+    q.bindValue(":max", seuilMax);
+    q.exec();
+    while (q.next())
+        ids.append(q.value(0).toInt());
+    return ids;
+}
+
+// ─────────────────────────────────────────────────────────
+// evolutionRendement
+// ─────────────────────────────────────────────────────────
+QVector<QPair<QDate, double>> Production::evolutionRendement()
+{
+    QVector<QPair<QDate, double>> result;
+    QSqlQuery q;
+    q.exec("SELECT DATE_PRODUCTION, RENDEMENT FROM PRODUCTION "
+           "ORDER BY DATE_PRODUCTION ASC");
+    while (q.next())
+        result.append({q.value(0).toDate(), q.value(1).toDouble()});
+    return result;
+}
+
+// ─────────────────────────────────────────────────────────
+// exporterCSV
+// ─────────────────────────────────────────────────────────
+bool Production::exporterCSV(const QString &chemin)
+{
+    QSqlQuery q;
+    q.exec("SELECT ID_OPERATION, DATE_PRODUCTION, CIN, ID_EMP, "
+           "QUANTITE_OLIVES, QUANTITE_HUILE, RENDEMENT, TYPE_HUILE, "
+           "DUREE_PRESSAGE, OBSERVATION FROM PRODUCTION ORDER BY DATE_PRODUCTION DESC");
+
+    QFile file(chemin);
+    if (!file.open(QIODevice::WriteOnly | QIODevice::Text))
+        return false;
+
+    QTextStream out(&file);
+    out << "ID,Date,CIN,ID Emp,Qte Olives,Qte Huile,Rendement,Type Huile,Duree,Observation\n";
+    while (q.next()) {
+        for (int i = 0; i < 10; i++) {
+            out << q.value(i).toString();
+            if (i < 9) out << ",";
+        }
+        out << "\n";
+    }
+    file.close();
+    return true;
+}
+
+// ─────────────────────────────────────────────────────────
+// rechercherParType
+// ─────────────────────────────────────────────────────────
+QSqlQueryModel* Production::rechercherParType(const QString &type)
+{
+    QSqlQueryModel *model = new QSqlQueryModel();
+    QSqlQuery q;
+    q.prepare("SELECT ID_OPERATION, DATE_PRODUCTION, CIN, ID_EMP, "
+              "QUANTITE_OLIVES, QUANTITE_HUILE, RENDEMENT, TYPE_HUILE, "
+              "DUREE_PRESSAGE, OBSERVATION FROM PRODUCTION "
+              "WHERE UPPER(TYPE_HUILE) LIKE UPPER(:type) "
+              "ORDER BY DATE_PRODUCTION DESC");
+    q.bindValue(":type", "%" + type + "%");
+    q.exec();
+    model->setQuery(std::move(q));
+    return model;
+}
+
+// ─────────────────────────────────────────────────────────
+// rechercherParPeriode
+// ─────────────────────────────────────────────────────────
+QSqlQueryModel* Production::rechercherParPeriode(const QDate &debut, const QDate &fin)
+{
+    QSqlQueryModel *model = new QSqlQueryModel();
+    QSqlQuery q;
+    q.prepare("SELECT ID_OPERATION, DATE_PRODUCTION, CIN, ID_EMP, "
+              "QUANTITE_OLIVES, QUANTITE_HUILE, RENDEMENT, TYPE_HUILE, "
+              "DUREE_PRESSAGE, OBSERVATION FROM PRODUCTION "
+              "WHERE DATE_PRODUCTION BETWEEN :debut AND :fin "
+              "ORDER BY DATE_PRODUCTION DESC");
+    q.bindValue(":debut", debut);
+    q.bindValue(":fin",   fin);
+    q.exec();
+    model->setQuery(std::move(q));
     return model;
 }

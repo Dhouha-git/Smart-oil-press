@@ -9,12 +9,13 @@ private:
     static Connection* instance;
     QSqlDatabase db;
 
-    Connection();
+
 
 public:
     static Connection* getInstance();
     bool createconnect();
     QSqlDatabase getDatabase();
+     Connection();
 };
 
 #endif

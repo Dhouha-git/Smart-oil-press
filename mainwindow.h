@@ -7,7 +7,24 @@
 #include "vente.h"
 #include <QString>
 #include <QMainWindow>
+#include "arduino.h"
 
+#include <QTcpSocket>
+#include <QRandomGenerator>
+#include <QSslSocket>
+#include <QPrinter>
+#include <QPainter>
+#include <QFileDialog>
+#include <QDateTime>
+#include <QDir>
+#include <QTextEdit>
+#include <QtCharts/QChartView>
+#include <QtCharts/QLineSeries>
+#include <QtCharts/QChart>
+#include <QtCharts/QValueAxis>
+#include <QtCharts/QDateTimeAxis>
+#include <QNetworkAccessManager>
+#include <QNetworkReply>
 QT_BEGIN_NAMESPACE
 namespace Ui {
 class MainWindow;
@@ -185,6 +202,8 @@ private slots:
     void on_btn_ventes_12_clicked();
 
     void on_connecter_clicked();
+
+    void on_btn_mdp_oublie_clicked();
     void on_historique_clicked();
 
     void on_btn_retour_5_clicked();
@@ -210,12 +229,18 @@ private slots:
     void on_lineEdit_recherche_textChanged(const QString &);
     void on_comboBox_filtre_currentTextChanged(const QString &);
     void on_comboBox_tri_currentTextChanged(const QString &);
-
+    void on_btn_pdf_employes_clicked();
     void on_ajouterVente();
     void on_afficherVente();
     void on_listerVentes();
     void on_resetFormulaire();
     void on_tableView_vente_clicked(const QModelIndex &index);
+
+    void on_exporter_excel_employes_clicked();
+    void on_btn_chatbot_clicked();
+
+    void on_btn_face_login_clicked();
+    void on_btn_prendre_photo_clicked();
 
     void on_ajouter_3_clicked();
     void on_supprimer_3_clicked();   // ← adaptez au vrai nom du bouton
@@ -223,6 +248,8 @@ private slots:
     void on_recherche1_2_clicked();       // ← adaptez au vrai nom du bouton
     void on_tri_2_clicked();
     void on_tableView_client_clicked(const QModelIndex &index);
+
+
 
     // ── Agriculteur ──────────────────────────────────────
     void on_btn_ajouter_2_clicked();
@@ -236,15 +263,85 @@ private slots:
     void on_pushButton_20_clicked();
     void on_pushButton_21_clicked();
 
-    // ── Production ───────────────────────────────────────
-    void on_ajouter_prod_clicked();
-    void on_modifier_prod_clicked();
-    void on_suprimer_prod_clicked();
-    void on_afficher_prod_clicked();
-    void on_rendement_clicked();
-    void on_tableWidget_prod_cellClicked(int row, int column);
+    void on_btn_stats_agri_clicked();
+    void on_btn_alertes_agri_clicked();
+    void on_btn_pdf_agri_clicked();
+    void on_comboBox_region_agri_currentTextChanged(const QString &region);
+    void chargerRegionsAgri();
+
+
+    void onCarteDetectee(const QString &cin);
+    void onEmployeIdentifie(const QString &cin, const QString &nom, const QString &prenom);
+    void onEmployeInconnu(const QString &cin);
+    void onMessageArduino(const QString &msg);
+    void on_btn_connecter_arduino_clicked();   // bouton de connexion dans ton UI
+    void on_btn_ecrire_carte_clicked();
+    void on_recherche2_2_clicked();
+
+    void on_appliquer_clicked();
+
+    void on_exporter1_clicked();
+
+
+    void on_appliquer2_clicked();
+
+    void on_appliquer3_2_clicked();
+
+    void on_exporter_2_clicked();
+
+    void on_executer_clicked();
+
+    void on_classement_clicked();
+        void afficher_historique();
+
+    void on_export_2_clicked();
+
+        // ── Ventes : Recherche & Tri ──────────────────────────────
+        void on_vente_rechercheClientBtn_clicked();
+        void on_vente_rechercheDateBtn_clicked();
+        void on_vente_triBox_currentIndexChanged(int index);
+
+        // ── Ventes : Exports ─────────────────────────────────────
+        void on_vente_exportCSVBtn_clicked();
+        void on_vente_exportPDFBtn_clicked();
+
+        // ── Ventes : Analyses ────────────────────────────────────
+        void on_vente_analyserCABtn_clicked();
+        void on_vente_detecterAnomaliesBtn_clicked();
+        void on_vente_previsionBtn_clicked();
+        void on_vente_graphiqueCABtn_clicked();
+
+        // ── Production : Analyses ─────────────────────────────────
+        void on_rendement_clicked();
+        void on_anomalies_clicked();
+        void on_graphique_clicked();
+
+        // ── Production : CRUD ─────────────────────────────────────
+        void on_ajouter_prod_clicked();
+        void on_modifier_prod_clicked();
+        void on_suprimer_prod_clicked();
+        void on_afficher_prod_clicked();
+        void on_tableWidget_prod_cellClicked(int row, int column);
+
+        // ── Production : Export ───────────────────────────────────
+        void on_pushButton_5_clicked();   // ← PDF production
+
+        // ── Production : IA Observation ───────────────────────────
+        void genererObservationIntelligente();
+        void onOllamaObservationResponse(QNetworkReply *reply);
+
+        // ── Production : Arduino ──────────────────────────────────
+        void onConnectArduinoClicked();
+        void onDisconnectArduinoClicked();
+        void onArduinoStatut(const QString &msg, bool connecte);
+        void onArduinoFormulaire(QString idOp, QString idAgri, QString idMach);
+        void onGreenCountChanged(int count);
+        void onBlackCountChanged(int count);
+        void recalculateAndAutoUpdateOliveWeight();
+
 private:
     Ui::MainWindow *ui;
+    QWidget* createSidebar(QWidget *parent);
     Employe Etmp;
     Agriculteur Atmp;
     Client Ctmp;
@@ -261,5 +358,41 @@ private:
     void viderFormulaireClient();
     void rafraichirGrilleProduction(const QString &needle);
     void viderChampsProduction();
+    void envoyerEmail(QString dest, QString code);
+    void exporterTableViewExcel(QAbstractItemModel* model, const QString& titre);
+    void afficherCourbeDansTable2();
+    void afficherCourbe();
+    void ouvrirChatbot();
+    QString interrogerOllama(const QString &prompt);
+    QString getInfosEmploye(const QString &question);
+    QList<QPair<QString,QString>> historiqueChat;
+    Arduino *m_arduino;
+    QChart *chart;
+    QLineSeries *series;
+    QTimer *timer;
+    // ── Production ────────────────────────────────────────────
+
+    void envoyerAlerteEmail(double rendement, const QString &idOperation);
+    void setupArduinoUI();
+    void updateArduinoCountersLabel();
+    void afficherOperations();
+
+
+    QNetworkAccessManager *managerEmail       = nullptr;
+    QNetworkAccessManager *managerObservation = nullptr;
+
+    int m_greenCount = 0;
+    int m_blackCount = 0;
+
+    //dashbord
+    struct DashboardData; // forward declaration
+    void loadDashboardStats();
+    void setupDashboard(int nbEmp, int nbActifs, int nbConge, int nbSusp,
+                        int nbAgri,
+                        int nbCli, int nbGold, int nbSilver,
+                        int nbVentes, double ca,
+                        double huile, double rendement,
+                        QList<int> ventesParMois, QStringList moisLabels);
+
 };
 #endif // MAINWINDOW_H

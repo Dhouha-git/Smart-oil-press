@@ -1,15 +1,23 @@
-QT       += core gui sql
+QT += core gui sql printsupport network serialport
 
 greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
 
 CONFIG += c++17
-
+QT += printsupport
+QT += network
+QT += core gui widgets network
+QT += charts
+QT += widgets charts
+QT += multimedia multimediawidgets
+QT += multimedia network
 # You can make your code fail to compile if it uses deprecated APIs.
 # In order to do so, uncomment the following line.
 #DEFINES += QT_DISABLE_DEPRECATED_BEFORE=0x060000    # disables all the APIs deprecated before Qt 6.0.0
 
 SOURCES += \
     agriculteur.cpp \
+    arduino.cpp \
+    circlestatwidget.cpp \
     client.cpp \
     connection.cpp \
     employe.cpp \
@@ -20,6 +28,8 @@ SOURCES += \
 
 HEADERS += \
     agriculteur.h \
+    arduino.h \
+    circlestatwidget.h \
     client.h \
     connection.h \
     employe.h \
