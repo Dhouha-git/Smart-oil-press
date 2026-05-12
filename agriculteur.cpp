@@ -112,8 +112,11 @@ QSqlQueryModel* Agriculteur::afficher()
 {
     QSqlQueryModel* model = new QSqlQueryModel();
     QSqlQuery query;
-    query.prepare("SELECT CIN, NOM, PRENOM, TELEPHONE, EMAIL, REGION, "
-                  "TYPE_OLIVE, DATE_INSCRIPTION, VOLUME_LIVRAISON, DATE_LIVRAISON "
+    query.prepare("SELECT TO_CHAR(CIN) AS CIN, NOM, PRENOM, "
+                  "TO_CHAR(TELEPHONE) AS TELEPHONE, EMAIL, REGION, "
+                  "TYPE_OLIVE, TO_CHAR(DATE_INSCRIPTION, 'DD/MM/YYYY') AS DATE_INSCRIPTION, "
+                  "VOLUME_LIVRAISON, "
+                  "TO_CHAR(DATE_LIVRAISON, 'DD/MM/YYYY') AS DATE_LIVRAISON "
                   "FROM AGRICULTEUR ORDER BY CIN");
     query.exec();
     model->setQuery(std::move(query));
@@ -136,8 +139,11 @@ QSqlQueryModel* Agriculteur::rechercher(QString val)
 {
     QSqlQueryModel* model = new QSqlQueryModel();
     QSqlQuery query;
-    query.prepare("SELECT CIN, NOM, PRENOM, TELEPHONE, EMAIL, REGION, "
-                  "TYPE_OLIVE, DATE_INSCRIPTION, VOLUME_LIVRAISON, DATE_LIVRAISON "
+    query.prepare("SELECT TO_CHAR(CIN) AS CIN, NOM, PRENOM, "
+                  "TO_CHAR(TELEPHONE) AS TELEPHONE, EMAIL, REGION, "
+                  "TYPE_OLIVE, TO_CHAR(DATE_INSCRIPTION, 'DD/MM/YYYY') AS DATE_INSCRIPTION, "
+                  "VOLUME_LIVRAISON, "
+                  "TO_CHAR(DATE_LIVRAISON, 'DD/MM/YYYY') AS DATE_LIVRAISON "
                   "FROM AGRICULTEUR "
                   "WHERE UPPER(NOM) LIKE UPPER(:val) "
                   "OR UPPER(PRENOM) LIKE UPPER(:val) "
@@ -164,10 +170,12 @@ QSqlQueryModel* Agriculteur::rechercher(QString val)
 QSqlQueryModel* Agriculteur::trier(QString critere)
 {
     QSqlQueryModel* model = new QSqlQueryModel();
-    model->setQuery("SELECT CIN, NOM, PRENOM, TELEPHONE, EMAIL, REGION, "
-                    "TYPE_OLIVE, DATE_INSCRIPTION, VOLUME_LIVRAISON, DATE_LIVRAISON "
+    model->setQuery("SELECT TO_CHAR(CIN) AS CIN, NOM, PRENOM, "
+                    "TO_CHAR(TELEPHONE) AS TELEPHONE, EMAIL, REGION, "
+                    "TYPE_OLIVE, TO_CHAR(DATE_INSCRIPTION, 'DD/MM/YYYY') AS DATE_INSCRIPTION, "
+                    "VOLUME_LIVRAISON, "
+                    "TO_CHAR(DATE_LIVRAISON, 'DD/MM/YYYY') AS DATE_LIVRAISON "
                     "FROM AGRICULTEUR ORDER BY " + critere);
-
     model->setHeaderData(0, Qt::Horizontal, "CIN");
     model->setHeaderData(1, Qt::Horizontal, "Nom");
     model->setHeaderData(2, Qt::Horizontal, "Prénom");
@@ -178,10 +186,8 @@ QSqlQueryModel* Agriculteur::trier(QString critere)
     model->setHeaderData(7, Qt::Horizontal, "Date Inscription");
     model->setHeaderData(8, Qt::Horizontal, "Volume Livraison");
     model->setHeaderData(9, Qt::Horizontal, "Date Livraison");
-
     return model;
 }
-
 // ============================================================
 // METIER AVANCEE 1 — Volume par Région
 // ============================================================

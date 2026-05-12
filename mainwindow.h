@@ -40,6 +40,9 @@ public:
     MainWindow(QWidget *parent = nullptr);
     ~MainWindow();
 
+protected:
+void resizeEvent(QResizeEvent *event) override;
+
 private slots:
     void on_btn_login_3_clicked();
 
@@ -58,8 +61,6 @@ private slots:
     void on_btn_modifier_clicked();
 
     void on_analyse_clicked();
-
-    void on_chatbot_clicked();
 
     void on_pdf_clicked();
 
@@ -237,6 +238,8 @@ private slots:
     void on_tableView_vente_clicked(const QModelIndex &index);
 
     void on_exporter_excel_employes_clicked();
+    void on_btn_analyse_employes_clicked();
+    void on_btn_graphiques_agri_clicked();
     void on_btn_chatbot_clicked();
 
     void on_btn_face_login_clicked();
@@ -247,7 +250,10 @@ private slots:
     void on_modifier_3_clicked();    // ← adaptez au vrai nom du bouton
     void on_recherche1_2_clicked();       // ← adaptez au vrai nom du bouton
     void on_tri_2_clicked();
+
     void on_tableView_client_clicked(const QModelIndex &index);
+
+    void on_btn_chatbot_global_clicked();
 
 
 
@@ -292,7 +298,7 @@ private slots:
     void on_executer_clicked();
 
     void on_classement_clicked();
-        void afficher_historique();
+    void afficher_historique();
 
     void on_export_2_clicked();
 
@@ -311,26 +317,36 @@ private slots:
         void on_vente_previsionBtn_clicked();
         void on_vente_graphiqueCABtn_clicked();
 
-        // ── Production : Analyses ─────────────────────────────────
         void on_rendement_clicked();
         void on_anomalies_clicked();
         void on_graphique_clicked();
 
-        // ── Production : CRUD ─────────────────────────────────────
-        void on_ajouter_prod_clicked();
-        void on_modifier_prod_clicked();
-        void on_suprimer_prod_clicked();
-        void on_afficher_prod_clicked();
-        void on_tableWidget_prod_cellClicked(int row, int column);
+        // Slot pour le bouton ajouter
+        void on_ajouter_clicked();
 
-        // ── Production : Export ───────────────────────────────────
-        void on_pushButton_5_clicked();   // ← PDF production
+        // Slots pour les autres boutons du CRUD
+        void on_modifier_clicked();
+        void on_suprimer_clicked();
+        void on_afficher_clicked();
+        void on_tableWidget_cellClicked(int row, int column);
 
-        // ── Production : IA Observation ───────────────────────────
+        // Slot pour l'export PDF
+        void on_pushButton_5_clicked();
+
+        // Slot pour afficher les données dans le tableWidget
+        void afficherOperations();
+
+        void effacerFiltreRecherche();
+
+        // Slots pour le Chatbot
+
+        void onOllamaResponse(QNetworkReply *reply);
+
+        // Slots pour l'IA Observation
         void genererObservationIntelligente();
         void onOllamaObservationResponse(QNetworkReply *reply);
 
-        // ── Production : Arduino ──────────────────────────────────
+        // Arduino
         void onConnectArduinoClicked();
         void onDisconnectArduinoClicked();
         void onArduinoStatut(const QString &msg, bool connecte);
@@ -339,7 +355,11 @@ private slots:
         void onBlackCountChanged(int count);
         void recalculateAndAutoUpdateOliveWeight();
 
-private:
+        void on_VERIFIER_clicked();
+
+        void on_btn_logout_2_clicked();
+
+    private:
     Ui::MainWindow *ui;
     QWidget* createSidebar(QWidget *parent);
     Employe Etmp;
@@ -356,7 +376,6 @@ private:
     void remplirTableau(QSqlQuery query);
     void viderFormulaire();
     void viderFormulaireClient();
-    void rafraichirGrilleProduction(const QString &needle);
     void viderChampsProduction();
     void envoyerEmail(QString dest, QString code);
     void exporterTableViewExcel(QAbstractItemModel* model, const QString& titre);
@@ -366,33 +385,46 @@ private:
     QString interrogerOllama(const QString &prompt);
     QString getInfosEmploye(const QString &question);
     QList<QPair<QString,QString>> historiqueChat;
-    Arduino *m_arduino;
     QChart *chart;
     QLineSeries *series;
     QTimer *timer;
+
+    // ── Sidebar unique ────────────────────────────────────────
+
+    void loadDashboardStats();
     // ── Production ────────────────────────────────────────────
 
+    void rafraichirGrilleProduction(const QString &needle);
+
+    // Méthode pour vider les champs après ajout
+    void viderChamps();
+
+    // Cerveau du chatbot local
+    void traiterQuestionChatbot(const QString &question);
+
+    QNetworkAccessManager *managerOllama;
+    QNetworkAccessManager *managerEmail;
+    QNetworkAccessManager *managerObservation; // Manager dédié à la génération d'observation
+
+    // Fonction d'alerte Email
     void envoyerAlerteEmail(double rendement, const QString &idOperation);
+
+    Arduino *m_arduino;   // ← ajouter
+    int m_greenCount = 0; // green box count
+    int m_blackCount = 0; // black box count
     void setupArduinoUI();
     void updateArduinoCountersLabel();
-    void afficherOperations();
-
-
-    QNetworkAccessManager *managerEmail       = nullptr;
-    QNetworkAccessManager *managerObservation = nullptr;
-
-    int m_greenCount = 0;
-    int m_blackCount = 0;
-
     //dashbord
     struct DashboardData; // forward declaration
-    void loadDashboardStats();
     void setupDashboard(int nbEmp, int nbActifs, int nbConge, int nbSusp,
                         int nbAgri,
                         int nbCli, int nbGold, int nbSilver,
                         int nbVentes, double ca,
                         double huile, double rendement,
                         QList<int> ventesParMois, QStringList moisLabels);
+
+    QString getContexteGlobal(const QString &question);
+
 
 };
 #endif // MAINWINDOW_H

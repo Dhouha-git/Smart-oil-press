@@ -1,4 +1,3 @@
-// arduino.h
 #ifndef ARDUINO_H
 #define ARDUINO_H
 
@@ -19,43 +18,47 @@ public:
     explicit Arduino(QObject *parent = nullptr);
     ~Arduino();
 
-    // Connexion au port série (ex: "COM3" sous Windows, "/dev/ttyUSB0" sous Linux)
+    // ── Connexion ──────────────────────────────────────────────
     bool connecter(const QString &portName, qint32 baudRate = 9600);
     void deconnecter();
     bool estConnecte() const;
+    QStringList listePortsDisponibles() const;
 
-    // Envoyer une commande à l'Arduino
-    // Ex: envoyer le CIN d'un employé à écrire sur la carte
+    // ── RFID Employés ──────────────────────────────────────────
     void envoyerDonnees(const QString &data);
-
-    // Envoyer "RESET" pour effacer une carte
     void envoyerReset();
-
-    // Enregistrer la présence d'un employé dans la BD
-    // (appelé automatiquement quand une carte valide est scannée)
-     bool enregistrerPresence(const QString &cin);
+    bool enregistrerPresence(const QString &cin);
 
 signals:
-    // Émis quand une carte valide est lue (avec le CIN)
+    // ── RFID ───────────────────────────────────────────────────
     void carteDetectee(const QString &cin);
-
-    // Émis pour afficher les logs dans l'UI
+    void employeIdentifie(const QString &cin, const QString &nom, const QString &prenom);
+    void employeInconnu(const QString &cin);
     void messageRecu(const QString &message);
 
-    // Émis quand l'employé est reconnu (après vérification BD)
-    void employeIdentifie(const QString &cin, const QString &nom, const QString &prenom);
+    // ── Production / capteurs olives ───────────────────────────
+    void greenCountChanged(int count);
+    void blackCountChanged(int count);
+    void formulaireRecu(QString idOperation, QString idAgriculteur, QString idMachine);
 
-    // Émis si le CIN n'existe pas en BD
-    void employeInconnu(const QString &cin);
+    // ── Statut connexion ───────────────────────────────────────
+    void statutChanged(const QString &message, bool connecte);
 
 private slots:
     void lireDonneesSerial();
 
 private:
     QSerialPort *m_serial;
-    QString      m_buffer;
+    QByteArray   m_buffer;
 
-    void traiterMessage(const QString &message);
+    // État formulaire production
+    QString m_idOperation;
+    QString m_idAgriculteur;
+    QString m_idMachine;
+
+    void traiterMessage(const QString &ligne);
+    void traiterRFID(const QString &ligne);
+    void traiterProduction(const QString &ligne);
 };
 
 #endif // ARDUINO_H

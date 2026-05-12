@@ -24,7 +24,7 @@
        </font>
       </property>
       <property name="currentIndex">
-       <number>15</number>
+       <number>13</number>
       </property>
       <widget class="QWidget" name="login">
        <property name="styleSheet">
@@ -413,16 +413,14 @@ QPushButton:pressed {
        <widget class="QFrame" name="frame_6">
         <property name="geometry">
          <rect>
-          <x>210</x>
-          <y>0</y>
-          <width>961</width>
-          <height>61</height>
+          <x>230</x>
+          <y>10</y>
+          <width>921</width>
+          <height>51</height>
          </rect>
         </property>
         <property name="styleSheet">
-         <string notr="true">QFrame {
-    background-color: #556B2F;
-}</string>
+         <string notr="true">QFrame { background: #556B2F; border-radius: 10px; }</string>
         </property>
         <property name="frameShape">
          <enum>QFrame::Shape::StyledPanel</enum>
@@ -430,6 +428,28 @@ QPushButton:pressed {
         <property name="frameShadow">
          <enum>QFrame::Shadow::Raised</enum>
         </property>
+        <widget class="QLabel" name="label_52">
+         <property name="geometry">
+          <rect>
+           <x>20</x>
+           <y>0</y>
+           <width>391</width>
+           <height>51</height>
+          </rect>
+         </property>
+         <property name="font">
+          <font>
+           <pointsize>-1</pointsize>
+           <bold>true</bold>
+          </font>
+         </property>
+         <property name="styleSheet">
+          <string notr="true">color: white; font-size: 15px; font-weight: bold; background: transparent;</string>
+         </property>
+         <property name="text">
+          <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;👷   Employes - Smart Oil Press&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+         </property>
+        </widget>
        </widget>
        <widget class="QFrame" name="sidebar_2">
         <property name="geometry">
@@ -530,10 +550,7 @@ QPushButton:hover {
             </font>
            </property>
            <property name="text">
-            <string>Tableau de Bord</string>
-           </property>
-           <property name="icon">
-            <iconset theme="QIcon::ThemeIcon::GoHome"/>
+            <string>🏠  Tableau de Bord</string>
            </property>
           </widget>
          </item>
@@ -546,10 +563,7 @@ QPushButton:hover {
             </font>
            </property>
            <property name="text">
-            <string>Gestion des Employes</string>
-           </property>
-           <property name="icon">
-            <iconset theme="QIcon::ThemeIcon::UserAvailable"/>
+            <string>👷   Employes</string>
            </property>
           </widget>
          </item>
@@ -562,7 +576,7 @@ QPushButton:hover {
             </font>
            </property>
            <property name="text">
-            <string>Gestion des Agriculteurs</string>
+            <string>🌿   Agriculteurs</string>
            </property>
           </widget>
          </item>
@@ -575,7 +589,7 @@ QPushButton:hover {
             </font>
            </property>
            <property name="text">
-            <string>Gestion des Clients</string>
+            <string>👥  Clients</string>
            </property>
           </widget>
          </item>
@@ -588,7 +602,7 @@ QPushButton:hover {
             </font>
            </property>
            <property name="text">
-            <string>Gestion de Production</string>
+            <string>⚙  Production</string>
            </property>
           </widget>
          </item>
@@ -601,7 +615,7 @@ QPushButton:hover {
             </font>
            </property>
            <property name="text">
-            <string>Gestion des Ventes</string>
+            <string>🛒  Ventes</string>
            </property>
           </widget>
          </item>
@@ -627,116 +641,11 @@ QPushButton:hover {
             </font>
            </property>
            <property name="text">
-            <string>Deconnexion</string>
+            <string>🚪  Déconnexion</string>
            </property>
           </widget>
          </item>
         </layout>
-       </widget>
-       <widget class="QFrame" name="frame_3">
-        <property name="geometry">
-         <rect>
-          <x>300</x>
-          <y>470</y>
-          <width>231</width>
-          <height>211</height>
-         </rect>
-        </property>
-        <property name="styleSheet">
-         <string notr="true">QFrame {
-    background-color: white;
-    border: 2px solid #D4AF37;   /* jaune doré */
-    gridline-color: #D4AF37;
-    border-radius: 6px;
-    selection-background-color: #FFF3C4;
-    selection-color: black;
-}
-
-
-
-
-</string>
-        </property>
-        <property name="frameShape">
-         <enum>QFrame::Shape::StyledPanel</enum>
-        </property>
-        <property name="frameShadow">
-         <enum>QFrame::Shadow::Raised</enum>
-        </property>
-        <widget class="QLabel" name="label_27">
-         <property name="geometry">
-          <rect>
-           <x>50</x>
-           <y>10</y>
-           <width>141</width>
-           <height>31</height>
-          </rect>
-         </property>
-         <property name="font">
-          <font>
-           <pointsize>10</pointsize>
-           <bold>true</bold>
-          </font>
-         </property>
-         <property name="text">
-          <string>Notification </string>
-         </property>
-         <property name="alignment">
-          <set>Qt::AlignmentFlag::AlignCenter</set>
-         </property>
-        </widget>
-        <widget class="QFrame" name="frame_4">
-         <property name="geometry">
-          <rect>
-           <x>19</x>
-           <y>49</y>
-           <width>191</width>
-           <height>121</height>
-          </rect>
-         </property>
-         <property name="frameShape">
-          <enum>QFrame::Shape::StyledPanel</enum>
-         </property>
-         <property name="frameShadow">
-          <enum>QFrame::Shadow::Raised</enum>
-         </property>
-        </widget>
-        <widget class="QPushButton" name="pushButton_8">
-         <property name="geometry">
-          <rect>
-           <x>70</x>
-           <y>170</y>
-           <width>91</width>
-           <height>31</height>
-          </rect>
-         </property>
-         <property name="font">
-          <font>
-           <bold>true</bold>
-          </font>
-         </property>
-         <property name="styleSheet">
-          <string notr="true">QPushButton {
-    background-color: white;
-    border: 2px solid #D4AF37;   /* jaune doré */
-    gridline-color: #D4AF37;
-    border-radius: 6px;
-    selection-background-color: #FFF3C4;
-    selection-color: black;
-}
-
-
-
-
-</string>
-         </property>
-         <property name="text">
-          <string>Envoyer</string>
-         </property>
-         <property name="icon">
-          <iconset theme="QIcon::ThemeIcon::MailSend"/>
-         </property>
-        </widget>
        </widget>
        <widget class="QFrame" name="frame_top">
         <property name="geometry">
@@ -767,22 +676,6 @@ QPushButton:hover {
          <enum>QFrame::Shadow::Raised</enum>
         </property>
         <layout class="QHBoxLayout" name="horizontalLayout_2">
-         <item>
-          <widget class="QLabel" name="label_22">
-           <property name="font">
-            <font>
-             <pointsize>16</pointsize>
-             <bold>true</bold>
-            </font>
-           </property>
-           <property name="text">
-            <string>Gestion des Employés</string>
-           </property>
-           <property name="alignment">
-            <set>Qt::AlignmentFlag::AlignLeading|Qt::AlignmentFlag::AlignLeft|Qt::AlignmentFlag::AlignVCenter</set>
-           </property>
-          </widget>
-         </item>
          <item>
           <spacer name="horizontalSpacer">
            <property name="orientation">
@@ -821,7 +714,7 @@ QPushButton:hover {
           <x>220</x>
           <y>220</y>
           <width>921</width>
-          <height>191</height>
+          <height>291</height>
          </rect>
         </property>
         <property name="styleSheet">
@@ -843,8 +736,8 @@ QPushButton:hover {
        <widget class="QPushButton" name="btn_modifier">
         <property name="geometry">
          <rect>
-          <x>460</x>
-          <y>420</y>
+          <x>400</x>
+          <y>520</y>
           <width>161</width>
           <height>31</height>
          </rect>
@@ -878,8 +771,8 @@ QPushButton:hover {
        <widget class="QPushButton" name="btn_supprimer">
         <property name="geometry">
          <rect>
-          <x>650</x>
-          <y>420</y>
+          <x>580</x>
+          <y>520</y>
           <width>151</width>
           <height>31</height>
          </rect>
@@ -910,17 +803,6 @@ QPushButton:hover {
          <iconset theme="QIcon::ThemeIcon::EditDelete"/>
         </property>
        </widget>
-       <widget class="QWidget" name="verticalLayoutWidget">
-        <property name="geometry">
-         <rect>
-          <x>210</x>
-          <y>580</y>
-          <width>81</width>
-          <height>101</height>
-         </rect>
-        </property>
-        <layout class="QVBoxLayout" name="verticalLayout_chart"/>
-       </widget>
        <widget class="QLabel" name="label_25">
         <property name="geometry">
          <rect>
@@ -940,111 +822,6 @@ QPushButton:hover {
          <string>Trier par</string>
         </property>
        </widget>
-       <widget class="QFrame" name="frame">
-        <property name="geometry">
-         <rect>
-          <x>780</x>
-          <y>470</y>
-          <width>231</width>
-          <height>211</height>
-         </rect>
-        </property>
-        <property name="styleSheet">
-         <string notr="true">QFrame {
-    background-color: white;
-    border: 2px solid #D4AF37;   /* jaune doré */
-    gridline-color: #D4AF37;
-    border-radius: 6px;
-    selection-background-color: #FFF3C4;
-    selection-color: black;
-}
-
-
-
-
-</string>
-        </property>
-        <property name="frameShape">
-         <enum>QFrame::Shape::StyledPanel</enum>
-        </property>
-        <property name="frameShadow">
-         <enum>QFrame::Shadow::Raised</enum>
-        </property>
-        <widget class="QLabel" name="label_26">
-         <property name="geometry">
-          <rect>
-           <x>50</x>
-           <y>10</y>
-           <width>141</width>
-           <height>31</height>
-          </rect>
-         </property>
-         <property name="font">
-          <font>
-           <pointsize>10</pointsize>
-           <bold>true</bold>
-          </font>
-         </property>
-         <property name="text">
-          <string>Assistant Intelligant </string>
-         </property>
-         <property name="alignment">
-          <set>Qt::AlignmentFlag::AlignCenter</set>
-         </property>
-        </widget>
-        <widget class="QFrame" name="frame_2">
-         <property name="geometry">
-          <rect>
-           <x>19</x>
-           <y>49</y>
-           <width>191</width>
-           <height>121</height>
-          </rect>
-         </property>
-         <property name="frameShape">
-          <enum>QFrame::Shape::StyledPanel</enum>
-         </property>
-         <property name="frameShadow">
-          <enum>QFrame::Shadow::Raised</enum>
-         </property>
-        </widget>
-        <widget class="QPushButton" name="btn_chatbot">
-         <property name="geometry">
-          <rect>
-           <x>70</x>
-           <y>170</y>
-           <width>91</width>
-           <height>31</height>
-          </rect>
-         </property>
-         <property name="font">
-          <font>
-           <bold>true</bold>
-          </font>
-         </property>
-         <property name="styleSheet">
-          <string notr="true">QPushButton {
-    background-color: white;
-    border: 2px solid #D4AF37;   /* jaune doré */
-    gridline-color: #D4AF37;
-    border-radius: 6px;
-    selection-background-color: #FFF3C4;
-    selection-color: black;
-}
-
-
-
-
-</string>
-         </property>
-         <property name="text">
-          <string>Envoyer</string>
-         </property>
-         <property name="icon">
-          <iconset theme="QIcon::ThemeIcon::MailSend"/>
-         </property>
-        </widget>
-       </widget>
        <widget class="QLineEdit" name="lineEdit_recherche">
         <property name="geometry">
          <rect>
@@ -1053,6 +830,21 @@ QPushButton:hover {
           <width>171</width>
           <height>31</height>
          </rect>
+        </property>
+        <property name="styleSheet">
+         <string notr="true">QLineEdit {
+    background-color: white;
+    border: 2px solid #D4AF37;   /* jaune doré */
+    gridline-color: #D4AF37;
+    border-radius: 6px;
+    selection-background-color: #FFF3C4;
+    selection-color: black;
+}
+
+
+
+
+</string>
         </property>
         <property name="placeholderText">
          <string>🔍 Rechercher employé...</string>
@@ -1085,6 +877,21 @@ QPushButton:hover {
           <width>101</width>
           <height>31</height>
          </rect>
+        </property>
+        <property name="styleSheet">
+         <string notr="true">QComboBox {
+    background-color: white;
+    border: 2px solid #D4AF37;   /* jaune doré */
+    gridline-color: #D4AF37;
+    border-radius: 6px;
+    selection-background-color: #FFF3C4;
+    selection-color: black;
+}
+
+
+
+
+</string>
         </property>
         <item>
          <property name="text">
@@ -1121,6 +928,21 @@ QPushButton:hover {
           <height>31</height>
          </rect>
         </property>
+        <property name="styleSheet">
+         <string notr="true">QComboBox {
+    background-color: white;
+    border: 2px solid #D4AF37;   /* jaune doré */
+    gridline-color: #D4AF37;
+    border-radius: 6px;
+    selection-background-color: #FFF3C4;
+    selection-color: black;
+}
+
+
+
+
+</string>
+        </property>
         <item>
          <property name="text">
           <string>ID ASC</string>
@@ -1155,8 +977,8 @@ QPushButton:hover {
        <widget class="QPushButton" name="btn_pdf_employes">
         <property name="geometry">
          <rect>
-          <x>830</x>
-          <y>420</y>
+          <x>760</x>
+          <y>520</y>
           <width>151</width>
           <height>31</height>
          </rect>
@@ -1190,8 +1012,8 @@ QPushButton:hover {
        <widget class="QPushButton" name="exporter_excel_employes">
         <property name="geometry">
          <rect>
-          <x>1010</x>
-          <y>420</y>
+          <x>930</x>
+          <y>520</y>
           <width>151</width>
           <height>31</height>
          </rect>
@@ -1225,11 +1047,30 @@ QPushButton:hover {
        <widget class="QPushButton" name="btn_connecter_arduino">
         <property name="geometry">
          <rect>
-          <x>830</x>
-          <y>140</y>
-          <width>121</width>
-          <height>24</height>
+          <x>850</x>
+          <y>130</y>
+          <width>131</width>
+          <height>31</height>
          </rect>
+        </property>
+        <property name="font">
+         <font>
+          <pointsize>9</pointsize>
+          <bold>true</bold>
+         </font>
+        </property>
+        <property name="styleSheet">
+         <string notr="true">QPushButton {
+    background-color: #D4AF37;
+    color: black;
+    border-radius: 6px;
+    padding: 6px 12px;
+}
+
+QPushButton:hover {
+    background-color: #c49b2f;
+}
+</string>
         </property>
         <property name="text">
          <string>🔌 Arduino</string>
@@ -1238,14 +1079,65 @@ QPushButton:hover {
        <widget class="QPushButton" name="btn_ecrire_carte">
         <property name="geometry">
          <rect>
-          <x>310</x>
-          <y>420</y>
-          <width>101</width>
+          <x>240</x>
+          <y>520</y>
+          <width>141</width>
           <height>31</height>
          </rect>
         </property>
+        <property name="font">
+         <font>
+          <pointsize>10</pointsize>
+          <bold>true</bold>
+         </font>
+        </property>
+        <property name="styleSheet">
+         <string notr="true">QPushButton {
+    background-color: #D4AF37;
+    color: black;
+    border-radius: 6px;
+    padding: 6px 12px;
+}
+
+QPushButton:hover {
+    background-color: #c49b2f;
+}
+</string>
+        </property>
         <property name="text">
          <string>🪪 Écrire carte</string>
+        </property>
+       </widget>
+       <widget class="QPushButton" name="btn_analyse_employes">
+        <property name="geometry">
+         <rect>
+          <x>540</x>
+          <y>570</y>
+          <width>231</width>
+          <height>31</height>
+         </rect>
+        </property>
+        <property name="font">
+         <font>
+          <pointsize>10</pointsize>
+          <bold>true</bold>
+         </font>
+        </property>
+        <property name="styleSheet">
+         <string notr="true">QPushButton {
+    background-color: #D4AF37;
+    color: black;
+    border-radius: 6px;
+    padding: 6px 12px;
+}
+
+QPushButton:hover {
+    background-color: #c49b2f;
+}
+</string>
+        </property>
+        <property name="text">
+         <string>📊 Analyse les employes</string>
         </property>
        </widget>
       </widget>
@@ -1373,16 +1265,14 @@ QLCDNumber{
        <widget class="QFrame" name="frame_16">
         <property name="geometry">
          <rect>
-          <x>220</x>
-          <y>0</y>
-          <width>961</width>
-          <height>61</height>
+          <x>240</x>
+          <y>10</y>
+          <width>921</width>
+          <height>51</height>
          </rect>
         </property>
         <property name="styleSheet">
-         <string notr="true">QFrame {
-    background-color: #556B2F;
-}</string>
+         <string notr="true">QFrame { background: #556B2F; border-radius: 10px; }</string>
         </property>
         <property name="frameShape">
          <enum>QFrame::Shape::StyledPanel</enum>
@@ -1390,6 +1280,28 @@ QLCDNumber{
         <property name="frameShadow">
          <enum>QFrame::Shadow::Raised</enum>
         </property>
+        <widget class="QLabel" name="label_51">
+         <property name="geometry">
+          <rect>
+           <x>20</x>
+           <y>0</y>
+           <width>391</width>
+           <height>51</height>
+          </rect>
+         </property>
+         <property name="font">
+          <font>
+           <pointsize>-1</pointsize>
+           <bold>true</bold>
+          </font>
+         </property>
+         <property name="styleSheet">
+          <string notr="true">color: white; font-size: 15px; font-weight: bold; background: transparent;</string>
+         </property>
+         <property name="text">
+          <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;👥  Clients - Smart Oil Press&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+         </property>
+        </widget>
        </widget>
        <widget class="QFrame" name="sidebar_5">
         <property name="geometry">
@@ -1489,10 +1401,7 @@ QPushButton:hover {
             </font>
            </property>
            <property name="text">
-            <string>Tableau de Bord</string>
-           </property>
-           <property name="icon">
-            <iconset theme="QIcon::ThemeIcon::GoHome"/>
+            <string>🏠  Tableau de Bord</string>
            </property>
           </widget>
          </item>
@@ -1505,10 +1414,7 @@ QPushButton:hover {
             </font>
            </property>
            <property name="text">
-            <string>Gestion des Employes</string>
-           </property>
-           <property name="icon">
-            <iconset theme="QIcon::ThemeIcon::UserAvailable"/>
+            <string>👷   Employes</string>
            </property>
           </widget>
          </item>
@@ -1521,7 +1427,7 @@ QPushButton:hover {
             </font>
            </property>
            <property name="text">
-            <string>Gestion des Agriculteurs</string>
+            <string>🌿   Agriculteurs</string>
            </property>
           </widget>
          </item>
@@ -1534,7 +1440,7 @@ QPushButton:hover {
             </font>
            </property>
            <property name="text">
-            <string>Gestion des Clients</string>
+            <string>👥  Clients</string>
            </property>
           </widget>
          </item>
@@ -1547,7 +1453,7 @@ QPushButton:hover {
             </font>
            </property>
            <property name="text">
-            <string>Gestion de Production</string>
+            <string>⚙  Production</string>
            </property>
           </widget>
          </item>
@@ -1560,7 +1466,7 @@ QPushButton:hover {
             </font>
            </property>
            <property name="text">
-            <string>Gestion des Ventes</string>
+            <string>🛒  Ventes</string>
            </property>
           </widget>
          </item>
@@ -1586,7 +1492,7 @@ QPushButton:hover {
             </font>
            </property>
            <property name="text">
-            <string>Deconnexion</string>
+            <string>🚪  Déconnexion</string>
            </property>
           </widget>
          </item>
@@ -1711,7 +1617,7 @@ QPushButton:hover {
         <property name="geometry">
          <rect>
           <x>430</x>
-          <y>500</y>
+          <y>470</y>
           <width>93</width>
           <height>29</height>
          </rect>
@@ -1724,7 +1630,7 @@ QPushButton:hover {
         <property name="geometry">
          <rect>
           <x>550</x>
-          <y>490</y>
+          <y>460</y>
           <width>191</width>
           <height>42</height>
          </rect>
@@ -1734,7 +1640,7 @@ QPushButton:hover {
         <property name="geometry">
          <rect>
           <x>750</x>
-          <y>500</y>
+          <y>470</y>
           <width>93</width>
           <height>29</height>
          </rect>
@@ -1743,32 +1649,11 @@ QPushButton:hover {
          <string> trier par</string>
         </property>
        </widget>
-       <widget class="QLabel" name="label_148">
-        <property name="geometry">
-         <rect>
-          <x>230</x>
-          <y>80</y>
-          <width>331</width>
-          <height>31</height>
-         </rect>
-        </property>
-        <property name="font">
-         <font>
-          <family>Segoe UI</family>
-          <pointsize>16</pointsize>
-          <italic>false</italic>
-          <bold>true</bold>
-         </font>
-        </property>
-        <property name="text">
-         <string>Gestion des Clients</string>
-        </property>
-       </widget>
        <widget class="QLineEdit" name="recherche1">
         <property name="geometry">
          <rect>
           <x>240</x>
-          <y>490</y>
+          <y>460</y>
           <width>181</width>
           <height>42</height>
          </rect>
@@ -1802,7 +1687,7 @@ QLineEdit#searchEdit:hover {
         <property name="geometry">
          <rect>
           <x>250</x>
-          <y>120</y>
+          <y>90</y>
           <width>631</width>
           <height>361</height>
          </rect>
@@ -1826,7 +1711,7 @@ QLineEdit#searchEdit:hover {
          <property name="geometry">
           <rect>
            <x>10</x>
-           <y>10</y>
+           <y>0</y>
            <width>141</width>
            <height>31</height>
           </rect>
@@ -1987,8 +1872,8 @@ QLineEdit#searchEdit:hover {
           <rect>
            <x>70</x>
            <y>300</y>
-           <width>171</width>
-           <height>40</height>
+           <width>141</width>
+           <height>31</height>
           </rect>
          </property>
          <property name="font">
@@ -2152,8 +2037,8 @@ QPushButton:hover {
           <rect>
            <x>260</x>
            <y>300</y>
-           <width>201</width>
-           <height>40</height>
+           <width>171</width>
+           <height>31</height>
           </rect>
          </property>
          <property name="font">
@@ -2283,9 +2168,9 @@ QPushButton:hover {
         <property name="geometry">
          <rect>
           <x>960</x>
-          <y>90</y>
+          <y>100</y>
           <width>161</width>
-          <height>51</height>
+          <height>41</height>
          </rect>
         </property>
         <property name="font">
@@ -2311,45 +2196,13 @@ QPushButton:hover {
          <string> 📈Analyse</string>
         </property>
        </widget>
-       <widget class="QPushButton" name="chatbot">
-        <property name="geometry">
-         <rect>
-          <x>960</x>
-          <y>160</y>
-          <width>161</width>
-          <height>51</height>
-         </rect>
-        </property>
-        <property name="font">
-         <font>
-          <pointsize>10</pointsize>
-          <bold>true</bold>
-         </font>
-        </property>
-        <property name="styleSheet">
-         <string notr="true">QPushButton {
-    background-color: #6B4F3F
-    color: black;
-    border-radius: 6px;
-    padding: 6px 12px;
-}
-
-QPushButton:hover {
-    background-color: #c49b2f;
-}
-</string>
-        </property>
-        <property name="text">
-         <string>🤖 Chatbot</string>
-        </property>
-       </widget>
        <widget class="QPushButton" name="pdf">
         <property name="geometry">
          <rect>
           <x>960</x>
-          <y>230</y>
+          <y>170</y>
           <width>161</width>
-          <height>51</height>
+          <height>41</height>
          </rect>
         </property>
         <property name="font">
@@ -2379,9 +2232,9 @@ QPushButton:hover {
         <property name="geometry">
          <rect>
           <x>220</x>
-          <y>540</y>
-          <width>961</width>
-          <height>141</height>
+          <y>510</y>
+          <width>951</width>
+          <height>171</height>
          </rect>
         </property>
         <property name="styleSheet">
@@ -2405,16 +2258,14 @@ QPushButton:hover {
        <widget class="QFrame" name="frame_19">
         <property name="geometry">
          <rect>
-          <x>220</x>
-          <y>0</y>
-          <width>961</width>
-          <height>61</height>
+          <x>240</x>
+          <y>10</y>
+          <width>921</width>
+          <height>51</height>
          </rect>
         </property>
         <property name="styleSheet">
-         <string notr="true">QFrame {
-    background-color: #556B2F;
-}</string>
+         <string notr="true">QFrame { background: #556B2F; border-radius: 10px; }</string>
         </property>
         <property name="frameShape">
          <enum>QFrame::Shape::StyledPanel</enum>
@@ -2422,6 +2273,28 @@ QPushButton:hover {
         <property name="frameShadow">
          <enum>QFrame::Shadow::Raised</enum>
         </property>
+        <widget class="QLabel" name="label_27">
+         <property name="geometry">
+          <rect>
+           <x>10</x>
+           <y>0</y>
+           <width>391</width>
+           <height>51</height>
+          </rect>
+         </property>
+         <property name="font">
+          <font>
+           <pointsize>-1</pointsize>
+           <bold>true</bold>
+          </font>
+         </property>
+         <property name="styleSheet">
+          <string notr="true">color: white; font-size: 15px; font-weight: bold; background: transparent;</string>
+         </property>
+         <property name="text">
+          <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;👥  Clients - Smart Oil Press&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+         </property>
+        </widget>
        </widget>
        <widget class="QFrame" name="sidebar_6">
         <property name="geometry">
@@ -2521,10 +2394,7 @@ QPushButton:hover {
             </font>
            </property>
            <property name="text">
-            <string>Tableau de Bord</string>
-           </property>
-           <property name="icon">
-            <iconset theme="QIcon::ThemeIcon::GoHome"/>
+            <string>🏠  Tableau de Bord</string>
            </property>
           </widget>
          </item>
@@ -2537,10 +2407,7 @@ QPushButton:hover {
             </font>
            </property>
            <property name="text">
-            <string>Gestion des Employes</string>
-           </property>
-           <property name="icon">
-            <iconset theme="QIcon::ThemeIcon::UserAvailable"/>
+            <string>👷   Employes</string>
            </property>
           </widget>
          </item>
@@ -2553,7 +2420,7 @@ QPushButton:hover {
             </font>
            </property>
            <property name="text">
-            <string>Gestion des Agriculteurs</string>
+            <string>🌿   Agriculteurs</string>
            </property>
           </widget>
          </item>
@@ -2566,7 +2433,7 @@ QPushButton:hover {
             </font>
            </property>
            <property name="text">
-            <string>Gestion des Clients</string>
+            <string>👥  Clients</string>
            </property>
           </widget>
          </item>
@@ -2579,7 +2446,7 @@ QPushButton:hover {
             </font>
            </property>
            <property name="text">
-            <string>Gestion de Production</string>
+            <string>⚙  Production</string>
            </property>
           </widget>
          </item>
@@ -2618,7 +2485,7 @@ QPushButton:hover {
             </font>
            </property>
            <property name="text">
-            <string>Deconnexion</string>
+            <string>🚪  Déconnexion</string>
            </property>
           </widget>
          </item>
@@ -3576,10 +3443,7 @@ QPushButton:hover {
             </font>
            </property>
            <property name="text">
-            <string>Tableau de Bord</string>
-           </property>
-           <property name="icon">
-            <iconset theme="QIcon::ThemeIcon::GoHome"/>
+            <string>🏠  Tableau de Bord</string>
            </property>
           </widget>
          </item>
@@ -3592,10 +3456,7 @@ QPushButton:hover {
             </font>
            </property>
            <property name="text">
-            <string>Gestion des Employes</string>
-           </property>
-           <property name="icon">
-            <iconset theme="QIcon::ThemeIcon::UserAvailable"/>
+            <string>👷   Employes</string>
            </property>
           </widget>
          </item>
@@ -3608,7 +3469,7 @@ QPushButton:hover {
             </font>
            </property>
            <property name="text">
-            <string>Gestion des Agriculteurs</string>
+            <string>🌿   Agriculteurs</string>
            </property>
           </widget>
          </item>
@@ -3621,7 +3482,7 @@ QPushButton:hover {
             </font>
            </property>
            <property name="text">
-            <string>Gestion des Clients</string>
+            <string>👥  Clients</string>
            </property>
           </widget>
          </item>
@@ -3634,7 +3495,7 @@ QPushButton:hover {
             </font>
            </property>
            <property name="text">
-            <string>Gestion de Production</string>
+            <string>⚙  Production</string>
            </property>
           </widget>
          </item>
@@ -3647,7 +3508,7 @@ QPushButton:hover {
             </font>
            </property>
            <property name="text">
-            <string>Gestion des Ventes</string>
+            <string>🛒  Ventes</string>
            </property>
           </widget>
          </item>
@@ -3673,7 +3534,7 @@ QPushButton:hover {
             </font>
            </property>
            <property name="text">
-            <string>Deconnexion</string>
+            <string>🚪  Déconnexion</string>
            </property>
           </widget>
          </item>
@@ -3682,16 +3543,14 @@ QPushButton:hover {
        <widget class="QFrame" name="frame_9">
         <property name="geometry">
          <rect>
-          <x>220</x>
-          <y>0</y>
-          <width>961</width>
-          <height>61</height>
+          <x>240</x>
+          <y>10</y>
+          <width>921</width>
+          <height>51</height>
          </rect>
         </property>
         <property name="styleSheet">
-         <string notr="true">QFrame {
-    background-color: #556B2F;
-}</string>
+         <string notr="true">QFrame { background: #556B2F; border-radius: 10px; }</string>
         </property>
         <property name="frameShape">
          <enum>QFrame::Shape::StyledPanel</enum>
@@ -3699,6 +3558,28 @@ QPushButton:hover {
         <property name="frameShadow">
          <enum>QFrame::Shadow::Raised</enum>
         </property>
+        <widget class="QLabel" name="label_53">
+         <property name="geometry">
+          <rect>
+           <x>10</x>
+           <y>0</y>
+           <width>391</width>
+           <height>51</height>
+          </rect>
+         </property>
+         <property name="font">
+          <font>
+           <pointsize>-1</pointsize>
+           <bold>true</bold>
+          </font>
+         </property>
+         <property name="styleSheet">
+          <string notr="true">color: white; font-size: 15px; font-weight: bold; background: transparent;</string>
+         </property>
+         <property name="text">
+          <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;👥  Clients - Smart Oil Press&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+         </property>
+        </widget>
        </widget>
        <widget class="QTableWidget" name="table3">
         <property name="geometry">
@@ -3820,10 +3701,10 @@ QPushButton:pressed {
        <widget class="QLabel" name="label_64">
         <property name="geometry">
          <rect>
-          <x>230</x>
-          <y>70</y>
-          <width>291</width>
-          <height>51</height>
+          <x>260</x>
+          <y>90</y>
+          <width>271</width>
+          <height>31</height>
          </rect>
         </property>
         <property name="font">
@@ -3927,16 +3808,14 @@ QPushButton:pressed {
        <widget class="QFrame" name="frame_7">
         <property name="geometry">
          <rect>
-          <x>220</x>
-          <y>0</y>
-          <width>961</width>
-          <height>61</height>
+          <x>240</x>
+          <y>10</y>
+          <width>921</width>
+          <height>51</height>
          </rect>
         </property>
         <property name="styleSheet">
-         <string notr="true">QFrame {
-    background-color: #556B2F;
-}</string>
+         <string notr="true">QFrame { background: #556B2F; border-radius: 10px; }</string>
         </property>
         <property name="frameShape">
          <enum>QFrame::Shape::StyledPanel</enum>
@@ -3944,6 +3823,28 @@ QPushButton:pressed {
         <property name="frameShadow">
          <enum>QFrame::Shadow::Raised</enum>
         </property>
+        <widget class="QLabel" name="label_3">
+         <property name="geometry">
+          <rect>
+           <x>10</x>
+           <y>0</y>
+           <width>391</width>
+           <height>51</height>
+          </rect>
+         </property>
+         <property name="font">
+          <font>
+           <pointsize>-1</pointsize>
+           <bold>true</bold>
+          </font>
+         </property>
+         <property name="styleSheet">
+          <string notr="true">color: white; font-size: 15px; font-weight: bold; background: transparent;</string>
+         </property>
+         <property name="text">
+          <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;👷   Employes - Smart Oil Press&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+         </property>
+        </widget>
        </widget>
        <widget class="QFrame" name="sidebar_3">
         <property name="geometry">
@@ -4043,10 +3944,7 @@ QPushButton:hover {
             </font>
            </property>
            <property name="text">
-            <string>Tableau de Bord</string>
-           </property>
-           <property name="icon">
-            <iconset theme="QIcon::ThemeIcon::GoHome"/>
+            <string>🏠  Tableau de Bord</string>
            </property>
           </widget>
          </item>
@@ -4059,10 +3957,7 @@ QPushButton:hover {
             </font>
            </property>
            <property name="text">
-            <string>Gestion des Employes</string>
-           </property>
-           <property name="icon">
-            <iconset theme="QIcon::ThemeIcon::UserAvailable"/>
+            <string>👷   Employes</string>
            </property>
           </widget>
          </item>
@@ -4075,7 +3970,7 @@ QPushButton:hover {
             </font>
            </property>
            <property name="text">
-            <string>Gestion des Agriculteurs</string>
+            <string>🌿   Agriculteurs</string>
            </property>
           </widget>
          </item>
@@ -4088,7 +3983,7 @@ QPushButton:hover {
             </font>
            </property>
            <property name="text">
-            <string>Gestion des Clients</string>
+            <string>👥  Clients</string>
            </property>
           </widget>
          </item>
@@ -4101,7 +3996,7 @@ QPushButton:hover {
             </font>
            </property>
            <property name="text">
-            <string>Gestion de Production</string>
+            <string>⚙  Production</string>
            </property>
           </widget>
          </item>
@@ -4114,7 +4009,7 @@ QPushButton:hover {
             </font>
            </property>
            <property name="text">
-            <string>Gestion des Ventes</string>
+            <string>🛒  Ventes</string>
            </property>
           </widget>
          </item>
@@ -4140,7 +4035,7 @@ QPushButton:hover {
             </font>
            </property>
            <property name="text">
-            <string>Deconnexion</string>
+            <string>🚪  Déconnexion</string>
            </property>
           </widget>
          </item>
@@ -4500,7 +4395,7 @@ QPushButton:hover {
           <x>540</x>
           <y>70</y>
           <width>281</width>
-          <height>41</height>
+          <height>31</height>
          </rect>
         </property>
         <property name="font">
@@ -5135,10 +5030,7 @@ QPushButton:hover {
             </font>
            </property>
            <property name="text">
-            <string>Tableau de Bord</string>
-           </property>
-           <property name="icon">
-            <iconset theme="QIcon::ThemeIcon::GoHome"/>
+            <string>🏠  Tableau de Bord</string>
            </property>
           </widget>
          </item>
@@ -5151,10 +5043,7 @@ QPushButton:hover {
             </font>
            </property>
            <property name="text">
-            <string>Gestion des Employes</string>
-           </property>
-           <property name="icon">
-            <iconset theme="QIcon::ThemeIcon::UserAvailable"/>
+            <string>👷   Employes</string>
            </property>
           </widget>
          </item>
@@ -5167,7 +5056,7 @@ QPushButton:hover {
             </font>
            </property>
            <property name="text">
-            <string>Gestion des Agriculteurs</string>
+            <string>🌿   Agriculteurs</string>
            </property>
           </widget>
          </item>
@@ -5180,7 +5069,7 @@ QPushButton:hover {
             </font>
            </property>
            <property name="text">
-            <string>Gestion des Clients</string>
+            <string>👥  Clients</string>
            </property>
           </widget>
          </item>
@@ -5193,7 +5082,7 @@ QPushButton:hover {
             </font>
            </property>
            <property name="text">
-            <string>Gestion de Production</string>
+            <string>⚙  Production</string>
            </property>
           </widget>
          </item>
@@ -5206,7 +5095,7 @@ QPushButton:hover {
             </font>
            </property>
            <property name="text">
-            <string>Gestion des Ventes</string>
+            <string>🛒  Ventes</string>
            </property>
           </widget>
          </item>
@@ -5232,7 +5121,7 @@ QPushButton:hover {
             </font>
            </property>
            <property name="text">
-            <string>Deconnexion</string>
+            <string>🚪  Déconnexion</string>
            </property>
           </widget>
          </item>
@@ -5241,16 +5130,14 @@ QPushButton:hover {
        <widget class="QFrame" name="frame_15">
         <property name="geometry">
          <rect>
-          <x>220</x>
-          <y>0</y>
-          <width>961</width>
-          <height>61</height>
+          <x>240</x>
+          <y>10</y>
+          <width>921</width>
+          <height>51</height>
          </rect>
         </property>
         <property name="styleSheet">
-         <string notr="true">QFrame {
-    background-color: #556B2F;
-}</string>
+         <string notr="true">QFrame { background: #556B2F; border-radius: 10px; }</string>
         </property>
         <property name="frameShape">
          <enum>QFrame::Shape::StyledPanel</enum>
@@ -5258,6 +5145,28 @@ QPushButton:hover {
         <property name="frameShadow">
          <enum>QFrame::Shadow::Raised</enum>
         </property>
+        <widget class="QLabel" name="label_22">
+         <property name="geometry">
+          <rect>
+           <x>10</x>
+           <y>0</y>
+           <width>391</width>
+           <height>51</height>
+          </rect>
+         </property>
+         <property name="font">
+          <font>
+           <pointsize>-1</pointsize>
+           <bold>true</bold>
+          </font>
+         </property>
+         <property name="styleSheet">
+          <string notr="true">color: white; font-size: 15px; font-weight: bold; background: transparent;</string>
+         </property>
+         <property name="text">
+          <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;👷   Employes - Smart Oil Press&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+         </property>
+        </widget>
        </widget>
        <widget class="QPushButton" name="btn_retour_4">
         <property name="geometry">
@@ -6119,10 +6028,7 @@ QPushButton:hover {
             </font>
            </property>
            <property name="text">
-            <string>Tableau de Bord</string>
-           </property>
-           <property name="icon">
-            <iconset theme="QIcon::ThemeIcon::GoHome"/>
+            <string>🏠  Tableau de Bord</string>
            </property>
           </widget>
          </item>
@@ -6135,10 +6041,7 @@ QPushButton:hover {
             </font>
            </property>
            <property name="text">
-            <string>Gestion des Employes</string>
-           </property>
-           <property name="icon">
-            <iconset theme="QIcon::ThemeIcon::UserAvailable"/>
+            <string>👷   Employes</string>
            </property>
           </widget>
          </item>
@@ -6151,7 +6054,7 @@ QPushButton:hover {
             </font>
            </property>
            <property name="text">
-            <string>Gestion des Agriculteurs</string>
+            <string>🌿   Agriculteurs</string>
            </property>
           </widget>
          </item>
@@ -6164,7 +6067,7 @@ QPushButton:hover {
             </font>
            </property>
            <property name="text">
-            <string>Gestion des Clients</string>
+            <string>👥  Clients</string>
            </property>
           </widget>
          </item>
@@ -6177,7 +6080,7 @@ QPushButton:hover {
             </font>
            </property>
            <property name="text">
-            <string>Gestion de Production</string>
+            <string>⚙  Production</string>
            </property>
           </widget>
          </item>
@@ -6190,7 +6093,7 @@ QPushButton:hover {
             </font>
            </property>
            <property name="text">
-            <string>Gestion des Ventes</string>
+            <string>🛒  Ventes</string>
            </property>
           </widget>
          </item>
@@ -6216,7 +6119,7 @@ QPushButton:hover {
             </font>
            </property>
            <property name="text">
-            <string>Deconnexion</string>
+            <string>🚪  Déconnexion</string>
            </property>
           </widget>
          </item>
@@ -6225,9 +6128,9 @@ QPushButton:hover {
        <widget class="QFrame" name="frame_5">
         <property name="geometry">
          <rect>
-          <x>210</x>
+          <x>240</x>
           <y>0</y>
-          <width>961</width>
+          <width>931</width>
           <height>61</height>
          </rect>
         </property>
@@ -6346,10 +6249,7 @@ QPushButton:hover {
             </font>
            </property>
            <property name="text">
-            <string>Tableau de Bord</string>
-           </property>
-           <property name="icon">
-            <iconset theme="QIcon::ThemeIcon::GoHome"/>
+            <string>🏠  Tableau de Bord</string>
            </property>
           </widget>
          </item>
@@ -6362,10 +6262,7 @@ QPushButton:hover {
             </font>
            </property>
            <property name="text">
-            <string>Gestion des Employes</string>
-           </property>
-           <property name="icon">
-            <iconset theme="QIcon::ThemeIcon::UserAvailable"/>
+            <string>👷   Employes</string>
            </property>
           </widget>
          </item>
@@ -6378,7 +6275,7 @@ QPushButton:hover {
             </font>
            </property>
            <property name="text">
-            <string>Gestion des Agriculteurs</string>
+            <string>🌿   Agriculteurs</string>
            </property>
           </widget>
          </item>
@@ -6391,7 +6288,7 @@ QPushButton:hover {
             </font>
            </property>
            <property name="text">
-            <string>Gestion des Clients</string>
+            <string>👥  Clients</string>
            </property>
           </widget>
          </item>
@@ -6404,7 +6301,7 @@ QPushButton:hover {
             </font>
            </property>
            <property name="text">
-            <string>Gestion de Production</string>
+            <string>⚙  Production</string>
            </property>
           </widget>
          </item>
@@ -6417,7 +6314,7 @@ QPushButton:hover {
             </font>
            </property>
            <property name="text">
-            <string>Gestion des Ventes</string>
+            <string>🛒  Ventes</string>
            </property>
           </widget>
          </item>
@@ -6443,7 +6340,7 @@ QPushButton:hover {
             </font>
            </property>
            <property name="text">
-            <string>Deconnexion</string>
+            <string>🚪  Déconnexion</string>
            </property>
           </widget>
          </item>
@@ -6452,31 +6349,14 @@ QPushButton:hover {
        <widget class="QFrame" name="frame_10">
         <property name="geometry">
          <rect>
-          <x>220</x>
-          <y>0</y>
-          <width>961</width>
-          <height>61</height>
+          <x>240</x>
+          <y>10</y>
+          <width>921</width>
+          <height>51</height>
          </rect>
         </property>
         <property name="styleSheet">
-         <string notr="true">QFrame {
-    background-color: #556B2F;
-}
-QPushButton {
-    background-color: transparent;
-    color: white;
-    border: 2px solid #D4AF37;
-    border-radius: 10px;
-    padding: 10px;
-    margin: 8px 12px;
-    text-align: left;
-}
-
-QPushButton:hover {
-    background-color: #D4AF37;
-    color: black;
-}
-</string>
+         <string notr="true">QFrame { background: #556B2F; border-radius: 10px; }</string>
         </property>
         <property name="frameShape">
          <enum>QFrame::Shape::StyledPanel</enum>
@@ -6484,6 +6364,28 @@ QPushButton:hover {
         <property name="frameShadow">
          <enum>QFrame::Shadow::Raised</enum>
         </property>
+        <widget class="QLabel" name="label_48">
+         <property name="geometry">
+          <rect>
+           <x>20</x>
+           <y>0</y>
+           <width>391</width>
+           <height>51</height>
+          </rect>
+         </property>
+         <property name="font">
+          <font>
+           <pointsize>-1</pointsize>
+           <bold>true</bold>
+          </font>
+         </property>
+         <property name="styleSheet">
+          <string notr="true">color: white; font-size: 15px; font-weight: bold; background: transparent;</string>
+         </property>
+         <property name="text">
+          <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;👥  Clients - Smart Oil Press&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+         </property>
+        </widget>
        </widget>
        <widget class="QRadioButton" name="particulier_4">
         <property name="geometry">
@@ -7020,10 +6922,7 @@ QPushButton:hover {
             </font>
            </property>
            <property name="text">
-            <string>Tableau de Bord</string>
-           </property>
-           <property name="icon">
-            <iconset theme="QIcon::ThemeIcon::GoHome"/>
+            <string>🏠  Tableau de Bord</string>
            </property>
           </widget>
          </item>
@@ -7036,10 +6935,7 @@ QPushButton:hover {
             </font>
            </property>
            <property name="text">
-            <string>Gestion des Employes</string>
-           </property>
-           <property name="icon">
-            <iconset theme="QIcon::ThemeIcon::UserAvailable"/>
+            <string>👷   Employes</string>
            </property>
           </widget>
          </item>
@@ -7052,7 +6948,7 @@ QPushButton:hover {
             </font>
            </property>
            <property name="text">
-            <string>Gestion des Agriculteurs</string>
+            <string>🌿   Agriculteurs</string>
            </property>
           </widget>
          </item>
@@ -7065,7 +6961,7 @@ QPushButton:hover {
             </font>
            </property>
            <property name="text">
-            <string>Gestion des Clients</string>
+            <string>👥  Clients</string>
            </property>
           </widget>
          </item>
@@ -7078,7 +6974,7 @@ QPushButton:hover {
             </font>
            </property>
            <property name="text">
-            <string>Gestion de Production</string>
+            <string>⚙  Production</string>
            </property>
           </widget>
          </item>
@@ -7091,7 +6987,7 @@ QPushButton:hover {
             </font>
            </property>
            <property name="text">
-            <string>Gestion des Ventes</string>
+            <string>🛒  Ventes</string>
            </property>
           </widget>
          </item>
@@ -7117,7 +7013,7 @@ QPushButton:hover {
             </font>
            </property>
            <property name="text">
-            <string>Deconnexion</string>
+            <string>🚪  Déconnexion</string>
            </property>
           </widget>
          </item>
@@ -7126,16 +7022,14 @@ QPushButton:hover {
        <widget class="QFrame" name="frame_11">
         <property name="geometry">
          <rect>
-          <x>210</x>
-          <y>0</y>
-          <width>961</width>
-          <height>61</height>
+          <x>230</x>
+          <y>10</y>
+          <width>931</width>
+          <height>51</height>
          </rect>
         </property>
         <property name="styleSheet">
-         <string notr="true">QFrame {
-    background-color: #556B2F;
-}</string>
+         <string notr="true">QFrame { background: #556B2F; border-radius: 10px; }</string>
         </property>
         <property name="frameShape">
          <enum>QFrame::Shape::StyledPanel</enum>
@@ -7143,304 +7037,37 @@ QPushButton:hover {
         <property name="frameShadow">
          <enum>QFrame::Shadow::Raised</enum>
         </property>
+        <widget class="QLabel" name="label_54">
+         <property name="geometry">
+          <rect>
+           <x>20</x>
+           <y>0</y>
+           <width>391</width>
+           <height>51</height>
+          </rect>
+         </property>
+         <property name="font">
+          <font>
+           <pointsize>-1</pointsize>
+           <bold>true</bold>
+          </font>
+         </property>
+         <property name="styleSheet">
+          <string notr="true">color: white; font-size: 15px; font-weight: bold; background: transparent;</string>
+         </property>
+         <property name="text">
+          <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;⚙  Production - Smart Oil Press&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+         </property>
+        </widget>
        </widget>
        <widget class="QGroupBox" name="InformationsPersonnelles_2">
         <property name="geometry">
          <rect>
-          <x>220</x>
-          <y>100</y>
+          <x>230</x>
+          <y>80</y>
           <width>341</width>
-          <height>581</height>
+          <height>611</height>
          </rect>
-        </property>
-        <property name="styleSheet">
-         <string notr="true">
-QWidget {
-    background: #ffffff;
-    font-family: &quot;Segoe UI&quot;, &quot;Arial&quot;;
-    font-size: 11pt;
-    color: #111111;
-}
-
-/* Optional: better default focus behavior */
-*:focus {
-    outline: none; /* Qt ignores CSS outline mostly, but keep clean */
-}
-
-/* =========================================================
-   COLORS (keep consistent)
-   =========================================================
-   Accent (orange): #c78a10
-   Accent dark:     #a66f08
-   Accent light:    #f3d08a
-   Border neutral:  #bdbdbd
-*/
- 
-/* =========================================================
-   GROUPBOX
-   ========================================================= */
-QGroupBox {
-    border: 2px solid #c78a10;
-    border-radius: 14px;
-    margin-top: 18px;              /* space for title */
-    padding: 16px 14px 12px 14px;  /* inside spacing */
-    background: transparent;
-}
-
-QGroupBox::title {
-    subcontrol-origin: margin;
-    subcontrol-position: top left;
-
-    left: 16px;
-    padding: 0 10px;
-
-    font-weight: 700;
-    font-size: 12pt;
-    color: #111111;
-
-    background: #ffffff; /* cuts border behind title */
-}
-
-/* =========================================================
-   LABELS
-   ========================================================= */
-QLabel {
-    font-weight: 700;
-    color: #111111;
-}
-
-/* =========================================================
-   LINE EDIT (text fields)
-   ========================================================= */
-QLineEdit {
-    background: #ffffff;
-    border: 2px solid #c78a10;
-    border-radius: 6px;
-    padding: 6px 10px;
-    selection-background-color: #c78a10;
-    selection-color: #ffffff;
-}
-
-QLineEdit:hover {
-    border-color: #a66f08;
-}
-
-QLineEdit:focus {
-    border-color: #a66f08;
-}
-
-QLineEdit:disabled {
-    background: #f4f4f4;
-    border-color: #d6b56f;
-    color: #888888;
-}
-
-/* =========================================================
-   COMBOBOX
-   ========================================================= */
-QComboBox {
-    background: #ffffff;
-    border: 2px solid #c78a10;
-    border-radius: 6px;
-    padding: 6px 34px 6px 10px;  /* right padding to avoid overlap with arrow */
-}
-
-QComboBox:hover {
-    border-color: #a66f08;
-}
-
-QComboBox:focus {
-    border-color: #a66f08;
-}
-
-QComboBox:disabled {
-    background: #f4f4f4;
-    border-color: #d6b56f;
-    color: #888888;
-}
-
-QComboBox::drop-down {
-    subcontrol-origin: padding;
-    subcontrol-position: top right;
-    width: 28px;
-
-    border-left: 2px solid #c78a10;
-    border-top-right-radius: 6px;
-    border-bottom-right-radius: 6px;
-    background: #ffffff;
-}
-
-QComboBox:hover::drop-down {
-    border-left-color: #a66f08;
-}
-
-/* Arrow: QSS cannot draw a real arrow without an image.
-   This is a simple “chevron” using borders via an indicator trick is not supported for QComboBox.
-   Best option: provide an SVG/PNG. Replace with your resource path.
-*/
-QComboBox::down-arrow {
-    image: url(:/icons/chevron-down.png); /* &lt;-- put your icon in Qt resources */
-    width: 12px;
-    height: 12px;
-}
-
-/* Dropdown list */
-QComboBox QAbstractItemView {
-    border: 2px solid #c78a10;
-    background: #ffffff;
-    selection-background-color: #f3d08a;
-    selection-color: #111111;
-    outline: none;
-}
-
-/* =========================================================
-   DATEEDIT / SPINBOX
-   ========================================================= */
-QDateEdit, QSpinBox, QDoubleSpinBox {
-    background: #ffffff;
-    border: 2px solid #c78a10;
-    border-radius: 6px;
-    padding: 6px 34px 6px 10px; /* space for buttons */
-}
-
-QDateEdit:hover, QSpinBox:hover, QDoubleSpinBox:hover {
-    border-color: #a66f08;
-}
-
-QDateEdit:focus, QSpinBox:focus, QDoubleSpinBox:focus {
-    border-color: #a66f08;
-}
-
-QDateEdit:disabled, QSpinBox:disabled, QDoubleSpinBox:disabled {
-    background: #f4f4f4;
-    border-color: #d6b56f;
-    color: #888888;
-}
-
-/* Buttons area */
-QDateEdit::up-button, QSpinBox::up-button, QDoubleSpinBox::up-button,
-QDateEdit::down-button, QSpinBox::down-button, QDoubleSpinBox::down-button {
-    subcontrol-origin: border;
-    width: 28px;
-    background: #ffffff;
-    border-left: 2px solid #c78a10;
-}
-
-QDateEdit::up-button, QSpinBox::up-button, QDoubleSpinBox::up-button {
-    subcontrol-position: top right;
-    border-top-right-radius: 6px;
-}
-
-QDateEdit::down-button, QSpinBox::down-button, QDoubleSpinBox::down-button {
-    subcontrol-position: bottom right;
-    border-bottom-right-radius: 6px;
-}
-
-QDateEdit:hover::up-button, QSpinBox:hover::up-button, QDoubleSpinBox:hover::up-button,
-QDateEdit:hover::down-button, QSpinBox:hover::down-button, QDoubleSpinBox:hover::down-button {
-    border-left-color: #a66f08;
-}
-
-QDateEdit::up-arrow, QSpinBox::up-arrow, QDoubleSpinBox::up-arrow {
-    image: url(:/icons/chevron-up.png);
-    width: 10px;
-    height: 10px;
-}
-
-QDateEdit::down-arrow, QSpinBox::down-arrow, QDoubleSpinBox::down-arrow {
-    image: url(:/icons/chevron-down.png);
-    width: 10px;
-    height: 10px;
-}
-
-/* =========================================================
-   PUSH BUTTON
-   ========================================================= */
-QPushButton {
-    background: #f5f5f5;
-    border: 1px solid #bdbdbd;
-    border-radius: 6px;
-    padding: 7px 16px;
-}
-
-QPushButton:hover {
-    background: #eeeeee;
-    border-color: #a9a9a9;
-}
-
-QPushButton:pressed {
-    background: #e4e4e4;
-}
-
-QPushButton:disabled {
-    background: #f2f2f2;
-    border-color: #d0d0d0;
-    color: #9a9a9a;
-}
-
-/* =========================================================
-   TOOLTIP
-   ========================================================= */
-QToolTip {
-    background: #ffffff;
-    color: #111111;
-    border: 1px solid #c78a10;
-    padding: 6px 8px;
-    border-radius: 6px;
-}
-
-/* Fond du formulaire */
-#InformationsPersonnelles_2 {
-    background-color: #faf8f4;
-}
-
-/* Bouton principal */
-QPushButton#ajouter {
-    background-color: #4a5c25;
-    color: #ffffff;
-    border: 1px solid #3d4d1f;
-    font-weight: 700;
-    border-radius: 8px;
-    padding: 8px 14px;
-}
-QPushButton#ajouter:hover {
-    background-color: #5d7230;
-    border-color: #4a5c25;
-}
-QPushButton#ajouter:pressed {
-    background-color: #3d4d1f;
-}
-
-QPushButton#modifier, QPushButton#suprimer, QPushButton#afficher {
-    border-radius: 8px;
-    padding: 7px 12px;
-    font-weight: 600;
-}
-QPushButton#modifier {
-    background-color: #fff9ed;
-    border: 2px solid #c78a10;
-    color: #5c4006;
-}
-QPushButton#modifier:hover {
-    background-color: #f3d08a;
-}
-QPushButton#suprimer {
-    background-color: #fff5f5;
-    border: 2px solid #c62828;
-    color: #b71c1c;
-}
-QPushButton#suprimer:hover {
-    background-color: #ffcdd2;
-}
-QPushButton#afficher {
-    background-color: #e8f4ea;
-    border: 2px solid #4a5c25;
-    color: #2e3d18;
-}
-QPushButton#afficher:hover {
-    background-color: #c8e6c9;
-}
-</string>
         </property>
         <property name="title">
          <string>Fiche de production</string>
@@ -7460,12 +7087,38 @@ QPushButton#afficher:hover {
          <property name="font">
           <font>
            <family>Segoe UI</family>
-           <pointsize>11</pointsize>
-           <bold>true</bold>
+           <pointsize>10</pointsize>
+           <fontweight>DemiBold</fontweight>
           </font>
          </property>
          <property name="text">
           <string>ID opération</string>
+         </property>
+         <property name="scaledContents">
+          <bool>false</bool>
+         </property>
+        </widget>
+        <widget class="QLabel" name="label_40">
+         <property name="enabled">
+          <bool>true</bool>
+         </property>
+         <property name="geometry">
+          <rect>
+           <x>20</x>
+           <y>80</y>
+           <width>49</width>
+           <height>16</height>
+          </rect>
+         </property>
+         <property name="font">
+          <font>
+           <family>Segoe UI</family>
+           <pointsize>10</pointsize>
+           <fontweight>DemiBold</fontweight>
+          </font>
+         </property>
+         <property name="text">
+          <string>Date de production</string>
          </property>
          <property name="scaledContents">
           <bool>false</bool>
@@ -7477,21 +7130,21 @@ QPushButton#afficher:hover {
          </property>
          <property name="geometry">
           <rect>
-           <x>0</x>
-           <y>80</y>
-           <width>161</width>
-           <height>20</height>
+           <x>20</x>
+           <y>120</y>
+           <width>131</width>
+           <height>21</height>
           </rect>
          </property>
          <property name="font">
           <font>
            <family>Segoe UI</family>
-           <pointsize>11</pointsize>
-           <bold>true</bold>
+           <pointsize>10</pointsize>
+           <fontweight>DemiBold</fontweight>
           </font>
          </property>
          <property name="text">
-          <string>Date de production</string>
+          <string>ID agriculteur</string>
          </property>
          <property name="scaledContents">
           <bool>false</bool>
@@ -7504,20 +7157,46 @@ QPushButton#afficher:hover {
          <property name="geometry">
           <rect>
            <x>20</x>
-           <y>480</y>
-           <width>131</width>
+           <y>160</y>
+           <width>91</width>
            <height>21</height>
           </rect>
          </property>
          <property name="font">
           <font>
            <family>Segoe UI</family>
-           <pointsize>11</pointsize>
-           <bold>true</bold>
+           <pointsize>10</pointsize>
+           <fontweight>DemiBold</fontweight>
           </font>
          </property>
          <property name="text">
-          <string>CIN agriculteur</string>
+          <string>ID employe</string>
+         </property>
+         <property name="scaledContents">
+          <bool>false</bool>
+         </property>
+        </widget>
+        <widget class="QLabel" name="label_43">
+         <property name="enabled">
+          <bool>true</bool>
+         </property>
+         <property name="geometry">
+          <rect>
+           <x>10</x>
+           <y>190</y>
+           <width>141</width>
+           <height>31</height>
+          </rect>
+         </property>
+         <property name="font">
+          <font>
+           <family>Segoe UI</family>
+           <pointsize>10</pointsize>
+           <fontweight>DemiBold</fontweight>
+          </font>
+         </property>
+         <property name="text">
+          <string>Quantité d'olives</string>
          </property>
          <property name="scaledContents">
           <bool>false</bool>
@@ -7530,20 +7209,20 @@ QPushButton#afficher:hover {
          <property name="geometry">
           <rect>
            <x>10</x>
-           <y>130</y>
-           <width>141</width>
-           <height>31</height>
+           <y>240</y>
+           <width>131</width>
+           <height>21</height>
           </rect>
          </property>
          <property name="font">
           <font>
            <family>Segoe UI</family>
-           <pointsize>11</pointsize>
-           <bold>true</bold>
+           <pointsize>10</pointsize>
+           <fontweight>DemiBold</fontweight>
           </font>
          </property>
          <property name="text">
-          <string>Quantité d'olives</string>
+          <string>Quantité d'huile (L)</string>
          </property>
          <property name="scaledContents">
           <bool>false</bool>
@@ -7556,7 +7235,7 @@ QPushButton#afficher:hover {
          <property name="geometry">
           <rect>
            <x>10</x>
-           <y>190</y>
+           <y>280</y>
            <width>141</width>
            <height>21</height>
           </rect>
@@ -7564,34 +7243,8 @@ QPushButton#afficher:hover {
          <property name="font">
           <font>
            <family>Segoe UI</family>
-           <pointsize>11</pointsize>
-           <bold>true</bold>
-          </font>
-         </property>
-         <property name="text">
-          <string>Quantité d'huile (L)</string>
-         </property>
-         <property name="scaledContents">
-          <bool>false</bool>
-         </property>
-        </widget>
-        <widget class="QLabel" name="label_46">
-         <property name="enabled">
-          <bool>true</bool>
-         </property>
-         <property name="geometry">
-          <rect>
-           <x>10</x>
-           <y>290</y>
-           <width>141</width>
-           <height>21</height>
-          </rect>
-         </property>
-         <property name="font">
-          <font>
-           <family>Segoe UI</family>
-           <pointsize>11</pointsize>
-           <bold>true</bold>
+           <pointsize>10</pointsize>
+           <fontweight>DemiBold</fontweight>
           </font>
          </property>
          <property name="text">
@@ -7601,14 +7254,30 @@ QPushButton#afficher:hover {
           <bool>false</bool>
          </property>
         </widget>
-        <widget class="QLabel" name="label_47">
+        <widget class="QLabel" name="label_formule_rendement">
+         <property name="geometry">
+          <rect>
+           <x>10</x>
+           <y>320</y>
+           <width>321</width>
+           <height>32</height>
+          </rect>
+         </property>
+         <property name="text">
+          <string>Formule : (quantité d'huile ÷ quantité d'olives) × 100 — puis bouton « Calculer rendement » à droite</string>
+         </property>
+         <property name="wordWrap">
+          <bool>true</bool>
+         </property>
+        </widget>
+        <widget class="QLabel" name="label_46">
          <property name="enabled">
           <bool>true</bool>
          </property>
          <property name="geometry">
           <rect>
-           <x>20</x>
-           <y>240</y>
+           <x>10</x>
+           <y>364</y>
            <width>131</width>
            <height>21</height>
           </rect>
@@ -7616,8 +7285,8 @@ QPushButton#afficher:hover {
          <property name="font">
           <font>
            <family>Segoe UI</family>
-           <pointsize>11</pointsize>
-           <bold>true</bold>
+           <pointsize>10</pointsize>
+           <fontweight>DemiBold</fontweight>
           </font>
          </property>
          <property name="text">
@@ -7630,74 +7299,110 @@ QPushButton#afficher:hover {
         <widget class="QLineEdit" name="ID_Operation">
          <property name="geometry">
           <rect>
-           <x>190</x>
+           <x>160</x>
            <y>30</y>
-           <width>141</width>
-           <height>44</height>
+           <width>171</width>
+           <height>42</height>
           </rect>
          </property>
         </widget>
         <widget class="QLineEdit" name="ID_Agriculteur">
          <property name="geometry">
           <rect>
-           <x>190</x>
-           <y>470</y>
-           <width>141</width>
-           <height>44</height>
+           <x>160</x>
+           <y>110</y>
+           <width>171</width>
+           <height>42</height>
+          </rect>
+         </property>
+        </widget>
+        <widget class="QLineEdit" name="ID_machin">
+         <property name="geometry">
+          <rect>
+           <x>160</x>
+           <y>150</y>
+           <width>171</width>
+           <height>42</height>
           </rect>
          </property>
         </widget>
         <widget class="QDateEdit" name="Date">
          <property name="geometry">
           <rect>
-           <x>190</x>
-           <y>80</y>
+           <x>160</x>
+           <y>70</y>
            <width>171</width>
-           <height>44</height>
+           <height>42</height>
           </rect>
          </property>
         </widget>
         <widget class="QComboBox" name="Type_Huile">
          <property name="geometry">
           <rect>
-           <x>190</x>
-           <y>230</y>
-           <width>141</width>
-           <height>44</height>
+           <x>160</x>
+           <y>352</y>
+           <width>171</width>
+           <height>42</height>
           </rect>
          </property>
+         <item>
+          <property name="text">
+           <string>extra vierge</string>
+          </property>
+         </item>
          <item>
           <property name="text">
            <string>vierge</string>
           </property>
          </item>
-         <item>
-          <property name="text">
-           <string>bio</string>
-          </property>
-         </item>
         </widget>
-        <widget class="QLabel" name="label_48">
+        <widget class="QLabel" name="label_47">
          <property name="enabled">
           <bool>true</bool>
          </property>
          <property name="geometry">
           <rect>
-           <x>10</x>
-           <y>380</y>
-           <width>171</width>
+           <x>0</x>
+           <y>460</y>
+           <width>151</width>
            <height>21</height>
           </rect>
          </property>
          <property name="font">
           <font>
            <family>Segoe UI</family>
-           <pointsize>11</pointsize>
-           <bold>true</bold>
+           <pointsize>10</pointsize>
+           <fontweight>DemiBold</fontweight>
           </font>
          </property>
          <property name="text">
           <string>Durée de pressage (min)</string>
+         </property>
+         <property name="scaledContents">
+          <bool>false</bool>
+         </property>
+        </widget>
+        <widget class="QLabel" name="label_50">
+         <property name="enabled">
+          <bool>true</bool>
+         </property>
+         <property name="geometry">
+          <rect>
+           <x>10</x>
+           <y>410</y>
+           <width>141</width>
+           <height>21</height>
+          </rect>
+         </property>
+         <property name="font">
+          <font>
+           <family>Segoe UI</family>
+           <pointsize>10</pointsize>
+           <fontweight>DemiBold</fontweight>
+          </font>
+         </property>
+         <property name="text">
+          <string>Température moy. (°C)</string>
          </property>
          <property name="scaledContents">
           <bool>false</bool>
@@ -7709,8 +7414,8 @@ QPushButton#afficher:hover {
          </property>
          <property name="geometry">
           <rect>
-           <x>20</x>
-           <y>430</y>
+           <x>10</x>
+           <y>510</y>
            <width>111</width>
            <height>31</height>
           </rect>
@@ -7718,8 +7423,8 @@ QPushButton#afficher:hover {
          <property name="font">
           <font>
            <family>Segoe UI</family>
-           <pointsize>11</pointsize>
-           <bold>true</bold>
+           <pointsize>10</pointsize>
+           <fontweight>DemiBold</fontweight>
           </font>
          </property>
          <property name="text">
@@ -7732,30 +7437,30 @@ QPushButton#afficher:hover {
         <widget class="QLineEdit" name="Quantite_olives">
          <property name="geometry">
           <rect>
-           <x>190</x>
-           <y>130</y>
-           <width>141</width>
-           <height>44</height>
+           <x>160</x>
+           <y>190</y>
+           <width>171</width>
+           <height>42</height>
           </rect>
          </property>
         </widget>
         <widget class="QLineEdit" name="Quantite_Huile">
          <property name="geometry">
           <rect>
-           <x>190</x>
-           <y>180</y>
-           <width>141</width>
-           <height>44</height>
+           <x>160</x>
+           <y>230</y>
+           <width>171</width>
+           <height>42</height>
           </rect>
          </property>
         </widget>
         <widget class="QLineEdit" name="Rendement">
          <property name="geometry">
           <rect>
-           <x>190</x>
-           <y>280</y>
-           <width>141</width>
-           <height>44</height>
+           <x>160</x>
+           <y>270</y>
+           <width>171</width>
+           <height>42</height>
           </rect>
          </property>
          <property name="toolTip">
@@ -7765,411 +7470,141 @@ QPushButton#afficher:hover {
           <string>Calcul auto ou saisie manuelle</string>
          </property>
         </widget>
+        <widget class="QLineEdit" name="Temperature">
+         <property name="geometry">
+          <rect>
+           <x>160</x>
+           <y>400</y>
+           <width>171</width>
+           <height>42</height>
+          </rect>
+         </property>
+        </widget>
         <widget class="QLineEdit" name="Duree_Pressage">
          <property name="geometry">
           <rect>
-           <x>190</x>
-           <y>370</y>
-           <width>141</width>
-           <height>44</height>
+           <x>160</x>
+           <y>450</y>
+           <width>171</width>
+           <height>42</height>
           </rect>
          </property>
         </widget>
         <widget class="QLineEdit" name="Observation">
          <property name="geometry">
           <rect>
-           <x>190</x>
-           <y>420</y>
-           <width>141</width>
-           <height>44</height>
+           <x>160</x>
+           <y>500</y>
+           <width>171</width>
+           <height>42</height>
           </rect>
          </property>
         </widget>
-        <widget class="QPushButton" name="ajouter_prod">
+        <widget class="QPushButton" name="ajouter">
          <property name="geometry">
           <rect>
            <x>0</x>
-           <y>520</y>
-           <width>93</width>
+           <y>560</y>
+           <width>91</width>
            <height>32</height>
           </rect>
          </property>
+         <property name="font">
+          <font>
+           <pointsize>10</pointsize>
+           <bold>true</bold>
+          </font>
+         </property>
          <property name="styleSheet">
-          <string notr="true"/>
+          <string notr="true">QPushButton {
+    background-color: #D4AF37;
+    color: black;
+    border-radius: 6px;
+    padding: 6px 12px;
+}
+
+QPushButton:hover {
+    background-color: #c49b2f;
+}
+</string>
          </property>
          <property name="text">
           <string>Ajouter</string>
          </property>
         </widget>
-        <widget class="QPushButton" name="modifier_prod">
+        <widget class="QPushButton" name="modifier">
          <property name="geometry">
           <rect>
            <x>100</x>
-           <y>520</y>
+           <y>560</y>
            <width>111</width>
            <height>32</height>
           </rect>
+         </property>
+         <property name="font">
+          <font>
+           <pointsize>10</pointsize>
+           <bold>true</bold>
+          </font>
+         </property>
+         <property name="styleSheet">
+          <string notr="true">QPushButton {
+    background-color: #D4AF37;
+    color: black;
+    border-radius: 6px;
+    padding: 6px 12px;
+}
+
+QPushButton:hover {
+    background-color: #c49b2f;
+}
+</string>
          </property>
          <property name="text">
           <string>Modifier</string>
          </property>
         </widget>
-        <widget class="QPushButton" name="suprimer_prod">
+        <widget class="QPushButton" name="suprimer">
          <property name="geometry">
           <rect>
            <x>220</x>
-           <y>520</y>
+           <y>560</y>
            <width>111</width>
            <height>32</height>
           </rect>
          </property>
-         <property name="text">
-          <string>Supprimer</string>
-         </property>
-        </widget>
-        <widget class="QPushButton" name="afficher_prod">
-         <property name="geometry">
-          <rect>
-           <x>110</x>
-           <y>550</y>
-           <width>93</width>
-           <height>31</height>
-          </rect>
-         </property>
-         <property name="text">
-          <string>Afficher</string>
-         </property>
-        </widget>
-        <widget class="QLabel" name="label_50">
-         <property name="enabled">
-          <bool>true</bool>
-         </property>
-         <property name="geometry">
-          <rect>
-           <x>10</x>
-           <y>340</y>
-           <width>141</width>
-           <height>21</height>
-          </rect>
-         </property>
          <property name="font">
           <font>
-           <family>Segoe UI</family>
-           <pointsize>11</pointsize>
+           <pointsize>10</pointsize>
            <bold>true</bold>
           </font>
          </property>
+         <property name="styleSheet">
+          <string notr="true">QPushButton {
+    background-color: #D4AF37;
+    color: black;
+    border-radius: 6px;
+    padding: 6px 12px;
+}
+
+QPushButton:hover {
+    background-color: #c49b2f;
+}
+</string>
+         </property>
          <property name="text">
-          <string>ID Employe</string>
-         </property>
-         <property name="scaledContents">
-          <bool>false</bool>
-         </property>
-        </widget>
-        <widget class="QLineEdit" name="ID_Emp">
-         <property name="geometry">
-          <rect>
-           <x>190</x>
-           <y>320</y>
-           <width>141</width>
-           <height>44</height>
-          </rect>
+          <string>Supprimer</string>
          </property>
         </widget>
        </widget>
        <widget class="QGroupBox" name="InformationsPersonnelles_5">
         <property name="geometry">
          <rect>
-          <x>560</x>
-          <y>100</y>
-          <width>621</width>
-          <height>581</height>
+          <x>580</x>
+          <y>130</y>
+          <width>631</width>
+          <height>561</height>
          </rect>
-        </property>
-        <property name="styleSheet">
-         <string notr="true">QTableWidget {
-    background-color: #6f8438;
-    gridline-color: #d6b25e;
-    border: 1px solid #d6b25e;
-    border-radius: 10px;
-}
-
-QTableWidget::item {
-    padding: 6px;
-}
-
-QTableWidget::item:selected {
-    background-color: #d6b25e;
-    color: #3b3b3b;
-}
-
-/* Header */
-QHeaderView::section {
-    background-color: #4a5c25;
-    color: white;
-    padding: 6px;
-    border: 1px solid #d6b25e;
-    font-weight: bold;
-}
-
-/* =========================
-   SCROLLBAR
-========================= */
-QScrollBar:vertical {
-    background: #4a5c25;
-    width: 12px;
-    margin: 0;
-}
-
-QScrollBar::handle:vertical {
-    background: #d6b25e;
-    border-radius: 6px;
-    min-height: 20px;
-}
-
-QScrollBar::handle:vertical:hover {
-    background: #ffd978;
-}
-
-QScrollBar::add-line,
-QScrollBar::sub-line {
-    background: none;
-    height: 0;
-}
-
-QWidget {
-    background: #ffffff;
-    font-family: &quot;Segoe UI&quot;, &quot;Arial&quot;;
-    font-size: 11pt;
-    color: #111111;
-}
-
-/* Optional: better default focus behavior */
-*:focus {
-    outline: none; /* Qt ignores CSS outline mostly, but keep clean */
-}
-
-/* =========================================================
-   COLORS (keep consistent)
-   =========================================================
-   Accent (orange): #c78a10
-   Accent dark:     #a66f08
-   Accent light:    #f3d08a
-   Border neutral:  #bdbdbd
-*/
- 
-/* =========================================================
-   GROUPBOX
-   ========================================================= */
-QGroupBox {
-    border: 2px solid #c78a10;
-    border-radius: 14px;
-    margin-top: 18px;              /* space for title */
-    padding: 16px 14px 12px 14px;  /* inside spacing */
-    background: transparent;
-}
-
-QGroupBox::title {
-    subcontrol-origin: margin;
-    subcontrol-position: top left;
-
-    left: 16px;
-    padding: 0 10px;
-
-    font-weight: 700;
-    font-size: 12pt;
-    color: #111111;
-
-    background: #ffffff; /* cuts border behind title */
-}
-
-/* =========================================================
-   LABELS
-   ========================================================= */
-QLabel {
-    font-weight: 700;
-    color: #111111;
-}
-
-/* =========================================================
-   LINE EDIT (text fields)
-   ========================================================= */
-QLineEdit {
-    background: #ffffff;
-    border: 2px solid #c78a10;
-    border-radius: 6px;
-    padding: 6px 10px;
-    selection-background-color: #c78a10;
-    selection-color: #ffffff;
-}
-
-QLineEdit:hover {
-    border-color: #a66f08;
-}
-
-QLineEdit:focus {
-    border-color: #a66f08;
-}
-
-QLineEdit:disabled {
-    background: #f4f4f4;
-    border-color: #d6b56f;
-    color: #888888;
-}
-
-/* =========================================================
-   COMBOBOX
-   ========================================================= */
-QComboBox {
-    background: #ffffff;
-    border: 2px solid #c78a10;
-    border-radius: 6px;
-    padding: 6px 34px 6px 10px;  /* right padding to avoid overlap with arrow */
-}
-
-QComboBox:hover {
-    border-color: #a66f08;
-}
-
-QComboBox:focus {
-    border-color: #a66f08;
-}
-
-QComboBox:disabled {
-    background: #f4f4f4;
-    border-color: #d6b56f;
-    color: #888888;
-}
-
-QComboBox::drop-down {
-    subcontrol-origin: padding;
-    subcontrol-position: top right;
-    width: 28px;
-
-    border-left: 2px solid #c78a10;
-    border-top-right-radius: 6px;
-    border-bottom-right-radius: 6px;
-    background: #ffffff;
-}
-
-QComboBox:hover::drop-down {
-    border-left-color: #a66f08;
-}
-
-/* Arrow: QSS cannot draw a real arrow without an image.
-   This is a simple “chevron” using borders via an indicator trick is not supported for QComboBox.
-   Best option: provide an SVG/PNG. Replace with your resource path.
-*/
-QComboBox::down-arrow {
-    image: url(:/icons/chevron-down.png); /* &lt;-- put your icon in Qt resources */
-    width: 12px;
-    height: 12px;
-}
-
-/* Dropdown list */
-QComboBox QAbstractItemView {
-    border: 2px solid #c78a10;
-    background: #ffffff;
-    selection-background-color: #f3d08a;
-    selection-color: #111111;
-    outline: none;
-}
-
-/* =========================================================
-   DATEEDIT / SPINBOX
-   ========================================================= */
-QDateEdit, QSpinBox, QDoubleSpinBox {
-    background: #ffffff;
-    border: 2px solid #c78a10;
-    border-radius: 6px;
-    padding: 6px 34px 6px 10px; /* space for buttons */
-}
-
-QDateEdit:hover, QSpinBox:hover, QDoubleSpinBox:hover {
-    border-color: #a66f08;
-}
-
-QDateEdit:focus, QSpinBox:focus, QDoubleSpinBox:focus {
-    border-color: #a66f08;
-}
-
-QDateEdit:disabled, QSpinBox:disabled, QDoubleSpinBox:disabled {
-    background: #f4f4f4;
-    border-color: #d6b56f;
-    color: #888888;
-}
-
-/* Buttons area */
-QDateEdit::up-button, QSpinBox::up-button, QDoubleSpinBox::up-button,
-QDateEdit::down-button, QSpinBox::down-button, QDoubleSpinBox::down-button {
-    subcontrol-origin: border;
-    width: 28px;
-    background: #ffffff;
-    border-left: 2px solid #c78a10;
-}
-
-QDateEdit::up-button, QSpinBox::up-button, QDoubleSpinBox::up-button {
-    subcontrol-position: top right;
-    border-top-right-radius: 6px;
-}
-
-QDateEdit::down-button, QSpinBox::down-button, QDoubleSpinBox::down-button {
-    subcontrol-position: bottom right;
-    border-bottom-right-radius: 6px;
-}
-
-QDateEdit:hover::up-button, QSpinBox:hover::up-button, QDoubleSpinBox:hover::up-button,
-QDateEdit:hover::down-button, QSpinBox:hover::down-button, QDoubleSpinBox:hover::down-button {
-    border-left-color: #a66f08;
-}
-
-QDateEdit::up-arrow, QSpinBox::up-arrow, QDoubleSpinBox::up-arrow {
-    image: url(:/icons/chevron-up.png);
-    width: 10px;
-    height: 10px;
-}
-
-QDateEdit::down-arrow, QSpinBox::down-arrow, QDoubleSpinBox::down-arrow {
-    image: url(:/icons/chevron-down.png);
-    width: 10px;
-    height: 10px;
-}
-
-/* =========================================================
-   PUSH BUTTON
-   ========================================================= */
-QPushButton {
-    background: #f5f5f5;
-    border: 1px solid #bdbdbd;
-    border-radius: 6px;
-    padding: 7px 16px;
-}
-
-QPushButton:hover {
-    background: #eeeeee;
-    border-color: #a9a9a9;
-}
-
-QPushButton:pressed {
-    background: #e4e4e4;
-}
-
-QPushButton:disabled {
-    background: #f2f2f2;
-    border-color: #d0d0d0;
-    color: #9a9a9a;
-}
-
-/* =========================================================
-   OPTIONAL: TOOLTIP (nice touch)
-  
-QToolTip {
-    background: #ffffff;
-    color: #111111;
-    border: 1px solid #c78a10;
-    padding: 6px 8px;
-    border-radius: 6px;
-}</string>
         </property>
         <property name="title">
          <string>Liste des productions</string>
@@ -8196,7 +7631,7 @@ QToolTip {
            <x>86</x>
            <y>36</y>
            <width>138</width>
-           <height>44</height>
+           <height>42</height>
           </rect>
          </property>
          <item>
@@ -8223,10 +7658,10 @@ QToolTip {
         <widget class="QLabel" name="label_mot_recherche">
          <property name="geometry">
           <rect>
-           <x>230</x>
-           <y>44</y>
+           <x>210</x>
+           <y>40</y>
            <width>56</width>
-           <height>26</height>
+           <height>31</height>
           </rect>
          </property>
          <property name="text">
@@ -8239,10 +7674,10 @@ QToolTip {
         <widget class="QLineEdit" name="rechercheEdit">
          <property name="geometry">
           <rect>
-           <x>288</x>
-           <y>36</y>
-           <width>131</width>
-           <height>44</height>
+           <x>270</x>
+           <y>30</y>
+           <width>168</width>
+           <height>42</height>
           </rect>
          </property>
          <property name="placeholderText">
@@ -8258,7 +7693,7 @@ QToolTip {
            <x>100</x>
            <y>90</y>
            <width>300</width>
-           <height>44</height>
+           <height>42</height>
           </rect>
          </property>
          <item>
@@ -8276,51 +7711,58 @@ QToolTip {
            <height>38</height>
           </rect>
          </property>
+         <property name="font">
+          <font>
+           <bold>true</bold>
+          </font>
+         </property>
+         <property name="styleSheet">
+          <string notr="true">QPushButton {
+    background-color: #D4AF37;
+    color: black;
+    border-radius: 6px;
+    padding: 6px 12px;
+}
+
+QPushButton:hover {
+    background-color: #c49b2f;
+}
+</string>
+         </property>
          <property name="text">
           <string>PDF</string>
-         </property>
-        </widget>
-        <widget class="QPushButton" name="pushButton_6">
-         <property name="geometry">
-          <rect>
-           <x>418</x>
-           <y>90</y>
-           <width>124</width>
-           <height>38</height>
-          </rect>
-         </property>
-         <property name="text">
-          <string>Historique</string>
          </property>
         </widget>
         <widget class="QPushButton" name="rendement">
          <property name="geometry">
           <rect>
-           <x>16</x>
-           <y>324</y>
+           <x>30</x>
+           <y>320</y>
            <width>168</width>
            <height>44</height>
           </rect>
+         </property>
+         <property name="font">
+          <font>
+           <pointsize>10</pointsize>
+           <bold>true</bold>
+          </font>
          </property>
          <property name="toolTip">
           <string>Calcule : (quantité d'huile ÷ quantité d'olives) × 100 et remplit le champ Rendement (%)</string>
          </property>
          <property name="styleSheet">
           <string notr="true">QPushButton {
-    background-color: #c78a10;
-    color: #ffffff;
-    font-weight: 700;
-    font-size: 11pt;
-    border: none;
-    border-radius: 10px;
-    padding: 10px 14px;
+    background-color: #D4AF37;
+    color: black;
+    border-radius: 6px;
+    padding: 6px 12px;
 }
+
 QPushButton:hover {
-    background-color: #a66f08;
+    background-color: #c49b2f;
 }
-QPushButton:pressed {
-    background-color: #8a5a06;
-}</string>
+</string>
          </property>
          <property name="text">
           <string>Calculer rendement</string>
@@ -8329,9 +7771,9 @@ QPushButton:pressed {
         <widget class="QPushButton" name="anomalies">
          <property name="geometry">
           <rect>
-           <x>200</x>
-           <y>324</y>
-           <width>128</width>
+           <x>240</x>
+           <y>320</y>
+           <width>151</width>
            <height>44</height>
           </rect>
          </property>
@@ -8342,53 +7784,58 @@ QPushButton:pressed {
         <widget class="QPushButton" name="graphique">
          <property name="geometry">
           <rect>
-           <x>340</x>
-           <y>324</y>
-           <width>128</width>
+           <x>420</x>
+           <y>320</y>
+           <width>161</width>
            <height>44</height>
           </rect>
+         </property>
+         <property name="font">
+          <font>
+           <pointsize>10</pointsize>
+           <bold>true</bold>
+          </font>
+         </property>
+         <property name="styleSheet">
+          <string notr="true">QPushButton {
+    background-color: #D4AF37;
+    color: black;
+    border-radius: 6px;
+    padding: 6px 12px;
+}
+
+QPushButton:hover {
+    background-color: #c49b2f;
+}
+</string>
          </property>
          <property name="text">
           <string>Graphique</string>
          </property>
         </widget>
-        <widget class="QPushButton" name="pushButton_recherche">
-         <property name="geometry">
-          <rect>
-           <x>419</x>
-           <y>36</y>
-           <width>111</width>
-           <height>40</height>
-          </rect>
-         </property>
-         <property name="text">
-          <string>Rechercher</string>
-         </property>
-        </widget>
-        <widget class="QPushButton" name="pushButton_effacer_filtre">
-         <property name="geometry">
-          <rect>
-           <x>531</x>
-           <y>36</y>
-           <width>81</width>
-           <height>40</height>
-          </rect>
-         </property>
-         <property name="toolTip">
-          <string>Effacer le texte et afficher toutes les productions</string>
-         </property>
-         <property name="text">
-          <string>Effacer</string>
-         </property>
-        </widget>
-        <widget class="QTableWidget" name="tableWidget_prod">
+        <widget class="QTableWidget" name="tableWidget">
          <property name="geometry">
           <rect>
            <x>10</x>
-           <y>140</y>
+           <y>138</y>
            <width>591</width>
            <height>178</height>
           </rect>
+         </property>
+         <property name="styleSheet">
+          <string notr="true">QTableWidget {
+    background-color: white;
+    border: 2px solid #D4AF37;   /* jaune doré */
+    gridline-color: #D4AF37;
+    border-radius: 6px;
+    selection-background-color: #FFF3C4;
+    selection-color: black;
+}
+
+
+
+
+</string>
          </property>
          <property name="alternatingRowColors">
           <bool>true</bool>
@@ -8450,8 +7897,80 @@ QPushButton:pressed {
           </property>
          </column>
         </widget>
+        <widget class="QPushButton" name="pushButton_recherche">
+         <property name="geometry">
+          <rect>
+           <x>442</x>
+           <y>36</y>
+           <width>81</width>
+           <height>31</height>
+          </rect>
+         </property>
+         <property name="font">
+          <font>
+           <pointsize>10</pointsize>
+           <bold>true</bold>
+          </font>
+         </property>
+         <property name="styleSheet">
+          <string notr="true">QPushButton {
+    background-color: white;
+    border: 2px solid #D4AF37;   /* jaune doré */
+    gridline-color: #D4AF37;
+    border-radius: 6px;
+    selection-background-color: #FFF3C4;
+    selection-color: black;
+}
+
+
+
+
+</string>
+         </property>
+         <property name="text">
+          <string>Rechercher</string>
+         </property>
+        </widget>
+        <widget class="QPushButton" name="pushButton_effacer_filtre">
+         <property name="geometry">
+          <rect>
+           <x>531</x>
+           <y>36</y>
+           <width>91</width>
+           <height>31</height>
+          </rect>
+         </property>
+         <property name="font">
+          <font>
+           <pointsize>10</pointsize>
+           <bold>true</bold>
+          </font>
+         </property>
+         <property name="toolTip">
+          <string>Effacer le texte et afficher toutes les productions</string>
+         </property>
+         <property name="styleSheet">
+          <string notr="true">QPushButton {
+    background-color: white;
+    border: 2px solid #D4AF37;   /* jaune doré */
+    gridline-color: #D4AF37;
+    border-radius: 6px;
+    selection-background-color: #FFF3C4;
+    selection-color: black;
+}
+
+
+
+
+</string>
+         </property>
+         <property name="text">
+          <string>Effacer</string>
+         </property>
+        </widget>
        </widget>
       </widget>
+      <widget class="QWidget" name="page_2"/>
       <widget class="QWidget" name="page_ventes">
        <property name="styleSheet">
         <string notr="true">/* ====== GroupBox ====== */
@@ -8650,10 +8169,7 @@ QPushButton:hover {
             </font>
            </property>
            <property name="text">
-            <string>Tableau de Bord</string>
-           </property>
-           <property name="icon">
-            <iconset theme="QIcon::ThemeIcon::GoHome"/>
+            <string>🏠  Tableau de Bord</string>
            </property>
           </widget>
          </item>
@@ -8666,10 +8182,7 @@ QPushButton:hover {
             </font>
            </property>
            <property name="text">
-            <string>Gestion des Employes</string>
-           </property>
-           <property name="icon">
-            <iconset theme="QIcon::ThemeIcon::UserAvailable"/>
+            <string>👷   Employes</string>
            </property>
           </widget>
          </item>
@@ -8682,7 +8195,7 @@ QPushButton:hover {
             </font>
            </property>
            <property name="text">
-            <string>Gestion des Agriculteurs</string>
+            <string>🌿   Agriculteurs</string>
            </property>
           </widget>
          </item>
@@ -8695,7 +8208,7 @@ QPushButton:hover {
             </font>
            </property>
            <property name="text">
-            <string>Gestion des Clients</string>
+            <string>👥  Clients</string>
            </property>
           </widget>
          </item>
@@ -8708,7 +8221,7 @@ QPushButton:hover {
             </font>
            </property>
            <property name="text">
-            <string>Gestion de Production</string>
+            <string>⚙  Production</string>
            </property>
           </widget>
          </item>
@@ -8721,7 +8234,7 @@ QPushButton:hover {
             </font>
            </property>
            <property name="text">
-            <string>Gestion des Ventes</string>
+            <string>🛒  Ventes</string>
            </property>
           </widget>
          </item>
@@ -8747,7 +8260,7 @@ QPushButton:hover {
             </font>
            </property>
            <property name="text">
-            <string>Deconnexion</string>
+            <string>🚪  Déconnexion</string>
            </property>
           </widget>
          </item>
@@ -8756,16 +8269,14 @@ QPushButton:hover {
        <widget class="QFrame" name="frame_12">
         <property name="geometry">
          <rect>
-          <x>220</x>
-          <y>0</y>
-          <width>961</width>
-          <height>61</height>
+          <x>240</x>
+          <y>20</y>
+          <width>911</width>
+          <height>51</height>
          </rect>
         </property>
         <property name="styleSheet">
-         <string notr="true">QFrame {
-    background-color: #556B2F;
-}</string>
+         <string notr="true">QFrame { background: #556B2F; border-radius: 10px; }</string>
         </property>
         <property name="frameShape">
          <enum>QFrame::Shape::StyledPanel</enum>
@@ -8773,12 +8284,34 @@ QPushButton:hover {
         <property name="frameShadow">
          <enum>QFrame::Shadow::Raised</enum>
         </property>
+        <widget class="QLabel" name="label_19">
+         <property name="geometry">
+          <rect>
+           <x>10</x>
+           <y>0</y>
+           <width>201</width>
+           <height>51</height>
+          </rect>
+         </property>
+         <property name="font">
+          <font>
+           <pointsize>-1</pointsize>
+           <bold>true</bold>
+          </font>
+         </property>
+         <property name="styleSheet">
+          <string notr="true">color: white; font-size: 15px; font-weight: bold; background: transparent;</string>
+         </property>
+         <property name="text">
+          <string> 🛒 Ventes - Smart Oil Press</string>
+         </property>
+        </widget>
        </widget>
        <widget class="QDoubleSpinBox" name="doubleSpinBox_2">
         <property name="geometry">
          <rect>
           <x>610</x>
-          <y>250</y>
+          <y>210</y>
           <width>161</width>
           <height>42</height>
          </rect>
@@ -8788,8 +8321,8 @@ QPushButton:hover {
         <property name="geometry">
          <rect>
           <x>230</x>
-          <y>160</y>
-          <width>181</width>
+          <y>130</y>
+          <width>151</width>
           <height>42</height>
          </rect>
         </property>
@@ -8797,8 +8330,8 @@ QPushButton:hover {
        <widget class="QLabel" name="label_6">
         <property name="geometry">
          <rect>
-          <x>430</x>
-          <y>220</y>
+          <x>400</x>
+          <y>180</y>
           <width>161</width>
           <height>27</height>
          </rect>
@@ -8810,9 +8343,9 @@ QPushButton:hover {
        <widget class="QDoubleSpinBox" name="doubleSpinBox">
         <property name="geometry">
          <rect>
-          <x>440</x>
-          <y>160</y>
-          <width>181</width>
+          <x>410</x>
+          <y>130</y>
+          <width>161</width>
           <height>42</height>
          </rect>
         </property>
@@ -8820,8 +8353,8 @@ QPushButton:hover {
        <widget class="QPushButton" name="pushButton_10">
         <property name="geometry">
          <rect>
-          <x>440</x>
-          <y>320</y>
+          <x>420</x>
+          <y>280</y>
           <width>131</width>
           <height>31</height>
          </rect>
@@ -8855,8 +8388,8 @@ QPushButton:hover {
        <widget class="QPushButton" name="modifierVente">
         <property name="geometry">
          <rect>
-          <x>610</x>
-          <y>320</y>
+          <x>590</x>
+          <y>280</y>
           <width>131</width>
           <height>31</height>
          </rect>
@@ -8890,9 +8423,9 @@ QPushButton:hover {
        <widget class="QDateEdit" name="dateEdit">
         <property name="geometry">
          <rect>
-          <x>240</x>
-          <y>250</y>
-          <width>161</width>
+          <x>230</x>
+          <y>210</y>
+          <width>151</width>
           <height>42</height>
          </rect>
         </property>
@@ -8901,7 +8434,7 @@ QPushButton:hover {
         <property name="geometry">
          <rect>
           <x>610</x>
-          <y>220</y>
+          <y>180</y>
           <width>161</width>
           <height>27</height>
          </rect>
@@ -8913,8 +8446,8 @@ QPushButton:hover {
        <widget class="QLabel" name="label_2">
         <property name="geometry">
          <rect>
-          <x>230</x>
-          <y>130</y>
+          <x>200</x>
+          <y>100</y>
           <width>161</width>
           <height>27</height>
          </rect>
@@ -8926,8 +8459,8 @@ QPushButton:hover {
        <widget class="QLabel" name="label_4">
         <property name="geometry">
          <rect>
-          <x>440</x>
-          <y>130</y>
+          <x>390</x>
+          <y>100</y>
           <width>161</width>
           <height>27</height>
          </rect>
@@ -8940,7 +8473,7 @@ QPushButton:hover {
         <property name="geometry">
          <rect>
           <x>240</x>
-          <y>320</y>
+          <y>280</y>
           <width>131</width>
           <height>31</height>
          </rect>
@@ -8974,8 +8507,8 @@ QPushButton:hover {
        <widget class="QPushButton" name="annulerVente">
         <property name="geometry">
          <rect>
-          <x>780</x>
-          <y>320</y>
+          <x>770</x>
+          <y>280</y>
           <width>121</width>
           <height>31</height>
          </rect>
@@ -9009,9 +8542,9 @@ QPushButton:hover {
        <widget class="QSpinBox" name="spinBox">
         <property name="geometry">
          <rect>
-          <x>440</x>
-          <y>250</y>
-          <width>141</width>
+          <x>410</x>
+          <y>210</y>
+          <width>161</width>
           <height>42</height>
          </rect>
         </property>
@@ -9019,8 +8552,8 @@ QPushButton:hover {
        <widget class="QLabel" name="label_5">
         <property name="geometry">
          <rect>
-          <x>230</x>
-          <y>220</y>
+          <x>200</x>
+          <y>180</y>
           <width>161</width>
           <height>27</height>
          </rect>
@@ -9029,32 +8562,13 @@ QPushButton:hover {
          <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p align=&quot;center&quot;&gt;&lt;span style=&quot; font-size:12pt; font-weight:700;&quot;&gt;date_vente&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
         </property>
        </widget>
-       <widget class="QLabel" name="label_19">
-        <property name="geometry">
-         <rect>
-          <x>250</x>
-          <y>70</y>
-          <width>181</width>
-          <height>41</height>
-         </rect>
-        </property>
-        <property name="font">
-         <font>
-          <pointsize>14</pointsize>
-          <bold>true</bold>
-         </font>
-        </property>
-        <property name="text">
-         <string>Gestion des Ventes</string>
-        </property>
-       </widget>
        <widget class="QTableView" name="tableView_vente">
         <property name="geometry">
          <rect>
           <x>230</x>
-          <y>370</y>
-          <width>671</width>
-          <height>151</height>
+          <y>330</y>
+          <width>691</width>
+          <height>171</height>
          </rect>
         </property>
         <property name="styleSheet">
@@ -9076,8 +8590,8 @@ QPushButton:hover {
        <widget class="QPushButton" name="vente_rechercheClientBtn">
         <property name="geometry">
          <rect>
-          <x>380</x>
-          <y>540</y>
+          <x>370</x>
+          <y>520</y>
           <width>110</width>
           <height>30</height>
          </rect>
@@ -9090,7 +8604,7 @@ QPushButton:hover {
         <property name="geometry">
          <rect>
           <x>760</x>
-          <y>540</y>
+          <y>510</y>
           <width>162</width>
           <height>42</height>
          </rect>
@@ -9119,8 +8633,8 @@ QPushButton:hover {
        <widget class="QDateEdit" name="vente_dateRechercheEdit">
         <property name="geometry">
          <rect>
-          <x>510</x>
-          <y>540</y>
+          <x>500</x>
+          <y>510</y>
           <width>120</width>
           <height>42</height>
          </rect>
@@ -9129,27 +8643,11 @@ QPushButton:hover {
          <string>dd/MM/yyyy</string>
         </property>
        </widget>
-       <widget class="QLabel" name="vente_labelPeriode">
-        <property name="geometry">
-         <rect>
-          <x>340</x>
-          <y>640</y>
-          <width>120</width>
-          <height>22</height>
-         </rect>
-        </property>
-        <property name="styleSheet">
-         <string notr="true">color:#556B2F; font-weight:bold; font-size:11px;</string>
-        </property>
-        <property name="text">
-         <string>Période :</string>
-        </property>
-       </widget>
        <widget class="QPushButton" name="vente_rechercheDateBtn">
         <property name="geometry">
          <rect>
-          <x>640</x>
-          <y>540</y>
+          <x>630</x>
+          <y>520</y>
           <width>111</width>
           <height>31</height>
          </rect>
@@ -9161,8 +8659,8 @@ QPushButton:hover {
        <widget class="QLineEdit" name="vente_rechercheClientEdit">
         <property name="geometry">
          <rect>
-          <x>250</x>
-          <y>540</y>
+          <x>240</x>
+          <y>510</y>
           <width>120</width>
           <height>42</height>
          </rect>
@@ -9174,9 +8672,9 @@ QPushButton:hover {
        <widget class="QPushButton" name="vente_exportCSVBtn">
         <property name="geometry">
          <rect>
-          <x>440</x>
-          <y>590</y>
-          <width>110</width>
+          <x>419</x>
+          <y>570</y>
+          <width>121</width>
           <height>30</height>
          </rect>
         </property>
@@ -9184,11 +8682,76 @@ QPushButton:hover {
          <string>📄 Export CSV</string>
         </property>
        </widget>
+       <widget class="QPushButton" name="vente_exportPDFBtn">
+        <property name="geometry">
+         <rect>
+          <x>570</x>
+          <y>570</y>
+          <width>121</width>
+          <height>30</height>
+         </rect>
+        </property>
+        <property name="text">
+         <string>📕 Export PDF</string>
+        </property>
+       </widget>
+       <widget class="QPushButton" name="vente_previsionBtn">
+        <property name="geometry">
+         <rect>
+          <x>960</x>
+          <y>290</y>
+          <width>161</width>
+          <height>41</height>
+         </rect>
+        </property>
+        <property name="text">
+         <string>📈 Prévision CA</string>
+        </property>
+       </widget>
+       <widget class="QPushButton" name="vente_detecterAnomaliesBtn">
+        <property name="geometry">
+         <rect>
+          <x>960</x>
+          <y>350</y>
+          <width>161</width>
+          <height>41</height>
+         </rect>
+        </property>
+        <property name="text">
+         <string>⚠️ Anomalies</string>
+        </property>
+       </widget>
+       <widget class="QPushButton" name="vente_analyserCABtn">
+        <property name="geometry">
+         <rect>
+          <x>960</x>
+          <y>230</y>
+          <width>161</width>
+          <height>41</height>
+         </rect>
+        </property>
+        <property name="text">
+         <string>📊 Analyser CA</string>
+        </property>
+       </widget>
+       <widget class="QPushButton" name="vente_graphiqueCABtn">
+        <property name="geometry">
+         <rect>
+          <x>960</x>
+          <y>170</y>
+          <width>151</width>
+          <height>41</height>
+         </rect>
+        </property>
+        <property name="text">
+         <string>📉 Graphique CA</string>
+        </property>
+       </widget>
        <widget class="QDateEdit" name="vente_dateFinAnalyse">
         <property name="geometry">
          <rect>
-          <x>600</x>
-          <y>640</y>
+          <x>1040</x>
+          <y>120</y>
           <width>120</width>
           <height>42</height>
          </rect>
@@ -9204,24 +8767,11 @@ QPushButton:hover {
          </date>
         </property>
        </widget>
-       <widget class="QPushButton" name="vente_exportPDFBtn">
-        <property name="geometry">
-         <rect>
-          <x>570</x>
-          <y>590</y>
-          <width>110</width>
-          <height>30</height>
-         </rect>
-        </property>
-        <property name="text">
-         <string>📕 Export PDF</string>
-        </property>
-       </widget>
        <widget class="QDateEdit" name="vente_dateDebutAnalyse">
         <property name="geometry">
          <rect>
-          <x>430</x>
-          <y>640</y>
+          <x>890</x>
+          <y>120</y>
           <width>120</width>
           <height>42</height>
          </rect>
@@ -9237,56 +8787,20 @@ QPushButton:hover {
          </date>
         </property>
        </widget>
-       <widget class="QPushButton" name="vente_previsionBtn">
+       <widget class="QLabel" name="vente_labelPeriode">
         <property name="geometry">
          <rect>
-          <x>969</x>
-          <y>200</y>
-          <width>151</width>
-          <height>30</height>
+          <x>1000</x>
+          <y>90</y>
+          <width>120</width>
+          <height>22</height>
          </rect>
         </property>
-        <property name="text">
-         <string>📈 Prévision CA</string>
-        </property>
-       </widget>
-       <widget class="QPushButton" name="vente_detecterAnomaliesBtn">
-        <property name="geometry">
-         <rect>
-          <x>970</x>
-          <y>250</y>
-          <width>155</width>
-          <height>30</height>
-         </rect>
+        <property name="styleSheet">
+         <string notr="true">color:#556B2F; font-weight:bold; font-size:11px;</string>
         </property>
         <property name="text">
-         <string>⚠️ Anomalies</string>
-        </property>
-       </widget>
-       <widget class="QPushButton" name="vente_analyserCABtn">
-        <property name="geometry">
-         <rect>
-          <x>969</x>
-          <y>160</y>
-          <width>151</width>
-          <height>30</height>
-         </rect>
-        </property>
-        <property name="text">
-         <string>📊 Analyser CA</string>
-        </property>
-       </widget>
-       <widget class="QPushButton" name="vente_graphiqueCABtn">
-        <property name="geometry">
-         <rect>
-          <x>970</x>
-          <y>110</y>
-          <width>155</width>
-          <height>30</height>
-         </rect>
-        </property>
-        <property name="text">
-         <string>📉 Graphique CA</string>
+         <string>Période :</string>
         </property>
        </widget>
       </widget>
@@ -9294,16 +8808,14 @@ QPushButton:hover {
        <widget class="QFrame" name="frame_20">
         <property name="geometry">
          <rect>
-          <x>220</x>
-          <y>0</y>
-          <width>961</width>
-          <height>61</height>
+          <x>240</x>
+          <y>10</y>
+          <width>921</width>
+          <height>51</height>
          </rect>
         </property>
         <property name="styleSheet">
-         <string notr="true">QFrame {
-    background-color: #556B2F;
-}</string>
+         <string notr="true">QFrame { background: #556B2F; border-radius: 10px; }</string>
         </property>
         <property name="frameShape">
          <enum>QFrame::Shape::StyledPanel</enum>
@@ -9311,6 +8823,28 @@ QPushButton:hover {
         <property name="frameShadow">
          <enum>QFrame::Shadow::Raised</enum>
         </property>
+        <widget class="QLabel" name="label_26">
+         <property name="geometry">
+          <rect>
+           <x>10</x>
+           <y>0</y>
+           <width>391</width>
+           <height>51</height>
+          </rect>
+         </property>
+         <property name="font">
+          <font>
+           <pointsize>-1</pointsize>
+           <bold>true</bold>
+          </font>
+         </property>
+         <property name="styleSheet">
+          <string notr="true">color: white; font-size: 15px; font-weight: bold; background: transparent;</string>
+         </property>
+         <property name="text">
+          <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;🌿 Agriculteurs - Smart Oil Press&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+         </property>
+        </widget>
        </widget>
        <widget class="QFrame" name="sidebar_13">
         <property name="geometry">
@@ -9413,10 +8947,7 @@ QPushButton:hover {
             </font>
            </property>
            <property name="text">
-            <string>Tableau de Bord</string>
-           </property>
-           <property name="icon">
-            <iconset theme="QIcon::ThemeIcon::GoHome"/>
+            <string>🏠  Tableau de Bord</string>
            </property>
           </widget>
          </item>
@@ -9429,10 +8960,7 @@ QPushButton:hover {
             </font>
            </property>
            <property name="text">
-            <string>Gestion des Employes</string>
-           </property>
-           <property name="icon">
-            <iconset theme="QIcon::ThemeIcon::UserAvailable"/>
+            <string>👷   Employes</string>
            </property>
           </widget>
          </item>
@@ -9445,7 +8973,7 @@ QPushButton:hover {
             </font>
            </property>
            <property name="text">
-            <string>Gestion des Agriculteurs</string>
+            <string>🌿   Agriculteurs</string>
            </property>
           </widget>
          </item>
@@ -9458,7 +8986,7 @@ QPushButton:hover {
             </font>
            </property>
            <property name="text">
-            <string>Gestion des Clients</string>
+            <string>👥  Clients</string>
            </property>
           </widget>
          </item>
@@ -9471,7 +8999,7 @@ QPushButton:hover {
             </font>
            </property>
            <property name="text">
-            <string>Gestion de Production</string>
+            <string>⚙  Production</string>
            </property>
           </widget>
          </item>
@@ -9484,7 +9012,7 @@ QPushButton:hover {
             </font>
            </property>
            <property name="text">
-            <string>Gestion des Ventes</string>
+            <string>🛒  Ventes</string>
            </property>
           </widget>
          </item>
@@ -9510,7 +9038,7 @@ QPushButton:hover {
             </font>
            </property>
            <property name="text">
-            <string>Deconnexion</string>
+            <string>🚪  Déconnexion</string>
            </property>
           </widget>
          </item>
@@ -9524,6 +9052,12 @@ QPushButton:hover {
           <width>141</width>
           <height>41</height>
          </rect>
+        </property>
+        <property name="font">
+         <font>
+          <pointsize>9</pointsize>
+          <bold>true</bold>
+         </font>
         </property>
         <property name="styleSheet">
          <string notr="true">QPushButton {
@@ -9553,6 +9087,12 @@ QPushButton:hover {
           <width>141</width>
           <height>41</height>
          </rect>
+        </property>
+        <property name="font">
+         <font>
+          <pointsize>9</pointsize>
+          <bold>true</bold>
+         </font>
         </property>
         <property name="styleSheet">
          <string notr="true">QPushButton {
@@ -9609,8 +9149,8 @@ QPushButton:pressed {
         <property name="geometry">
          <rect>
           <x>270</x>
-          <y>170</y>
-          <width>76</width>
+          <y>140</y>
+          <width>111</width>
           <height>26</height>
          </rect>
         </property>
@@ -9648,6 +9188,12 @@ QPushButton:pressed {
           <width>151</width>
           <height>41</height>
          </rect>
+        </property>
+        <property name="font">
+         <font>
+          <pointsize>9</pointsize>
+          <bold>true</bold>
+         </font>
         </property>
         <property name="styleSheet">
          <string notr="true">QPushButton {
@@ -9764,6 +9310,12 @@ QPushButton:pressed {
           <height>41</height>
          </rect>
         </property>
+        <property name="font">
+         <font>
+          <pointsize>9</pointsize>
+          <bold>true</bold>
+         </font>
+        </property>
         <property name="styleSheet">
          <string notr="true">QPushButton {
     background-color: #D4AF37;
@@ -9786,16 +9338,14 @@ QPushButton:hover {
        <widget class="QFrame" name="frame_21">
         <property name="geometry">
          <rect>
-          <x>220</x>
+          <x>240</x>
           <y>0</y>
-          <width>961</width>
+          <width>941</width>
           <height>61</height>
          </rect>
         </property>
         <property name="styleSheet">
-         <string notr="true">QFrame {
-    background-color: #556B2F;
-}</string>
+         <string notr="true">QFrame { background: #556B2F; border-radius: 10px; }</string>
         </property>
         <property name="frameShape">
          <enum>QFrame::Shape::StyledPanel</enum>
@@ -9803,6 +9353,28 @@ QPushButton:hover {
         <property name="frameShadow">
          <enum>QFrame::Shadow::Raised</enum>
         </property>
+        <widget class="QLabel" name="label_59">
+         <property name="geometry">
+          <rect>
+           <x>10</x>
+           <y>0</y>
+           <width>391</width>
+           <height>61</height>
+          </rect>
+         </property>
+         <property name="font">
+          <font>
+           <pointsize>-1</pointsize>
+           <bold>true</bold>
+          </font>
+         </property>
+         <property name="styleSheet">
+          <string notr="true">color: white; font-size: 15px; font-weight: bold; background: transparent;</string>
+         </property>
+         <property name="text">
+          <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;🌿 Agriculteurs - Smart Oil Press&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+         </property>
+        </widget>
        </widget>
        <widget class="QFrame" name="sidebar_14">
         <property name="geometry">
@@ -9905,10 +9477,7 @@ QPushButton:hover {
             </font>
            </property>
            <property name="text">
-            <string>Tableau de Bord</string>
-           </property>
-           <property name="icon">
-            <iconset theme="QIcon::ThemeIcon::GoHome"/>
+            <string>🏠  Tableau de Bord</string>
            </property>
           </widget>
          </item>
@@ -9921,10 +9490,7 @@ QPushButton:hover {
             </font>
            </property>
            <property name="text">
-            <string>Gestion des Employes</string>
-           </property>
-           <property name="icon">
-            <iconset theme="QIcon::ThemeIcon::UserAvailable"/>
+            <string>👷   Employes</string>
            </property>
           </widget>
          </item>
@@ -9937,7 +9503,7 @@ QPushButton:hover {
             </font>
            </property>
            <property name="text">
-            <string>Gestion des Agriculteurs</string>
+            <string>🌿   Agriculteurs</string>
            </property>
           </widget>
          </item>
@@ -9950,7 +9516,7 @@ QPushButton:hover {
             </font>
            </property>
            <property name="text">
-            <string>Gestion des Clients</string>
+            <string>👥  Clients</string>
            </property>
           </widget>
          </item>
@@ -9963,7 +9529,7 @@ QPushButton:hover {
             </font>
            </property>
            <property name="text">
-            <string>Gestion de Production</string>
+            <string>⚙  Production</string>
            </property>
           </widget>
          </item>
@@ -9976,7 +9542,7 @@ QPushButton:hover {
             </font>
            </property>
            <property name="text">
-            <string>Gestion des Ventes</string>
+            <string>🛒  Ventes</string>
            </property>
           </widget>
          </item>
@@ -10002,7 +9568,7 @@ QPushButton:hover {
             </font>
            </property>
            <property name="text">
-            <string>Deconnexion</string>
+            <string>🚪  Déconnexion</string>
            </property>
           </widget>
          </item>
@@ -10049,7 +9615,7 @@ QPushButton:hover {
           </rect>
          </property>
          <property name="text">
-          <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-size:14pt; font-weight:700;&quot;&gt;RAPPEL DES DATES LIVRS PROCHES:&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+          <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-size:14pt; font-weight:700;&quot;&gt;RAPPEL DES DATES LIVRISION PROCHES&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
          </property>
         </widget>
         <widget class="QTableWidget" name="tableWidget_3">
@@ -10369,10 +9935,10 @@ QPushButton:pressed {
        <widget class="QPushButton" name="btn_ajouter_2">
         <property name="geometry">
          <rect>
-          <x>250</x>
-          <y>550</y>
-          <width>231</width>
-          <height>41</height>
+          <x>260</x>
+          <y>510</y>
+          <width>161</width>
+          <height>31</height>
          </rect>
         </property>
         <property name="font">
@@ -10382,25 +9948,20 @@ QPushButton:pressed {
          </font>
         </property>
         <property name="styleSheet">
-         <string notr="true">/* ====== PushButton ====== */
-QPushButton {
-    background-color: #556B2F;
-    color: white;
-    border-radius: 8px;
-    padding: 8px 20px;
-    font-weight: bold;
+         <string notr="true">QPushButton {
+    background-color: #D4AF37;
+    color: black;
+    border-radius: 6px;
+    padding: 6px 12px;
 }
 
 QPushButton:hover {
-    background-color: #6B8E23;
+    background-color: #c49b2f;
 }
-
-QPushButton:pressed {
-    background-color: #3E4E1F;
-}</string>
+</string>
         </property>
         <property name="text">
-         <string>Ajouter nouveau agriculteur</string>
+         <string>Ajouter </string>
         </property>
         <property name="icon">
          <iconset theme="QIcon::ThemeIcon::ListAdd"/>
@@ -10472,25 +10033,6 @@ QPushButton:pressed {
         </property>
         <property name="text">
          <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-size:11pt; font-weight:700;&quot;&gt;Region&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
-        </property>
-       </widget>
-       <widget class="QLabel" name="label">
-        <property name="geometry">
-         <rect>
-          <x>240</x>
-          <y>79</y>
-          <width>391</width>
-          <height>41</height>
-         </rect>
-        </property>
-        <property name="font">
-         <font>
-          <pointsize>16</pointsize>
-          <bold>true</bold>
-         </font>
-        </property>
-        <property name="text">
-         <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Gestion des Agriculteurs&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
         </property>
        </widget>
        <widget class="QLabel" name="prenom">
@@ -10583,8 +10125,8 @@ QPushButton:pressed {
        <widget class="QPushButton" name="pushButton_20">
         <property name="geometry">
          <rect>
-          <x>880</x>
-          <y>80</y>
+          <x>930</x>
+          <y>100</y>
           <width>201</width>
           <height>41</height>
          </rect>
@@ -10603,14 +10145,14 @@ QPushButton:hover {
 </string>
         </property>
         <property name="text">
-         <string>Analyse les Agriculteurs</string>
+         <string> 📈Analyse les Agriculteurs</string>
         </property>
        </widget>
        <widget class="QPushButton" name="pushButton_21">
         <property name="geometry">
          <rect>
-          <x>880</x>
-          <y>130</y>
+          <x>930</x>
+          <y>170</y>
           <width>201</width>
           <height>41</height>
          </rect>
@@ -10629,16 +10171,16 @@ QPushButton:hover {
 </string>
         </property>
         <property name="text">
-         <string>Classement les Agriculteurs</string>
+         <string>Rappels</string>
         </property>
        </widget>
        <widget class="QPushButton" name="btn_modifier_agri">
         <property name="geometry">
          <rect>
-          <x>500</x>
-          <y>550</y>
-          <width>181</width>
-          <height>41</height>
+          <x>470</x>
+          <y>510</y>
+          <width>161</width>
+          <height>31</height>
          </rect>
         </property>
         <property name="styleSheet">
@@ -10659,32 +10201,6 @@ QPushButton:hover {
         </property>
         <property name="icon">
          <iconset theme="QIcon::ThemeIcon::DocumentProperties"/>
-        </property>
-       </widget>
-       <widget class="QPushButton" name="metier">
-        <property name="geometry">
-         <rect>
-          <x>880</x>
-          <y>180</y>
-          <width>201</width>
-          <height>41</height>
-         </rect>
-        </property>
-        <property name="styleSheet">
-         <string notr="true">QPushButton {
-    background-color: #D4AF37;
-    color: black;
-    border-radius: 6px;
-    padding: 6px 12px;
-}
-
-QPushButton:hover {
-    background-color: #c49b2f;
-}
-</string>
-        </property>
-        <property name="text">
-         <string>Métiers avancé</string>
         </property>
        </widget>
        <widget class="QFrame" name="sidebar_12">
@@ -10709,8 +10225,7 @@ QPushButton:hover {
          </size>
         </property>
         <property name="styleSheet">
-         <string notr="true">QFrame#sidebar_12
- {
+         <string notr="true">QFrame#sidebar_12 {
     background-color: #556B2F;
 }
 QPushButton {
@@ -10786,10 +10301,7 @@ QPushButton:hover {
             </font>
            </property>
            <property name="text">
-            <string>Tableau de Bord</string>
-           </property>
-           <property name="icon">
-            <iconset theme="QIcon::ThemeIcon::GoHome"/>
+            <string>🏠  Tableau de Bord</string>
            </property>
           </widget>
          </item>
@@ -10802,10 +10314,7 @@ QPushButton:hover {
             </font>
            </property>
            <property name="text">
-            <string>Gestion des Employes</string>
-           </property>
-           <property name="icon">
-            <iconset theme="QIcon::ThemeIcon::UserAvailable"/>
+            <string>👷   Employes</string>
            </property>
           </widget>
          </item>
@@ -10818,7 +10327,7 @@ QPushButton:hover {
             </font>
            </property>
            <property name="text">
-            <string>Gestion des Agriculteurs</string>
+            <string>🌿   Agriculteurs</string>
            </property>
           </widget>
          </item>
@@ -10831,7 +10340,7 @@ QPushButton:hover {
             </font>
            </property>
            <property name="text">
-            <string>Gestion des Clients</string>
+            <string>👥  Clients</string>
            </property>
           </widget>
          </item>
@@ -10844,7 +10353,7 @@ QPushButton:hover {
             </font>
            </property>
            <property name="text">
-            <string>Gestion de Production</string>
+            <string>⚙  Production</string>
            </property>
           </widget>
          </item>
@@ -10857,7 +10366,7 @@ QPushButton:hover {
             </font>
            </property>
            <property name="text">
-            <string>Gestion des Ventes</string>
+            <string>🛒  Ventes</string>
            </property>
           </widget>
          </item>
@@ -10883,7 +10392,7 @@ QPushButton:hover {
             </font>
            </property>
            <property name="text">
-            <string>Deconnexion</string>
+            <string>🚪  Déconnexion</string>
            </property>
           </widget>
          </item>
@@ -10892,22 +10401,55 @@ QPushButton:hover {
        <widget class="QFrame" name="frame_13">
         <property name="geometry">
          <rect>
-          <x>220</x>
-          <y>0</y>
-          <width>961</width>
-          <height>61</height>
+          <x>240</x>
+          <y>10</y>
+          <width>921</width>
+          <height>51</height>
          </rect>
         </property>
         <property name="styleSheet">
-         <string notr="true">QFrame {
-    background-color: #556B2F;
-}</string>
+         <string notr="true">QFrame { background: #556B2F; border-radius: 10px; }</string>
         </property>
         <property name="frameShape">
          <enum>QFrame::Shape::StyledPanel</enum>
         </property>
         <property name="frameShadow">
          <enum>QFrame::Shadow::Raised</enum>
+        </property>
+        <widget class="QLabel" name="label">
+         <property name="geometry">
+          <rect>
+           <x>0</x>
+           <y>0</y>
+           <width>391</width>
+           <height>51</height>
+          </rect>
+         </property>
+         <property name="font">
+          <font>
+           <pointsize>-1</pointsize>
+           <bold>true</bold>
+          </font>
+         </property>
+         <property name="styleSheet">
+          <string notr="true">color: white; font-size: 15px; font-weight: bold; background: transparent;</string>
+         </property>
+         <property name="text">
+          <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;🌿 Agriculteurs - Smart Oil Press&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+         </property>
+        </widget>
+       </widget>
+       <widget class="QPushButton" name="btn_graphiques_agri">
+        <property name="geometry">
+         <rect>
+          <x>940</x>
+          <y>250</y>
+          <width>191</width>
+          <height>41</height>
+         </rect>
+        </property>
+        <property name="text">
+         <string>📉 Graphique </string>
         </property>
        </widget>
       </widget>
@@ -10925,12 +10467,10 @@ QPushButton:hover {
   <tabstop>btn_production_3</tabstop>
   <tabstop>btn_ventes_3</tabstop>
   <tabstop>btn_logout_3</tabstop>
-  <tabstop>pushButton_8</tabstop>
   <tabstop>btn_ajouter</tabstop>
   <tabstop>tableView</tabstop>
   <tabstop>btn_modifier</tabstop>
   <tabstop>btn_supprimer</tabstop>
-  <tabstop>btn_chatbot</tabstop>
   <tabstop>lineEdit_recherche</tabstop>
   <tabstop>comboBox_filtre</tabstop>
   <tabstop>comboBox_tri</tabstop>
@@ -10962,7 +10502,6 @@ QPushButton:hover {
   <tabstop>tot_achat</tabstop>
   <tabstop>point_fid</tabstop>
   <tabstop>analyse</tabstop>
-  <tabstop>chatbot</tabstop>
   <tabstop>pdf</tabstop>
   <tabstop>tableView_client</tabstop>
   <tabstop>btn_home_8</tabstop>
